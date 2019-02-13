@@ -34,30 +34,36 @@ Keep these excerpts as short as possible. Balance readability of this document w
 
 [role="arc42help"]
 ****
-[options="header", cols="1,3"]
+[options="header", cols="1,3,1"]
 |===
 |Quality goal
 |Scenario
-
-|Dececentralized architecture
-|It is imperative that the project separates the data storage from 
-the application itself.
+|Priority
 
 |Usability
-|The project must be easy to use by non technical people. Any person should be 
-able to use the chat with ease.
+|A user should be able to select a contact and start the conversation in less than 
+5 seconds.
+|High, High
 
 |Performance efficiency
-|The project must have a quick response time. Users should be able to use the chat 
-in real time.
+|The message should be sent and stored in the other user's POD in less than 2 
+seconds.
+|High, Medium
 
-|Security and privacy
-|The management of the data must be carefully taken care of. The project must be 
-as secure as possible, without any vulnerability point.
+|Security
+|In case of a network failure, the system should notify the user about having 
+no connection in less than 4 seconds.
+|High, Low
 
-|Mantainability
-|The project must be easy to mantain and to upgrade. It must be modular and should 
-be correctly tested.
+|Testability
+|When testing a piece of the design, we should be able to finish in less than 
+3 days.
+|Medium, High
+
+|Usability
+|If a user deletes a message by accident, the system should be able to recover it 
+in less than 5 seconds.
+|Medium, Low
 |===
 ****
 
