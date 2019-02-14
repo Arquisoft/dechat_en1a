@@ -67,9 +67,9 @@ These stakeholders determine the extent and the level of detail of your work and
 Table with role names, person names, and their expectations with respect to the architecture and its documentation.
 ****
 
-[options="header",cols="1,2,2"]
+[options="header"]
 |===
-|Role/Name|Contact|Expectations
-| Solid development team | _<Contact-1>_ | They are the original proposers of the project, and are interested in the best results of this and the ones of other teams of this course, as the best ones will be presented for public review and maybe used in the final product. For more information, see https://solid.mit.edu/.
-| Teachers of the cousrse | _<Contact-2>_ | They expect a well developed final version following some specific guidelines, paying special attention to the architecture of the project, due to this being the main topic of the subject.
+|Role/Name|Expectations
+| Solid development team | They are the original proposers of the project, and are interested in the best results of this and the ones of other teams of this course, as the best ones will be presented for public review and maybe used in the final product. For more information, see https://solid.mit.edu/.
+| Teachers of the cousrse | They expect a well developed final version following some specific guidelines, paying special attention to the architecture of the project, due to this being the main topic of the subject.
 |===
