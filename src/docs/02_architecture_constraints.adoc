@@ -18,7 +18,7 @@ technical constraints, organizational and political constraints and
 conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
 ****
 
-[options="header"]
+[options="header", cols=2*]
 .Technical
 |===
 | Name         
