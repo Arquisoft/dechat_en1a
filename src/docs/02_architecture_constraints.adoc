@@ -17,3 +17,38 @@ If needed you can subdivide them into
 technical constraints, organizational and political constraints and
 conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
 ****
+
+[options="header"]
+.Technical
+|===
+| Name         
+| Definition
+
+| Decentralized
+| The system will be based on a decentralized architecture 
+where data storage is separated from the app.
+
+| Data Storage  
+| The data must be stored in the user's pods.
+
+| Sharing files
+| Users must be able to share pictures, videos or other kinds 
+of files with other friends through the chat.
+
+| Notifications
+| Users must receive notifications when some friend wants to chat 
+with them.
+
+| Groups
+| Users can have groups of friends where everyone involved must be 
+able to chat.
+
+| Live calls
+| Users can have live calls.
+
+| Video calls
+| Users can have video calls.
+
+| Screen sharing
+| Users can share their screens in the chat.
+|===
