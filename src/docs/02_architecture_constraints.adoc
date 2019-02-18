@@ -2,22 +2,6 @@
 == Architecture Constraints
 
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
-
 [options="header", cols=2*]
 .Technical
 |===
@@ -51,4 +35,38 @@ able to chat.
 
 | Screen sharing
 | Users can share their screens in the chat.
+|===
+
+[options="header", cols=2*]
+.Political
+|===
+|Name
+|Definition
+
+|Non-technical
+|Every user should manage the app
+
+|Responsiveness
+|The app must work immediately
+
+|Independence
+|The data must be only manage by users
+
+|Security
+|Data must not be in touch by external devices
+
+|Privacy
+|Only own users can manage their own data
+
+|Aesthetics
+|The app must be intuitive
+
+|Friendliness
+|The app must have inviting interfaz
+
+|Originality
+|The app must be different from other apps and be recognize 
+
+|Usability
+|The documentation of the app must be easy to understand by users
 |===
