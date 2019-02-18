@@ -1,5 +1,6 @@
 [[section-system-scope-and-context]]
 == System Scope and Context
+:imagesdir: images
 
 
 [role="arc42help"]
@@ -23,25 +24,14 @@ Various options:
 
 === Business Context
 
-[role="arc42help"]
-****
-.Contents
-Specification of *all* communication partners (users, IT-systems, ...) with explanations of domain specific inputs and outputs or interfaces.
-Optionally you can add domain specific formats or communication protocols.
+image::useCase1.png[]
 
-.Motivation
-All stakeholders should understand which data are exchanged with the environment of the system.
-
-.Form
-All kinds of diagrams that show the system as a black box and specify the domain interfaces to communication partners.
-
-Alternatively (or additionally) you can use a table.
-The title of the table is the name of your system, the three columns contain the name of the communication partner, the inputs, and the outputs.
-****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of external domain interfaces>**
+[options="header"]
+|===
+|Communication partner|Input|Output
+|User|Send a message|Recieve feedback of messages being received by chat partner
+|User|Delete a message|Message is deleted, the user and the reciever of said message receive feedback of this action and can no longer see the message
+|===
 
 === Technical Context
 
