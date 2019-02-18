@@ -35,22 +35,18 @@ image::useCase1.png[]
 
 === Technical Context
 
-[role="arc42help"]
-****
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
 
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
+image::technicalContext1.png[]
 
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
+The application will be divided in several modules, each one with a different responsability.
 
-****
+[options="header"]
+|===
+|Module|Responsabilities|Relations
+|Login Service|Will verify the user identity and grant him access to the app.|The verification process will use the Solid API.
+|Messaging Service|This module will let the user write any message, and then send the data to the necessary number of PODs in the Solid platform.|It will have a direct communication with Solid PODs.
+|Solid Platform|We will use it to securely store the user's data in a decentralized way.|
+|===
 
-**<Diagram or Table>**
+Right now the project is in a very early stage. This page will be modified during the development process.
 
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
