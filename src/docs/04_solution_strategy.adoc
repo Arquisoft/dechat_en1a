@@ -2,23 +2,36 @@
 == Solution Strategy
 
 
+=== Technology Decisions
 [role="arc42help"]
 ****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+DeChat is developed using the https://solid.mit.edu[Solid] platform, which allows decentralization using Secure Pots.
+The Solid API is written in JavaScript. Therefore, we have decided the best option for DeChat implementation is
+use the JavaScript programming language to build the whole application.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+Over several frameworks available for the development of JavaScript applications, our team has chosen the
+https://angular.io[Angular] framework, running in a https://nodejs.org/en/[Node.js] enviroment. This way, we'll be able
+to develop a cross-platform application using well-known and fully documented technologies.
+****
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+=== Design and Architecture Decisions
+[role="arc42help"]
+****
+As we are using Angular, we have decided to follow a https://en.wikipedia.org/wiki/Model–view–controller[Model-View-Controller]
+structure, which the framework is designed to manage. It will help us to separate the different parts of the program, and
+implement all the services DeChat will need in a well-defined layer, easy to scale and mantain.
+****
 
-.Form
-Keep the explanation of these key decisions short.
+=== Decisions on How to Achieve Quality Goals
+[role="arc42help"]
+****
+TBD
+****
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
+=== Organizational Decisions
+[role="arc42help"]
+****
+Our idea is to follow an agile metodology -for the moment, a simplified version of 
+https://en.wikipedia.org/wiki/Scrum_(software_development)[SCRUM]. Our goal is to always have a minimum viable product,
+which we can deliver any time a deadline is reached.
 ****
