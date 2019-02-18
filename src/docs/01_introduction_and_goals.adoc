@@ -14,19 +14,63 @@ Describes the relevant requirements and the driving forces that software archite
 
 [role="arc42help"]
 ****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+Requirements Overview  
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+.Context 
 
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
+-We have an application chat like, with some extensions like voice call, video call... This app won't have a central server, so it must be made by pods. LINKS 
 
+We must use javaScript because we must use SOLID 
+
+  
+
+.Motivation 
+
+-There are many chat applications that have an open server, but in our case, we want that the information shared by the users can be only managed by themselves. We think that the private way of chatting is a needed improve, because nowadays, the privacy is one of the main keys in internet, because we don't really know who can see our things. 
+
+Making the application private will change the behaviour of the user-user connection 
+
+  
+
+.Form 
+
+-DeChat´s goal is to be a user-user interaction platform with a higher security, thanks to a server that is decentralized. 
+
+-How can we make that possible? 
+
++That’s possible because of PODS.   
+
+Problem 
+
+Solution 
+
+Build a decentralized application. 
+
+As we said just before, we can make it private by means of the use of the PODS. 
+
+The users must have the total control of their own data 
+
+We will create local repositories with PODS. 
+
+The user can send multimedia like pictures, video... 
+
+We will recode different kind of chats to include our technology. 
+
+The user will receive a notification when someone wants to chat with him. 
+
+We will ask for notification permission in the device to add an extension. 
+
+Users can have groups with people they want to chat with. 
+
+With PODS we will create repositories in each device also with group chats. 
+
+In the groups, the whole group will receive the message. 
+
+ 
+
+ 
+
+-If you want, you can look for more information here:  https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/
 Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
 ****
 
