@@ -5,6 +5,13 @@
 
 [role="arc42help"]
 ****
+.What we are going to create is an application where the whole information is stored and managed by the own user. He is the one that must take control of who
+can see their information and where is that information.
+The idea is that we will use SOLID like a "securirty" system, where the user can give his key to another user,
+and so that the other user can see the first user's information.
+Also, we have to consider the implementation of other systems taht can interact with the application, like the
+possibility of store photos, videos and stuff like that.
+
 .Contents
 System scope and context - as the name suggests - delimits your system (i.e. your scope) from all its communication partners
 (neighboring systems and users, i.e. the context of your system). It thereby specifies the external interfaces.
