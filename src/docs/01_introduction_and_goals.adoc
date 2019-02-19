@@ -11,6 +11,7 @@ It will let any user with a Secure Pod chat with his trusted contacts, guarantee
 
 [role="arc42help"]
 ****
+****
 Right now, there exist many kinds of messaging applications, but all of them follow a centralized architecture. This is, all the data must go through a server, compromising its security and privacy.
 
 Our main goal is to keep user's data private, and letting the user share it with only with the people he trusts. That's why we will use the Solid platform to create a decentralized chat application able to reach these standards.
@@ -23,11 +24,12 @@ Here are the basic ones we have decided to define for DeChat:
 - Users can create group chats, in which two or more contacts will send messages to all the members of the group.
 - The user data will be always kept private and secure.
 
-****
+
 
 === Quality Goals
 
 [role="arc42help"]
+****
 ****
 [options="header", cols="1,3,1"]
 |===
@@ -60,7 +62,7 @@ no connection in less than 4 seconds.
 in less than 5 seconds.
 |Medium, Low
 |===
-****
+
 
 === Stakeholders
 
