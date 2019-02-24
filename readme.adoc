@@ -1,11 +1,9 @@
 = dechat_en1a
 
-image:https://api.codacy.com/project/badge/Grade/6bf64efc1f78475686c2690c1f4462e2[link="https://app.codacy.com/app/pacojq/dechat_en1a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en1a&utm_campaign=Badge_Grade_Dashboard"]
-
 image:https://travis-ci.org/Arquisoft/dechat_en1a.svg?branch=master["Build Status", link="https://travis-ci.org/Arquisoft/dechat_en1a"]
 image:https://codecov.io/gh/Arquisoft/dechat_en1a/branch/master/graph/badge.svg["Codecov",link="https://codecov.io/gh/Arquisoft/dechat_en1a"]
 image:https://coveralls.io/repos/github/Arquisoft/dechat_en1a/badge.svg["Coverage",link="https://coveralls.io/github/Arquisoft/dechat_en1a"]
-image:https://api.codacy.com/project/badge/Grade/fc7dc1da60ee4e9fb67ccff782625794["Codacy code quality", link="https://www.codacy.com/app/jelabra/dechat_en1a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en1a&utm_campaign=Badge_Grade"]
+image:https://api.codacy.com/project/badge/Grade/6bf64efc1f78475686c2690c1f4462e2[link="https://app.codacy.com/app/pacojq/dechat_en1a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en1a&utm_campaign=Badge_Grade_Dashboard"]
 
 This project was generated with https://github.com/angular/angular-cli[Angular CLI] version 6.0.8.
 
