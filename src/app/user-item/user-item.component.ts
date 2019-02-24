@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../models/dechat/user.model';
 
 @Component({
   selector: 'app-user-item',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserItemComponent implements OnInit {
 
+  @Input() user: User;
+  
   constructor() { }
 
   ngOnInit() {

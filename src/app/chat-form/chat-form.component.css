@@ -1,0 +1,44 @@
+
+
+/* * * * * 'SEND' BUTTON * * * * */
+
+.chatButton {
+    flex: 1;
+    border-radius: 4px;
+    padding: 8px 24px;
+    font-size: 1.3em;
+    background-color: #2A2845;    
+    color: #fff;
+    transition: 0.2s ease-out;
+    min-width: 50px;
+}
+  
+.chatButton:disabled {
+    background-color: #F0EEEB;
+    border-color: #F0EEEB;
+}
+  
+  
+.chatButton:hover {
+    background-color: #444;
+}
+
+
+
+/* * * * * CHAT TEXT INPUT * * * * */
+
+.chatInput {
+    flex: 10;
+    font-size: 1.3em;
+    background-color: white;
+    color: black;
+    transition: 0.1s ease-out;
+    padding-left: 80px;
+}
+
+.chatInput:focus {
+    background-color: rgb(238, 242, 247);
+    color: #222;
+    transition: 0.1s ease-in;
+}
+  

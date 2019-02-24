@@ -1,14 +1,9 @@
 <div class="feed">
 
-  [FEED]
-  <br>
-
   <!-- the feed contains a collection of message objects -->
   <!-- for each message, we are generating a chatMessage component -->
   <div *ngFor="let message of feed" class="message">
     <app-message [chatMessage]=message></app-message>
   </div>
-
-  <br>
-  Type a thing:
+  
 </div>
