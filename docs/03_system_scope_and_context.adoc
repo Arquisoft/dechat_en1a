@@ -1,0 +1,39 @@
+[[section-system-scope-and-context]]
+== System Scope and Context
+:imagesdir: images
+
+.What we are going to create is an application where the whole information is stored and managed by the own user. He is the one that must take control of who
+can see their information and where is that information.
+The idea is that we will use SOLID like a "securirty" system, where the user can give his key to another user,
+and so that the other user can see the first user's information.
+Also, we have to consider the implementation of other systems taht can interact with the application, like the
+possibility of store photos, videos and stuff like that.
+
+=== Business Context
+
+image::useCase1.png[]
+
+[options="header"]
+|===
+|Communication partner|Input|Output
+|User|Send a message|Recieve feedback of messages being received by chat partner
+|User|Delete a message|Message is deleted, the user and the reciever of said message receive feedback of this action and can no longer see the message
+|===
+
+=== Technical Context
+
+
+image::technicalContext1.png[]
+
+The application will be divided in several modules, each one with a different responsability.
+
+[options="header"]
+|===
+|Module|Responsabilities|Relations
+|Login Service|Will verify the user identity and grant him access to the app.|The verification process will use the Solid API.
+|Messaging Service|This module will let the user write any message, and then send the data to the necessary number of PODs in the Solid platform.|It will have a direct communication with Solid PODs.
+|Solid Platform|We will use it to securely store the user's data in a decentralized way.|
+|===
+
+Right now the project is in a very early stage. This page will be modified during the development process.
+

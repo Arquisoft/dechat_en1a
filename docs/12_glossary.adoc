@@ -1,0 +1,23 @@
+[[section-glossary]]
+== Glossary
+
+
+
+[role="arc42help"]
+****
+
+[options="header", cols=2*]
+|===
+| Term         
+| Definition
+
+| Decentralized architecture
+| An architecture where the system does not have a central authority 
+which controls the information or operations.
+
+| Quality attributes   
+| Anotate functional requirements of the system.
+
+| Constraints  
+| Design decisions that have already been made.
+|===

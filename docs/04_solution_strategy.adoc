@@ -1,0 +1,40 @@
+[[section-solution-strategy]]
+== Solution Strategy
+
+
+=== Technology Decisions
+[role="arc42help"]
+****
+****
+DeChat is developed using the https://solid.mit.edu[Solid] platform, which allows decentralization using Secure Pots.
+The Solid API is written in JavaScript. Therefore, we have decided the best option for DeChat implementation is
+use the JavaScript programming language to build the whole application.
+
+Over several frameworks available for the development of JavaScript applications, our team has chosen the
+https://angular.io[Angular] framework, running in a https://nodejs.org/en/[Node.js] environment. This way, we'll be able
+to develop a cross-platform application using well-known and fully documented technologies.
+
+
+=== Design and Architecture Decisions
+[role="arc42help"]
+****
+****
+As we are using Angular, we have decided to follow a https://en.wikipedia.org/wiki/Model–view–controller[Model-View-Controller]
+structure, which the framework is designed to manage. It will help us to separate the different parts of the program, and
+implement all the services DeChat will need in a well-defined layer, easy to scale and maintain.
+
+
+=== Decisions on How to Achieve Quality Goals
+[role="arc42help"]
+****
+****
+TBD
+
+=== Organizational Decisions
+[role="arc42help"]
+****
+****
+Our idea is to follow an agile methodology -for the moment, a simplified version of 
+https://en.wikipedia.org/wiki/Scrum_(software_development)[SCRUM]. Our goal is to always have a minimum viable product,
+which we can deliver any time a deadline is reached.
+

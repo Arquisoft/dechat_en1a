@@ -1,6 +1,0 @@
-[[section-technical-risks]]
-== Risks and Technical Debts
-
-- The development team footnote:[Not necessarily refering to the abolute totality of the members of the team, but to the majority of it. Applicable to the rest of this piece of documentation.] has never designed and implemented an aplication related to the use of Solid pods.
-- The development team has never worked with Angular.
-- The development team has never designed an architecture for an application of this characteristics.
