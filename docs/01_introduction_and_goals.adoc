@@ -21,10 +21,9 @@ Here are the basic ones we have decided to define for DeChat:
 - Users can create group chats, in which two or more contacts will send messages to all the members of the group.
 - The user data will be always kept private and secure.
 
-[options="header]
+[options="header"]
 |===
-|Problem
-|Solution
+|Problem|Solution
 
 |Build a decentralized application. 
 |As we said just before, we can make it private by means of the use of the PODS. 
