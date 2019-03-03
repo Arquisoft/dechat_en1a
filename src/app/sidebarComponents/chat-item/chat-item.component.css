@@ -1,4 +1,4 @@
-.userItem{
+.chatItem{
     height: auto;
     padding: 10px;
     width: 90%;
@@ -12,7 +12,7 @@
     transition: ease-in 0.2s;
 }
 
-.userItem:hover{
+.chatItem:hover{
     background-color: #453968;
     color: #ddd;
     transition: ease-in 0.1s;

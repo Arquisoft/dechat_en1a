@@ -1,0 +1,22 @@
+
+.chatroom {
+    display: flex;
+}
+
+
+
+.feedWrapper {
+    flex: 5;
+    order: 2;
+    overflow-y: scroll;
+    padding: 20px 0px 0px 24px;
+}
+
+.chatFormWrapper {
+    display: flex;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 3;
+    padding: 8px;
+}
+

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { SignupFormComponent } from './app/signup-form/signup-form.component';
 import { LoginFormComponent } from './app/login-form/login-form.component';
-import { ChatroomComponent } from './app/chatroom/chatroom.component';
+import { MainContentComponent } from './app/main-content/main-content.component'
 
 /*
     Here we specify the routes of the app.
@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
 
     { path: 'signup', component: SignupFormComponent },
     { path: 'login', component: LoginFormComponent },
-    { path: 'chat', component: ChatroomComponent },
+    { path: 'chat', component: MainContentComponent },
     { path: '', redirectTo: '/chat', pathMatch: 'full' },
 
     /* Default generated routes

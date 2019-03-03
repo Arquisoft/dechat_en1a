@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
 import { RdfService } from './rdf.service';
-import { SolidProvider } from '../models/solid-provider.model';
+import { SolidProvider } from '../../models/solid/solid-provider.model';
 declare let solid: any;
 
 interface SolidSession {

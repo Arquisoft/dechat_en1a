@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 // import { currentSession } from 'solid-auth-client';
 
 // Services
-import { AuthService } from '../services/solid.auth.service';
+import { AuthService } from '../services/solid/solid.auth.service';
 
 class Session {
   constructor() {}

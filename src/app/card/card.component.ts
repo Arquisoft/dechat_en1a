@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { SolidProfile } from '../models/solid-profile.model';
-import { RdfService } from '../services/rdf.service';
-import { AuthService } from '../services/solid.auth.service';
+import { SolidProfile } from '../models/solid/solid-profile.model';
+import { RdfService } from '../services/solid/rdf.service';
+import { AuthService } from '../services/solid/solid.auth.service';
 
 
 @Component({

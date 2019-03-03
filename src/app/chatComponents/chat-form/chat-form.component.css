@@ -4,13 +4,14 @@
 
 .chatButton {
     flex: 1;
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 8px 24px;
-    font-size: 1.3em;
+    font-size: 1em;
     background-color: #2A2845;    
     color: #fff;
     transition: 0.2s ease-out;
     min-width: 50px;
+    text-align: center;
 }
   
 .chatButton:disabled {
@@ -27,13 +28,25 @@
 
 /* * * * * CHAT TEXT INPUT * * * * */
 
-.chatInput {
-    flex: 10;
-    font-size: 1.3em;
-    background-color: white;
-    color: black;
-    transition: 0.1s ease-out;
+.inputWrapper {
+    flex: 5;
     padding-left: 80px;
+    padding-right: 16px;
+    display: flex;
+}
+
+.chatInput { 
+    flex: 1; 
+    width: auto;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1.3em;
+    color: black;   
+    background-color: white;
+    transition: 0.1s ease-out; 
+    padding-left: 16px;
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 .chatInput:focus {
