@@ -21,7 +21,25 @@ Here are the basic ones we have decided to define for DeChat:
 - Users can create group chats, in which two or more contacts will send messages to all the members of the group.
 - The user data will be always kept private and secure.
 
+´[options="header, cols="1,2,1]
+|===
+|Problem
+|Solution
 
+|Build a decentralized application. 
+|As we said just before, we can make it private by means of the use of the PODS. 
+
+|The users must have the total control of their own data 
+|We will create local repositories with PODS. 
+
+|The user can send multimedia like pictures, video... 
+|We will recode different kind of chats to include our technology. 
+
+|The user will receive a notification when someone wants to chat with him. 
+|We will ask for notification permission in the device to add an extension. 
+
+|Users can have groups with people they want to chat with. In the groups, the whole group will receive the message. 
+|With PODS we will create repositories in each device also with group chats. 
 
 === Quality Goals
 
