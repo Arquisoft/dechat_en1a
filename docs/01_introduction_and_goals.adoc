@@ -21,7 +21,7 @@ Here are the basic ones we have decided to define for DeChat:
 - Users can create group chats, in which two or more contacts will send messages to all the members of the group.
 - The user data will be always kept private and secure.
 
-[options="header, cols="1,2,1]
+[options="header]
 |===
 |Problem
 |Solution
