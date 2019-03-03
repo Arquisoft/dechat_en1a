@@ -41,6 +41,7 @@ Here are the basic ones we have decided to define for DeChat:
 |Users can have groups with people they want to chat with. 
 In the groups, the whole group will receive the message. 
 |With PODS we will create repositories in each device also with group chats. 
+|===
 
 === Quality Goals
 
