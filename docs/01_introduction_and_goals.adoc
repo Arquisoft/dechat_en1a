@@ -21,7 +21,7 @@ Here are the basic ones we have decided to define for DeChat:
 - Users can create group chats, in which two or more contacts will send messages to all the members of the group.
 - The user data will be always kept private and secure.
 
-´[options="header, cols="1,2,1]
+[options="header, cols="1,2,1]
 |===
 |Problem
 |Solution
@@ -38,7 +38,8 @@ Here are the basic ones we have decided to define for DeChat:
 |The user will receive a notification when someone wants to chat with him. 
 |We will ask for notification permission in the device to add an extension. 
 
-|Users can have groups with people they want to chat with. In the groups, the whole group will receive the message. 
+|Users can have groups with people they want to chat with. 
+In the groups, the whole group will receive the message. 
 |With PODS we will create repositories in each device also with group chats. 
 
 === Quality Goals
