@@ -11,7 +11,7 @@ possibility of store photos, videos and stuff like that.
 
 === Business Context
 
-image::useCase1.png[]
+image::casoUsoAlvaro.png[]
 
 [options="header"]
 |===
