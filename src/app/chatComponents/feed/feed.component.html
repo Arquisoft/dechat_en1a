@@ -2,7 +2,7 @@
 
   <!-- the feed contains a collection of message objects -->
   <!-- for each message, we are generating a chatMessage component -->
-  <div *ngFor="let message of feed" class="message">
+  <div *ngFor="let message of feed | async" class="message">
     <app-message [chatMessage]=message></app-message>
   </div>
   

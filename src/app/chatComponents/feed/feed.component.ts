@@ -2,6 +2,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ChatService } from '../../services/dechat/chat.service';
 import { ChatMessage } from '../../models/dechat/chat-message.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-feed',
@@ -10,11 +11,11 @@ import { ChatMessage } from '../../models/dechat/chat-message.model';
 })
 export class FeedComponent implements OnInit, OnChanges {
   
-  feed: any; // TODO give it an actual type once we have decided which structure we use
+  feed: Observable<ChatMessage[]>;
 
   constructor(private chatService: ChatService) {
 
-    this.chatService.addListener(ChatService.ON_CHAT_START, this.update.bind(this))
+    //this.chatService.addListener(ChatService.ON_CHAT_START, this.update.bind(this))
   }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class FeedComponent implements OnInit, OnChanges {
     this.update();
   }
 
+  
   update() : void {
     this.feed = this.chatService.getMessages();
   }
