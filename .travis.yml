@@ -14,9 +14,7 @@ install:
   - npm install
   
 script:
-  - npm run setup:install
   - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
-  - npm run e2e
 
 after_success:
   - nmp run coverage
