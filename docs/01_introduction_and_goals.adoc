@@ -48,34 +48,35 @@ In the groups, the whole group will receive the message.
 |===
 |Quality goal
 |Scenario
-|Priority
-
-|Usability
-|A user should be able to select a contact and start the conversation in less than 
-5 seconds.
-|High, High
+|Priority (Importance, Difficulty of its implementation)
 
 |Performance efficiency
 |The message should be sent and stored in the other user's POD in less than 2 
 seconds.
+|High, High
+
+|Usability
+|If a user deletes a message, it must not appear in the conversation for all 
+the other users in less than 6 seconds.
 |High, Medium
+
+|Usability
+|A user should be able to select a contact and start the conversation in less than 
+5 seconds.
+|High, Low
 
 |Security
 |In case of a network failure, the system should notify the user about having 
 no connection in less than 4 seconds.
-|High, Low
+|Medium, High
 
 |Testability
 |When testing a piece of the design, we should be able to finish in less than 
 3 days.
-|Medium, High
-
-|Usability
-|If a user deletes a message by accident, the system should be able to recover it 
-in less than 5 seconds.
 |Medium, Low
 |===
 
+Note: In the priority column, you have two values as stated in its name, the first one represents the level of importance for the attribute according to the consumer, and the second one represents the level of difficulty for the attribute to be implemented.
 
 === Stakeholders
 
