@@ -5,10 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "mocha --recursive",
+    "test": "mocha",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "install": "npm install"
+    "install": "npm install && npm install -g @angular/cli"
   },
   "browser": {
     "crypto": false,
