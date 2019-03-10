@@ -41,6 +41,7 @@ import { ChatService } from './services/dechat/chat.service';
 
 // Miscelanea
 import { appRoutes } from '../routes';
+import { ProfileIconComponent } from './profile-icon/profile-icon.component';
 
 
 
@@ -61,7 +62,8 @@ import { appRoutes } from '../routes';
     UserListComponent,
     ChatItemComponent,
     MainContentComponent,
-    ChatHeaderComponent
+    ChatHeaderComponent,
+    ProfileIconComponent
   ],
   imports: [
     BrowserModule,

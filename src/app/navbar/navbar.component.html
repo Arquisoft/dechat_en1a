@@ -14,9 +14,11 @@
       </span>
       -->
 
-      <span>
-        <span id="userEmail" >Hello, {{ userName }}</span>
-      </span>
+      <div *ngIf="showProfileIcon()">
+        <div class="profileIconWrapper">
+          <app-profile-icon></app-profile-icon>
+        </div>
+      </div>
 
       <!--
       <span>

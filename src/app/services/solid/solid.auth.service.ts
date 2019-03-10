@@ -49,7 +49,7 @@ export class AuthService {
       await this.isSessionActive();
 
       // popupLogin success redirect to profile
-      this.router.navigate(['/card']);
+      this.router.navigate(['/chat']);
     } catch (error) {
       console.log(`Error: ${error}`);
     }
