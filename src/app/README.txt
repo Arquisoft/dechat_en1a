@@ -5,7 +5,7 @@ The application is composed by three main elements:
         They are all inside the "services" folder.
         They can be created in the command line with 'ng g s [name]'
 
-    - COMPONENS (graphical representation)
+    - COMPONENTS (graphical representation)
         They are spread all over the "app" folder.
         They can be created in the command line with 'ng g c [name]'
 

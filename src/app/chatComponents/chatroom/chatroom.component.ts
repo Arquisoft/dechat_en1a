@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatroomComponent implements OnInit, AfterViewChecked {
 
-  // Refference to the #scroller element in the DOM
+  // Reference to the #scroller element in the DOM
   @ViewChild('scroller') private feedContainer: ElementRef;
 
   ready : Observable<boolean[]>;
