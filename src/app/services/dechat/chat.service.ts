@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
-import { AuthService } from './auth.service';
+//import { AuthService } from 'src/app/services/solid/solid.auth.service';
 import { User } from 'src/app/models/dechat/user.model';
 import { Observable, of } from 'rxjs';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
@@ -17,9 +17,6 @@ export class ChatService {
    *
    * - Send and receive messages from the current chat
    * - Creating new chats
-   *
-   *
-   * 
    * 
   */
 

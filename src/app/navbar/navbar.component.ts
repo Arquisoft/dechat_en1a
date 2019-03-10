@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/dechat/user.service';
+import { AuthService } from '../services/solid/solid.auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  userName :string;
+
+  constructor(
+    private auth : AuthService,
+    //private user : UserService
+  ) { }
 
   ngOnInit() {
+    /*if (this.auth.isSessionActive()) {
+      this.userName = this.user.getUserName();
+    }*/
   }
 
 }
