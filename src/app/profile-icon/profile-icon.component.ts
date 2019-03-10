@@ -11,7 +11,10 @@ import { SolidProfile } from '../models/solid/solid-profile.model';
 export class ProfileIconComponent implements OnInit {
 
   profile: SolidProfile;
+
   userName : string;
+  profileImage : string;
+
   loadingProfile: boolean;
 
   constructor(private rdf: RdfService, private auth: AuthService) { }
@@ -36,7 +39,12 @@ export class ProfileIconComponent implements OnInit {
       }
 
       this.loadingProfile = false;
-      this.setupProfileData();
+      if (this.profile) {
+        this.setupFromProfile();
+      } else {
+        this.setupDefault()
+      }
+
     } catch (error) {
       console.log(`Error: ${error}`);
     }
@@ -44,14 +52,18 @@ export class ProfileIconComponent implements OnInit {
   }
 
 
-  // Format data coming back from server. Intended purpose is to replace profile image with default if it's missing
-  // and potentially format the address if we need to reformat it for this UI
-  private setupProfileData() {
-    if (this.profile) {
-      this.userName = this.profile.fn;
-    } else {
-      this.userName = "Unknown";
-    }
+
+  private setupFromProfile() {
+    this.userName = this.profile.fn;
+    this.profileImage = this.profile.image ? this.profile.image : '/assets/images/profile.png';
   }
+
+  private setupDefault() {
+    this.userName = "Unknown";
+    this.profileImage = '/assets/images/profile.png';
+  }
+
+
+
 
 }
