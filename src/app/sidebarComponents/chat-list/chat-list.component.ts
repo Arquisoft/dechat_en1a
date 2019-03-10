@@ -1,54 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ChatService } from '../../services/dechat/chat.service';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
 import { User } from 'src/app/models/dechat/user.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
   styleUrls: ['./chat-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnChanges {
+  
+  chatInfos: Observable<ChatInfo[]>;
 
-  chatInfos: ChatInfo[];
-
-  constructor(chat: ChatService) {
-    this.chatInfos = [];
-    this.chatInfos = this.getDummies();
+  constructor(private chatService: ChatService) {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.update();
+  }
+
+  
+  update() : void {
+    this.chatInfos = this.chatService.getAllChats();
   }
 
 
-
-  // TODO erase this
-  private getDummies() : ChatInfo[] {
-
-    var result : ChatInfo[] = []
-    
-    result.push(this.getDummy("Dummy 1", "online"));
-    result.push(this.getDummy("Dummy 2", "busy"));
-
-    for (var i = 3; i < 50; i ++) {
-      result.push(this.getDummy("Dummy " + i, "offline"));
-    }
-
-    return result;
-  }
-
-  // TODO erase this
-  private getDummy(userName: string, status: string = "offline") : ChatInfo {
-
-    var dummy : User;
-    var info : ChatInfo;
-
-    dummy = new User();
-    dummy.userName = userName;
-    info = new ChatInfo();
-    info.user = dummy;
-    info.status = status;
-    
-    return info;
-  }
 }

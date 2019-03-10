@@ -294,17 +294,14 @@ export class RdfService {
 
   getProfile = async () => {
 
-    console.log("RDF Service getting profile...");
     if (!this.session) {
-      console.log("Getting session");
       await this.getSession();
-      console.log("Session = " + this.session );
     }
 
     try {
       await this.fetcher.load(this.session.webId);
 
-      console.log("Profile loaded!: " + this.getValueFromVcard('fn'));
+      console.log("Profile loaded: " + this.getValueFromVcard('fn'));
       return {
         fn : this.getValueFromVcard('fn'),
         company : this.getValueFromVcard('organization-name'),
@@ -349,21 +346,24 @@ export class RdfService {
 
 
   async getContacts() : Promise<Array<NamedNode>> {
-    if (!this.session) {
-      await this.getSession();
-    }
+    //if (!this.session) {
+    //  await this.getSession();
+    //}
     let webId = this.session.webId;
     try {
         await this.fetcher.load(this.store.sym(webId).doc());
         return this.store.each(this.store.sym(webId), FOAF("knows"));
     } catch (error) {
-      console.log(`Error fetching data: ${error}`);
+      console.log(`Error fetching contacts data: ${error}`);
     }
   }
 
-  getUserName = () => {
-    return this.getValueFromVcard('fn');
+  getWebID() {
+    return this.session.webId;
+  }
 
+  getUserName() {
+    return this.getValueFromVcard('fn');
   }
 
 }

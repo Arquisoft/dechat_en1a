@@ -10,17 +10,21 @@ import { AuthService } from '../solid/solid.auth.service';
 })
 export class UserService {
 
-  profile: SolidProfile;
-  loadingProfile : boolean;
+  private profile: SolidProfile;
+  private loadingProfile : boolean;
+  private profileLoaded : boolean;
 
-  contacts : User[];
-  userName : string;
-  profileImage : string;
+  private user : User;
+  private contacts : User[];
 
 
   constructor(private rdf: RdfService, private auth: AuthService) {
 
+    console.log("User service constructor");
+    this.user = null;
     this.loadingProfile = true;
+    this.profileLoaded = false;
+    this.contacts = [];
     this.loadProfile();
 
     // Clear cached profile data
@@ -30,6 +34,10 @@ export class UserService {
 
   // Loads the profile from the rdf service and handles the response
   async loadProfile() {
+
+    if (this.profileLoaded)
+      return;
+
     if (!this.loadingProfile)
       return;
 
@@ -42,6 +50,7 @@ export class UserService {
       }
 
       this.loadingProfile = false;
+      this.profileLoaded = true;
       if (this.profile) {
         this.setupFromProfile();
       } else {
@@ -51,28 +60,44 @@ export class UserService {
     } catch (error) {
       console.log(`Error: ${error}`);
     }
-
   }
 
   private setupFromProfile() {
-    this.userName = this.profile.fn;
-    this.profileImage = this.profile.image ? this.profile.image : '/assets/images/profile.png';
+
+    this.user = new User();
+    this.user.url = this.rdf.getWebID();
+    this.user.userName = this.profile.fn;
+    this.user.status = 'online';
+    this.user.profileImage = this.profile.image ? this.profile.image : '/assets/images/profile.png';
     this.loadContacts();
   }
 
   private setupDefault() {
-    this.userName = "Unknown";
-    this.profileImage = '/assets/images/profile.png';
+    this.user = new User();
   }
 
   private async loadContacts() {
-    await this.rdf.getSession();
-    var contacts = await this.rdf.getContacts();
+    console.log("Fetching contacts...");
     
-    contacts.forEach(async element => {
+    var contacts = await this.rdf.getContacts();
+    console.log("Contact count = " + contacts.length);
+
+    while(this.contacts.length > 0)
+      this.contacts.pop();
+
+    /*await contacts.forEach(async element => {
+
+      console.log("Contact: " + element.value);
       await this.rdf.fetcher.load(element.value);
-      var contact = new User(this.rdf.getValueFromVcard('fn', element.value));
-      this.contacts.push(contact);
+      var name = this.rdf.getValueFromVcard('fn', element.value);
+      console.log("Contact name = " + name);
+      var c = new User(name);
+      this.contacts.push(c);
+    });*/
+
+    contacts.forEach(element => {
+      var c = new User(element.value);
+      this.contacts.push(c);
     });
   }
 
@@ -81,20 +106,26 @@ export class UserService {
 
 
 
+  async getUser() : Promise<User> {
+    await this.loadProfile();
+    return this.user;
+  }
+
 
   async getUserName() : Promise<string> {
     await this.loadProfile();
-    return this.userName;
+    return this.user.userName;
   }
 
   async getProfileImage() : Promise<string> {
     await this.loadProfile();
-    return this.profileImage;
+    return this.user.profileImage;
   }
 
 
-  getContacts() : Observable<User[]> {
-    return of(this.contacts);
+  async getContacts() : Promise<User[]> {
+    await this.loadProfile();
+    return this.contacts;
   }
 
   

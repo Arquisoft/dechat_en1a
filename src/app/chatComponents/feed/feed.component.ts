@@ -13,10 +13,7 @@ export class FeedComponent implements OnInit, OnChanges {
   
   feed: Observable<ChatMessage[]>;
 
-  constructor(private chatService: ChatService) {
-
-    //this.chatService.addListener(ChatService.ON_CHAT_START, this.update.bind(this))
-  }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
     this.update();
