@@ -22,7 +22,7 @@ image::useCase1.png[]
 
 === Technical Context
 
-image::Technical_context.png[]
+image::Technical_context_alternative_2.png[]
 
 The application will be divided in several modules, each one with a different responsability.
 
