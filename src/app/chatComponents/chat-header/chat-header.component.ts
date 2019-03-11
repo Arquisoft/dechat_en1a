@@ -12,7 +12,7 @@ export class ChatHeaderComponent implements OnInit {
 
 
   constructor() {
-  	ready = true;
+  	this.ready = true;
    }
 
   ngOnInit() {

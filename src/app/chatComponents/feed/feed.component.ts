@@ -16,7 +16,7 @@ export class FeedComponent implements OnInit, OnChanges {
   ready: boolean;
 
   constructor(private chatService: ChatService) { 
-  ready = true;
+  this.ready = true;
   }
 
   ngOnInit() {
