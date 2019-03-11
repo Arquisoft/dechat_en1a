@@ -297,10 +297,14 @@ export class RdfService {
     if (!this.session) {
       await this.getSession();
     }
+    console.log("Wait for it...");
+    if (this.session == null)
+      console.log("NULL SESSION!!!");
 
     try {
       await this.fetcher.load(this.session.webId);
 
+      console.log("Profile loaded: " + this.getValueFromVcard('fn'));
       return {
         fn : this.getValueFromVcard('fn'),
         company : this.getValueFromVcard('organization-name'),
@@ -345,17 +349,24 @@ export class RdfService {
 
 
   async getContacts() : Promise<Array<NamedNode>> {
-    if (!this.session) {
-      await this.getSession();
-    }
+    //if (!this.session) {
+    //  await this.getSession();
+    //}
     let webId = this.session.webId;
     try {
         await this.fetcher.load(this.store.sym(webId).doc());
-        return this.store.each(this.store.sym(webId), FOAF("knows")); // .forEach(friend => console.log(friend.value)); // Just to test that it works
+        return this.store.each(this.store.sym(webId), FOAF("knows"));
     } catch (error) {
-      console.log(`Error fetching data: ${error}`);
+      console.log(`Error fetching contacts data: ${error}`);
     }
   }
 
+  getWebID() {
+    return this.session.webId;
+  }
+
+  getUserName() {
+    return this.getValueFromVcard('fn');
+  }
 
 }

@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
-import { SignupFormComponent } from './app/signup-form/signup-form.component';
-import { LoginFormComponent } from './app/login-form/login-form.component';
 import { MainContentComponent } from './app/main-content/main-content.component'
+import { LoginComponent } from './app/login/login.component';
+import { CardComponent } from './app/card/card.component';
+import { DashboardComponent } from './app/dashboard/dashboard.component';
+import { LoginPopupComponent } from './app/login-popup/login-popup.component';
+import { AuthGuard } from './app/services/solid/auth.guard.service';
+import { AuthService } from './app/services/solid/solid.auth.service';
 
 /*
     Here we specify the routes of the app.
@@ -11,34 +15,27 @@ import { MainContentComponent } from './app/main-content/main-content.component'
 */
 export const appRoutes: Routes = [
 
-    { path: 'signup', component: SignupFormComponent },
-    { path: 'login', component: LoginFormComponent },
-    { path: 'chat', component: MainContentComponent },
-    { path: '', redirectTo: '/chat', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
+    { path: 'login-popup', component: LoginPopupComponent },
+
+    {
+      path: 'dashboard', component: DashboardComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'card', component: CardComponent,
+      canActivate: [AuthGuard],
+    },
+
+    { 
+      path: 'chat', component: MainContentComponent,
+      canActivate: [AuthGuard],
+    }
+    
     /* Default generated routes
-    {
-      path: '',
-      component: LoginComponent
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'login-popup',
-      component: LoginPopupComponent
-    },
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-      canActivate: [AuthGuard],
-    },
-    {
-      path: 'card',
-      component: CardComponent,
-      canActivate: [AuthGuard],
-    },
+    
     {
       path: 'register',
       component: RegisterComponent

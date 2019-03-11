@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatHeaderComponent implements OnInit {
 
-  constructor() { }
+//Atributes
+  ready: boolean;
+
+
+  constructor() {
+  	this.ready = true;
+   }
 
   ngOnInit() {
   }

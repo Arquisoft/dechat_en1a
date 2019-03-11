@@ -12,10 +12,11 @@ import { Observable } from 'rxjs';
 export class FeedComponent implements OnInit, OnChanges {
   
   feed: Observable<ChatMessage[]>;
+  
+  ready: boolean;
 
-  constructor(private chatService: ChatService) {
-
-    //this.chatService.addListener(ChatService.ON_CHAT_START, this.update.bind(this))
+  constructor(private chatService: ChatService) { 
+   this.ready = true;
   }
 
   ngOnInit() {

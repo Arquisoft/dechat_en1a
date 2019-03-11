@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
-import { AuthService } from './auth.service';
+//import { AuthService } from 'src/app/services/solid/solid.auth.service';
 import { User } from 'src/app/models/dechat/user.model';
 import { Observable, of } from 'rxjs';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
 import { Chat } from 'src/app/models/dechat/chat.model';
+import { UserService } from './user.service';
+import { RdfService } from '../solid/rdf.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,6 @@ export class ChatService {
    *
    * - Send and receive messages from the current chat
    * - Creating new chats
-   *
-   *
-   * 
    * 
   */
 
@@ -35,6 +34,8 @@ export class ChatService {
   // This way, we'll be able to directly read messages
   // That have already been fetched.
   chatMap : Map<ChatInfo, Chat>;
+  allChats : ChatInfo[];
+
 
   // We will also store the current chat data
   ready : any[];
@@ -46,26 +47,42 @@ export class ChatService {
 
   // Constructor //
   constructor(
+    private userService : UserService,
+    private rdf : RdfService
     // TODO maybe inject solid stuff here
     // TODO inject auth stuff
-  ) {
-    // TODO authenticate user object. For now, get a dummy
-    this.user = new User();
-    this.user.userName = "Test User";
-
+  ) {   
 
     this.ready = [];
     this.currentChat = null;
-/*
-    this.currentChat = new Chat();
-    this.currentChat.info = new ChatInfo();
-    this.currentChat.info.user = new User();
-    this.currentChat.messages = [];
-*/
     this.currentMessages = [];
 
     this.chatMap = new Map<ChatInfo, Chat>();
+    this.allChats = [];
 
+    this.setUp();
+  }
+
+  async setUp() {
+
+    await 1;
+    this.user = await this.userService.getUser();
+    var contacts = await this.userService.getContacts();
+    
+    console.log("Number of chat contacts = " + contacts.length);
+
+    contacts.forEach(async c => {
+      var info = new ChatInfo();
+      info.user = c;
+      info.status = "offline";
+      this.allChats.push(info);
+    });
+    
+
+    // Add a couple of dummy chats
+    this.allChats.push(this.getDummy("Dummy 1", "online"));
+    this.allChats.push(this.getDummy("Dummy 2", "busy"));
+    this.allChats.push(this.getDummy("Dummy 3", "offline"));
   }
 
 
@@ -100,6 +117,32 @@ export class ChatService {
     return c;
   }
 
+  getAllChats() : Observable<ChatInfo[]> {
+    return of(this.allChats);
+  }
+
+  
+
+  // TODO erase this
+  private getDummy(userName: string, status: string = "offline") : ChatInfo {
+
+    var dummy : User;
+    var info : ChatInfo;
+
+    dummy = new User();
+    dummy.userName = userName;
+    info = new ChatInfo();
+    info.user = dummy;
+    info.status = status;
+    
+    return info;
+  }
+
+
+
+
+
+
 
 
 
@@ -110,13 +153,11 @@ export class ChatService {
     // TODO send it to the current chat
 
     const timestamp = this.getTimeStamp();
-    const email = this.user.email;
 
     var message = new ChatMessage();
     message.message = msg;
     message.timeSent = timestamp;
     message.userName = this.user.userName;
-    message.email = email;
 
     this.currentChat.messages.push(message);
     this.currentMessages.push(message);
