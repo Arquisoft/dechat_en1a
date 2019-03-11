@@ -14,8 +14,11 @@ export class MessageComponent implements OnInit {
   messageContent: string;
   timeSent: string;
   // isOwnMessage: boolean;
+  ready: boolean;
 
-  constructor() { }
+  constructor() {
+  ready = true;
+  }
 
   ngOnInit(chatMessage = this.chatMessage) {
     this.messageContent = chatMessage.message;

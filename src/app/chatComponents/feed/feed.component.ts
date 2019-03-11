@@ -13,7 +13,7 @@ export class FeedComponent implements OnInit, OnChanges {
   
   feed: Observable<ChatMessage[]>;
   
-  boolean ready;
+  ready: boolean;
 
   constructor(private chatService: ChatService) { 
   ready = true;

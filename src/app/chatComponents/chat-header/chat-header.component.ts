@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatHeaderComponent implements OnInit {
 
 //Atributes
-  boolean ready;
+  ready: boolean;
 
 
   constructor() {
