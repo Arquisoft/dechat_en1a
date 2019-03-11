@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   showProfileIcon() : boolean {
-    return this.router.url == '/chat';
+    return this.router.url === '/chat';
   }
 
 }

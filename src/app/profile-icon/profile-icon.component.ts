@@ -12,7 +12,9 @@ export class ProfileIconComponent implements OnInit {
   profileImage : string;
 
 
-  constructor(private user: UserService) { }
+  constructor(private user: UserService) {
+    this.profileImage = '/assets/images/profile.png';
+  }
 
   ngOnInit() {
     this.loadProfile();

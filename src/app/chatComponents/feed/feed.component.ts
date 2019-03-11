@@ -12,8 +12,12 @@ import { Observable } from 'rxjs';
 export class FeedComponent implements OnInit, OnChanges {
   
   feed: Observable<ChatMessage[]>;
+  
+  ready: boolean;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) { 
+   this.ready = true;
+  }
 
   ngOnInit() {
     this.update();

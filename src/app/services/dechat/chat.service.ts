@@ -8,6 +8,7 @@ import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
 import { Chat } from 'src/app/models/dechat/chat.model';
 import { UserService } from './user.service';
 import { RdfService } from '../solid/rdf.service';
+import { FilesService } from './files.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,8 @@ export class ChatService {
   // Constructor //
   constructor(
     private userService : UserService,
-    private rdf : RdfService
+    private rdf : RdfService,
+    private files : FilesService
     // TODO maybe inject solid stuff here
     // TODO inject auth stuff
   ) {   
@@ -69,10 +71,14 @@ export class ChatService {
     this.user = await this.userService.getUser();
     var contacts = await this.userService.getContacts();
     
+
+    this.files.checkUserFiles(this.user);
+
     console.log("Number of chat contacts = " + contacts.length);
 
     contacts.forEach(async c => {
-      var info = new ChatInfo();
+      var chatId = c.url.replace("https://", "").split('.')[0];
+      var info = new ChatInfo(chatId);
       info.user = c;
       info.status = "offline";
       this.allChats.push(info);
@@ -107,6 +113,7 @@ export class ChatService {
     this.currentChat.messages.forEach(m =>
         this.currentMessages.push(m));
 
+    this.files.checkChatFolder(this.user, chatInfo);
   }
 
   private fetchChat(chatInfo: ChatInfo) : Chat {

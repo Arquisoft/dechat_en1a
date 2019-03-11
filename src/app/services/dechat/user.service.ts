@@ -73,6 +73,7 @@ export class UserService {
   }
 
   private setupDefault() {
+    console.log("UserService failed fetching user data. Loading default user.")
     this.user = new User();
   }
 
@@ -96,7 +97,7 @@ export class UserService {
     });*/
 
     contacts.forEach(element => {
-      var c = new User(element.value);
+      var c = new User(element.value, element.value);
       this.contacts.push(c);
     });
   }
