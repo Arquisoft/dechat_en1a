@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigateByUrl('/login');
     }
 
-    return isLoggedIn; /* this.auth.session.pipe(
+    return /*isLoggedIn; /*/ this.auth.session.pipe(
       take(1),
       map(session => !!session),
       tap(loggedIn => {
@@ -35,6 +35,6 @@ export class AuthGuard implements CanActivate {
           return this.router.navigate(['/']);
         }
       })
-    );*/
+    );//*/
   }
 }

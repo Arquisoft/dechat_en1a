@@ -1,8 +1,0 @@
-<!-- The chat form represents the chat functionality-->
-<div class="inputWrapper">
-  <textarea
-    class ="chatInput" 
-    [(ngModel)]="message" 
-    (keydown)="handleSubmit($event)"></textarea>
-</div>
-<button class="chatButton" (click)=send()>Send</button>

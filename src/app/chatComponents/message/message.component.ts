@@ -17,7 +17,7 @@ export class MessageComponent implements OnInit {
   ready: boolean;
 
   constructor() {
-  ready = true;
+  this.ready = true;
   }
 
   ngOnInit(chatMessage = this.chatMessage) {

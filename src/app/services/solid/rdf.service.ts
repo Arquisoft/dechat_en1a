@@ -297,6 +297,9 @@ export class RdfService {
     if (!this.session) {
       await this.getSession();
     }
+    console.log("Wait for it...");
+    if (this.session == null)
+      console.log("NULL SESSION!!!");
 
     try {
       await this.fetcher.load(this.session.webId);
