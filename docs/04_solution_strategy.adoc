@@ -6,13 +6,16 @@
 [role="arc42help"]
 ****
 ****
-DeChat is developed using the https://solid.mit.edu[Solid] platform, which allows decentralization using Secure Pots.
-The Solid API is written in JavaScript. Therefore, we have decided the best option for DeChat implementation is
-use the JavaScript programming language to build the whole application.
+DeChat is developed using the https://solid.mit.edu[Solid] platform, which allows the creation of decentralized applications using Secure Pods, so the privacy of the user is respected.
+The Solid API is fully written in JavaScript. Therefore, we have decided that the best option the implementation of our application is to use the JavaScript programming language, so it will be in the same programming language as the Solid API. 
 
 Over several frameworks available for the development of JavaScript applications, our team has chosen the
-https://angular.io[Angular] framework, running in a https://nodejs.org/en/[Node.js] environment. This way, we'll be able
+https://angular.io[Angular] framework, which is the one that most fits the way we want to develop our application, as it is really helpful for creating web applications in an easier way than other frameworks. We have also decided to run the application in a https://nodejs.org/en/[Node.js] environment. This way, we'll be able
 to develop a cross-platform application using well-known and fully documented technologies.
+
+For testing our code, we have decided that we would use https://mochajs.org/[Mocha JS] for unit testing, as it is not very difficult for learning how to do tests, and it is powerful enough for testing our application.
+
+Also, we are using https://travis-ci.org/[Travis] for continuous integration of our project. It will run the tests we have made every time we make a commit.
 
 
 === Design and Architecture Decisions
@@ -22,6 +25,7 @@ to develop a cross-platform application using well-known and fully documented te
 As we are using Angular, we have decided to follow a https://en.wikipedia.org/wiki/Model–view–controller[Model-View-Controller]
 structure, which the framework is designed to manage. It will help us to separate the different parts of the program, and
 implement all the services DeChat will need in a well-defined layer, easy to scale and maintain.
+image::mvc-angular.png[]
 
 
 === Decisions on How to Achieve Quality Goals
