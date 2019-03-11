@@ -58,12 +58,30 @@ export class FilesService {
   async createFolder(path: String) {
     await solidFiles.createFolder(path).then(
       (success: any) => { console.log(`Created folder ${path}.`); },
-      (error: any) => { console.log('Could not create folder structure: ' + error) }
+      (error: any) => { console.log('Could not create folder: ' + error) }
+    );
+  }
+
+  async createFile(path: String, str: String = null) {
+    await solidFiles.createFile(path).then(
+      (success: any) => { 
+        console.log(`Created file ${path}.`);
+        if (str != null)
+          this.updateFile(path, str);
+      },
+      (error: any) => { console.log('Could not create file: ' + error) }
+    );
+  }
+
+  async updateFile(path: String, str: String) {
+    await solidFiles.updateFile(path, str).then(
+      (success: any) => { console.log("File edited!"); },
+      (error: any) => { console.log("Could not edit file: " + error) }
     );
   }
 
 
-  // Shut out to our mates in group en1B
+  // Shout out to our mates in group en1B
   async givePermissions(path: string, user: User) {
     const webId = user.url.replace('#me', '#');
     const acl =

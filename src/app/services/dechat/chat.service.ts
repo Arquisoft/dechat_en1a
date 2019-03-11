@@ -41,6 +41,7 @@ export class ChatService {
   // We will also store the current chat data
   ready : any[];
   currentChat : Chat;
+  currentChatUrl : String;
   currentMessages : ChatMessage[];
 
 
@@ -96,7 +97,7 @@ export class ChatService {
   // Methods //
 
   // Given a ChatInfo object, we will open the chat
-  openChat(chatInfo: ChatInfo) : void {
+  async openChat(chatInfo: ChatInfo) : Promise<void> {
 
     if (!this.chatMap.has(chatInfo)) {
       this.chatMap.set(chatInfo, this.fetchChat(chatInfo));
@@ -113,7 +114,10 @@ export class ChatService {
     this.currentChat.messages.forEach(m =>
         this.currentMessages.push(m));
 
+
+    // Update file system
     this.files.checkChatFolder(this.user, chatInfo);
+    this.currentChatUrl = await this.files.getChatUrl(this.user, chatInfo);
   }
 
   private fetchChat(chatInfo: ChatInfo) : Chat {
@@ -152,25 +156,35 @@ export class ChatService {
 
 
 
-
-
-
   sendMessage(msg: string) {
-
-    // TODO send it to the current chat
 
     const timestamp = this.getTimeStamp();
 
-    var message = new ChatMessage();
-    message.message = msg;
-    message.timeSent = timestamp;
-    message.userName = this.user.userName;
+    var message = this.createMessage(msg);
 
     this.currentChat.messages.push(message);
     this.currentMessages.push(message);
 
+    var path = this.currentChatUrl + this.getFullTimeStamp() + ".txt";
+    console.log("Message path: " + path);
+    this.files.createFile(path, msg);
+
     console.log("[Message sent] : " + msg);
   }
+
+  private createMessage(msg: string) : ChatMessage {
+    var message = new ChatMessage();
+    message.message = msg;
+    message.timeSent = this.getTimeStamp();
+    message.userName = this.user.userName;
+    return message;
+  }
+
+
+
+
+
+
 
   getTimeStamp() {
     const now = new Date();
@@ -181,6 +195,21 @@ export class ChatService {
 
     const time = now.getUTCHours() + ':' +
                  now.getUTCMinutes();
+    
+    return date + ' ' + time;
+  }
+
+  getFullTimeStamp() {
+    const now = new Date();
+
+    const date = now.getUTCFullYear() + '-' +
+                 (now.getUTCMonth() + 1) + '-' +
+                 now.getUTCDate();
+
+    const time = now.getUTCHours() + '-' +
+                 now.getUTCMinutes() + '-' +
+                 now.getSeconds() + '-' +
+                 now.getMilliseconds();
     
     return date + ' ' + time;
   }
