@@ -7,7 +7,7 @@ var assert = require('assert');
 
 // Now we define the tests
 describe('Chat-Form', function() { 
-    it('Should have an empty message when created', function() {
+    it('The attribute ready must be 'true' when created', function() {
         var chatForm = new cFormComp.ChatFormComponent(new cServ.ChatService());
         assert.equal(chatForm.message, "");
     });  
