@@ -7,7 +7,7 @@ var assert = require('assert');
 
 // Now we define the tests
 describe('Feed', function() { 
-    it('The attribute ready must be 'true' when created', function() {
+    it('The attribute ready must be true when created', function() {
         var feed = new feedComp.feedComponent(new cServ.ChatService());
         assert.equal(feed.ready, true);
     });  
