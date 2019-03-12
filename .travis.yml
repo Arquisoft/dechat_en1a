@@ -17,4 +17,4 @@ script:
   - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
 
 after_success:
-  - nmp run coverage
+  - npm run coverage
