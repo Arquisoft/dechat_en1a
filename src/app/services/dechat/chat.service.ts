@@ -100,13 +100,17 @@ export class ChatService {
   async openChat(chatInfo: ChatInfo) : Promise<void> {
 
     if (!this.chatMap.has(chatInfo)) {
-      this.chatMap.set(chatInfo, this.fetchChat(chatInfo));
+      this.chatMap.set(chatInfo, await this.fetchChat(chatInfo));
     }
 
     if (this.ready.length == 0)
       this.ready.push(true);
-      
-    this.currentChat = this.chatMap.get(chatInfo);
+    
+    var newChat = this.chatMap.get(chatInfo);
+    if (this.currentChat === newChat)
+      return;
+
+    this.currentChat = newChat;
     
     while(this.currentMessages.length > 0)
       this.currentMessages.pop();
@@ -120,13 +124,34 @@ export class ChatService {
     this.currentChatUrl = await this.files.getChatUrl(this.user, chatInfo);
   }
 
-  private fetchChat(chatInfo: ChatInfo) : Chat {
-    // TODO
+
+  private async fetchChat(chatInfo: ChatInfo) : Promise<Chat> {
     var c = new Chat();
     c.info = chatInfo;
     c.messages = [];
+
+    var path = await this.files.getChatUrl(this.user, chatInfo);
+    await this.files.readFolder(path).then(async files => await
+        files.forEach(async f => { 
+          c.messages.push(await this.getMessageFromFile(f));
+          await 5;
+        })
+    );
+
     return c;
   }
+
+  private async getMessageFromFile(url:string) : Promise<ChatMessage> {
+    var msg;
+    var json;
+    await this.files.readFile(url).then(body => json = JSON.parse(body));
+
+    msg = new ChatMessage(json.message);
+
+    return msg;
+  }
+
+
 
   getAllChats() : Observable<ChatInfo[]> {
     return of(this.allChats);
@@ -158,16 +183,12 @@ export class ChatService {
 
   sendMessage(msg: string) {
 
-    const timestamp = this.getTimeStamp();
-
     var message = this.createMessage(msg);
 
     this.currentChat.messages.push(message);
     this.currentMessages.push(message);
 
-    var path = this.currentChatUrl + this.getFullTimeStamp() + ".txt";
-    console.log("Message path: " + path);
-    this.files.createFile(path, msg);
+    this.pushMessage(message);
 
     console.log("[Message sent] : " + msg);
   }
@@ -175,31 +196,18 @@ export class ChatService {
   private createMessage(msg: string) : ChatMessage {
     var message = new ChatMessage();
     message.message = msg;
-    message.timeSent = this.getTimeStamp();
     message.userName = this.user.userName;
     return message;
   }
 
-
-
-
-
-
-
-  getTimeStamp() {
-    const now = new Date();
-
-    const date = now.getUTCFullYear() + '/' +
-                 (now.getUTCMonth() + 1) + '/' +
-                 now.getUTCDate();
-
-    const time = now.getUTCHours() + ':' +
-                 now.getUTCMinutes();
-    
-    return date + ' ' + time;
+  private pushMessage(msg : ChatMessage) {
+    var str = JSON.stringify(msg);
+    var path = this.currentChatUrl + this.getFullTimeStamp() + ".txt";
+    this.files.createFile(path, str);
   }
 
-  getFullTimeStamp() {
+
+  private getFullTimeStamp() {
     const now = new Date();
 
     const date = now.getUTCFullYear() + '-' +

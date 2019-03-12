@@ -1,10 +1,14 @@
 
 // Contains the data for a single message
-
 export class ChatMessage {
-    $key?: string;
-    email?: string;
+    userUrl: string;
     userName?: string;
     message?: string;
-    timeSent?: string;
+    date: Date;
+
+    constructor(msg: string = "") {
+        this.message = msg;
+        this.date = new Date();
+    }
+    
 }

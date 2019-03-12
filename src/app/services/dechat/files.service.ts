@@ -9,6 +9,14 @@ import { RdfService } from '../solid/rdf.service';
 })
 export class FilesService {
 
+
+  //
+  //  ALL INFO NEEDED FOR THIS SERVICE:
+  //
+  //  https://github.com/jeff-zucker/solid-file-client
+  //
+
+
   constructor(private rdf: RdfService) { }
 
 
@@ -55,30 +63,56 @@ export class FilesService {
   }
 
 
-  async createFolder(path: String) {
-    await solidFiles.createFolder(path).then(
-      (success: any) => { console.log(`Created folder ${path}.`); },
+  async createFolder(url: String) {
+    await solidFiles.createFolder(url).then(
+      (success: any) => { console.log(`Created folder ${url}.`); },
       (error: any) => { console.log('Could not create folder: ' + error) }
     );
   }
 
-  async createFile(path: String, str: String = null) {
-    await solidFiles.createFile(path).then(
+  async createFile(url: string, str: string = null) {
+    await solidFiles.createFile(url).then(
       (success: any) => { 
-        console.log(`Created file ${path}.`);
+        console.log(`Created file ${url}.`);
         if (str != null)
-          this.updateFile(path, str);
+          this.updateFile(url, str);
       },
       (error: any) => { console.log('Could not create file: ' + error) }
     );
   }
 
-  async updateFile(path: String, str: String) {
-    await solidFiles.updateFile(path, str).then(
+  async updateFile(url: string, str: string) {
+    await solidFiles.updateFile(url, str).then(
       (success: any) => { console.log("File edited!"); },
       (error: any) => { console.log("Could not edit file: " + error) }
     );
   }
+
+
+
+  async readFile(url: string) : Promise<string> {
+    var result = "";
+    await solidFiles.readFile(url).then(  body => {
+      console.log(`File content is : ${body}.`);
+      result = body;
+    }, err => console.log(err) );
+    return result;
+  }
+
+
+  async readFolder(url: string) : Promise<string[]> {
+    var result = [];
+    await solidFiles.readFolder(url).then(folder => {
+      console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
+      result = folder.files.map(f => f.url);
+    }, err => console.log(err) );
+
+    result.forEach(f => console.log("FILE: " + f));
+
+    return result;
+  }
+
+
 
 
   // Shout out to our mates in group en1B
@@ -108,5 +142,6 @@ export class FilesService {
       console.log('Folder permisions added');
     }, (err: string) => console.log('Could not set folder permisions' + err));
   }
+
 
 }
