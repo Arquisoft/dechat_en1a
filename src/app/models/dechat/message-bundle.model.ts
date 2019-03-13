@@ -3,7 +3,7 @@ import { ChatMessage } from "./chat-message.model";
 
 // Represents an actual chat, storing the message stack
 
-export class Chat {
+export class MessageBundle {
     info: ChatInfo;
     messages: ChatMessage[];
 }

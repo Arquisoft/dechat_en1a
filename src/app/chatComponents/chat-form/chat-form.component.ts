@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ChatService } from '../../services/dechat/chat.service';
+import { MessageService } from 'src/app/services/dechat/message.service';
 
 @Component({
   selector: 'app-chat-form',
@@ -14,7 +14,7 @@ export class ChatFormComponent implements OnInit {
 
 
   // Constructor //
-  constructor(private chat: ChatService) { 
+  constructor(private messageService: MessageService) { 
     this.message = "";
   }
 
@@ -30,7 +30,7 @@ export class ChatFormComponent implements OnInit {
     if (this.message.length <= 0)
       return;
 
-    this.chat.sendMessage(this.message);
+    this.messageService.sendMessage(this.message);
     this.message = '';
   }
 

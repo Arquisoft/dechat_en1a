@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, SimpleChanges } from '@angular/core';
-import { Chat } from 'src/app/models/dechat/chat.model';
+import { MessageBundle } from 'src/app/models/dechat/message-bundle.model';
 import { ChatService } from '../../services/dechat/chat.service';
 import { Observable } from 'rxjs';
 

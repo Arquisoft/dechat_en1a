@@ -21,14 +21,23 @@ export class FilesService {
 
 
 
+  getRoot(user: User) {
+    return user.url.replace("/profile/card#me", "/private/dechat_en1a/");
+  }
+
 
   async checkUserFiles(user: User) {
     await this.rdf.getSession();
-    var userFolder = user.url.replace("/profile/card#me", "/private/dechat/");
-      this.checkFolderExistence(userFolder).then(
-        result => {this.checkFolderExistence(userFolder + "/chats/");
-      });
+
+    var userFolder = user.url.replace("/profile/card#me", "/private/");
+
+    this.checkFolderExistence(userFolder).then(then =>
+      this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
+       this.checkFolderExistence(userFolder + "dechat_en1a/chats/")
+      )
+    );
   }
+  
 
 
   async checkFolderExistence(url : string) {
@@ -47,16 +56,23 @@ export class FilesService {
 
 
 
-  async checkChatFolder(user: User, chat : ChatInfo) {
+  async checkChatFolder(chat : ChatInfo) {
     await this.rdf.getSession();
-    this.getChatUrl(user, chat).then(
-      url => {this.checkFolderExistence(url);}
-    );
+
+    await chat.users.forEach(async user => {
+        var path = this.getChatUrl(user, chat);
+        await this.checkFolderExistence(path).then( result => {
+          chat.users.forEach(otherUser =>
+              this.givePermissions(path, otherUser)
+          );
+        });
+
+    });    
   }
 
 
-  async getChatUrl(user: User, chat : ChatInfo): Promise<string> {
-    var userFolder = user.url.replace("/profile/card#me", "/private/dechat/chats/");
+  getChatUrl(user: User, chat : ChatInfo) : string {
+    var userFolder = this.getRoot(user) + "chats/";
     var url = userFolder + chat.chatId + "/";
     console.log("Chat url = " + url);
     return url;

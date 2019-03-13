@@ -19,7 +19,7 @@ export class ChatItemComponent implements OnInit {
 
 
   openChat() {
-    console.log("Oppening chat with " + this.chatInfo.user.userName);
+    console.log("Oppening chat with " + this.chatInfo.chatName);
     this.chatService.openChat(this.chatInfo);
   }
 }

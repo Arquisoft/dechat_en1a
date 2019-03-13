@@ -64,7 +64,7 @@ export class UserService {
 
   private setupFromProfile() {
 
-    this.user = new User();
+    this.user = new User(this.rdf.getWebID());
     this.user.url = this.rdf.getWebID();
     this.user.userName = this.profile.fn;
     this.user.status = 'online';
@@ -74,7 +74,7 @@ export class UserService {
 
   private setupDefault() {
     console.log("UserService failed fetching user data. Loading default user.")
-    this.user = new User();
+    this.user = new User("");
   }
 
   private async loadContacts() {
@@ -86,6 +86,7 @@ export class UserService {
     while(this.contacts.length > 0)
       this.contacts.pop();
 
+      // TODO
     /*await contacts.forEach(async element => {
 
       console.log("Contact: " + element.value);
@@ -97,7 +98,7 @@ export class UserService {
     });*/
 
     contacts.forEach(element => {
-      var c = new User(element.value, element.value);
+      var c = new User(element.value);
       this.contacts.push(c);
     });
   }

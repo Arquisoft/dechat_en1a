@@ -1,8 +1,8 @@
 
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ChatService } from '../../services/dechat/chat.service';
 import { ChatMessage } from '../../models/dechat/chat-message.model';
 import { Observable } from 'rxjs';
+import { MessageService } from 'src/app/services/dechat/message.service';
 
 @Component({
   selector: 'app-feed',
@@ -15,7 +15,7 @@ export class FeedComponent implements OnInit, OnChanges {
   
   ready: boolean;
 
-  constructor(private chatService: ChatService) { 
+  constructor(private messageService: MessageService) { 
    this.ready = true;
   }
 
@@ -29,7 +29,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
   
   update() : void {
-    this.feed = this.chatService.getMessages();
+    this.feed = this.messageService.getMessages();
   }
 
 }
