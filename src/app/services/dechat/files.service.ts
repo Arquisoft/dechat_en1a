@@ -39,7 +39,8 @@ export class FilesService {
   }
   
 
-
+  // Checks if a folder exists.
+  // If not, it will create a folder with the requested url.
   async checkFolderExistence(url : string) {
     await this.rdf.getSession();
     try {

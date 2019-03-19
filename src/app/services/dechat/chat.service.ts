@@ -41,15 +41,15 @@ export class ChatService {
 
     await 1;
     this.user = await this.userService.getUser();
+    this.messages.setCurrentUser(this.user);
     var contacts = await this.userService.getContacts();
     
-
     this.files.checkUserFiles(this.user);
 
     console.log("Number of chat contacts = " + contacts.length);
 
     contacts.forEach(async c => {
-      // TODO fetch, not create
+      // TODO fetch chats, not create
       this.allChats.push(this.createChat(c));
     });
     
@@ -57,7 +57,6 @@ export class ChatService {
 
 
 
-  // Methods //
 
   // Given a ChatInfo object, we will open the chat
   async openChat(chatInfo: ChatInfo) : Promise<void> {
@@ -67,14 +66,10 @@ export class ChatService {
     if (this.ready.length == 0)
       this.ready.push(true);
     
-    
-
 
     // Update file system
     this.files.checkChatFolder(chatInfo);
-  }
-
-  
+  } 
 
 
 
@@ -87,9 +82,6 @@ export class ChatService {
     return of(this.ready);
   }
   
-
-
-
 
 
 
