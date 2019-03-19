@@ -48,9 +48,11 @@ export class ChatService {
 
     console.log("Number of chat contacts = " + contacts.length);
 
-    contacts.forEach(async c => {
-      // TODO fetch chats, not create
-      this.allChats.push(this.createChat(c));
+    contacts.forEach(async con => {
+      // TODO: Fetch chats, not create them
+
+      // We create a new chat with the contact
+      this.allChats.push(this.createChat(con));
     });
     
   }
@@ -98,14 +100,20 @@ export class ChatService {
     return chat.administrators.includes(this.user);
   }
 
-  createChat(otherUser : User) : ChatInfo {    
+  /* 
+   * Normal chats behave the same as group chats, so 
+   * we create a group chat with just both this user and 
+   * the other one.
+   */
+  createChat(otherUser : User) : ChatInfo {       
     return this.createGroupChat(otherUser.nickname, [otherUser]);
   }
 
   createGroupChat(chatName : string, otherUsers : User[]) : ChatInfo {
     var chat : ChatInfo;
-
-    var id = this.user.nickname + "_" + otherUsers[0].nickname;//this.generateChatId();
+    
+    // We generate the ID for this chat
+    var id = this.generateChatId(otherUsers);
     otherUsers.push(this.user);
 
     chat = new ChatInfo(id);
@@ -128,13 +136,21 @@ export class ChatService {
 
 
   
-  // Will generate an id for a brand new chat
-  private generateChatId() : string {
+  // Will generate an identifier for a brand new chat
+  private generateChatId(otherUsers: User[]) : string {
 
-    var strUser = this.user.userName;
+    // We declare the initial state of the Chat ID and the current date
+    var chatId = this.user.nickname;
     var date = this.messages.getFullTimeStamp();
 
-    return strUser + "_" + date;
+    // We traverse the otherUsers array
+    var index;
+    for (index = 0; index < otherUsers.length; index++) {
+      chatId +=  "_" + otherUsers[0].nickname;
+    }
+
+    // We need to add the current date to the Chat ID
+    return chatId + "_" + date;
   }
 
 
