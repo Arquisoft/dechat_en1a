@@ -8,7 +8,6 @@
 e2e_test.*
 node_modules
 tools/gulp-tasks/cldr/cldr-data/
-.nyc_output/
 
 # Include when developing application packages.
 pubspec.lock
