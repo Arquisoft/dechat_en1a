@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../../models/solid/solid-session.model';
 declare let solid: any;
-declare let $rdf: any;
-//import * as $rdf from 'rdflib'
+//declare let $rdf: any;
+import * as $rdf from 'rdflib'
 
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';

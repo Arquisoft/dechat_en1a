@@ -1,5 +1,3 @@
-
-// Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,7 +5,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-
 
 
 // Components
@@ -42,7 +39,6 @@ import { ChatService } from './services/dechat/chat.service';
 // Miscelanea
 import { appRoutes } from '../routes';
 import { ProfileIconComponent } from './profile-icon/profile-icon.component';
-
 
 
 

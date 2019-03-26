@@ -1,7 +1,0 @@
-[[section-glossary]]
-== Glossary
-
-
-
-[role="arc42help"]
-TBD

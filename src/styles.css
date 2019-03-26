@@ -1,72 +1,73 @@
 
 * {
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-body {
-  width: 100%;
-  min-height: 100%;
-  background: white;
-  background-attachment: fixed;
-  background-size: cover;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-app-chatroom {
-  display: flex;
-  flex-direction: column;
-}
-
-app-navbar {
-  width: 100%;
-}
-
-app-chat-form {
-  width: 100%;
-  display: flex;
-  white-space: nowrap;
-  overflow: none;
-}
-
-app-main-content {
-  display: flex;
-}
-
-
-.message {
-  display: block;
-  height: auto;
-}
-
-
-
-
-
-/* * * * * * * * SCROLLBAR STYLE * * * * * * * */
-
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0); 
-}
-::-webkit-scrollbar-track:hover {
-  background: rgba(0,0,0,.2); 
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, .5); 
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: white; 
-}
-
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  body {
+    width: 100%;
+    min-height: 100%;
+    background: white;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  app-chatroom {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  app-navbar {
+    width: 100%;
+  }
+  
+  app-chat-form {
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    overflow: none;
+  }
+  
+  app-main-content {
+    display: flex;
+  }
+  
+  
+  .message {
+    display: block;
+    height: auto;
+  }
+  
+  
+  
+  
+  
+  /* * * * * * * * SCROLLBAR STYLE * * * * * * * */
+  
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0); 
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: rgba(0,0,0,.2); 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .5); 
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: white; 
+  }
+  
+  
