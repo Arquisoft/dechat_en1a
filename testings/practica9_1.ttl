@@ -1,0 +1,12 @@
+@base <http://dbpedia.org/resource/>.
+@prefix schema: <http://schema.org/>.
+
+<United_States>
+    a schema:Country;
+    schema:name "United States Of America".
+
+<Miles_Davis>
+    a schema:Person;
+    schema:name "Miles Davis";
+    schema:nationality <United_States>;
+    schema:jobTitle "jazz musician".

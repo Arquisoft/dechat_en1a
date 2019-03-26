@@ -1,7 +1,6 @@
 
-
 .navWrapper {
-    height: 96px;
+    width: 100%;
     color: #222;
     box-shadow: 0 2px 3px rgba(0, 0, 0, .37), 1px 2px 3px rgba(0, 0, 0, .54);
     z-index: 2; /* for it to be on top of some other elements */
