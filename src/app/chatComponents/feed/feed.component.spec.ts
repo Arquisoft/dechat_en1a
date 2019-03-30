@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeedComponent } from './feed.component';
 import { MessageComponent } from '../message/message.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ChatService } from 'src/app/services/dechat/chat.service';
 import { MessageService } from 'src/app/services/dechat/message.service';
 
 describe('FeedComponent', () => {
@@ -17,9 +16,7 @@ describe('FeedComponent', () => {
         FeedComponent,
         MessageComponent
       ],
-      providers: [ 
-        MessageService
-      ]
+      providers: [ MessageService ]
     })
     .compileComponents();
   }));

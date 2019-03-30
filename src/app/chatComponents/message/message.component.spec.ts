@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageComponent } from './message.component';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('MessageComponent', () => {
@@ -11,9 +10,7 @@ describe('MessageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ToastrModule.forRoot() ],
-      declarations: [ 
-        MessageComponent
-      ]
+      declarations: [ MessageComponent ]
     })
     .compileComponents();
   }));
