@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedComponent } from './feed.component';
+import { MessageComponent } from '../message/message.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ChatService } from 'src/app/services/dechat/chat.service';
+import { MessageService } from 'src/app/services/dechat/message.service';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -8,7 +12,14 @@ describe('FeedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedComponent ]
+      imports: [ ToastrModule.forRoot() ],
+      declarations: [ 
+        FeedComponent,
+        MessageComponent
+      ],
+      providers: [ 
+        MessageService
+      ]
     })
     .compileComponents();
   }));
