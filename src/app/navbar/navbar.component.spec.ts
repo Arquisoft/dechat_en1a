@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
+import { ProfileIconComponent } from '../profile-icon/profile-icon.component';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -8,7 +11,14 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ]
+      imports: [ 
+        ToastrModule.forRoot(),
+        RouterTestingModule
+      ],
+      declarations: [
+        NavbarComponent,
+        ProfileIconComponent
+      ]
     })
     .compileComponents();
   }));
