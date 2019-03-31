@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -40,8 +40,33 @@ import { ChatService } from './services/dechat/chat.service';
 
 
 // Miscelanea
-import { appRoutes } from '../routes';
 import { ProfileIconComponent } from './profile-icon/profile-icon.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+
+
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  { path: 'login-popup', component: LoginPopupComponent },
+
+  {
+    path: 'dashboard', component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'card', component: CardComponent,
+    canActivate: [AuthGuard],
+  },
+
+  { 
+    path: 'chat', component: MainContentComponent,
+    canActivate: [AuthGuard],
+  }
+];
 
 
 
@@ -68,7 +93,7 @@ import { ProfileIconComponent } from './profile-icon/profile-icon.component';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes), //RouterModule.forRoot(routes),
+    RouterModule.forRoot(appRoutes),
     NgSelectModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule //required for toastr
