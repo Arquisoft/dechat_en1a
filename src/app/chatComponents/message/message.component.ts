@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatMessage } from '../../models/dechat/chat-message.model';
+import { MultimediaDisplayComponent } from '../multimedia-display/multimedia-display.component';
 
 @Component({
   selector: 'app-message',
@@ -9,6 +10,7 @@ import { ChatMessage } from '../../models/dechat/chat-message.model';
 export class MessageComponent implements OnInit {
 
   @Input() chatMessage: ChatMessage;
+  @Input() multimedia: MultimediaDisplayComponent;
   userEmail: string;
   userName: string;
   messageContent: string;
