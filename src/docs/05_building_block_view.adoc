@@ -2,15 +2,23 @@
 :imagesdir: images
 
 == Building Block View
-
-TBD
+We have marked in the diagrams the building blocks that are not going to be explored in this section as <<outOfScope>> and in yellow background and grey borders. The building blocks that are currently being explored are in white background, and the ones yet to explore are in grey background.
 
 === Whitebox Overall System
 image::buildingBlocks_overall.png[]
 
-=== Level 1
+- user: represents a human using the application as a client.
+- chat app: this is the main functionality of the app. It contains all the logic as well as all the styling files and markup.
+- solid service: everything related to the solid platform that is not directly developed by our team. This includes mainly the pods and its storing system.
 
+=== Level 1
 image::buildingBlocks_level1.png[]
+
+- chat-form: handles the sending of the messages and controls some of the graphical interface.
+- chat-header: TBD
+- chatroom: handles some of the graphical interface relating to showing the messages and other components.
+- feed: contains the messages of the chat and updates itself when there are new messages.
+- message: a messages in the chat. Contains a text to be shown and a timestamp, as well as the name and email of the sender.
 
 === Level 2
 
