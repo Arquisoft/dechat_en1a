@@ -1,11 +1,6 @@
 [[section-solution-strategy]]
 == Solution Strategy
-
-
 === Technology Decisions
-[role="arc42help"]
-****
-****
 DeChat is developed using the https://solid.mit.edu[Solid] platform, which allows the creation of decentralized applications using Secure Pods, so the privacy of the user is respected.
 The Solid API is fully written in JavaScript. Therefore, we have decided that the best option the implementation of our application is to use the JavaScript programming language, so it will be in the same programming language as the Solid API. 
 
@@ -17,27 +12,19 @@ For testing our code, we have decided that we would use https://mochajs.org/[Moc
 
 Also, we are using https://travis-ci.org/[Travis] for continuous integration of our project. It will run the tests we have made every time we make a commit.
 
-
 === Design and Architecture Decisions
-[role="arc42help"]
-****
-****
 As we are using Angular, we have decided to follow a https://en.wikipedia.org/wiki/Model–view–controller[Model-View-Controller]
 structure, which the framework is designed to manage. It will help us to separate the different parts of the program, and
 implement all the services DeChat will need in a well-defined layer, easy to scale and maintain.
 image::mvc-angular.png[]
 
-
 === Decisions on How to Achieve Quality Goals
-[role="arc42help"]
-****
-****
-TBD
+- The message should be sent and stored in the other user’s POD in less than 2 seconds: This is achieved just by executing the action immediately, and makng checks and cosuming processes later.
+- If a user deletes a message, it must not appear in the conversation for all the other users in less than 6 seconds: again, when this action is requested, it is done right away.
+- A user should be able to select a contact and start the conversation in less than 5 seconds: the graphical user interface gives little options to the user, so an action this simple is not more complicated than necessary, the button is allways on the screen.
+- When testing a piece of the design, we should be able to finish in less than 3 days: we are using mocha, which has a simple syntax. This makes the process of testing relatively simple.
 
 === Organizational Decisions
-[role="arc42help"]
-****
-****
 Our idea is to follow an agile methodology -for the moment, a simplified version of 
 https://en.wikipedia.org/wiki/Scrum_(software_development)[SCRUM]. Our goal is to always have a minimum viable product,
 which we can deliver any time a deadline is reached.
