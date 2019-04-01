@@ -1,15 +1,15 @@
 <div class="chatroom">
 
 
-  <!-- The feed contains all the messages-->
-  <div #scroller class="feedWrapper">
-    <app-feed></app-feed>
-  </div>
-  
-</div>
+    <!-- The feed contains all the messages-->
+    <div #scroller class="feedWrapper">
+        <app-feed></app-feed>
+    </div>
 
-<!-- The chat form represents the chat functionality-->
-<div *ngIf="(ready|async)?.length > 0" 
-  class="chatFormWrapper">
-    <app-chat-form></app-chat-form>
+    <!-- The chat form represents the chat functionality-->
+    <div *ngIf="(ready|async)?.length > 0"
+         class="chatFormWrapper">
+        <app-chat-form></app-chat-form>
+    </div>
+
 </div>
