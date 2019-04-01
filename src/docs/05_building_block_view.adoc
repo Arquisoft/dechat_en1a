@@ -6,11 +6,11 @@
 TBD
 
 === Whitebox Overall System
-image::buildingBlocks-overall.png[]
+image::buildingBlocks_overall.png[]
 
 === Level 1
 
-image::buildingBlocks-level1.png[]
+image::buildingBlocks_level1.png[]
 
 === Level 2
 
