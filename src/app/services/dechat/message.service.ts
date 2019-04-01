@@ -183,7 +183,7 @@ export class MessageService {
         // Read all messages inside the bundle folder
         await this.files.readFolder(bundleUrl).then(
             async files => await files.forEach(async f => {
-                await this.getMessageFromFile(f);
+                await this.getMessageFromChat(f);
             })
         );
 
