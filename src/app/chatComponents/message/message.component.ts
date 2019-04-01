@@ -41,6 +41,6 @@ export class MessageComponent implements OnInit {
                 date.getUTCMinutes();
     
     return day + ' ' + time;
-}
+  }
 
 }

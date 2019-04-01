@@ -2,27 +2,25 @@
   We need to show the multimedia element in 
   different ways according to its type.
 -->
-<div [ngSwitch]="{{multimediaType}}">
 
-  <!-- In case it is a video. -->
-  <div ng-switch-when="video">
-    <video width="480" height="360" controls>
-      <source [ng-src]="{{multimediaURL}}"/>
-      Your browser does not support the video HTML tag.
-    </video>
-  </div>
-
-  <!-- In case it is an audio. -->
-  <div ng-switch-when="audio">
-    <audio controls>
-      <source [ng-src]="{{multimediaURL}}"/>
-      Your browser does not support the audio HTML tag.
-    </video>
-  </div>
-
-  <!-- In case it is a image. -->
-  <div ng-switch-when="image">
-      <img [ng-src]="{{multimediaURL}}"/>
-  </div>
-
+<!-- In case it is a video. -->
+<div ng-if="this.multimediaType == 'video'">
+  <video width="480" height="360" controls>
+    <source ng-src="this.multimediaURL"/>
+    Your browser does not support the video HTML tag.
+  </video>
 </div>
+
+<!-- In case it is an audio. -->
+<div ng-if="this.multimediaType == 'audio'">
+  <audio controls>
+    <source ng-src="this.multimediaURL"/>
+    Your browser does not support the audio HTML tag.
+  </audio>
+</div>
+
+<!-- In case it is a image. -->
+<div ng-if="this.multimediaType == 'image'">
+    <img ng-src="this.multimediaURL"/>
+</div>
+
