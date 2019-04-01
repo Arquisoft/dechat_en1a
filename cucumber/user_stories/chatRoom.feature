@@ -1,5 +1,5 @@
-Feature: Send a message
-  A user should be able to send a desired message
+Feature: See the chat
+  A user should be able to see the chat and chat messages
 
 Scenario: A user want to see his/her chats
 	Given I logged
