@@ -141,14 +141,16 @@ export class MessageService {
 
 
     private async getMessagesFromChat(chat: ChatInfo): Promise<Array<ChatMessage>> {
-        let msg;
-        let json;
-        let chatMessages: ChatMessage [];
-        await this.rdf.getFieldArray(chat.chatId,'Message',this.rdf.SCHEMA);
+        const chatMessages: ChatMessage [] = [];
+        await this.rdf.getFileContent(chat.chatId).then(result => result.forEach(message => {
+            const mes: ChatMessage = new ChatMessage();
+            mes.userName = this.rdf.getValueFromSchema('sender', message.value);
+            mes.message = this.rdf.getValueFromSchema('text', message.value);
+            mes.date = this.rdf.getValueFromSchema('dateSent', message.value);
+            chatMessages.push(mes);
+        }));
 
-        // TODO get all the message data, I guess
-        msg = new ChatMessage(json.message);
-        return msg;
+        return chatMessages;
     }
 
 

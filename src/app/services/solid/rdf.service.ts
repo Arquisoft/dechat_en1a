@@ -386,6 +386,10 @@ export class RdfService {
         }
     }
 
+    async getFileContent(url: string): Promise<Array<NamedNode>> {
+        return this.getFieldArray(url, 'contains', LDP);
+    }
+
     async getContacts(): Promise<Array<NamedNode>> {
         // if (!this.session) {
         //  await this.getSession();
