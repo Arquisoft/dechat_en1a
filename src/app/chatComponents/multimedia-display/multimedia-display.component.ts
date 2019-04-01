@@ -19,10 +19,18 @@ export class MultimediaDisplayComponent implements OnInit {
     this.ready = true;
   }
 
-  ngOnInit(multim = this.multimedia) {
+  ngOnInit(multim = this.multimedia) {    
+    /*    
+    // Actual implementation
     this.multimediaURL = multim.url;
     this.multimediaType = multim.type;
     this.multimediaExten = multim.extension;
+    */
+    
+    // For testing purposes
+    this.multimediaURL = "https://i.redd.it/hf5v5rp6dir11.jpg";
+    this.multimediaType = "image";
+    this.multimediaExten = "jpg";
   }
 
 }

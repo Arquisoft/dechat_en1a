@@ -4,23 +4,23 @@
 -->
 
 <!-- In case it is a video. -->
-<div ng-if="this.multimediaType == 'video'">
+<div ng-if="multimediaType == 'video'">
   <video width="480" height="360" controls>
-    <source ng-src="this.multimediaURL"/>
+    <source ng-src="multimediaURL"/>
     Your browser does not support the video HTML tag.
   </video>
 </div>
 
 <!-- In case it is an audio. -->
-<div ng-if="this.multimediaType == 'audio'">
+<div ng-if="multimediaType == 'audio'">
   <audio controls>
-    <source ng-src="this.multimediaURL"/>
+    <source ng-src="multimediaURL"/>
     Your browser does not support the audio HTML tag.
   </audio>
 </div>
 
 <!-- In case it is a image. -->
-<div ng-if="this.multimediaType == 'image'">
-    <img ng-src="this.multimediaURL"/>
+<div ng-if="multimediaType == 'image'">
+    <img ng-src="multimediaURL"/>
 </div>
 
