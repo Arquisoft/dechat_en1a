@@ -19,10 +19,10 @@ export class MessageComponent implements OnInit {
   ready: boolean;
 
   constructor() {
-  this.ready = true;
+    this.ready = true;
   }
 
-  ngOnInit(chatMessage = this.chatMessage) {
+  ngOnInit(chatMessage = this.chatMessage, multim = this.multimedia) {
     if (chatMessage == undefined)
       return;
       
@@ -41,6 +41,6 @@ export class MessageComponent implements OnInit {
                 date.getUTCMinutes();
     
     return day + ' ' + time;
-}
+  }
 
 }
