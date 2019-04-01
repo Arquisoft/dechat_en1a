@@ -1,4 +1,9 @@
 [[section-runtime-view]]
 == Runtime View
 
-[TBD
+- When the application is executed the login page is the first to be shown
+- When the user clicks log in "login-popup" shows a popup to give the login options, and "login" processes the login.
+- Once the user is logged in to the desired platform, the main page is shown, delivered by several components.
+- If the user selects a chat, the chatroom is shown for that user. This is handled by the "chatroom" component.
+- To send a message, it must be written in the specified field and ordered to send, this action is handled by "message" and "chat-form".
+- The "chat-feed" receives the message, and shows it in the screen. The message is also sent to the other chatter's pod, also being shown in his feed. The sending is managed by "messageService".
