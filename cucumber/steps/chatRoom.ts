@@ -27,16 +27,6 @@ When('I click on a chat', function() {
 Then('I should be able to see my chat', function() {
     const subject = new BehaviorSubject(null);
 
-    feedComponent.feed.subscribe(
-        (x: ChatMessage[]) => {
-            subject.next(x);
-        },
-        (err: any) => {
-            subject.error(err);
-        },
-        () => {
-            subject.complete();
-        },
-    );
+    feedComponent.feed.subscribe(ngOnChanges(null));
     expect(subject.getValue).toEqual(true);
 });
