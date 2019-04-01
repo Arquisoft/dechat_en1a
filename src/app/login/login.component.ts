@@ -51,6 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToRegistration() {
-    this.router.navigateByUrl('/register');
+    window.location.href="https://solid.community/register";
   }
 }
