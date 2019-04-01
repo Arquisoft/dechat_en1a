@@ -2,12 +2,12 @@
   We need to show the multimedia element in 
   different ways according to its type.
 -->
-<div [ngSwitch]="multimediaType">
+<div [ngSwitch]="{{multimediaType}}">
 
   <!-- In case it is a video. -->
   <div ng-switch-when="video">
-    <video width="1280" height="720" controls>
-      <source src="" type=""/>
+    <video width="480" height="360" controls>
+      <source [ng-src]="{{multimediaURL}}"/>
       Your browser does not support the video HTML tag.
     </video>
   </div>
@@ -15,14 +15,14 @@
   <!-- In case it is an audio. -->
   <div ng-switch-when="audio">
     <audio controls>
-      <source src="" type=""/>
+      <source [ng-src]="{{multimediaURL}}"/>
       Your browser does not support the audio HTML tag.
     </video>
   </div>
 
   <!-- In case it is a image. -->
   <div ng-switch-when="image">
-      <img src=""/>
-    </div>
+      <img [ng-src]="{{multimediaURL}}"/>
+  </div>
 
 </div>
