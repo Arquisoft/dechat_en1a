@@ -1,15 +1,15 @@
 
-
-
 .mainContent {
-    display: flex;
-    flex: auto;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    overflow: hidden;
 }
 
 .userListWrapper {
     display: flex;
     flex: 1;
-    order: 1;
     background-color: #2A2845;
     color: white;
     padding: 20px 0px 40px 30px;
@@ -19,15 +19,13 @@
 }
 
 .chatroomWrapper {
-    flex: 5;
-    order: 2;
     background-color: white;
-    background: 
-        linear-gradient(180deg, 
-                rgba(196, 228, 238, 0.5),
-                rgba(0, 0, 0, .7)),
-        url('src/assets/img/chat-bg-1.jpg')
-        center
-        center
-        no-repeat;
+    background: linear-gradient(180deg,
+    rgba(196, 228, 238, 0.5),
+    rgba(0, 0, 0, .7)),
+    url('src/assets/img/chat-bg-1.jpg') center center no-repeat;
+}
+
+app-chatroom {
+    height: 100%;
 }

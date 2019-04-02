@@ -5,6 +5,7 @@ html {
     margin: 0;
     padding: 0;
     border: 0;
+    overflow: hidden;
 }
 
 body {
@@ -15,6 +16,12 @@ body {
     background-size: cover;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+app-root {
+    height: 100%;
 }
 
 app-chatroom {
@@ -30,11 +37,12 @@ app-chat-form {
     width: 100%;
     display: flex;
     white-space: nowrap;
-    overflow: none;
+    overflow: hidden;
 }
 
 app-main-content {
     display: flex;
+    height: 100%;
 }
 
 
