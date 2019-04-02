@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-chat-header',
-  templateUrl: './chat-header.component.html',
-  styleUrls: ['./chat-header.component.css']
+    selector: 'app-chat-header',
+    templateUrl: './chat-header.component.html',
+    styleUrls: ['./chat-header.component.css']
 })
 export class ChatHeaderComponent implements OnInit {
 
-//Atributes
-  ready: boolean;
+// Atributes
+    ready: boolean;
 
+    constructor() {
+        this.ready = true;
+    }
 
-  constructor() {
-  	this.ready = true;
-   }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }
