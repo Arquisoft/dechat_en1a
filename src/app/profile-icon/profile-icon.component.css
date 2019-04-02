@@ -1,7 +1,11 @@
 
 .profileIcon {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.textWrapper {
+    padding: 15% 10%;
 }
 
 .imgWrapper {
@@ -12,6 +16,7 @@
 }
 
 .imgWrapper img {
+    width: 100%;
     border-radius: 50%;
     border-width: 2px;
     border-style: solid;

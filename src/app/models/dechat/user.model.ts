@@ -6,10 +6,10 @@ export class User {
     userName?: string; // User name
     profileImage: string;
     status?: string; // Online, busy, offline
-    
-    constructor(url:string) {
+
+    constructor(url: string) {
         this.url = url;
-        this.nickname = url.replace("https://", "").split('.')[0];
+        this.nickname = url.replace('https://', '').split('.')[0];
         this.profileImage = '/assets/images/profile.png';
     }
 }
