@@ -27,12 +27,17 @@ export class InboxService {
 
     console.log("Inbox setting up...");
     this.user = await this.users.getUser();
-    setInterval(this.checkInbox, 2000);
+    setInterval(this.checkInbox.bind(this), 2000);
   }
 
 
 
   private async checkInbox() {
+
+    if (this.user == undefined) {
+      this.user = await this.users.getUser();
+      return;
+    }
 
     console.log("Checking inbox...");
     var url = this.files.getInboxUrl(this.user);

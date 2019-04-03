@@ -62,7 +62,7 @@ export class ChatService {
     var chatFolder = await this.files.getChatsRootUrl(this.user);
     var chats = await this.files.readFolder(chatFolder);
     chats.forEach(async chat => {
-      this.allChats.push(this.fetchChat(chat));
+      this.allChats.push(await this.fetchChat(chat));
     });
   }
 
