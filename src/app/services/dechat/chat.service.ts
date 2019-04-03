@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 
-import {Observable, of} from 'rxjs';
-import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
-import {ChatMessage} from 'src/app/models/dechat/chat-message.model';
-import {MessageBundle} from 'src/app/models/dechat/message-bundle.model';
-import {User} from 'src/app/models/dechat/user.model';
-import {FilesService} from './files.service';
-import {MessageService} from './message.service';
-import {UserService} from './user.service';
+import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
+import { User } from 'src/app/models/dechat/user.model';
+import { Observable, of } from 'rxjs';
+import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
+import { MessageBundle } from 'src/app/models/dechat/message-bundle.model';
+import { UserService } from './user.service';
+import { FilesService } from './files.service';
+import { MessageService } from './message.service';
+import { InboxService } from './inbox.service';
+
+import { v4 as uuid } from 'uuid';
 
 @Injectable({
     providedIn: 'root'
@@ -23,12 +26,13 @@ export class ChatService {
     // We will also store the current chat data
     ready: any[];
 
-    // Constructor //
-    constructor(
-        private userService: UserService,
-        private files: FilesService,
-        private messages: MessageService
-    ) {
+  // Constructor //
+  constructor(
+    private userService : UserService,
+    private files : FilesService,
+    private messages : MessageService,
+    private inbox : InboxService
+  ) {   
 
         this.ready = [];
         this.allChats = [];
@@ -38,106 +42,131 @@ export class ChatService {
 
     async setUp() {
 
-        await 1;
-        this.user = await this.userService.getUser();
-        this.messages.setCurrentUser(this.user);
-        const contacts = await this.userService.getContacts();
+    await 1;
+    this.user = await this.userService.getUser();
+    this.messages.setCurrentUser(this.user);
+    var contacts = await this.userService.getContacts();
+    
+    await this.files.checkUserFiles(this.user);
 
-        this.files.checkUserFiles(this.user);
+    console.log("Checking existent chats...");
+    
+    var chatFolder = await this.files.getChatsRootUrl(this.user);
+    var chats = await this.files.readFolderSubfolders(chatFolder);
+    chats.forEach(async chat => {
+      this.allChats.push(await this.fetchChat(chat));
+    });
 
-        console.log('Number of chat contacts = ' + contacts.length);
 
-        contacts.forEach(async (con) => {
-            // TODO: Fetch chats, not create them
-
-            // We create a new chat with the contact
-            this.allChats.push(this.createChat(con));
-        });
-
+    // TODO remove this Testing stuff
+    if (chats.length == 0) {
+      contacts.forEach(async c => {
+        this.allChats.push(this.createChat(c));
+      });
     }
 
-    // Given a ChatInfo object, we will open the chat
-    async openChat(chatInfo: ChatInfo): Promise<void> {
+  }
 
-        this.messages.setCurrentChat(chatInfo);
+  // Given a ChatInfo object, we will open the chat
+  async openChat(chatInfo: ChatInfo) : Promise<void> {
 
-        if (this.ready.length === 0) {
-            this.ready.push(true);
-        }
+      this.messages.setCurrentChat(chatInfo);
 
-        // Update file system
-        this.files.checkChatFolder(chatInfo);
-    }
+      if (this.ready.length === 0) {
+          this.ready.push(true);
+      }
 
-    getAllChats(): Observable<ChatInfo[]> {
-        return of(this.allChats);
-    }
+      // Update file system
+      this.files.checkChatFolder(chatInfo);
+  }
 
-    isReady(): Observable<boolean[]> {
-        return of(this.ready);
-    }
+  getAllChats(): Observable<ChatInfo[]> {
+      return of(this.allChats);
+  }
 
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*                                                           */
-    /*                 CHAT CREATION AND EDITION                 */
-    /*                                                           */
+  isReady(): Observable<boolean[]> {
+      return of(this.ready);
+  }
 
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /*                                                           */
+  /*                 CHAT CREATION AND EDITION                 */
+  /*                                                           */
 
-    isAdmin(chat: ChatInfo): boolean {
-        return chat.administrators.includes(this.user);
-    }
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-    /*
-     * Normal chats behave the same as group chats, so
-     * we create a group chat with just both this user and
-     * the other one.
-     */
-    createChat(otherUser: User): ChatInfo {
-        return this.createGroupChat(otherUser.nickname, [otherUser]);
-    }
+  isAdmin(chat: ChatInfo): boolean {
+      return chat.administrators.includes(this.user);
+  }
 
-    createGroupChat(chatName: string, otherUsers: User[]): ChatInfo {
-        let chat: ChatInfo;
+  /*
+    * Normal chats behave the same as group chats, so
+    * we create a group chat with just both this user and
+    * the other one.
+    */
+  createChat(otherUser: User): ChatInfo {
+      return this.createGroupChat(otherUser.nickname, [otherUser]);
+  }
 
-        // We generate the ID for this chat
-        const id = this.generateChatId(otherUsers);
-        otherUsers.push(this.user);
+  createGroupChat(chatName: string, otherUsers: User[]): ChatInfo {
+    let chat: ChatInfo;
 
-        chat = new ChatInfo(id);
-        chat.chatName = chatName;
-        chat.users.push(this.user);
+    var id : string = uuid();
+    id = id.replace(/-/g, '');
+    console.log("New chat id: " + id);
+    otherUsers.push(this.user);
 
-        this.files.checkChatFolder(chat);
+    chat = new ChatInfo(id);
+    chat.chatName = chatName;
+    chat.users.push(this.user);
 
-        return chat;
-    }
+    this.files.checkChatFolder(chat);
 
-    addUserToChat(chat: ChatInfo, user: User): boolean {
-        if (!this.isAdmin(chat)) {
-            return false;
-        }
+    return chat;
+  }
 
-        chat.users.push(this.user);
-        this.files.checkChatFolder(chat);
-        return true;
-    }
+  addUserToChat(chat: ChatInfo, user: User) : boolean {
+    if (!this.isAdmin(chat))
+      return false;
 
-    // Will generate an identifier for a brand new chat
-    private generateChatId(otherUsers: User[]): string {
+    chat.users.push(this.user);
+    this.files.checkChatFolder(chat);
+    return true;
+  }
 
-        // We declare the initial state of the Chat ID and the current date
-        let chatId = this.user.nickname;
-        const date = this.messages.getFullTimeStamp();
 
-        // We traverse the otherUsers array
-        let index;
-        for (index = 0; index < otherUsers.length; index++) {
-            chatId += '_' + otherUsers[0].nickname;
-        }
+  
 
-        // We need to add the current date to the Chat ID
-        return chatId + '_' + date;
-    }
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /*                                                           */
+  /*                        CHAT FETCHING                      */
+  /*                                                           */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  async fetchChat(chatUrl : string) : Promise<ChatInfo> {
+    
+    var chat : ChatInfo;
+    var id = chatUrl;
+
+    // TODO get the chat data file, with name and users
+
+    var dataFile = chatUrl + "data.txt";
+    var file = await this.files.readFile(dataFile);
+    
+    var chat : ChatInfo = JSON.parse(file);
+/*
+    var data = JSON.parse(file);
+
+    chat = new ChatInfo(id);
+    chat.chatName = data.name;
+    data.users.forEach(user => {
+      chat.users.push(this.user);
+    });
+  */
+
+    // TODO load messages
+
+    return chat;
+  }
 
 }

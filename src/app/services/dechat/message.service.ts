@@ -150,7 +150,7 @@ export class MessageService {
     async fetchMessageBundles() {
 
         // TODO for each folder in the chat folder, create  bundle
-        await this.files.readFolder(this.currentChatUrl).then(
+        await this.files.readFolderSubfolders(this.currentChatUrl).then(
             // TODO check if they already exist
             async (files) => await files.forEach(async (f) => {
                 await this.fetchMessageBundle(f);

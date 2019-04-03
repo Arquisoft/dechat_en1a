@@ -24,116 +24,149 @@ export class FilesService {
 
     async checkUserFiles(user: User) {
         await this.rdf.getSession();
-
         const userFolder = user.url.replace('/profile/card#me', '/private/');
-
-        this.checkFolderExistence(userFolder).then(() =>
-            this.checkFolderExistence(userFolder + 'dechat_en1a/').then(() =>
-                this.checkFolderExistence(userFolder + 'dechat_en1a/chats/'),
-            ),
+        this.checkFolderExistence(userFolder).then(then =>
+          this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
+          this.checkFolderExistence(userFolder + "dechat_en1a/chats/").then( ther =>
+            this.checkFolderExistence(userFolder + "dechat_en1a/inbox/")
+            )
+          )
         );
     }
+  
 
-    // Checks if a folder exists.
-    // If not, it will create a folder with the requested url.
-    async checkFolderExistence(url: string) {
-        await this.rdf.getSession();
-        try {
-            solidFiles.readFolder(url).then(
-                () => {
-                    console.log('Existent folder!');
-                },
-                () => {
-                    console.log('Non existent folder...');
-                    this.createFolder(url);
-                });
-        } catch (error) {
-            console.log(`Error creating folder: ${error}`);
-        }
-    }
-
-    async checkChatFolder(chat: ChatInfo) {
-        await this.rdf.getSession();
-
-        await chat.users.forEach(async (user) => {
-            const path = this.getChatUrl(user, chat);
-            await this.checkFolderExistence(path).then(() => {
-                chat.users.forEach((otherUser) =>
-                    this.givePermissions(path, otherUser),
-                );
-            });
-
+  // Checks if a folder exists.
+  // If not, it will create a folder with the requested url.
+  async checkFolderExistence(url : string, onError = (err) => {}) {
+    await this.rdf.getSession();
+    try {
+      solidFiles.readFolder(url).then(
+        (success: any) => { console.log('Existent folder!'); }, 
+        (error: any) => {
+            console.log('Non existent folder...');
+            this.createFolder(url).then(onError);
         });
+    } catch (error) {
+      console.log(`Error creating folder: ${error}`);
+    }    
+  }
+
+
+  /*
+    It will check the existance of the chat folder and, inside
+    that folder, the existance of the chat data file.
+  */
+  async checkChatFolder(chat : ChatInfo) {
+    await this.rdf.getSession();
+
+    await chat.users.forEach(async user => {
+        var path = this.getChatUrl(user, chat);
+        var err = (e) => { this.checkChatDataFile(path, chat); }
+        await this.checkFolderExistence(path, err).then( result => {
+          chat.users.forEach(otherUser => {
+              this.givePermissions(path, otherUser);
+          });
+          //this.checkChatDataFile(path, chat);
+        });
+    });    
+  }
+
+  private checkChatDataFile(path : string, chat : ChatInfo) {
+      var filename = path + "data.txt";
+      var json = JSON.stringify(chat);
+      this.updateFile(filename, json);
+  }
+
+
+
+  getChatsRootUrl(user: User) : string {
+    return this.getRoot(user) + "chats/";
+  }
+
+
+  getChatUrl(user: User, chat : ChatInfo) : string {
+    var userFolder = this.getRoot(user) + "chats/";
+    var url = userFolder + chat.chatId + "/";
+    console.log("Chat url = " + url);
+    return url;
+  }
+
+  getInboxUrl(user: User) : string {
+    return this.getRoot(user) + "inbox/";
+  }
+
+
+  async createFolder(url: String) {
+    await solidFiles.createFolder(url).then(
+      (success: any) => { console.log(`Created folder ${url}.`); },
+      (error: any) => { console.log('Could not create folder: ' + error) }
+    );
+  }
+
+  async createFile(url: string, str: string = null) {
+    await solidFiles.createFile(url).then(
+      (success: any) => { 
+        console.log(`Created file ${url}.`);
+        if (str != null)
+          this.updateFile(url, str);
+      },
+      (error: any) => { console.log('Could not create file: ' + error) }
+    );
+  }
+
+  async updateFile(url: string, str: string) {
+    await solidFiles.updateFile(url, str).then(
+      (success: any) => { console.log("File edited!"); },
+      (error: any) => { 
+        //console.log("Could not edit file: " + error)
+        this.createFile(url, str);
+      }
+    );
+  }
+
+
+
+  async readFile(url: string) : Promise<string> {
+    var result = "";
+    await solidFiles.readFile(url).then(  body => {
+      console.log(`File content is : ${body}.`);
+      result = body;
+    }, err => console.log(err) );
+    return result;
+  }
+
+
+  async readFolder(url: string): Promise<string[]> {
+      let result = [];
+      await solidFiles.readFolder(url).then((folder) => {
+          console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
+          result = folder.files.map((f) => f.url);
+      }, (err) => console.log(err));
+
+      return result;
     }
 
-    getChatUrl(user: User, chat: ChatInfo): string {
-        const userFolder = this.getRoot(user) + 'chats/';
-        const url = userFolder + chat.chatId + '/';
-        console.log('Chat url = ' + url);
-        return url;
-    }
 
-    async createFolder(url: string) {
-        await solidFiles.createFolder(url).then(
-            () => {
-                console.log(`Created folder ${url}.`);
-            },
-            (error: any) => {
-                console.log('Could not create folder: ' + error);
-            },
-        );
-    }
+  async readFolderSubfolders(url: string) : Promise<string[]> {
+    var result = [];
+    await solidFiles.readFolder(url).then(folder => {
+      console.log(`Read ${folder.name}, it has ${folder.files.length} subfolders.`);
+      result = folder.folders.map(f => f.url);
+    }, err => console.log(err) );
 
-    async createFile(url: string, str: string = null) {
-        await solidFiles.createFile(url).then(
-            () => {
-                console.log(`Created file ${url}.`);
-                if (str != null) {
-                    this.updateFile(url, str);
-                }
-            },
-            (error: any) => {
-                console.log('Could not create file: ' + error);
-            },
-        );
-    }
+    result.forEach(f => console.log("FOLDER: " + f));
 
-    async updateFile(url: string, str: string) {
-        await solidFiles.updateFile(url, str).then(
-            () => {
-                console.log('File edited!');
-            },
-            (error: any) => {
-                console.log('Could not edit file: ' + error);
-            },
-        );
-    }
+    return result;
+  }
 
-    async readFile(url: string): Promise<string> {
-        let result = '';
-        await solidFiles.readFile(url).then((body) => {
-            console.log(`File content is : ${body}.`);
-            result = body;
-        }, (err) => console.log(err));
-        return result;
-    }
 
-    async readFolder(url: string): Promise<string[]> {
-        let result = [];
-        await solidFiles.readFolder(url).then((folder) => {
-            console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
-            result = folder.files.map((f) => f.url);
-        }, (err) => console.log(err));
 
-        result.forEach((f) => console.log('FILE: ' + f));
+      
 
-        return result;
-    }
-
-    // Shout out to our mates in group en1B
-    async givePermissions(path: string, user: User) {
-        const webId = user.url.replace('#me', '#');
-        const acl =
+  // Shout out to our mates in group en1B
+  async givePermissions(path: string, user: User) {
+      const webId = user.url.replace('#me', '#');
+      const acl =
             `@prefix : <#>.
     @prefix n0: <http://www.w3.org/ns/auth/acl#>.
     @prefix ch: <./>.
@@ -152,10 +185,13 @@ export class FilesService {
         n0:agent c0:me;
         n0:defaultForNew ch:;
         n0:mode n0:Read.`;
-        path += '.acl';
-        solidFiles.updateFile(path, acl).then(() => {
-            console.log('Folder permissions added');
-        }, (err: string) => console.log('Could not set folder permissions' + err));
-    }
+
+    
+    path += '.acl';
+    solidFiles.updateFile(path, acl).then((success: any) => {
+      console.log('Folder permisions added');
+    }, (err: string) => console.log('Could not set folder permisions' + err));
+  }
+
 
 }
