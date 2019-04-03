@@ -10,6 +10,8 @@ import { FilesService } from './files.service';
 import { MessageService } from './message.service';
 import { InboxService } from './inbox.service';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,20 +52,22 @@ export class ChatService {
 
     console.log("Number of chat contacts = " + contacts.length);
 
-    /* TESTING STUFF
-    contacts.forEach(async c => {
-      // TODO fetch chats, not create
-      this.allChats.push(this.createChat(c));
-    });
-    */
-
     console.log("Checking existent chats...");
     
     var chatFolder = await this.files.getChatsRootUrl(this.user);
-    var chats = await this.files.readFolder(chatFolder);
+    var chats = await this.files.readFolderSubfolders(chatFolder);
     chats.forEach(async chat => {
       this.allChats.push(await this.fetchChat(chat));
     });
+
+
+    // TODO remove this Testing stuff
+    if (chats.length == 0) {
+      contacts.forEach(async c => {
+        this.allChats.push(this.createChat(c));
+      });
+    }
+
   }
 
 
@@ -120,7 +124,9 @@ export class ChatService {
   createGroupChat(chatName : string, otherUsers : User[]) : ChatInfo {
     var chat : ChatInfo;
 
-    var id = this.user.nickname + "_" + otherUsers[0].nickname;//this.generateChatId();
+    var id : string = uuid();
+    id = id.replace(/-/g, '');
+    console.log("New chat id: " + id);
     otherUsers.push(this.user);
 
     chat = new ChatInfo(id);
@@ -143,14 +149,6 @@ export class ChatService {
 
 
   
-  // Will generate an id for a brand new chat
-  private generateChatId() : string {
-
-    var strUser = this.user.userName;
-    var date = this.messages.getFullTimeStamp();
-
-    return strUser + "_" + date;
-  }
 
 
 
@@ -171,13 +169,17 @@ export class ChatService {
 
     var dataFile = chatUrl + "data.txt";
     var file = await this.files.readFile(dataFile);
+    
+    var chat : ChatInfo = JSON.parse(file);
+/*
     var data = JSON.parse(file);
 
     chat = new ChatInfo(id);
     chat.chatName = data.name;
-    data.users.array.forEach(user => {
+    data.users.forEach(user => {
       chat.users.push(this.user);
     });
+  */
 
     // TODO load messages
 

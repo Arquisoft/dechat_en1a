@@ -43,14 +43,14 @@ export class FilesService {
 
   // Checks if a folder exists.
   // If not, it will create a folder with the requested url.
-  async checkFolderExistence(url : string) {
+  async checkFolderExistence(url : string, onError = (err) => {}) {
     await this.rdf.getSession();
     try {
       solidFiles.readFolder(url).then(
         (success: any) => { console.log('Existent folder!'); }, 
         (error: any) => {
             console.log('Non existent folder...');
-            this.createFolder(url);
+            this.createFolder(url).then(onError);
         });
     } catch (error) {
       console.log(`Error creating folder: ${error}`);
@@ -59,18 +59,29 @@ export class FilesService {
 
 
 
+  /*
+    It will check the existance of the chat folder and, inside
+    that folder, the existance of the chat data file.
+  */
   async checkChatFolder(chat : ChatInfo) {
     await this.rdf.getSession();
 
     await chat.users.forEach(async user => {
         var path = this.getChatUrl(user, chat);
-        await this.checkFolderExistence(path).then( result => {
-          chat.users.forEach(otherUser =>
-              this.givePermissions(path, otherUser)
-          );
+        var err = (e) => { this.checkChatDataFile(path, chat); }
+        await this.checkFolderExistence(path, err).then( result => {
+          chat.users.forEach(otherUser => {
+              this.givePermissions(path, otherUser);
+          });
+          //this.checkChatDataFile(path, chat);
         });
-
     });    
+  }
+
+  private checkChatDataFile(path : string, chat : ChatInfo) {
+      var filename = path + "data.txt";
+      var json = JSON.stringify(chat);
+      this.updateFile(filename, json);
   }
 
 
@@ -113,7 +124,10 @@ export class FilesService {
   async updateFile(url: string, str: string) {
     await solidFiles.updateFile(url, str).then(
       (success: any) => { console.log("File edited!"); },
-      (error: any) => { console.log("Could not edit file: " + error) }
+      (error: any) => { 
+        //console.log("Could not edit file: " + error)
+        this.createFile(url, str);
+      }
     );
   }
 
@@ -137,6 +151,19 @@ export class FilesService {
     }, err => console.log(err) );
 
     result.forEach(f => console.log("FILE: " + f));
+
+    return result;
+  }
+
+
+  async readFolderSubfolders(url: string) : Promise<string[]> {
+    var result = [];
+    await solidFiles.readFolder(url).then(folder => {
+      console.log(`Read ${folder.name}, it has ${folder.files.length} subfolders.`);
+      result = folder.folders.map(f => f.url);
+    }, err => console.log(err) );
+
+    result.forEach(f => console.log("FOLDER: " + f));
 
     return result;
   }
@@ -166,6 +193,8 @@ export class FilesService {
         n0:agent c0:me;
         n0:defaultForNew ch:;
         n0:mode n0:Read.`;
+
+    
     path += '.acl';
     solidFiles.updateFile(path, acl).then((success: any) => {
       console.log('Folder permisions added');
