@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
 import { User } from 'src/app/models/dechat/user.model';
@@ -13,19 +13,18 @@ import { InboxService } from './inbox.service';
 import { v4 as uuid } from 'uuid';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ChatService {
 
-  // Attributes //
-  user : User;
-  userName : Observable<string>;
+    // Attributes //
+    user: User;
+    userName: Observable<string>;
 
-  allChats : ChatInfo[];
+    allChats: ChatInfo[];
 
-  // We will also store the current chat data
-  ready : any[];
-  
+    // We will also store the current chat data
+    ready: any[];
 
   // Constructor //
   constructor(
@@ -35,13 +34,13 @@ export class ChatService {
     private inbox : InboxService
   ) {   
 
-    this.ready = [];
-    this.allChats = [];
+        this.ready = [];
+        this.allChats = [];
 
-    this.setUp();
-  }
+        this.setUp();
+    }
 
-  async setUp() {
+    async setUp() {
 
     await 1;
     this.user = await this.userService.getUser();
@@ -49,8 +48,6 @@ export class ChatService {
     var contacts = await this.userService.getContacts();
     
     await this.files.checkUserFiles(this.user);
-
-    console.log("Number of chat contacts = " + contacts.length);
 
     console.log("Checking existent chats...");
     
@@ -70,59 +67,49 @@ export class ChatService {
 
   }
 
-
-
-
-
-
-
-
   // Given a ChatInfo object, we will open the chat
   async openChat(chatInfo: ChatInfo) : Promise<void> {
 
-    this.messages.setCurrentChat(chatInfo);
+      this.messages.setCurrentChat(chatInfo);
 
-    if (this.ready.length == 0)
-      this.ready.push(true);
-    
+      if (this.ready.length === 0) {
+          this.ready.push(true);
+      }
 
-    // Update file system
-    this.files.checkChatFolder(chatInfo);
-  } 
-
-
-
-  getAllChats() : Observable<ChatInfo[]> {
-    return of(this.allChats);
+      // Update file system
+      this.files.checkChatFolder(chatInfo);
   }
-  
 
-  isReady() : Observable<boolean[]> {
-    return of(this.ready);
+  getAllChats(): Observable<ChatInfo[]> {
+      return of(this.allChats);
   }
-  
 
-
-
-
-
+  isReady(): Observable<boolean[]> {
+      return of(this.ready);
+  }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   /*                                                           */
   /*                 CHAT CREATION AND EDITION                 */
   /*                                                           */
+
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  isAdmin(chat:ChatInfo) : boolean {
-    return chat.administrators.includes(this.user);
+  isAdmin(chat: ChatInfo): boolean {
+      return chat.administrators.includes(this.user);
   }
 
-  createChat(otherUser : User) : ChatInfo {    
-    return this.createGroupChat(otherUser.nickname, [otherUser]);
+  /*
+    * Normal chats behave the same as group chats, so
+    * we create a group chat with just both this user and
+    * the other one.
+    */
+  createChat(otherUser: User): ChatInfo {
+      return this.createGroupChat(otherUser.nickname, [otherUser]);
   }
 
-  createGroupChat(chatName : string, otherUsers : User[]) : ChatInfo {
-    var chat : ChatInfo;
+  createGroupChat(chatName: string, otherUsers: User[]): ChatInfo {
+    let chat: ChatInfo;
 
     var id : string = uuid();
     id = id.replace(/-/g, '');
@@ -149,10 +136,6 @@ export class ChatService {
 
 
   
-
-
-
-
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   /*                                                           */

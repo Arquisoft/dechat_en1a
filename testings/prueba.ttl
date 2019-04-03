@@ -1,0 +1,26 @@
+@base <cualquieraQueSeaLoDeSolid>.
+@prefix schema: <http://schema.org/>.
+
+<ivanpl98>
+    a schema:Person;
+    schema:name "Iván Prieto Labrador".
+
+<pacojq>
+    a schema:Person;
+    schema:name "Paco Juan Quiros".
+
+<igalat>
+    a schema:Person;
+    schema:name "Álvaro Vega Cadavieco".
+
+<ASWGroup>
+    a schema:ItemList;
+    schame:name "ASWGroup";
+    schema:itemListElement <ivanpl98>;
+    schema:itemListElement <pacojq>;
+    schema:itemListElement <igalat>;
+    schema:numberOfItems 3;
+
+    
+
+

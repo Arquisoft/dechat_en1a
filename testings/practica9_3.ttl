@@ -1,0 +1,29 @@
+@base <http://dbpedia.org/resource/>.
+@prefix schema: <http://schema.org/>.
+
+<The_New_York_Times>
+    a schema:Newspaper;
+    schema:name "The New York Times".
+
+<Report>
+    a schema:Report;
+    schema:about <John_McCarthy_(computer_scientist)>;
+    schema:about <Death>;
+    schema:author <The_New_York_Times>.
+
+<John_McCarthy_(computer_scientist)>
+    a schema:Person;
+    schema:name "John McCarthy";
+    schema:jobTitle "Computer Scientist".
+
+<Lisp_(programming_language)>
+    a schema:ComputerLanguage;
+    schema:name "Lisp".
+
+<Invention>
+    a schema:Event;
+    schema:about <Lisp_(programming_language)>;
+    schema:atendee <John_McCarthy_(computer_scientist)>.
+
+<Death>
+    a schema:Event.

@@ -41,10 +41,9 @@ import { ChatService } from './services/dechat/chat.service';
 
 // Miscelanea
 import { ProfileIconComponent } from './profile-icon/profile-icon.component';
+import { MultimediaDisplayComponent } from './chatComponents/multimedia-display/multimedia-display.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
-
 
 
 const appRoutes: Routes = [
@@ -88,7 +87,8 @@ const appRoutes: Routes = [
     ChatItemComponent,
     MainContentComponent,
     ChatHeaderComponent,
-    ProfileIconComponent
+    ProfileIconComponent,
+    MultimediaDisplayComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 [[section-design-decisions]]
 == Design Decisions
 
-
-TBD
+The app code is distributed in a modular way (see document 5 "building-block-view", level 1 and 2, for a more detailed insight), being all the classes in the same package level, and interacting between one another, taking a part in the construction of the app, in a more "graphical design" sense, and each one having very concrete functions.
+For the main structuration of the architecture we have based it on angular using a template provided by it. The main programing languale for the logic is TypeScript, and for the graphical aspect CSS and HTML mainly.
+Testing is implemented using Karma, also provided by angular templates, and for the user stories Cucumber was used.

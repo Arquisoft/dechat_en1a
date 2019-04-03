@@ -1,56 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {SolidProvider} from '../models/solid/solid-provider.model';
 // Auth Service
-import { AuthService } from '../services/solid/solid.auth.service';
-import { SolidProvider } from '../models/solid/solid-provider.model';
-
+import {AuthService} from '../services/solid/solid.auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
-
-  /**
-   * A list of Solid Identity Providers
-   * @type {SolidProvider[]}
-   */
-  identityProviders: SolidProvider[];
-  selectedProviderUrl: string;
-  customProviderUrl: string;
-
-  ngOnInit() {
-    // If we're authenticated, go to profile
-    if (localStorage.getItem('solid-auth-client')) {
-      this.router.navigateByUrl('/chat');
+    constructor(private auth: AuthService, private router: Router) {
     }
 
-    this.identityProviders = this.auth.getIdentityProviders();
-  }
+    /**
+     * A list of Solid Identity Providers
+     * @type {SolidProvider[]}
+     */
+    identityProviders: SolidProvider[];
+    selectedProviderUrl: string;
+    customProviderUrl: string;
 
-  /*
-  *  Alternate login-popup function for Solid. See service for more details.
-  */
-  onLoginPopup = async () => {
-    this.auth.solidLoginPopup();
-  }
+    ngOnInit() {
+        // If we're authenticated, go to profile
+        if (localStorage.getItem('solid-auth-client')) {
+            this.router.navigateByUrl('/chat');
+        }
 
-  onLogin = async () => {
-    const idp: string = this.selectedProviderUrl ? this.selectedProviderUrl : this.customProviderUrl;
-
-    if (idp) {
-      try {
-        this.auth.solidLogin(idp);
-      } catch (err) {
-        console.log('An error has occurred logging in: ' + err);
-      }
+        this.identityProviders = this.auth.getIdentityProviders();
     }
-  }
 
-  goToRegistration() {
-    this.router.navigateByUrl('/register');
-  }
+    /*
+    *  Alternate login-popup function for Solid. See service for more details.
+    */
+    onLoginPopup = async () => {
+        this.auth.solidLoginPopup();
+    }
+
+    onLogin = async () => {
+        const idp: string = this.selectedProviderUrl ? this.selectedProviderUrl : this.customProviderUrl;
+
+        if (idp) {
+            try {
+                this.auth.solidLogin(idp);
+            } catch (err) {
+                console.log('An error has occurred logging in: ' + err);
+            }
+        }
+    }
+
+    goToRegistration() {
+        window.location.href = 'https://solid.community/register';
+    }
 }

@@ -6,9 +6,9 @@ export class ChatMessage {
     message: string;
     date: Date;
 
-    constructor(msg: string = "") {
+    constructor(msg: string = '') {
         this.message = msg;
         this.date = new Date();
     }
-    
+
 }

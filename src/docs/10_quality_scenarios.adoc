@@ -1,6 +1,6 @@
 [[section-quality-scenarios]]
 == Quality Requirements
-
+:imagesdir: images
 
 [role="arc42help"]
 ****
