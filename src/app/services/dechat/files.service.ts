@@ -33,7 +33,9 @@ export class FilesService {
 
     this.checkFolderExistence(userFolder).then(then =>
       this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
-       this.checkFolderExistence(userFolder + "dechat_en1a/chats/")
+       this.checkFolderExistence(userFolder + "dechat_en1a/chats/").then( ther =>
+        this.checkFolderExistence(userFolder + "dechat_en1a/inbox/")
+        )
       )
     );
   }
@@ -72,11 +74,21 @@ export class FilesService {
   }
 
 
+
+  getChatsRootUrl(user: User) : string {
+    return this.getRoot(user) + "chats/";
+  }
+
+
   getChatUrl(user: User, chat : ChatInfo) : string {
     var userFolder = this.getRoot(user) + "chats/";
     var url = userFolder + chat.chatId + "/";
     console.log("Chat url = " + url);
     return url;
+  }
+
+  getInboxUrl(user: User) : string {
+    return this.getRoot(user) + "inbox/";
   }
 
 

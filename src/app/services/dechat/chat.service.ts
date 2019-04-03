@@ -8,6 +8,7 @@ import { MessageBundle } from 'src/app/models/dechat/message-bundle.model';
 import { UserService } from './user.service';
 import { FilesService } from './files.service';
 import { MessageService } from './message.service';
+import { InboxService } from './inbox.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class ChatService {
   constructor(
     private userService : UserService,
     private files : FilesService,
-    private messages : MessageService
+    private messages : MessageService,
+    private inbox : InboxService
   ) {   
 
     this.ready = [];
@@ -44,16 +46,29 @@ export class ChatService {
     this.messages.setCurrentUser(this.user);
     var contacts = await this.userService.getContacts();
     
-    this.files.checkUserFiles(this.user);
+    await this.files.checkUserFiles(this.user);
 
     console.log("Number of chat contacts = " + contacts.length);
 
+    /* TESTING STUFF
     contacts.forEach(async c => {
       // TODO fetch chats, not create
       this.allChats.push(this.createChat(c));
     });
+    */
+
+    console.log("Checking existent chats...");
     
+    var chatFolder = await this.files.getChatsRootUrl(this.user);
+    var chats = await this.files.readFolder(chatFolder);
+    chats.forEach(async chat => {
+      this.allChats.push(this.fetchChat(chat));
+    });
   }
+
+
+
+
 
 
 
@@ -138,5 +153,35 @@ export class ChatService {
   }
 
 
+
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /*                                                           */
+  /*                        CHAT FETCHING                      */
+  /*                                                           */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  async fetchChat(chatUrl : string) : Promise<ChatInfo> {
+    
+    var chat : ChatInfo;
+    var id = chatUrl;
+
+    // TODO get the chat data file, with name and users
+
+    var dataFile = chatUrl + "data.txt";
+    var file = await this.files.readFile(dataFile);
+    var data = JSON.parse(file);
+
+    chat = new ChatInfo(id);
+    chat.chatName = data.name;
+    data.users.array.forEach(user => {
+      chat.users.push(this.user);
+    });
+
+    // TODO load messages
+
+    return chat;
+  }
 
 }
