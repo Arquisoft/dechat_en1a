@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainContentComponent } from './main-content.component';
-import { UserListComponent } from '../sidebarComponents/chat-list/chat-list.component';
+import { ChatListComponent } from '../sidebarComponents/chat-list/chat-list.component';
 import { ChatroomComponent } from '../chatComponents/chatroom/chatroom.component';
 import { ChatItemComponent } from '../sidebarComponents/chat-item/chat-item.component';
 import { FeedComponent } from '../chatComponents/feed/feed.component';
@@ -26,7 +26,7 @@ describe('MainContentComponent', () => {
       ],
       declarations: [ 
         MainContentComponent,
-        UserListComponent,
+        ChatListComponent,
         ChatroomComponent
       ]
     })
