@@ -50,4 +50,10 @@ export class InboxService {
     });
     console.log("Check!");
   }
+
+
+
+  sendRequest(InboxElement : InboxElement, toUser : User) {
+    // TODO
+  }
 }

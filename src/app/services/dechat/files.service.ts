@@ -137,14 +137,20 @@ export class FilesService {
 
 
   async readFolder(url: string): Promise<string[]> {
-      let result = [];
-      await solidFiles.readFolder(url).then((folder) => {
-          console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
-          result = folder.files.map((f) => f.url);
-      }, (err) => console.log(err));
+    let result = [];
+    await solidFiles.readFolder(url).then((folder) => {
+        console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
+        result = folder.files.map((f) => f.url);
+    }, (err) => console.log(err));
 
-      return result;
-    }
+    return result;
+  }
+
+  deleteFolder(url: string) {
+    solidFiles.deleteFile(url).then(success => {
+      console.log(`Deleted ${url}.`);
+    }, err => console.log(err) );
+  }
 
 
   async readFolderSubfolders(url: string) : Promise<string[]> {

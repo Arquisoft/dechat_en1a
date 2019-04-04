@@ -54,12 +54,15 @@ export class ChatService {
     var chatFolder = await this.files.getChatsRootUrl(this.user);
     var chats = await this.files.readFolderSubfolders(chatFolder);
     chats.forEach(async chat => {
-      this.allChats.push(await this.fetchChat(chat));
+      var c = await this.fetchChat(chat);
+      if (c != null)
+        this.allChats.push(c);
     });
 
 
     // TODO remove this Testing stuff
     if (chats.length == 0) {
+      console.log("No chats created. Generating test chats...")
       contacts.forEach(async c => {
         this.allChats.push(this.createChat(c));
       });
@@ -105,10 +108,13 @@ export class ChatService {
     * the other one.
     */
   createChat(otherUser: User): ChatInfo {
-      return this.createGroupChat(otherUser.nickname, [otherUser]);
+    var users = [];
+    users.push(otherUser);
+    return this.createGroupChat(otherUser.nickname, users);
   }
 
   createGroupChat(chatName: string, otherUsers: User[]): ChatInfo {
+    console.log("Chat service creating new chat: " + chatName);
     let chat: ChatInfo;
 
     var id : string = uuid();
@@ -118,7 +124,7 @@ export class ChatService {
 
     chat = new ChatInfo(id);
     chat.chatName = chatName;
-    chat.users.push(this.user);
+    chat.users = otherUsers;
 
     this.files.checkChatFolder(chat);
 
@@ -144,7 +150,7 @@ export class ChatService {
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   async fetchChat(chatUrl : string) : Promise<ChatInfo> {
-    
+    console.log("Fetching chat: " + chatUrl);
     var chat : ChatInfo;
     var id = chatUrl;
 
@@ -152,7 +158,12 @@ export class ChatService {
 
     var dataFile = chatUrl + "data.txt";
     var file = await this.files.readFile(dataFile);
-    
+
+    if (file.length == 0) {
+      console.log("Something bad happened.");
+      this.files.deleteFolder(chatUrl);
+      return null;
+    }
     var chat : ChatInfo = JSON.parse(file);
 /*
     var data = JSON.parse(file);
