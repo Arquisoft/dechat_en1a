@@ -39,7 +39,6 @@ export class InboxService {
       return;
     }
 
-    console.log("Checking inbox...");
     var url = this.files.getInboxUrl(this.user);
     var folder = await this.files.readFolder(url).then(
       result => {
@@ -48,6 +47,5 @@ export class InboxService {
 
 
     });
-    console.log("Check!");
   }
 }
