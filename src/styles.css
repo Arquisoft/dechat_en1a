@@ -1,4 +1,7 @@
 
+/* import so dialogs can work as intended :D */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 html {
     height: 100%;
     box-sizing: border-box;
