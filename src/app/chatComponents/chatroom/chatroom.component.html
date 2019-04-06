@@ -7,7 +7,7 @@
     </div>
 
     <!-- The chat form represents the chat functionality-->
-    <div *ngIf="(ready|async)?.length > 0"
+    <div *ngIf="chatService.currentChat != undefined"
          class="chatFormWrapper">
         <app-chat-form></app-chat-form>
     </div>

@@ -12,6 +12,10 @@
     transition: ease-in 0.2s;
 }
 
+.activeChatItem {
+    background-color: #4f3b80;
+}
+
 .chatItem:hover{
     background-color: #453968;
     color: #ddd;

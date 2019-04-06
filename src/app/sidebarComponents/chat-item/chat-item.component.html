@@ -1,8 +1,8 @@
-<div class="chatItem" (click)="openChat()">
-    <!--<span class="status" [ngClass]=(chatInfo.status)>
-    </span>-->
-    <span class="userName" *ngIf="chatInfo != undefined">
-      {{ chatInfo.chatName }}
-    </span>
+<div class="chatItem" [ngClass]=(isActive()) (click)="openChat()">
+    
+
+      <span class="userName" *ngIf="chatInfo != undefined">
+        {{ chatInfo.chatName }}
+      </span>
 
 </div>

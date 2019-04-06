@@ -17,6 +17,11 @@ export class ChatItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  isActive() {
+    if (this.chatService.currentChat == this.chatInfo)
+      return "activeChatItem";
+    return "chatItem";
+  }
 
   openChat() {
     console.log("Oppening chat with " + this.chatInfo.chatName);

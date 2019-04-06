@@ -24,16 +24,16 @@ export class FilesService {
 
     async checkUserFiles(user: User) {
         await this.rdf.getSession();
+
         const userFolder = user.url.replace('/profile/card#me', '/private/');
+        const inboxFolder = user.url.replace('/profile/card#me', '/inbox/');
+
+        this.checkFolderExistence(inboxFolder);
         this.checkFolderExistence(userFolder).then(then =>
           this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
-          this.checkFolderExistence(userFolder + "dechat_en1a/chats/").then( ther =>
-            this.checkFolderExistence(userFolder + "dechat_en1a/inbox/")
-            )
+            this.checkFolderExistence(userFolder + "dechat_en1a/chats/")
           )
         );
-
-        // TODO public access to the inbox
     }
   
 
@@ -60,11 +60,15 @@ export class FilesService {
   */
   async checkChatFolder(chat : ChatInfo) {
     await this.rdf.getSession();
-    
+
+    // TODO just for current user ?
+
     await chat.users.forEach(async user => {
+
         var path = this.getChatUrl(user, chat);
-        var err = (e) => { this.checkChatDataFile(path, chat); }
-        await this.checkFolderExistence(path, err).then( result => {
+        var error = (e) => { this.checkChatDataFile(path, chat); }
+        
+        await this.checkFolderExistence(path, error).then( result => {
           chat.users.forEach(otherUser => {
               this.givePermissions(path, otherUser);
           });
@@ -94,7 +98,7 @@ export class FilesService {
   }
 
   getInboxUrl(user: User) : string {
-    return this.getRoot(user) + "inbox/";
+    return user.url.replace('/profile/card#me', '/inbox/');
   }
 
 
@@ -137,6 +141,13 @@ export class FilesService {
     return result;
   }
 
+  deleteFile(url: string) {
+    solidFiles.deleteFile(url).then(
+        success => { console.log(`Deleted ${url}.`); },
+        err => console.log(err)
+      );
+  }
+
 
   async readFolder(url: string): Promise<string[]> {
     let result = [];
@@ -149,9 +160,10 @@ export class FilesService {
   }
 
   deleteFolder(url: string) {
-    solidFiles.deleteFile(url).then(success => {
-      console.log(`Deleted ${url}.`);
-    }, err => console.log(err) );
+    solidFiles.deleteFolder(url).then(
+        success => { console.log(`Deleted ${url}.`); },
+        err => console.log(err)
+      );
   }
 
 
@@ -194,7 +206,7 @@ export class FilesService {
         n0:defaultForNew ch:;
         n0:mode n0:Read.`;
 
-    // TODO remove last '/' with path.substring
+    
     path += '.acl';
     solidFiles.updateFile(path, acl).then((success: any) => {
       console.log('Folder permisions added');

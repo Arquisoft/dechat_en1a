@@ -1,3 +1,4 @@
+import { ChatInfo } from './chat-info.model';
 
 
 export enum InboxElementType {
@@ -8,7 +9,7 @@ export enum InboxElementType {
 
 export class InboxElement {
     
-    chatUrl : string;
+    chat : ChatInfo;
     messageUrl : string;
     type: InboxElementType;
     
