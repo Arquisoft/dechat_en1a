@@ -32,6 +32,8 @@ export class FilesService {
             )
           )
         );
+
+        // TODO public access to the inbox
     }
   
 
@@ -58,7 +60,7 @@ export class FilesService {
   */
   async checkChatFolder(chat : ChatInfo) {
     await this.rdf.getSession();
-
+    
     await chat.users.forEach(async user => {
         var path = this.getChatUrl(user, chat);
         var err = (e) => { this.checkChatDataFile(path, chat); }
@@ -192,7 +194,7 @@ export class FilesService {
         n0:defaultForNew ch:;
         n0:mode n0:Read.`;
 
-    
+    // TODO remove last '/' with path.substring
     path += '.acl';
     solidFiles.updateFile(path, acl).then((success: any) => {
       console.log('Folder permisions added');
