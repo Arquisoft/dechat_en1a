@@ -64,7 +64,7 @@ export class MessageService {
 
         // Fetch the bundles up in the pod (add them to the map)
         // And retrieve the existing bundles in the map
-        await this.fetchMessageBundles();
+        await this.checkAllMessageBundles();
         const bundles = this.chatMap.get(this.currentChat.chatId);
 
         bundles.forEach((b) => this.processFetchedMessages(b.messages));
@@ -216,25 +216,36 @@ export class MessageService {
 
 
 
-    // TODO fetch messages in bundles from the pod
-    async fetchMessageBundles() {
+    // Looks at the message bundles in the pod
+    // And loads the last one
+    async checkAllMessageBundles() {
         console.log("Fetching message bundles in the POD");
 
-        // TODO for each folder in the chat folder, create  bundle
-        await this.files.readFolderSubfolders(this.currentChatUrl).then(
-            // TODO check if they already exist
-            async (files) => await files.forEach(async (f) => {
-                await this.fetchMessageBundle(f);
-            }),
-        );
+        var folders : string[];
+        folders = await this.files.readFolderSubfolders(this.currentChatUrl);
 
+        if (folders.length == 0)
+            return;
+
+        var newest : string = folders[0];
+        for (var i = 1; i < folders.length; i ++)
+            if (newest < folders[i])
+                newest = folders[i];
+
+        await this.fetchMessageBundle(newest);
     }
 
     // Fetches all the messages in a given bundle.
     private async fetchMessageBundle(bundleUrl: string) {
 
-        const id = bundleUrl.replace(this.currentChatUrl, '').replace('/', '');
-        const bundle = this.getBundle(id);
+        console.log("Fetching message bundle.");
+
+        var bundleId = bundleUrl.replace(this.currentChatUrl, '').replace('/', '');
+
+        console.log("URL: " + bundleUrl);
+        console.log("ID: " + bundleId);
+
+        var bundle = await this.getBundle(bundleId);
 
         // Read all messages inside the bundle folder
         await this.files.readFolder(bundleUrl).then(
@@ -253,13 +264,13 @@ export class MessageService {
 
 
 
-    private getBundle(bundleId: string): MessageBundle {
+    private async getBundle(bundleId: string): Promise<MessageBundle> {
         this.chatMap.get(this.currentChat.chatId).forEach((bundle) => {
             if (bundle.bundleId === bundleId) {
                 return bundle;
             }
         });
-        return null;
+        return this.createBundle(this.currentChat.chatId, bundleId);
     }
 
     private async createBundle(chatId: string, id: string): Promise<MessageBundle> {
