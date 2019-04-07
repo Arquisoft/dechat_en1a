@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "ghbuild": "ng build --prod --base-href 'https://arquisoft.github.io/dechat_en1a/'",
-    "ghdeploy": "ng gh-build && npx angular-cli-ghpages",
+    "ghdeploy": "ng ghbuild && npx angular-cli-ghpages",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
