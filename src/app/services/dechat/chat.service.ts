@@ -11,6 +11,7 @@ import { MessageService } from './message.service';
 import { InboxService } from './inbox.service';
 
 import { v4 as uuid } from 'uuid';
+import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
 
 @Injectable({
     providedIn: 'root'
@@ -35,6 +36,12 @@ export class ChatService {
 
         this.allChats = [];
         this.setUp();
+
+        this.inbox.addOnElementFoundCallback(
+            (element : InboxElement) => {
+                if (element.type == InboxElementType.CHAT_REQUEST)
+                    this.createChatFromRequest(element);
+            });
     }
 
 
@@ -53,9 +60,9 @@ export class ChatService {
         var chatFolder = await this.files.getChatsRootUrl(this.user);
         var chats = await this.files.readFolderSubfolders(chatFolder);
         chats.forEach(async chat => {
-        var c = await this.fetchChat(chat);
-        if (c != null)
-            this.allChats.push(c);
+            var c = await this.fetchChat(chat);
+            if (c != null)
+                this.allChats.push(c);
         });
 
 
@@ -63,7 +70,7 @@ export class ChatService {
         if (chats.length == 0) {
         console.log("No chats created. Generating test chats...")
         contacts.forEach(async c => {
-            this.allChats.push(this.createChat(c));
+            this.allChats.push(await this.createChat(c));
         });
         }
 
@@ -79,7 +86,7 @@ export class ChatService {
         this.currentChat = chatInfo;
 
         // Update file system
-        this.files.checkChatFolder(chatInfo);
+        this.files.checkChatFolder(this.user, chatInfo);
     }
 
     getAllChats(): Observable<ChatInfo[]> {
@@ -98,18 +105,29 @@ export class ChatService {
         return chat.administrators.includes(this.user);
     }
 
+
     /*
-        * Normal chats behave the same as group chats, so
-        * we create a group chat with just both this user and
-        * the other one.
-        */
-    createChat(otherUser: User): ChatInfo {
+    * Normal chats behave the same as group chats, so
+    * we create a group chat with just both this user and
+    * the other one.
+    */
+    async createChat(otherUser: User): Promise<ChatInfo> {
         var users = [];
         users.push(otherUser);
         return this.createGroupChat(otherUser.nickname, users);
     }
 
-    createGroupChat(chatName: string, otherUsers: User[]): ChatInfo {
+
+    private async createChatFromRequest(request: InboxElement): Promise<ChatInfo> {
+        
+        var chat : ChatInfo = request.chat;//JSON.parse(file);
+        this.allChats.push(chat);
+        await this.files.checkChatFolder(this.user, chat);
+        return chat;
+    }
+    
+
+    async createGroupChat(chatName: string, otherUsers: User[]): Promise<ChatInfo> {
         console.log("Chat service creating new chat: " + chatName);
         let chat: ChatInfo;
 
@@ -120,14 +138,16 @@ export class ChatService {
         chat = new ChatInfo(id);
         chat.chatName = chatName;
         chat.users = otherUsers;
-
-        chat.users.forEach(async user => {
-        this.inbox.sendChatRequest(user, chat);
-        });
+        chat.administrators = [];
+        chat.administrators.push(this.user);
         chat.users.push(this.user);
 
+        chat.users.forEach(async user => {
+            if (user !== this.user)
+                this.inbox.sendChatRequest(user, chat);
+        });
 
-        this.files.checkChatFolder(chat);
+        await this.files.checkChatFolder(this.user, chat);
 
         return chat;
     }
@@ -135,10 +155,10 @@ export class ChatService {
 
     addUserToChat(chat: ChatInfo, user: User) : boolean {
         if (!this.isAdmin(chat))
-        return false;
+            return false;
 
         chat.users.push(this.user);
-        this.files.checkChatFolder(chat);
+        this.files.checkChatFolder(this.user, chat);
         return true;
     }
 

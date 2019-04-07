@@ -80,10 +80,10 @@ export class NewChatDialogComponent implements OnInit {
     console.log("Chat name: " + this.chatName);
     // TODO create it and open it
 
-    var chat = this.chatService.createGroupChat(this.chatName, this.users);
+    var chat = await this.chatService.createGroupChat(this.chatName, this.users);
     this.chatService.allChats.push(chat);
-    this.chatService.openChat(chat);
-    
+    await this.chatService.openChat(chat);
+
     this.closeDialog();
   }
 

@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { User } from 'src/app/models/dechat/user.model';
 import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
+import { ChatService } from './chat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,15 @@ export class InboxService {
   private user : User;
   private newElements : InboxElement[];
 
+  private onElementFoundCallbacks;
+
 
   constructor(
     private files : FilesService,
     private users : UserService
   ) {
+    this.newElements = [];
+    this.onElementFoundCallbacks = [];
     this.setUp();
   }
 
@@ -26,9 +31,13 @@ export class InboxService {
     await 5;
 
     console.log("Inbox setting up...");
-    this.newElements = [];
     this.user = await this.users.getUser();
     setInterval(this.checkInbox.bind(this), 2000);
+  }
+
+
+  addOnElementFoundCallback(callback) {
+    this.onElementFoundCallbacks.push(callback);
   }
 
 
@@ -41,16 +50,32 @@ export class InboxService {
       return;
     }
 
+    // Read files in inbox
     var url = this.files.getInboxUrl(this.user);
     var newFiles = [];
     var folder = await this.files.readFolder(url).then(
       result => {
 
-        newFiles = result.filter((str, index, array) => str.includes("DeChatEn1a"))
+        newFiles = result.filter((str, index, array) => str.includes("DeChatEn1a"));
         console.log("INBOX HAS " + newFiles.length + " FILES");
         this.addInboxFiles(newFiles);
     });
+
+    // Process new elements
+    this.processNewElements();
   }
+
+
+
+
+  private processNewElements() {
+    this.newElements.forEach( element => {
+      this.onElementFoundCallbacks.forEach(callback => { callback(element); });
+    });
+    this.newElements = [];
+  }
+
+
 
   // Takes an array of urls and processes the requests
   private async addInboxFiles(files : string[]) {
@@ -70,7 +95,6 @@ export class InboxService {
 
 
   public sendChatRequest(user: User, chat: ChatInfo) {
-
 
     var request : InboxElement;
     request = new InboxElement();

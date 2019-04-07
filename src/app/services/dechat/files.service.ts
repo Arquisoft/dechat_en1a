@@ -28,6 +28,9 @@ export class FilesService {
         const userFolder = user.url.replace('/profile/card#me', '/private/');
         const inboxFolder = user.url.replace('/profile/card#me', '/inbox/');
 
+        //this.readFile(user.url.replace('/profile/card#me', "/.acl"));
+        //this.readFile(inboxFolder + ".acl");
+
         this.checkFolderExistence(inboxFolder);
         this.checkFolderExistence(userFolder).then(then =>
           this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
@@ -45,10 +48,11 @@ export class FilesService {
       solidFiles.readFolder(url).then(
         (success: any) => { console.log('Existent folder!'); }, 
         (error: any) => {
-            console.log('Non existent folder...');
+            console.log('Non existent folder. Creating new one...');
             this.createFolder(url).then(onError);
         });
-    } catch (error) {
+    }
+    catch (error) {
       console.log(`Error creating folder: ${error}`);
     }    
   }
@@ -58,23 +62,23 @@ export class FilesService {
     It will check the existance of the chat folder and, inside
     that folder, the existance of the chat data file.
   */
-  async checkChatFolder(chat : ChatInfo) {
+  async checkChatFolder(user: User, chat : ChatInfo) {
     await this.rdf.getSession();
 
-    // TODO just for current user ?
+    var path = this.getChatUrl(user, chat);
+    
+    var error = (e) => { // TO be executed if the file doesn't exist yet
+      this.checkChatDataFile(path, chat);
+      this.givePermissions(path, user);
+    }
 
-    await chat.users.forEach(async user => {
-
-        var path = this.getChatUrl(user, chat);
-        var error = (e) => { this.checkChatDataFile(path, chat); }
-        
-        await this.checkFolderExistence(path, error).then( result => {
-          chat.users.forEach(otherUser => {
-              this.givePermissions(path, otherUser);
-          });
-          //this.checkChatDataFile(path, chat);
-        });
-    });    
+    await this.checkFolderExistence(path, error).then( result => {
+      //chat.users.forEach(otherUser => {
+      //    this.givePermissions(path, otherUser);
+      //});
+      //this.checkChatDataFile(path, chat);
+    });
+     
   }
 
   private checkChatDataFile(path : string, chat : ChatInfo) {
@@ -182,7 +186,7 @@ export class FilesService {
 
 
       
-
+/*
   // Shout out to our mates in group en1B
   async givePermissions(path: string, user: User) {
       const webId = user.url.replace('#me', '#');
@@ -208,10 +212,113 @@ export class FilesService {
 
     
     path += '.acl';
+    this.readFile(path);
+    solidFiles.updateFile(path, acl).then((success: any) => {
+      console.log('Folder permisions added');
+    }, (err: string) => console.log('Could not set folder permisions' + err));
+  }*/
+
+
+  // Shout out to our mates in group en1B
+  async givePermissions(path: string, owner: User) {
+    const webId = owner.url;//.replace('#me', '#');
+    const acl =
+          `# ACL resource for the profile folder
+          @prefix acl: <http://www.w3.org/ns/auth/acl#>.
+          @prefix foaf: <http://xmlns.com/foaf/0.1/>.
+          
+          # The owner has all permissions
+          <#owner>
+              a acl:Authorization;
+              acl:agent <${webId}>;
+              acl:accessTo <./>;
+              acl:defaultForNew <./>;
+              acl:mode acl:Read, acl:Write, acl:Control.
+          
+          # The public has read permissions
+          <#public>
+              a acl:Authorization;
+              acl:agentClass foaf:Agent;
+              acl:accessTo <./>;
+              acl:defaultForNew <./>;
+              acl:mode acl:Read.`;
+  
+    path += '.acl';
+    this.readFile(path);
     solidFiles.updateFile(path, acl).then((success: any) => {
       console.log('Folder permisions added');
     }, (err: string) => console.log('Could not set folder permisions' + err));
   }
+
+
+
+
+
+  // Process the .acl file to give premissions to a new user
+  private addUserToAclFile(str : string, newUser: User) {
+
+    var webId = newUser.url;
+    var lines : string[] = str.split("\n");
+
+    // First check the @prefixes //
+    var lastPrefixLine = 0;
+    var prefixes = lines.filter((str, index, array) => {
+      if (str.startsWith("@prefix")) {
+        lastPrefixLine = index;
+        return true;
+      }
+      return false;
+    });
+
+
+    // Check w3.org auth acl
+    var isW3Added = false;
+    var w3 = "http://www.w3.org/ns/auth/acl#";
+    for (var i = 0; i < prefixes.length; i ++) {
+      if (prefixes[i].includes(w3)) {
+        isW3Added = true;
+        break;
+      }
+    }    
+    if (!isW3Added) {
+      var prefix = `@prefix n0: <${w3}>.\n`;
+      lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
+      lastPrefixLine ++;
+    }
+
+    // Check user prefix added
+    var isUserAdded = false;
+    for (var i = 0; i < prefixes.length; i ++) {
+      if (prefixes[i].includes(webId)) {
+        isUserAdded = true;
+        break;
+      }
+    }    
+    if (!isUserAdded) {
+      var prefix = `@prefix c0: <${webId}>.\n`;
+      lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
+    }
+
+
+    // Now add the :Read permission //
+    var readIndex = lines.findIndex((str, index, array) => str.startsWith(":Read"));
+    if (readIndex == -1) {
+      readIndex = lines.length;
+      lines.push(":Read\n");
+      lines.push("a n0:Authorization;\n");
+      lines.push("n0:accessTo <./>:;\n");
+      lines.push("n0:defaultForNew <./>:;\n");
+      lines.push("n0:mode n0:Read.`;\n");
+
+      lines.push("n0:agent c0:me;\n");
+    }
+
+
+
+  }
+
+
+
 
 
 }
