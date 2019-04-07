@@ -141,11 +141,15 @@ export class MessageService {
     private async createMessageFromRequest(request: InboxElement) {
         
         var msg : ChatMessage = request.message;
+        var chat : ChatInfo = request.chat;
 
+        if (this.currentChat == undefined) {
+            // TODO increase the unread icon on the chat
+        }
         // Push it so we can see it
-        if (this.currentChat.chatId == msg.chatId) {
+        else if (this.currentChat.chatId == chat.chatId) {
             var existentMsg = this.currentMessages.find((m, index, array) => m.id == msg.id);
-            if (!existentMsg == undefined)
+            if (existentMsg == undefined)
                 this.currentMessages.push(msg);
         }
         else {
@@ -165,7 +169,7 @@ export class MessageService {
         var bundle = bundles.find((b, index, array) => b.bundleId == msg.bundleId);
         
         if (bundle == undefined) {
-            console.log("Cundefined bundle. Creating it.");
+            console.log("Undefined bundle. Creating it.");
             this.currentBundle = await this.createBundle(msg.chatId, msg.bundleId);
             bundle = this.currentBundle;
         }
