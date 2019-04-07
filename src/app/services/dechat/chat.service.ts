@@ -187,15 +187,6 @@ export class ChatService {
         return null;
         }
         var chat : ChatInfo = JSON.parse(file);
-    /*
-        var data = JSON.parse(file);
-
-        chat = new ChatInfo(id);
-        chat.chatName = data.name;
-        data.users.forEach(user => {
-        chat.users.push(this.user);
-        });
-    */
 
         // TODO load messages
 
