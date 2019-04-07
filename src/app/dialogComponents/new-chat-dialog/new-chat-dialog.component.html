@@ -1,0 +1,27 @@
+<div class="newChatDialog">
+
+  <div class="titleWrapper">
+    <h1>New chat</h1>
+  </div>
+
+  <div class="nameWrapper">
+      <input [(ngModel)]="chatName" placeholder="New chat name">
+  </div>
+
+  <div *ngFor="let message of feed | async" class="message">
+    <app-message [chatMessage]=message></app-message>
+  </div>
+
+  <div class="contactListWrapper">
+      <div class="contactWrapper" *ngFor="let contact of contacts" (click)="onContactClick(contact)">
+        <app-user-display-slot [user]=contact></app-user-display-slot>
+        <span class="contactCheck" *ngIf="isContactIn(contact)">✔️</span>
+      </div>
+  </div>
+
+  <div class="actionsWrapper">
+    <button (click)="cancel()">Back</button>
+    <button (click)="create()">Let's chat!</button>
+  </div>
+
+</div>

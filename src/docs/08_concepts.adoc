@@ -1,7 +1,9 @@
 [[section-concepts]]
+:imagesdir: images
+
 == Cross-cutting Concepts
 
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-
-TBD
-
+- Use of observer pattern to keep the chat feed updated, as well as the chat notifications.
+- Synchronization of the messages to ensure security and privacy of the messages posted.
+- Fast, simple and easy to navigate interface using angular, css and html.
+- Security is handled by the Solid platform, giving access to the accounts through the use of a pair username-password. It is also secure, in the sense that the user's information is not stored in the machine, but in the cloud.

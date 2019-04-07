@@ -1,0 +1,24 @@
+
+.profileIcon {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.textWrapper {
+    padding: 15% 10%;
+}
+
+.imgWrapper {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+}
+
+.imgWrapper img {
+    width: 100%;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(90, 90, 90);
+}

@@ -1,5 +1,13 @@
-<div class="userList" *ngIf="(chatInfos|async).length > 0">
-  <app-chat-item
-  [chatInfo]=chatInfo *ngFor="let chatInfo of chatInfos | async">
-  </app-chat-item>
+<div class="userList">
+
+  <div class="newChatWrapper">
+    <span>New chat</span>
+    <button class="newChatButton" (click)="newChat()">+</button>
+  </div>
+
+  <span *ngIf="(chatInfos|async).length > 0">
+    <app-chat-item
+    [chatInfo]=chatInfo *ngFor="let chatInfo of chatInfos | async">
+    </app-chat-item>
+  </span>
 </div>

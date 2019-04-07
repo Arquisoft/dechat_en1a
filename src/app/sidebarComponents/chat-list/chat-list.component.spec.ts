@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserListComponent } from './chat-list.component';
+import { ChatListComponent } from './chat-list.component';
 import { ChatItemComponent } from '../chat-item/chat-item.component';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from 'src/app/services/dechat/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChatService } from 'src/app/services/dechat/chat.service';
 
-describe('UserListComponent', () => {
-  let component: UserListComponent;
-  let fixture: ComponentFixture<UserListComponent>;
+describe('ChatListComponent', () => {
+  let component: ChatListComponent;
+  let fixture: ComponentFixture<ChatListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('UserListComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        UserListComponent,
+        ChatListComponent,
         ChatItemComponent
       ],
       providers: [ ChatService ]
@@ -27,7 +27,7 @@ describe('UserListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserListComponent);
+    fixture = TestBed.createComponent(ChatListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

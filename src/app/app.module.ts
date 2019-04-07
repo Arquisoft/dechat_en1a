@@ -24,7 +24,7 @@ import { FeedComponent } from './chatComponents/feed/feed.component';
 import { MessageComponent } from './chatComponents/message/message.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { UserListComponent } from './sidebarComponents/chat-list/chat-list.component';
+import { ChatListComponent } from './sidebarComponents/chat-list/chat-list.component';
 import { ChatItemComponent } from './sidebarComponents/chat-item/chat-item.component';
 
 import { MainContentComponent } from './main-content/main-content.component';
@@ -40,10 +40,13 @@ import { ChatService } from './services/dechat/chat.service';
 
 
 // Miscelanea
-import { ProfileIconComponent } from './profile-icon/profile-icon.component';
+import { ProfileIconComponent } from './utilComponents/profile-icon/profile-icon.component';
 import { MultimediaDisplayComponent } from './chatComponents/multimedia-display/multimedia-display.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NewChatDialogComponent } from './dialogComponents/new-chat-dialog/new-chat-dialog.component';
+import { MatDialogModule } from '@angular/material';
+import { UserDisplaySlotComponent } from './utilComponents/user-display-slot/user-display-slot.component';
 
 
 const appRoutes: Routes = [
@@ -83,12 +86,14 @@ const appRoutes: Routes = [
     FeedComponent,
     MessageComponent,
     NavbarComponent,
-    UserListComponent,
+    ChatListComponent,
     ChatItemComponent,
     MainContentComponent,
     ChatHeaderComponent,
     ProfileIconComponent,
-    MultimediaDisplayComponent
+    MultimediaDisplayComponent,
+    NewChatDialogComponent,
+    UserDisplaySlotComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +101,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgSelectModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule //required for toastr
+    BrowserAnimationsModule, //required for toastr
+    MatDialogModule
+  ],
+  entryComponents: [
+    NewChatDialogComponent
   ],
   providers: [AuthService, ChatService],
   bootstrap: [AppComponent]
