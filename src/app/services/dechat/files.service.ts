@@ -72,12 +72,7 @@ export class FilesService {
       this.givePermissions(path, user);
     }
 
-    await this.checkFolderExistence(path, error).then( result => {
-      //chat.users.forEach(otherUser => {
-      //    this.givePermissions(path, otherUser);
-      //});
-      //this.checkChatDataFile(path, chat);
-    });
+    await this.checkFolderExistence(path, error);
      
   }
 
@@ -154,12 +149,12 @@ export class FilesService {
 
 
   async readFolder(url: string): Promise<string[]> {
-    let result = [];
-    await solidFiles.readFolder(url).then((folder) => {
-        console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
-        result = folder.files.map((f) => f.url);
-    }, (err) => console.log(err));
-
+    
+    let result = [];    
+    await solidFiles.readFolder(url).then(
+      folder => { result = folder.files.map((f) => f.url); },
+      err => console.log(err)
+    );
     return result;
   }
 
@@ -172,54 +167,27 @@ export class FilesService {
 
 
   async readFolderSubfolders(url: string) : Promise<string[]> {
+    
     var result = [];
-    await solidFiles.readFolder(url).then(folder => {
-      console.log(`Read ${folder.name}, it has ${folder.files.length} subfolders.`);
-      result = folder.folders.map(f => f.url);
-    }, err => console.log(err) );
-
-    result.forEach(f => console.log("FOLDER: " + f));
-
+    await solidFiles.readFolder(url).then(
+      folder => { result = folder.folders.map(f => f.url); },
+      err => console.log(err)
+    );
     return result;
   }
 
 
 
-      
-/*
-  // Shout out to our mates in group en1B
-  async givePermissions(path: string, user: User) {
-      const webId = user.url.replace('#me', '#');
-      const acl =
-            `@prefix : <#>.
-    @prefix n0: <http://www.w3.org/ns/auth/acl#>.
-    @prefix ch: <./>.
-    @prefix c: </profile/card#>.
-    @prefix c0: <${webId}>.
-
-    :ControlReadWrite
-        a n0:Authorization;
-        n0:accessTo ch:;
-        n0:agent c:me;
-        n0:defaultForNew ch:;
-        n0:mode n0:Control, n0:Read, n0:Write.
-    :Read
-        a n0:Authorization;
-        n0:accessTo ch:;
-        n0:agent c0:me;
-        n0:defaultForNew ch:;
-        n0:mode n0:Read.`;
-
-    
-    path += '.acl';
-    this.readFile(path);
-    solidFiles.updateFile(path, acl).then((success: any) => {
-      console.log('Folder permisions added');
-    }, (err: string) => console.log('Could not set folder permisions' + err));
-  }*/
 
 
-  // Shout out to our mates in group en1B
+
+
+
+
+
+
+
+     
   async givePermissions(path: string, owner: User) {
     const webId = owner.url;//.replace('#me', '#');
     const acl =
@@ -255,6 +223,7 @@ export class FilesService {
 
 
   // Process the .acl file to give premissions to a new user
+  // Work in prograss
   private addUserToAclFile(str : string, newUser: User) {
 
     var webId = newUser.url;

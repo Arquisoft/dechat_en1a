@@ -5,6 +5,7 @@ import { User } from 'src/app/models/dechat/user.model';
 import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
 import { ChatService } from './chat.service';
+import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,11 @@ export class InboxService {
 
 
   private async setUp() {
-    await 5;
+    await 4;
 
     console.log("Inbox setting up...");
     this.user = await this.users.getUser();
-    setInterval(this.checkInbox.bind(this), 2000);
+    setInterval(this.checkInbox.bind(this), 500/*2000*/);
   }
 
 
@@ -94,15 +95,42 @@ export class InboxService {
 
 
 
-  public sendChatRequest(user: User, chat: ChatInfo) {
+
+
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /*                                                           */
+  /*                         REQUESTS                          */
+  /*                                                           */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+
+  public sendChatRequest(toUser: User, chat: ChatInfo) {
 
     var request : InboxElement;
     request = new InboxElement();
     request.chat = chat;
     request.type = InboxElementType.CHAT_REQUEST;
 
-    var inboxUrl = this.files.getInboxUrl(user);
+    var inboxUrl = this.files.getInboxUrl(toUser);
     var filename = inboxUrl + "DeChatEn1a_chatreq_" + chat.chatId + ".txt";
+
+    this.sendRequest(request, filename);
+  }
+
+
+  public sendNewMessage(toUser: User, chat : ChatInfo, message : ChatMessage) {
+
+    var request : InboxElement;
+    request = new InboxElement();
+    request.chat = chat;
+    request.message = message;
+    request.type = InboxElementType.NEW_MESSAGE;
+
+    var inboxUrl = this.files.getInboxUrl(toUser);
+    var filename = inboxUrl + "DeChatEn1a_newmsg_" + message.id + ".txt";
 
     this.sendRequest(request, filename);
   }
