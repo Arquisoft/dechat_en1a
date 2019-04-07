@@ -11,10 +11,10 @@ import {ChatService} from '../../services/dechat/chat.service';
 export class ChatroomComponent implements OnInit, AfterViewChecked {
 
     // Reference to the #scroller element in the DOM
-    @ViewChild('scroller') private feedContainer: ElementRef;
+    @ViewChild('scroller') feedContainer: ElementRef;
 
 
-    constructor(private chatService: ChatService) {
+    constructor(public chatService: ChatService) {
 
     }
 
