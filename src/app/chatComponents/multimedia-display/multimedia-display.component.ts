@@ -28,9 +28,18 @@ export class MultimediaDisplayComponent implements OnInit {
         */
 
         // For testing purposes
+
+        // Image
+        /*
         this.multimediaURL = 'https://i.redd.it/hf5v5rp6dir11.jpg';
         this.multimediaType = 'image';
         this.multimediaExten = 'jpg';
+        */
+
+        // Video
+        this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
+        this.multimediaType = 'video';
+        this.multimediaExten = 'webm';
     }
 
 }
