@@ -1,0 +1,16 @@
+span {
+    padding: 16px 16px 16px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+    background: #4a3059;
+}
+
+/* Position and style the close button (top right corner) */
+.userList .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}

@@ -55,6 +55,24 @@ app-main-content {
 }
 
 
+button {
+    border-radius: 4px;
+    border: none;
+    background-color: #D33395;
+    color: #EEE;
+    font-size: 20px;
+    margin: 3px
+}
+
+button:hover {
+    background-color: #8a3a9e;
+}
+
+button:active {
+    color: darkgray;
+    background-color: #2A2845;
+}
+
 /* * * * * * * * SCROLLBAR STYLE * * * * * * * */
 
 /* width */

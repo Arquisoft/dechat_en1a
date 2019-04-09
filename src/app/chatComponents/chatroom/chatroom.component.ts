@@ -15,8 +15,10 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
 
     ready: Observable<boolean[]>;
 
-    constructor(private chatService: ChatService) {
+    chatNav: boolean;
 
+    constructor(private chatService: ChatService) {
+        this.chatNav = false;
     }
 
     ngOnInit() {
@@ -34,6 +36,17 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
     scrollToBottom(): void {
         this.feedContainer.nativeElement.scrollTop =
             this.feedContainer.nativeElement.scrollHeight;
+    }
+
+    toggleChatNav() {
+        if (this.chatNav === false) {
+            document.getElementById('userListWrapper').style.width = '200px';
+            this.chatNav = true;
+        } else {
+            document.getElementById('userListWrapper').style.width = '0';
+            document.getElementById('chatroomWrapper').style.marginLeft = '0';
+            this.chatNav = false;
+        }
     }
 
 }

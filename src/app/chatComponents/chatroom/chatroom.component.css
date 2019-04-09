@@ -1,7 +1,7 @@
 
 .chatroom {
     display: grid;
-    grid-template-rows: 80% 20%;
+    grid-template-rows: 0% 80% 20%;
     height: 100%;
     overflow: hidden;
 }
@@ -22,10 +22,23 @@
 }
 
 .chatFormWrapper {
-    display: flex;
+    display: grid;
     height: 80px;
     background-color: rgba(0, 0, 0, 0);
     z-index: 3;
     padding: 8px;
+}
+
+span.chatNavToggle {
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 16px;
+    color: white;
+    background-color: black;
+}
+
+span.chatNavToggle:hover {
+    background-color: gray;
+    color: #2A2845;
 }
 

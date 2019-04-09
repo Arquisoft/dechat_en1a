@@ -6,19 +6,17 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { NewChatDialogComponent } from 'src/app/dialogComponents/new-chat-dialog/new-chat-dialog.component';
 
-
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
   styleUrls: ['./chat-list.component.css']
 })
 export class ChatListComponent implements OnInit, OnChanges {
-  
   chatInfos: Observable<ChatInfo[]>;
 
   constructor(
     private chatService: ChatService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
 
   }
@@ -31,8 +29,7 @@ export class ChatListComponent implements OnInit, OnChanges {
     this.update();
   }
 
-  
-  update() : void {
+  update(): void {
     this.chatInfos = this.chatService.getAllChats();
   }
 
@@ -44,8 +41,5 @@ export class ChatListComponent implements OnInit, OnChanges {
     dialogConfig.autoFocus = true;
 
     var dialogRef = this.dialog.open(NewChatDialogComponent, dialogConfig);
-    
   }
-
-
 }

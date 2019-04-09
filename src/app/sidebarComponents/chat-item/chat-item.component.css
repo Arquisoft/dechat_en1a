@@ -1,4 +1,4 @@
-.chatItem{
+/*.chatItem{
     height: auto;
     padding: 10px;
     width: 90%;
@@ -41,4 +41,24 @@
 
 .userName{
     display: inline-block;
+}
+*/
+
+/* The navigation menu links */
+span {
+    padding: 8px 8px 8px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+}
+
+span.add {
+    color: white;
+    background-color: purple;
+}
+
+/* When you mouse over the navigation links, change their color */
+span:hover {
+    color: #f1f1f1;
+    background-color: aqua;
 }
