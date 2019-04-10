@@ -1,24 +1,21 @@
 
 .profileIcon {
+    height: 100%;
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: max-content max-content;
 }
 
 .textWrapper {
-    padding: 15% 10%;
+    margin: auto;
+    vertical-align: middle;
 }
 
 .imgWrapper {
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
+    margin: auto;
+    padding: 20px;
+    vertical-align: middle;
 }
 
 .imgWrapper img {
-    width: 100%;
-    border-radius: 50%;
-    border-width: 2px;
-    border-style: solid;
-    border-color: rgb(90, 90, 90);
+    width: 5em;
 }
