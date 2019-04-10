@@ -17,4 +17,8 @@ export class ChatHeaderComponent implements OnInit {
     ngOnInit() {
     }
 
+    toggleChatNav() {
+        document.getElementById('userListWrapper').style.width = '200px';
+        document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
+    }
 }

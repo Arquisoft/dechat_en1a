@@ -1,0 +1,23 @@
+span.chatNavToggle {
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    background-color: black;
+}
+
+span.chatNavToggle:hover {
+    background-color: gray;
+    color: #2A2845;
+}
+
+i.fa-bars {
+    z-index: 3;
+    padding: 16px;
+    color: white;
+    background-color: black;
+}
+
+i.fa-bars:hover {
+    background-color: gray;
+    color: #2A2845;
+}
