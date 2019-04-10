@@ -12,8 +12,8 @@
     display: inline-block;
     background: url('src/assets/img/logo.png') no-repeat;
     background-size: cover;
-    width: 128px;
-    height: 128px;
+    width: 90px;
+    height: 90px;
 }
 
 #heading {
@@ -49,7 +49,6 @@
 }
 
 .profileIconWrapper {
-    padding: 10px;
     font-weight: bold;
 }
 

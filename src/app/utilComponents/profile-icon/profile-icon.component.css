@@ -8,11 +8,12 @@
 .textWrapper {
     margin: auto;
     vertical-align: middle;
+    padding: 10px;
 }
 
 .imgWrapper {
     margin: auto;
-    padding: 20px;
+    padding: 10px;
     vertical-align: middle;
 }
 
