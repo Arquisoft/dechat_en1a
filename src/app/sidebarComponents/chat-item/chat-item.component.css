@@ -44,12 +44,12 @@
 }
 */
 
-/* The navigation menu links */
 span {
     padding: 8px 8px 8px 16px;
     text-decoration: none;
     display: block;
     transition: 0.3s;
+    cursor: context-menu;
 }
 
 span.add {
@@ -57,8 +57,7 @@ span.add {
     background-color: purple;
 }
 
-/* When you mouse over the navigation links, change their color */
 span:hover {
-    color: #f1f1f1;
-    background-color: aqua;
+    color: #2A2845;
+    background-color: darkgray;
 }

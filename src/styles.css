@@ -38,9 +38,8 @@ app-navbar {
 
 app-chat-form {
     width: 100%;
-    display: flex;
-    white-space: nowrap;
-    overflow: hidden;
+    height: 100%;
+    display: contents;
 }
 
 app-main-content {
@@ -48,6 +47,10 @@ app-main-content {
     height: 100%;
 }
 
+app-chat-header{
+    display: grid;
+    grid-template-columns: min-content auto;
+}
 
 .message {
     display: block;

@@ -44,11 +44,10 @@ app-chatroom {
     background-color: #2A2845; /* Black*/
     color: white;
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 10px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+/* To push the chat aside when opening the menu */
 #main {
     transition: margin-left .5s;
     padding: 20px;

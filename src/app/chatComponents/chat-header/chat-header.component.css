@@ -1,11 +1,11 @@
-span.chatNavToggle {
+chatNavToggle {
     width: fit-content;
     height: fit-content;
     color: white;
     background-color: black;
 }
 
-span.chatNavToggle:hover {
+chatNavToggle:hover {
     background-color: gray;
     color: #2A2845;
 }
@@ -20,4 +20,21 @@ i.fa-bars {
 i.fa-bars:hover {
     background-color: gray;
     color: #2A2845;
+}
+
+.chatName {
+    height: 100%;
+    background-color: #4a3059;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    display: table;
+    margin: 0;
+}
+
+.textChatName{
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    text-align: center;
 }
