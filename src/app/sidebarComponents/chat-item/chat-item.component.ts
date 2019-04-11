@@ -30,5 +30,10 @@ export class ChatItemComponent implements OnInit {
         document.getElementById('userListWrapper').style.width = '0';
         document.getElementById('chatroomWrapper').style.marginLeft = '0';
     }
+  isActive() {
+    if (this.chatService.currentChat == this.chatInfo)
+      return "activeChatItem";
+    return "chatItem";
+  }
 
 }
