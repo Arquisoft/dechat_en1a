@@ -1,4 +1,3 @@
-
 /* import so dialogs can work as intended :D */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
@@ -28,8 +27,7 @@ app-root {
 }
 
 app-chatroom {
-    display: flex;
-    flex-direction: column;
+    height: 100%;
 }
 
 app-navbar {
@@ -43,7 +41,6 @@ app-chat-form {
 }
 
 app-main-content {
-    display: flex;
     height: 100%;
 }
 

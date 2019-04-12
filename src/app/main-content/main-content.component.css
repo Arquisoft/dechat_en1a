@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: auto 100%;
+    grid-template-columns: min-content auto;
     overflow: hidden;
 }
 
@@ -29,9 +29,7 @@
     ), url('src/assets/img/chat-bg-1.jpg') no-repeat center center;
 }
 
-app-chatroom {
-    height: 100%;
-}
+
 
 
 /* The side navigation menu */

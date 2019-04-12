@@ -9,7 +9,7 @@ import { InboxService } from './inbox.service';
 import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MessageService {
 

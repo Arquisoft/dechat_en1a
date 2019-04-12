@@ -2,7 +2,8 @@
     display: grid;
     grid-template-rows: max-content auto min-content;
     height: 100%;
-    overflow: hidden;
+    max-height: 100%;
+    box-sizing: border-box;
 }
 
 .chatHeaderWrapper {
@@ -13,10 +14,9 @@
 }
 
 .feedWrapper {
-    display: flex;
-    flex-direction: column-reverse;
-    overflow-y: scroll;
-    padding: 20px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    height: 100%;
 }
 
 .chatFormWrapper {
