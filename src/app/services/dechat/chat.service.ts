@@ -181,6 +181,12 @@ export class ChatService {
 
         // TODO load messages
 
+        // Load bundles and get the last two
+        var bundles : string[] = await this.files.readFolderSubfolders(chatUrl);
+        bundles = bundles.sort((a, b) => a > b ? 1 : (a == b ? 0 : -1));
+
+        this.messages.loadAllMessageBundles
+
         return chat;
     }
 
