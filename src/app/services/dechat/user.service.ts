@@ -88,17 +88,6 @@ export class UserService {
             this.contacts.pop();
         }
 
-        // TODO
-        /*await contacts.forEach(async element => {
-
-          console.log("Contact: " + element.value);
-          await this.rdf.fetcher.load(element.value);
-          var name = this.rdf.getValueFromVcard('fn', element.value);
-          console.log("Contact name = " + name);
-          var c = new User(name);
-          this.contacts.push(c);
-        });*/
-
         contacts.forEach((element) => {
             const c = new User(element.value);
             this.contacts.push(c);

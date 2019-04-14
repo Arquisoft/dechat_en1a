@@ -4,7 +4,6 @@ import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
 import { User } from 'src/app/models/dechat/user.model';
 import { Observable, of } from 'rxjs';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
-import { MessageBundle } from 'src/app/models/dechat/message-bundle.model';
 import { UserService } from './user.service';
 import { FilesService } from './files.service';
 import { MessageService } from './message.service';
@@ -59,20 +58,11 @@ export class ChatService {
         
         var chatFolder = await this.files.getChatsRootUrl(this.user);
         var chats = await this.files.readFolderSubfolders(chatFolder);
-        chats.forEach(async chat => {
+        await chats.forEach(async chat => {
             var c = await this.fetchChat(chat);
             if (c != null)
                 this.allChats.push(c);
         });
-
-
-        // TODO remove this Testing stuff
-        if (chats.length == 0) {
-        console.log("No chats created. Generating test chats...")
-        contacts.forEach(async c => {
-            this.allChats.push(await this.createChat(c));
-        });
-        }
 
     }
 
@@ -176,19 +166,25 @@ export class ChatService {
         var chat : ChatInfo;
         var id = chatUrl;
 
-        // TODO get the chat data file, with name and users
+        // Get the chat data file, with name and users
 
         var dataFile = chatUrl + "data.txt";
         var file = await this.files.readFile(dataFile);
         
-        if (file.length == 0) {
-        console.log("Something bad happened.");
-        this.files.deleteFolder(chatUrl);
-        return null;
+        if (file.length == 0 ||file == undefined) {
+            console.log("Something bad happened.");
+            this.files.deleteFolder(chatUrl);
+            return null;
         }
         var chat : ChatInfo = JSON.parse(file);
+        if (chat == undefined) {
+            console.log("Something bad happened.");
+            this.files.deleteFolder(chatUrl);
+            return null;
+        }
 
-        // TODO load messages
+        // Load messages
+        await this.messages.fetchChat(chat);
 
         return chat;
     }

@@ -7,33 +7,42 @@ import {User} from 'src/app/models/dechat/user.model';
 import {FilesService} from './files.service';
 import { InboxService } from './inbox.service';
 import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
+import { Chat } from 'src/app/models/dechat/chat.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MessageService {
 
+
+    // Huge TODO here
+    //
+    // Now we are working with json-encoded plain text.
+    // This will have to change and use RDF.
+    //
+
+
     user: User;
     chatMessage: ChatMessage;
 
-    currentChat: ChatInfo;
+    currentChat: Chat;
     currentMessages: ChatMessage[];
     currentBundle: MessageBundle;
     currentChatUrl: string;
 
 
     // We will store the chats locally in a hash map
-    // This way, we'll be able to directly read messages
-    // That have already been fetched.
     // string -> ChatInfo.chatId
-    chatMap: Map<string, MessageBundle[]>;
+    chatMap: Map<string, Chat>;
 
     constructor(
         private files: FilesService,
         private inbox : InboxService
     ) {
+
         this.currentMessages = [];
-        this.chatMap = new Map<string, MessageBundle[]>();
+        this.chatMap = new Map<string, Chat>();
+
         this.inbox.addOnElementFoundCallback(
             (element : InboxElement) => {
                 if (element.type == InboxElementType.NEW_MESSAGE)
@@ -45,30 +54,59 @@ export class MessageService {
         this.user = user;
     }
 
-    async setCurrentChat(chat: ChatInfo) {
 
-        if (this.currentChat === chat)
-            return;
+    async fetchChat(chatInfo : ChatInfo) {
+
+        console.log("Message Service Fetching chat: " + chatInfo.chatId);
+
+        if (!this.chatMap.has(chatInfo.chatId)) {
+            this.chatMap.set(chatInfo.chatId, new Chat(chatInfo));
+        }
+        var chat = this.chatMap.get(chatInfo.chatId);
+        var chatUrl = this.files.getChatUrl(this.user, chatInfo);
+        await this.loadAllMessageBundles(chatUrl, chat);
+    }
+
+
+
+    async setCurrentChat(chatInfo: ChatInfo) {
+
+        console.log("Message service setting current chat");
 
         // Clear messages of the previous chat
         while (this.currentMessages.length > 0) {
             this.currentMessages.pop();
-        }
+        }        
         
-        this.currentChat = chat;
-        if (!this.chatMap.has(chat.chatId)) {
-            this.chatMap.set(chat.chatId, []);
+        if (!this.chatMap.has(chatInfo.chatId)) {
+            this.chatMap.set(chatInfo.chatId, new Chat(chatInfo));
         }
-        this.currentChatUrl = await this.files.getChatUrl(this.user, chat);
-
+        this.currentChat = this.chatMap.get(chatInfo.chatId);
+        this.currentChatUrl = this.files.getChatUrl(this.user, chatInfo);
+        
 
         // Fetch the bundles up in the pod (add them to the map)
         // And retrieve the existing bundles in the map
-        await this.fetchMessageBundles();
-        const bundles = this.chatMap.get(this.currentChat.chatId);
+        var newBundles = await this.loadAllMessageBundles(this.currentChatUrl, this.currentChat);
+        
+        console.log("New bundles added: " + newBundles)
+        var bundles = this.currentChat.getBundles();
 
-        bundles.forEach((b) => this.processFetchedMessages(b.messages));
+        if (bundles.length == 0)
+            console.log("... man, the chat has no bundles");
+
+        await bundles.forEach((b) => {
+            console.log("Bundle " + b.bundleId + " has " + b.messages.length + " messages");
+            // Sort them by date
+            b.messages = b.messages.sort((a, b) => a.date.getTime() - b.date.getTime());
+            b.messages.forEach((m) => this.currentMessages.push(m));
+            this.currentBundle = b;
+        });
     }
+
+
+
+
 
     getFullTimeStamp() {
         const now = new Date();
@@ -90,6 +128,10 @@ export class MessageService {
 
 
 
+
+
+
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /*                                                           */
     /*                     MESSAGE MANAGEMENT                    */
@@ -104,7 +146,7 @@ export class MessageService {
 
         // No bundle!!
         if (this.currentBundle == undefined)
-            this.currentBundle = await this.createBundle(this.currentChat.chatId, this.getFullTimeStamp());
+            this.currentBundle = await this.createBundle(this.currentChat, this.getFullTimeStamp());
         
         const message = this.createMessage(msg);
 
@@ -112,7 +154,7 @@ export class MessageService {
         // Add the message to the bundle.
         // Create a new bundle if the current one is full
         if (!this.currentBundle.addMessage(message)) {
-            this.currentBundle = await this.createBundle(this.currentChat.chatId, this.getFullTimeStamp());
+            this.currentBundle = await this.createBundle(this.currentChat, this.getFullTimeStamp());
             this.currentBundle.addMessage(message);
         }
 
@@ -120,8 +162,8 @@ export class MessageService {
         this.currentMessages.push(message);
 
         // Send to the inbox of all users
-        this.currentChat.users.forEach(async (user) => {
-            this.inbox.sendNewMessage(user, this.currentChat, message);
+        this.currentChat.chatInfo.users.forEach(async (user) => {
+            this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
         });
 
         console.log('[Message sent] : ' + msg);
@@ -131,7 +173,7 @@ export class MessageService {
         const message = new ChatMessage();
         message.message = msg;
         message.userName = this.user.userName;
-        message.chatId = this.currentChat.chatId;
+        message.chatId = this.currentChat.chatInfo.chatId;
         message.bundleId = this.currentBundle.bundleId;
         return message;
     }
@@ -141,62 +183,63 @@ export class MessageService {
     private async createMessageFromRequest(request: InboxElement) {
         
         var msg : ChatMessage = request.message;
+        var chatInfo : ChatInfo = request.chat;
 
+        if (this.currentChat == undefined) {
+            // TODO Increase the unread icon on the chat
+            // and create it
+            console.log("Undefined current chat!!!!")
+        }
         // Push it so we can see it
-        if (this.currentChat.chatId == msg.chatId) {
+        else if (this.currentChat.chatInfo.chatId == chatInfo.chatId) {
             var existentMsg = this.currentMessages.find((m, index, array) => m.id == msg.id);
-            if (!existentMsg == undefined)
+            if (existentMsg == undefined)
                 this.currentMessages.push(msg);
         }
         else {
-            // TODO increase the unread icon on the chat
+            this.currentChat.unreadMessageCount ++;
         }
 
         
         if (!this.chatMap.has(msg.chatId)) {
-            console.log("[ERROR] We have received a message and we don't have the chat!!!!!!");
+            console.log("[ERROR] We have received a message and we don't have the chat in the map!!!!!!");
             // TODO add it to the chat map
             return;
         }
 
         
-
-        var bundles = this.chatMap.get(msg.chatId);
-        var bundle = bundles.find((b, index, array) => b.bundleId == msg.bundleId);
+        var chat = this.chatMap.get(msg.chatId);
+        var bundle = await chat.getBundle(msg.bundleId);
         
         if (bundle == undefined) {
-            console.log("Cundefined bundle. Creating it.");
-            this.currentBundle = await this.createBundle(msg.chatId, msg.bundleId);
+            console.log("Undefined bundle. Creating it.");
+            this.currentBundle = await this.createBundle(chat, msg.bundleId);
             bundle = this.currentBundle;
         }
 
         bundle.addMessage(msg);
 
-        // TODO create the file in the pod
-        //await this.files.createFile("", chat);
+        // Create the message file in the pod        
+        var path = await this.files.getChatUrl(this.user, this.currentChat.chatInfo);
+        path = path + bundle.bundleId + '/';
+        path = path + msg.id + '.txt';
+        await this.files.createFile(path, JSON.stringify(msg));
     }
 
 
 
 
-
-    private processFetchedMessages(messages: ChatMessage[]) {
-
-        // TODO sorth them
-        messages.sort((a, b) => a.date.getTime() - b.date.getTime());
-
-        messages.forEach((m) => this.currentMessages.push(m));
-    }
 
     private async getMessageFromFile(url: string): Promise<ChatMessage> {
         let msg;
         let json;
         await this.files.readFile(url).then((body) => json = JSON.parse(body));
 
-        // TODO get all the message data, I guess
+        // Get all the message data, I guess
         msg = new ChatMessage(json.message);
         return msg;
     }
+
 
 
 
@@ -212,35 +255,60 @@ export class MessageService {
 
 
 
-    // TODO fetch messages in bundles from the pod
-    async fetchMessageBundles() {
-        console.log("Fetching message bundles in the POD");
+    // Looks at the message bundles in the pod, adds them
+    // to the map and returns how many of them are new
+    async loadAllMessageBundles(chatUrl : string, chat: Chat) : Promise<number>{
 
-        // TODO for each folder in the chat folder, create  bundle
-        await this.files.readFolderSubfolders(this.currentChatUrl).then(
-            // TODO check if they already exist
-            async (files) => await files.forEach(async (f) => {
-                await this.fetchMessageBundle(f);
-            }),
-        );
+        console.log("Loading all message bundles in the POD chat folder " + chatUrl);
+        var bundleFolders : string[] = await this.files.readFolderSubfolders(chatUrl);
 
+        if (bundleFolders.length == 0) {
+            console.log("The chat has no bundles");
+            return 0;
+        }
+        console.log("Number of bundles in the POD: " + bundleFolders.length);
+        console.log("Number of bundles locally: " + chat.getBundles().length);
+
+        // TODO some async shit is happening here.
+        // Gotta find a way to fix it.
+
+        //bundleFolders = bundleFolders.sort((a, b) => a > b ? 1 : (a == b ? 0 : -1));
+        var count = 0;
+        await bundleFolders.forEach(async b => {
+            var result = await this.loadMessageBundle(chat, chatUrl, b);
+            console.log("Trying to add bundle");
+            if (await chat.addBundle(result)) {
+                count ++;
+                console.log("Bundle added :D");
+            }
+            console.log("Count = " + count);
+        });
+        
+        return count;
     }
 
     // Fetches all the messages in a given bundle.
-    private async fetchMessageBundle(bundleUrl: string) {
+    // Returns the bundle object.
+    private async loadMessageBundle(chat : Chat, chatUrl: string, bundleUrl: string) : Promise<MessageBundle>{
 
-        const id = bundleUrl.replace(this.currentChatUrl, '').replace('/', '');
-        const bundle = this.getBundle(id);
+        console.log("Fetching message bundle.");
+        var bundleId = bundleUrl.replace(chatUrl, '').replace('/', '');
+
+        console.log("URL: " + bundleUrl);
+        console.log("ID: " + bundleId);
+
+        console.log("Getting the bundle.");
+        var bundle = await this.getBundle(chat, bundleId);
 
         // Read all messages inside the bundle folder
-        await this.files.readFolder(bundleUrl).then(
-            async (files) => await files.forEach(async (f) => {
-                await this.getMessageFromFile(f);
-            }),
-        );
+        console.log("Reading all messages inside the bundle folder");
+        var messageFiles = await this.files.readFolder(bundleUrl);
+        await messageFiles.forEach(async (f) => {
+                var msg = await this.getMessageFromFile(f); 
+                await bundle.addMessage(msg);
+            });
 
-        this.processFetchedMessages(bundle.messages);
-        this.chatMap.get(this.currentChat.chatId).push(bundle);
+        return bundle;
     }
 
 
@@ -249,32 +317,19 @@ export class MessageService {
 
 
 
-    private getBundle(bundleId: string): MessageBundle {
-        this.chatMap.get(this.currentChat.chatId).forEach((bundle) => {
-            if (bundle.bundleId === bundleId) {
-                return bundle;
-            }
-        });
-        return null;
+    private async getBundle(chat : Chat, bundleId: string): Promise<MessageBundle> {
+        var bundle = chat.getBundle(bundleId);
+        if (bundle != undefined)
+            return bundle;
+        return await this.createBundle(chat, bundleId);
     }
 
-    private async createBundle(chatId: string, id: string): Promise<MessageBundle> {
+    private async createBundle(chat : Chat, id: string): Promise<MessageBundle> {
 
-        const bundle = new MessageBundle(chatId, id);
-
-        /*
-        // Check the existence in all pods in the chat
-        chat.users.forEach(async (user) => {
-            const path = await this.files.getChatUrl(this.user, this.currentChat);
-            this.files.checkFolderExistence(path + bundle.bundleId + '/');
-        });
-        */
-        const path = await this.files.getChatUrl(this.user, this.currentChat);
+        const bundle = new MessageBundle(chat.chatInfo.chatId, id);
+        const path = await this.files.getChatUrl(this.user, chat.chatInfo);
         await this.files.checkFolderExistence(path + bundle.bundleId + '/');
-        
-
-        this.chatMap.get(chatId).push(bundle);
-
+        //this.chatMap.get(chatId).addBundle(bundle);
         return bundle;
     }
 
