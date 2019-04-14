@@ -65,15 +65,6 @@ export class ChatService {
                 this.allChats.push(c);
         });
 
-
-        // TODO remove this Testing stuff
-        if (chats.length == 0) {
-        console.log("No chats created. Generating test chats...")
-        contacts.forEach(async c => {
-            this.allChats.push(await this.createChat(c));
-        });
-        }
-
     }
 
 
@@ -176,15 +167,15 @@ export class ChatService {
         var chat : ChatInfo;
         var id = chatUrl;
 
-        // TODO get the chat data file, with name and users
+        // Get the chat data file, with name and users
 
         var dataFile = chatUrl + "data.txt";
         var file = await this.files.readFile(dataFile);
         
         if (file.length == 0) {
-        console.log("Something bad happened.");
-        this.files.deleteFolder(chatUrl);
-        return null;
+            console.log("Something bad happened.");
+            this.files.deleteFolder(chatUrl);
+            return null;
         }
         var chat : ChatInfo = JSON.parse(file);
 

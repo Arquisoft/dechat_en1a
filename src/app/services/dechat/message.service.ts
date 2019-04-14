@@ -13,6 +13,14 @@ import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-elem
 })
 export class MessageService {
 
+
+    // Huge TODO here
+    //
+    // Now we are working with json-encoded plain text.
+    // This will have to change and use RDF.
+    //
+
+
     user: User;
     chatMessage: ChatMessage;
 
@@ -27,13 +35,17 @@ export class MessageService {
     // That have already been fetched.
     // string -> ChatInfo.chatId
     chatMap: Map<string, MessageBundle[]>;
+    unreadCountMap: Map<string, number>; // TODO display the count in the UI
 
     constructor(
         private files: FilesService,
         private inbox : InboxService
     ) {
+
         this.currentMessages = [];
         this.chatMap = new Map<string, MessageBundle[]>();
+        this.unreadCountMap = new Map<string, number>();
+
         this.inbox.addOnElementFoundCallback(
             (element : InboxElement) => {
                 if (element.type == InboxElementType.NEW_MESSAGE)
@@ -144,7 +156,8 @@ export class MessageService {
         var chat : ChatInfo = request.chat;
 
         if (this.currentChat == undefined) {
-            // TODO increase the unread icon on the chat
+            // Increase the unread icon on the chat
+            this.increaseUnreadMessageCount(chat.chatId);
         }
         // Push it so we can see it
         else if (this.currentChat.chatId == chat.chatId) {
@@ -153,12 +166,12 @@ export class MessageService {
                 this.currentMessages.push(msg);
         }
         else {
-            // TODO increase the unread icon on the chat
+            this.increaseUnreadMessageCount(chat.chatId);
         }
 
         
         if (!this.chatMap.has(msg.chatId)) {
-            console.log("[ERROR] We have received a message and we don't have the chat!!!!!!");
+            console.log("[ERROR] We have received a message and we don't have the chat in the map!!!!!!");
             // TODO add it to the chat map
             return;
         }
@@ -176,8 +189,11 @@ export class MessageService {
 
         bundle.addMessage(msg);
 
-        // TODO create the file in the pod
-        //await this.files.createFile("", chat);
+        // Create the message file in the pod        
+        var path = await this.files.getChatUrl(this.user, this.currentChat);
+        path = path + bundle.bundleId + '/';
+        path = path + msg.id + '.txt';
+        await this.files.createFile(path, JSON.stringify(msg));
     }
 
 
@@ -186,9 +202,8 @@ export class MessageService {
 
     private processFetchedMessages(messages: ChatMessage[]) {
 
-        // TODO sorth them
+        // Sort them by date
         messages.sort((a, b) => a.date.getTime() - b.date.getTime());
-
         messages.forEach((m) => this.currentMessages.push(m));
     }
 
@@ -197,11 +212,16 @@ export class MessageService {
         let json;
         await this.files.readFile(url).then((body) => json = JSON.parse(body));
 
-        // TODO get all the message data, I guess
+        // Get all the message data, I guess
         msg = new ChatMessage(json.message);
         return msg;
     }
 
+
+    private increaseUnreadMessageCount(chatId: string) {
+        var count = this.unreadCountMap.get(chatId);
+        this.unreadCountMap.set(chatId, count+1);
+    }
 
 
 
@@ -217,26 +237,23 @@ export class MessageService {
 
 
     // Looks at the message bundles in the pod
-    // And loads the last one
     async checkAllMessageBundles() {
         console.log("Fetching message bundles in the POD");
 
-        var folders : string[];
-        folders = await this.files.readFolderSubfolders(this.currentChatUrl);
+        var bundles : string[] = await this.files.readFolderSubfolders(this.currentChatUrl);
 
-        if (folders.length == 0)
+        if (bundles.length == 0)
             return;
 
-        var newest : string = folders[0];
-        for (var i = 1; i < folders.length; i ++)
-            if (newest < folders[i])
-                newest = folders[i];
-
-        await this.fetchMessageBundle(newest);
+        bundles.sort((a, b) => a > b ? 1 : (a == b ? 0 : -1));
+        await bundles.forEach(async b => {
+            this.currentBundle = await this.fetchMessageBundle(b);
+        });
     }
 
     // Fetches all the messages in a given bundle.
-    private async fetchMessageBundle(bundleUrl: string) {
+    // Returns the bundle object.
+    private async fetchMessageBundle(bundleUrl: string) : Promise<MessageBundle>{
 
         console.log("Fetching message bundle.");
 
@@ -256,6 +273,8 @@ export class MessageService {
 
         this.processFetchedMessages(bundle.messages);
         this.chatMap.get(this.currentChat.chatId).push(bundle);
+
+        return bundle;
     }
 
 

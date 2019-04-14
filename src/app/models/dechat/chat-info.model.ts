@@ -10,7 +10,6 @@ export class ChatInfo {
     users: User[];
     administrators: User[];
 
-    unreadCount?: number; // TODO Honestly I don't know how the hell we're gonna do this
     status?: string;
 
     constructor(id: string) {
