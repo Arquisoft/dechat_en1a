@@ -54,6 +54,21 @@ export class MessageService {
         this.user = user;
     }
 
+
+    async fetchChat(chatInfo : ChatInfo) {
+
+        console.log("Message Service Fetching chat: " + chatInfo.chatId);
+
+        if (!this.chatMap.has(chatInfo.chatId)) {
+            this.chatMap.set(chatInfo.chatId, new Chat(chatInfo));
+        }
+        var chat = this.chatMap.get(chatInfo.chatId);
+        var chatUrl = this.files.getChatUrl(this.user, chatInfo);
+        await this.loadAllMessageBundles(chatUrl, chat);
+    }
+
+
+
     async setCurrentChat(chatInfo: ChatInfo) {
 
         console.log("Message service setting current chat");
@@ -66,7 +81,7 @@ export class MessageService {
         if (!this.chatMap.has(chatInfo.chatId)) {
             this.chatMap.set(chatInfo.chatId, new Chat(chatInfo));
         }
-        this.currentChat = this.chatMap.get(chatInfo.chatId);        
+        this.currentChat = this.chatMap.get(chatInfo.chatId);
         this.currentChatUrl = this.files.getChatUrl(this.user, chatInfo);
         
 
@@ -131,7 +146,7 @@ export class MessageService {
 
         // No bundle!!
         if (this.currentBundle == undefined)
-            this.currentBundle = await this.createBundle(this.currentChat.chatInfo.chatId, this.getFullTimeStamp());
+            this.currentBundle = await this.createBundle(this.currentChat, this.getFullTimeStamp());
         
         const message = this.createMessage(msg);
 
@@ -139,7 +154,7 @@ export class MessageService {
         // Add the message to the bundle.
         // Create a new bundle if the current one is full
         if (!this.currentBundle.addMessage(message)) {
-            this.currentBundle = await this.createBundle(this.currentChat.chatInfo.chatId, this.getFullTimeStamp());
+            this.currentBundle = await this.createBundle(this.currentChat, this.getFullTimeStamp());
             this.currentBundle.addMessage(message);
         }
 
@@ -168,7 +183,7 @@ export class MessageService {
     private async createMessageFromRequest(request: InboxElement) {
         
         var msg : ChatMessage = request.message;
-        var chat : ChatInfo = request.chat;
+        var chatInfo : ChatInfo = request.chat;
 
         if (this.currentChat == undefined) {
             // TODO Increase the unread icon on the chat
@@ -176,7 +191,7 @@ export class MessageService {
             console.log("Undefined current chat!!!!")
         }
         // Push it so we can see it
-        else if (this.currentChat.chatInfo.chatId == chat.chatId) {
+        else if (this.currentChat.chatInfo.chatId == chatInfo.chatId) {
             var existentMsg = this.currentMessages.find((m, index, array) => m.id == msg.id);
             if (existentMsg == undefined)
                 this.currentMessages.push(msg);
@@ -193,12 +208,12 @@ export class MessageService {
         }
 
         
-
-        var bundle = await this.chatMap.get(msg.chatId).getBundle(msg.bundleId);
+        var chat = this.chatMap.get(msg.chatId);
+        var bundle = await chat.getBundle(msg.bundleId);
         
         if (bundle == undefined) {
             console.log("Undefined bundle. Creating it.");
-            this.currentBundle = await this.createBundle(msg.chatId, msg.bundleId);
+            this.currentBundle = await this.createBundle(chat, msg.bundleId);
             bundle = this.currentBundle;
         }
 
@@ -242,10 +257,10 @@ export class MessageService {
 
     // Looks at the message bundles in the pod, adds them
     // to the map and returns how many of them are new
-    async loadAllMessageBundles(url : string, chat: Chat) : Promise<number>{
+    async loadAllMessageBundles(chatUrl : string, chat: Chat) : Promise<number>{
 
-        console.log("Loading all message bundles in the POD chat folder " + url);
-        var bundleFolders : string[] = await this.files.readFolderSubfolders(url);
+        console.log("Loading all message bundles in the POD chat folder " + chatUrl);
+        var bundleFolders : string[] = await this.files.readFolderSubfolders(chatUrl);
 
         if (bundleFolders.length == 0) {
             console.log("The chat has no bundles");
@@ -260,7 +275,7 @@ export class MessageService {
         //bundleFolders = bundleFolders.sort((a, b) => a > b ? 1 : (a == b ? 0 : -1));
         var count = 0;
         await bundleFolders.forEach(async b => {
-            var result = await this.loadMessageBundle(b);
+            var result = await this.loadMessageBundle(chat, chatUrl, b);
             console.log("Trying to add bundle");
             if (await chat.addBundle(result)) {
                 count ++;
@@ -274,16 +289,16 @@ export class MessageService {
 
     // Fetches all the messages in a given bundle.
     // Returns the bundle object.
-    private async loadMessageBundle(bundleUrl: string) : Promise<MessageBundle>{
+    private async loadMessageBundle(chat : Chat, chatUrl: string, bundleUrl: string) : Promise<MessageBundle>{
 
         console.log("Fetching message bundle.");
-        var bundleId = bundleUrl.replace(this.currentChatUrl, '').replace('/', '');
+        var bundleId = bundleUrl.replace(chatUrl, '').replace('/', '');
 
         console.log("URL: " + bundleUrl);
         console.log("ID: " + bundleId);
 
         console.log("Getting the bundle.");
-        var bundle = await this.getBundle(bundleId);
+        var bundle = await this.getBundle(chat, bundleId);
 
         // Read all messages inside the bundle folder
         console.log("Reading all messages inside the bundle folder");
@@ -302,17 +317,17 @@ export class MessageService {
 
 
 
-    private async getBundle(bundleId: string): Promise<MessageBundle> {
-        var bundle = this.currentChat.getBundle(bundleId);
+    private async getBundle(chat : Chat, bundleId: string): Promise<MessageBundle> {
+        var bundle = chat.getBundle(bundleId);
         if (bundle != undefined)
             return bundle;
-        return await this.createBundle(this.currentChat.chatInfo.chatId, bundleId);
+        return await this.createBundle(chat, bundleId);
     }
 
-    private async createBundle(chatId: string, id: string): Promise<MessageBundle> {
+    private async createBundle(chat : Chat, id: string): Promise<MessageBundle> {
 
-        const bundle = new MessageBundle(chatId, id);
-        const path = await this.files.getChatUrl(this.user, this.currentChat.chatInfo);
+        const bundle = new MessageBundle(chat.chatInfo.chatId, id);
+        const path = await this.files.getChatUrl(this.user, chat.chatInfo);
         await this.files.checkFolderExistence(path + bundle.bundleId + '/');
         //this.chatMap.get(chatId).addBundle(bundle);
         return bundle;

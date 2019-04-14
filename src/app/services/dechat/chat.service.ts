@@ -4,7 +4,6 @@ import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
 import { User } from 'src/app/models/dechat/user.model';
 import { Observable, of } from 'rxjs';
 import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
-import { MessageBundle } from 'src/app/models/dechat/message-bundle.model';
 import { UserService } from './user.service';
 import { FilesService } from './files.service';
 import { MessageService } from './message.service';
@@ -59,7 +58,7 @@ export class ChatService {
         
         var chatFolder = await this.files.getChatsRootUrl(this.user);
         var chats = await this.files.readFolderSubfolders(chatFolder);
-        chats.forEach(async chat => {
+        await chats.forEach(async chat => {
             var c = await this.fetchChat(chat);
             if (c != null)
                 this.allChats.push(c);
@@ -172,20 +171,20 @@ export class ChatService {
         var dataFile = chatUrl + "data.txt";
         var file = await this.files.readFile(dataFile);
         
-        if (file.length == 0) {
+        if (file.length == 0 ||file == undefined) {
             console.log("Something bad happened.");
             this.files.deleteFolder(chatUrl);
             return null;
         }
         var chat : ChatInfo = JSON.parse(file);
+        if (chat == undefined) {
+            console.log("Something bad happened.");
+            this.files.deleteFolder(chatUrl);
+            return null;
+        }
 
-        // TODO load messages
-
-        // Load bundles and get the last two
-        var bundles : string[] = await this.files.readFolderSubfolders(chatUrl);
-        bundles = bundles.sort((a, b) => a > b ? 1 : (a == b ? 0 : -1));
-
-        this.messages.loadAllMessageBundles
+        // Load messages
+        await this.messages.fetchChat(chat);
 
         return chat;
     }
