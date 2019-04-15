@@ -1,3 +1,7 @@
+
+/target/
+
+
 # .gitignore copied from Angular GitHub page
 
 .DS_STORE
