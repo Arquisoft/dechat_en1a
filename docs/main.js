@@ -226,7 +226,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".profile-container {\n  font-family: 'Roboto', sans-serif;\n}\n\n.profile-container h1 {\n  font-size: 24px;\n  color: #7C55FB;\n  font-weight: bold;\n  line-height: 32px;\n  letter-spacing: 1.2px;\n  text-align: center;\n  margin-top: 82px;\n  text-transform: uppercase;\n}\n\n.profile-fields-container {\n  max-width: 740px;\n  min-height: 500px;\n  margin: 0 auto;\n  border: 1px solid #ccc;\n  box-shadow: #ccc 1px 1px 4px;\n  position: relative;\n}\n\n.profile-fields-container .profile-image-container {\n  height: 200px;\n  width: 100%;\n  background-size: cover !important;\n  background: url('https://arquisoft.github.io/dechat_en1a/assets/images/Solid_Pattern.png');\n}\n\n.profile-fields-container .profile-image-container img {\n  height: 128px;\n  border-radius: 50%;\n  margin-left: auto;\n  margin-right:auto;\n  position: relative;\n  top:40px;\n  display: block;\n}\n\n.profile-fields-container i {\n  font-size: 14px;\n  color: #89969F;\n  padding-left: 26px;\n  padding-right: 10px;\n  margin-top: 24px;\n}\n\n.profile-fields-container input[type=text].field-text {\n  height: 12px;\n  width: 280px;\n  border: 1px solid #89969F;\n  border-radius: 4px;\n  padding: 10px;\n}\n\n.profile-fields-container input[type=text].field-text::-webkit-input-placeholder {\n  color: rgba(102,102,102,0.2);\n}\n\n.profile-fields-container input[type=text].field-text:-ms-input-placeholder {\n  color: rgba(102,102,102,0.2);\n}\n\n.profile-fields-container input[type=text].field-text::-ms-input-placeholder {\n  color: rgba(102,102,102,0.2);\n}\n\n.profile-fields-container input[type=text].field-text::placeholder {\n  color: rgba(102,102,102,0.2);\n}\n\n.profile-save-button-container {\n  display: flex;\n  align-items: center;\n  margin-bottom: auto;\n  height: 100px;\n  flex-direction: column;\n  justify-content: flex-end;\n}\n\n.profile-save-button {\n  background-color: #7C55FB;\n  margin-left: auto;\n  margin-right: auto;\n  width: 280px;\n}\n\n.profile-save-button:disabled {\n  background-color: #F0EEEB;\n  border-color: #F0EEEB;\n  cursor: not-allowed;\n}\n\n.topnav {\n  position:absolute;\n  top:0;\n  left:0;\n  width: 100%;\n  background-color: #7C4DFF;\n  height: 50px;\n  color: #fff;\n}\n\n.topnav .logo {\n  display: inline-block;\n  font-family: 'Roboto Slab', serif;\n  font-size: 24px;\n  font-weight: bold;\n  text-transform: uppercase;\n  line-height: 32px;\n  padding-right: 80px;\n  position: relative;\n  top: -8px;\n  left: 28px;\n}\n\n.topnav .menu-item {\n  display: inline-block;\n  font-size: 10px;\n  line-height: 13px;\n  width: 100px;\n  height: 100%;\n  text-align: center;\n}\n\n.topnav .menu-item i {\n  font-size: 24px;\n  margin-top:8px;\n  margin-bottom: 2px;\n}\n\n.topnav .profile-menu {\n  float: right;\n  display: inline-block;\n  width: 50px;\n  height: 50px;\n  background-color: rgba(0,0,0,0.25);\n}\n\n.topnav .profile-menu img {\n  display: block;\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  margin: 0 auto;\n  margin-top:10px;\n  cursor: pointer;\n}\n\n.loading-image {\n  text-align: center;\n  margin-top: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FyZC9jYXJkLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQ0FBaUM7QUFDbkM7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2Qsc0JBQXNCO0VBQ3RCLDRCQUE0QjtFQUM1QixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsV0FBVztFQUNYLGlDQUFpQztFQUNqQywwRkFBbUQ7QUFDckQ7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFFBQVE7RUFDUixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGtCQUFrQjtFQUNsQixhQUFhO0FBQ2Y7O0FBRUE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixxQkFBcUI7RUFDckIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLEtBQUs7RUFDTCxNQUFNO0VBQ04sV0FBVztFQUNYLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGlDQUFpQztFQUNqQyxlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtBQUNaOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGVBQWU7RUFDZixpQkFBaUI7RUFDakIsWUFBWTtFQUNaLFlBQVk7RUFDWixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsY0FBYztFQUNkLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixxQkFBcUI7RUFDckIsV0FBVztFQUNYLFlBQVk7RUFDWixrQ0FBa0M7QUFDcEM7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsWUFBWTtFQUNaLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGVBQWU7RUFDZixlQUFlO0FBQ2pCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJzcmMvYXBwL2NhcmQvY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2ZpbGUtY29udGFpbmVyIHtcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xufVxuXG4ucHJvZmlsZS1jb250YWluZXIgaDEge1xuICBmb250LXNpemU6IDI0cHg7XG4gIGNvbG9yOiAjN0M1NUZCO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgbGluZS1oZWlnaHQ6IDMycHg7XG4gIGxldHRlci1zcGFjaW5nOiAxLjJweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBtYXJnaW4tdG9wOiA4MnB4O1xuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xufVxuXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIHtcbiAgbWF4LXdpZHRoOiA3NDBweDtcbiAgbWluLWhlaWdodDogNTAwcHg7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBib3gtc2hhZG93OiAjY2NjIDFweCAxcHggNHB4O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5wcm9maWxlLWZpZWxkcy1jb250YWluZXIgLnByb2ZpbGUtaW1hZ2UtY29udGFpbmVyIHtcbiAgaGVpZ2h0OiAyMDBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXIgIWltcG9ydGFudDtcbiAgYmFja2dyb3VuZDogdXJsKCcvYXNzZXRzL2ltYWdlcy9Tb2xpZF9QYXR0ZXJuLnBuZycpO1xufVxuXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIC5wcm9maWxlLWltYWdlLWNvbnRhaW5lciBpbWcge1xuICBoZWlnaHQ6IDEyOHB4O1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6YXV0bztcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB0b3A6NDBweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG5cbi5wcm9maWxlLWZpZWxkcy1jb250YWluZXIgaSB7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgY29sb3I6ICM4OTk2OUY7XG4gIHBhZGRpbmctbGVmdDogMjZweDtcbiAgcGFkZGluZy1yaWdodDogMTBweDtcbiAgbWFyZ2luLXRvcDogMjRweDtcbn1cblxuLnByb2ZpbGUtZmllbGRzLWNvbnRhaW5lciBpbnB1dFt0eXBlPXRleHRdLmZpZWxkLXRleHQge1xuICBoZWlnaHQ6IDEycHg7XG4gIHdpZHRoOiAyODBweDtcbiAgYm9yZGVyOiAxcHggc29saWQgIzg5OTY5RjtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBwYWRkaW5nOiAxMHB4O1xufVxuXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIGlucHV0W3R5cGU9dGV4dF0uZmllbGQtdGV4dDo6cGxhY2Vob2xkZXIge1xuICBjb2xvcjogcmdiYSgxMDIsMTAyLDEwMiwwLjIpO1xufVxuXG4ucHJvZmlsZS1zYXZlLWJ1dHRvbi1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBtYXJnaW4tYm90dG9tOiBhdXRvO1xuICBoZWlnaHQ6IDEwMHB4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xufVxuXG4ucHJvZmlsZS1zYXZlLWJ1dHRvbiB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM3QzU1RkI7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIHdpZHRoOiAyODBweDtcbn1cblxuLnByb2ZpbGUtc2F2ZS1idXR0b246ZGlzYWJsZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjBFRUVCO1xuICBib3JkZXItY29sb3I6ICNGMEVFRUI7XG4gIGN1cnNvcjogbm90LWFsbG93ZWQ7XG59XG5cbi50b3BuYXYge1xuICBwb3NpdGlvbjphYnNvbHV0ZTtcbiAgdG9wOjA7XG4gIGxlZnQ6MDtcbiAgd2lkdGg6IDEwMCU7XG4gIGJhY2tncm91bmQtY29sb3I6ICM3QzRERkY7XG4gIGhlaWdodDogNTBweDtcbiAgY29sb3I6ICNmZmY7XG59XG5cbi50b3BuYXYgLmxvZ28ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGZvbnQtZmFtaWx5OiAnUm9ib3RvIFNsYWInLCBzZXJpZjtcbiAgZm9udC1zaXplOiAyNHB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbiAgbGluZS1oZWlnaHQ6IDMycHg7XG4gIHBhZGRpbmctcmlnaHQ6IDgwcHg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgdG9wOiAtOHB4O1xuICBsZWZ0OiAyOHB4O1xufVxuXG4udG9wbmF2IC5tZW51LWl0ZW0ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGZvbnQtc2l6ZTogMTBweDtcbiAgbGluZS1oZWlnaHQ6IDEzcHg7XG4gIHdpZHRoOiAxMDBweDtcbiAgaGVpZ2h0OiAxMDAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi50b3BuYXYgLm1lbnUtaXRlbSBpIHtcbiAgZm9udC1zaXplOiAyNHB4O1xuICBtYXJnaW4tdG9wOjhweDtcbiAgbWFyZ2luLWJvdHRvbTogMnB4O1xufVxuXG4udG9wbmF2IC5wcm9maWxlLW1lbnUge1xuICBmbG9hdDogcmlnaHQ7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgd2lkdGg6IDUwcHg7XG4gIGhlaWdodDogNTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjI1KTtcbn1cblxuLnRvcG5hdiAucHJvZmlsZS1tZW51IGltZyB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBoZWlnaHQ6IDMwcHg7XG4gIHdpZHRoOiAzMHB4O1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBtYXJnaW4tdG9wOjEwcHg7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLmxvYWRpbmctaW1hZ2Uge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIG1hcmdpbi10b3A6IDUwcHg7XG59XG4iXX0= */"
+module.exports = ".profile-container {\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.profile-container h1 {\r\n  font-size: 24px;\r\n  color: #7C55FB;\r\n  font-weight: bold;\r\n  line-height: 32px;\r\n  letter-spacing: 1.2px;\r\n  text-align: center;\r\n  margin-top: 82px;\r\n  text-transform: uppercase;\r\n}\r\n\r\n.profile-fields-container {\r\n  max-width: 740px;\r\n  min-height: 500px;\r\n  margin: 0 auto;\r\n  border: 1px solid #ccc;\r\n  box-shadow: #ccc 1px 1px 4px;\r\n  position: relative;\r\n}\r\n\r\n.profile-fields-container .profile-image-container {\r\n  height: 200px;\r\n  width: 100%;\r\n  background-size: cover !important;\r\n  background: url('/dechat_en1a/assets/images/Solid_Pattern.png');\r\n}\r\n\r\n.profile-fields-container .profile-image-container img {\r\n  height: 128px;\r\n  border-radius: 50%;\r\n  margin-left: auto;\r\n  margin-right:auto;\r\n  position: relative;\r\n  top:40px;\r\n  display: block;\r\n}\r\n\r\n.profile-fields-container i {\r\n  font-size: 14px;\r\n  color: #89969F;\r\n  padding-left: 26px;\r\n  padding-right: 10px;\r\n  margin-top: 24px;\r\n}\r\n\r\n.profile-fields-container input[type=text].field-text {\r\n  height: 12px;\r\n  width: 280px;\r\n  border: 1px solid #89969F;\r\n  border-radius: 4px;\r\n  padding: 10px;\r\n}\r\n\r\n.profile-fields-container input[type=text].field-text::-webkit-input-placeholder {\r\n  color: rgba(102,102,102,0.2);\r\n}\r\n\r\n.profile-fields-container input[type=text].field-text:-ms-input-placeholder {\r\n  color: rgba(102,102,102,0.2);\r\n}\r\n\r\n.profile-fields-container input[type=text].field-text::-ms-input-placeholder {\r\n  color: rgba(102,102,102,0.2);\r\n}\r\n\r\n.profile-fields-container input[type=text].field-text::placeholder {\r\n  color: rgba(102,102,102,0.2);\r\n}\r\n\r\n.profile-save-button-container {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-bottom: auto;\r\n  height: 100px;\r\n  flex-direction: column;\r\n  justify-content: flex-end;\r\n}\r\n\r\n.profile-save-button {\r\n  background-color: #7C55FB;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  width: 280px;\r\n}\r\n\r\n.profile-save-button:disabled {\r\n  background-color: #F0EEEB;\r\n  border-color: #F0EEEB;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.topnav {\r\n  position:absolute;\r\n  top:0;\r\n  left:0;\r\n  width: 100%;\r\n  background-color: #7C4DFF;\r\n  height: 50px;\r\n  color: #fff;\r\n}\r\n\r\n.topnav .logo {\r\n  display: inline-block;\r\n  font-family: 'Roboto Slab', serif;\r\n  font-size: 24px;\r\n  font-weight: bold;\r\n  text-transform: uppercase;\r\n  line-height: 32px;\r\n  padding-right: 80px;\r\n  position: relative;\r\n  top: -8px;\r\n  left: 28px;\r\n}\r\n\r\n.topnav .menu-item {\r\n  display: inline-block;\r\n  font-size: 10px;\r\n  line-height: 13px;\r\n  width: 100px;\r\n  height: 100%;\r\n  text-align: center;\r\n}\r\n\r\n.topnav .menu-item i {\r\n  font-size: 24px;\r\n  margin-top:8px;\r\n  margin-bottom: 2px;\r\n}\r\n\r\n.topnav .profile-menu {\r\n  float: right;\r\n  display: inline-block;\r\n  width: 50px;\r\n  height: 50px;\r\n  background-color: rgba(0,0,0,0.25);\r\n}\r\n\r\n.topnav .profile-menu img {\r\n  display: block;\r\n  height: 30px;\r\n  width: 30px;\r\n  border-radius: 50%;\r\n  margin: 0 auto;\r\n  margin-top:10px;\r\n  cursor: pointer;\r\n}\r\n\r\n.loading-image {\r\n  text-align: center;\r\n  margin-top: 50px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FyZC9jYXJkLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQ0FBaUM7QUFDbkM7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2Qsc0JBQXNCO0VBQ3RCLDRCQUE0QjtFQUM1QixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsV0FBVztFQUNYLGlDQUFpQztFQUNqQywrREFBbUQ7QUFDckQ7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFFBQVE7RUFDUixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGtCQUFrQjtFQUNsQixhQUFhO0FBQ2Y7O0FBRUE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRkE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixxQkFBcUI7RUFDckIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLEtBQUs7RUFDTCxNQUFNO0VBQ04sV0FBVztFQUNYLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGlDQUFpQztFQUNqQyxlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtBQUNaOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGVBQWU7RUFDZixpQkFBaUI7RUFDakIsWUFBWTtFQUNaLFlBQVk7RUFDWixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsY0FBYztFQUNkLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixxQkFBcUI7RUFDckIsV0FBVztFQUNYLFlBQVk7RUFDWixrQ0FBa0M7QUFDcEM7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsWUFBWTtFQUNaLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGVBQWU7RUFDZixlQUFlO0FBQ2pCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJzcmMvYXBwL2NhcmQvY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2ZpbGUtY29udGFpbmVyIHtcclxuICBmb250LWZhbWlseTogJ1JvYm90bycsIHNhbnMtc2VyaWY7XHJcbn1cclxuXHJcbi5wcm9maWxlLWNvbnRhaW5lciBoMSB7XHJcbiAgZm9udC1zaXplOiAyNHB4O1xyXG4gIGNvbG9yOiAjN0M1NUZCO1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGxpbmUtaGVpZ2h0OiAzMnB4O1xyXG4gIGxldHRlci1zcGFjaW5nOiAxLjJweDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgbWFyZ2luLXRvcDogODJweDtcclxuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIHtcclxuICBtYXgtd2lkdGg6IDc0MHB4O1xyXG4gIG1pbi1oZWlnaHQ6IDUwMHB4O1xyXG4gIG1hcmdpbjogMCBhdXRvO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XHJcbiAgYm94LXNoYWRvdzogI2NjYyAxcHggMXB4IDRweDtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuXHJcbi5wcm9maWxlLWZpZWxkcy1jb250YWluZXIgLnByb2ZpbGUtaW1hZ2UtY29udGFpbmVyIHtcclxuICBoZWlnaHQ6IDIwMHB4O1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXIgIWltcG9ydGFudDtcclxuICBiYWNrZ3JvdW5kOiB1cmwoJy9hc3NldHMvaW1hZ2VzL1NvbGlkX1BhdHRlcm4ucG5nJyk7XHJcbn1cclxuXHJcbi5wcm9maWxlLWZpZWxkcy1jb250YWluZXIgLnByb2ZpbGUtaW1hZ2UtY29udGFpbmVyIGltZyB7XHJcbiAgaGVpZ2h0OiAxMjhweDtcclxuICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgbWFyZ2luLXJpZ2h0OmF1dG87XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIHRvcDo0MHB4O1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG59XHJcblxyXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIGkge1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBjb2xvcjogIzg5OTY5RjtcclxuICBwYWRkaW5nLWxlZnQ6IDI2cHg7XHJcbiAgcGFkZGluZy1yaWdodDogMTBweDtcclxuICBtYXJnaW4tdG9wOiAyNHB4O1xyXG59XHJcblxyXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIGlucHV0W3R5cGU9dGV4dF0uZmllbGQtdGV4dCB7XHJcbiAgaGVpZ2h0OiAxMnB4O1xyXG4gIHdpZHRoOiAyODBweDtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjODk5NjlGO1xyXG4gIGJvcmRlci1yYWRpdXM6IDRweDtcclxuICBwYWRkaW5nOiAxMHB4O1xyXG59XHJcblxyXG4ucHJvZmlsZS1maWVsZHMtY29udGFpbmVyIGlucHV0W3R5cGU9dGV4dF0uZmllbGQtdGV4dDo6cGxhY2Vob2xkZXIge1xyXG4gIGNvbG9yOiByZ2JhKDEwMiwxMDIsMTAyLDAuMik7XHJcbn1cclxuXHJcbi5wcm9maWxlLXNhdmUtYnV0dG9uLWNvbnRhaW5lciB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIG1hcmdpbi1ib3R0b206IGF1dG87XHJcbiAgaGVpZ2h0OiAxMDBweDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XHJcbn1cclxuXHJcbi5wcm9maWxlLXNhdmUtYnV0dG9uIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjN0M1NUZCO1xyXG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG4gIG1hcmdpbi1yaWdodDogYXV0bztcclxuICB3aWR0aDogMjgwcHg7XHJcbn1cclxuXHJcbi5wcm9maWxlLXNhdmUtYnV0dG9uOmRpc2FibGVkIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjBFRUVCO1xyXG4gIGJvcmRlci1jb2xvcjogI0YwRUVFQjtcclxuICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xyXG59XHJcblxyXG4udG9wbmF2IHtcclxuICBwb3NpdGlvbjphYnNvbHV0ZTtcclxuICB0b3A6MDtcclxuICBsZWZ0OjA7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzdDNERGRjtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbiAgY29sb3I6ICNmZmY7XHJcbn1cclxuXHJcbi50b3BuYXYgLmxvZ28ge1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICBmb250LWZhbWlseTogJ1JvYm90byBTbGFiJywgc2VyaWY7XHJcbiAgZm9udC1zaXplOiAyNHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgbGluZS1oZWlnaHQ6IDMycHg7XHJcbiAgcGFkZGluZy1yaWdodDogODBweDtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgdG9wOiAtOHB4O1xyXG4gIGxlZnQ6IDI4cHg7XHJcbn1cclxuXHJcbi50b3BuYXYgLm1lbnUtaXRlbSB7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIGZvbnQtc2l6ZTogMTBweDtcclxuICBsaW5lLWhlaWdodDogMTNweDtcclxuICB3aWR0aDogMTAwcHg7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnRvcG5hdiAubWVudS1pdGVtIGkge1xyXG4gIGZvbnQtc2l6ZTogMjRweDtcclxuICBtYXJnaW4tdG9wOjhweDtcclxuICBtYXJnaW4tYm90dG9tOiAycHg7XHJcbn1cclxuXHJcbi50b3BuYXYgLnByb2ZpbGUtbWVudSB7XHJcbiAgZmxvYXQ6IHJpZ2h0O1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB3aWR0aDogNTBweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjI1KTtcclxufVxyXG5cclxuLnRvcG5hdiAucHJvZmlsZS1tZW51IGltZyB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgaGVpZ2h0OiAzMHB4O1xyXG4gIHdpZHRoOiAzMHB4O1xyXG4gIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICBtYXJnaW46IDAgYXV0bztcclxuICBtYXJnaW4tdG9wOjEwcHg7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG59XHJcblxyXG4ubG9hZGluZy1pbWFnZSB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDUwcHg7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -237,7 +237,7 @@ module.exports = ".profile-container {\n  font-family: 'Roboto', sans-serif;\n}\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"profile-container\">\n  <!-- EXAMPLE TOP NAV -->\n  <div class=\"topnav\">\n    <div class=\"logo\">Solid</div>\n    <div class=\"menu-item\">\n      <div>\n        <i class=\"far fa-compass\"></i>\n      </div>\n      Menu Item 1\n    </div>\n    <div class=\"menu-item\">\n      <div>\n        <i class=\"far fa-comment\"></i>\n      </div>\n      Menu Item 2\n    </div>\n    <div class=\"menu-item\">\n      <div>\n        <i class=\"fas fa-sliders-h\"></i>\n      </div>\n      Menu Item 3\n    </div>\n\n    <div class=\"profile-menu\" (click)=\"logout()\">\n      <img [src]=\"profileImage\" />\n    </div>\n  </div>\n  <h1>Profile</h1>\n\n  <!-- LOADING IMAGE -->\n  <div class=\"loading-image\" *ngIf=\"loadingProfile\">\n    <i class=\"fas fa-circle-notch fa-4x fa-spin\"></i>\n  </div>\n\n  <!-- MAIN PROFILE -->\n  <div class=\"profile-fields-container\" *ngIf=\"!loadingProfile\">\n    <div class=\"profile-image-container\">\n      <img [src]=\"profileImage\" />\n    </div>\n    <form style=\"padding-top: 26px;\" #f=\"ngForm\" (submit)=\"onSubmit()\">\n      <div class=\"fields pure-g\">\n        <!-- NAME -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-user\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"fn\" placeholder=\"NAME\" [(ngModel)]=\"profile.fn\" />\n        </div>\n\n        <!-- PHONE -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-phone\"></i><input type=\"text\" class=\"field-text form-control\" name=\"phone\" placeholder=\"PHONE\" [(ngModel)]=\"profile.phone\" />\n        </div>\n      </div>\n\n      <div class=\"fields pure-g\">\n        <!-- ROLE -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-user-astronaut\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"role\" placeholder=\"ROLE\" [(ngModel)]=\"profile.role\" />\n        </div>\n\n        <!-- EMAIL -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-envelope\"></i><input type=\"text\" class=\"field-text form-control\" name=\"email\" placeholder=\"EMAIL\" [(ngModel)]=\"profile.email\" />\n        </div>\n      </div>\n\n      <div class=\"fields pure-g\">\n        <!-- ORGANIZATION -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-building\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"company\" placeholder=\"ORGANIZATION\" [(ngModel)]=\"profile.company\" />\n        </div>\n\n        <!-- ADDRESS -->\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\n          <i class=\"fas fa-map-marker-alt\" style=\"width: 12px; margin-left: 2px;\"></i><input type=\"text\" class=\"field-text form-control\" name=\"address\" placeholder=\"ADDRESS\" [(ngModel)]=\"profile.address.street\" />\n        </div>\n      </div>\n\n      <div class=\"profile-save-button-container\">\n        <button type=\"submit\" class=\"wide-button profile-save-button\" [disabled]=\"!cardForm || cardForm.pristine\">Save</button>\n      </div>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"profile-container\">\r\n  <!-- EXAMPLE TOP NAV -->\r\n  <div class=\"topnav\">\r\n    <div class=\"logo\">Solid</div>\r\n    <div class=\"menu-item\">\r\n      <div>\r\n        <i class=\"far fa-compass\"></i>\r\n      </div>\r\n      Menu Item 1\r\n    </div>\r\n    <div class=\"menu-item\">\r\n      <div>\r\n        <i class=\"far fa-comment\"></i>\r\n      </div>\r\n      Menu Item 2\r\n    </div>\r\n    <div class=\"menu-item\">\r\n      <div>\r\n        <i class=\"fas fa-sliders-h\"></i>\r\n      </div>\r\n      Menu Item 3\r\n    </div>\r\n\r\n    <div class=\"profile-menu\" (click)=\"logout()\">\r\n      <img [src]=\"profileImage\" />\r\n    </div>\r\n  </div>\r\n  <h1>Profile</h1>\r\n\r\n  <!-- LOADING IMAGE -->\r\n  <div class=\"loading-image\" *ngIf=\"loadingProfile\">\r\n    <i class=\"fas fa-circle-notch fa-4x fa-spin\"></i>\r\n  </div>\r\n\r\n  <!-- MAIN PROFILE -->\r\n  <div class=\"profile-fields-container\" *ngIf=\"!loadingProfile\">\r\n    <div class=\"profile-image-container\">\r\n      <img [src]=\"profileImage\" />\r\n    </div>\r\n    <form style=\"padding-top: 26px;\" #f=\"ngForm\" (submit)=\"onSubmit()\">\r\n      <div class=\"fields pure-g\">\r\n        <!-- NAME -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-user\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"fn\" placeholder=\"NAME\" [(ngModel)]=\"profile.fn\" />\r\n        </div>\r\n\r\n        <!-- PHONE -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-phone\"></i><input type=\"text\" class=\"field-text form-control\" name=\"phone\" placeholder=\"PHONE\" [(ngModel)]=\"profile.phone\" />\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"fields pure-g\">\r\n        <!-- ROLE -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-user-astronaut\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"role\" placeholder=\"ROLE\" [(ngModel)]=\"profile.role\" />\r\n        </div>\r\n\r\n        <!-- EMAIL -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-envelope\"></i><input type=\"text\" class=\"field-text form-control\" name=\"email\" placeholder=\"EMAIL\" [(ngModel)]=\"profile.email\" />\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"fields pure-g\">\r\n        <!-- ORGANIZATION -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-building\"></i> <input type=\"text\" class=\"field-text form-control\" name=\"company\" placeholder=\"ORGANIZATION\" [(ngModel)]=\"profile.company\" />\r\n        </div>\r\n\r\n        <!-- ADDRESS -->\r\n        <div class=\"pure-u-1-1 pure-u-md-1-2 form-group\">\r\n          <i class=\"fas fa-map-marker-alt\" style=\"width: 12px; margin-left: 2px;\"></i><input type=\"text\" class=\"field-text form-control\" name=\"address\" placeholder=\"ADDRESS\" [(ngModel)]=\"profile.address.street\" />\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"profile-save-button-container\">\r\n        <button type=\"submit\" class=\"wide-button profile-save-button\" [disabled]=\"!cardForm || cardForm.pristine\">Save</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -458,7 +458,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  chat-header works!\n</p>\n"
+module.exports = "<p>\r\n  chat-header works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -652,7 +652,7 @@ module.exports = "\r\n\r\n\r\n.messageContainer {\r\n    display: flex;\r\n    h
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"messageContainer\"\r\n    [ngClass]=\"{'isOwnMessageContainer':isOwnMessage}\">\r\n\r\n  <div class=\"messageData\">\r\n    <span class=\"sender\">{{ userName }}</span>\r\n    <span class=\"timeSent\">{{ timeSent }}</span>\r\n  </div>\r\n\r\n  <div class=\"messageContent\"\r\n      [ngClass]=\"{'isOwnMessageContent':isOwnMessage}\">\r\n    {{ messageContent }}\r\n  </div>\r\n  \r\n  <div class=\"multimediaWrapper\">\r\n    <app-multimedia-display [multimedia]=\"multimedia\"></app-multimedia-display>    \r\n  </div> \r\n\r\n</div>"
+module.exports = "<div class=\"messageContainer\"\r\n    [ngClass]=\"{'isOwnMessageContainer':isOwnMessage}\">\r\n\r\n  <div class=\"messageData\">\r\n    <span class=\"sender\">{{ userName }}</span>\r\n    <span class=\"timeSent\">{{ timeSent }}</span>\r\n  </div>\r\n\r\n  <div class=\"messageContent\"\r\n      [ngClass]=\"{'isOwnMessageContent':isOwnMessage}\">\r\n    {{ messageContent }}\r\n  </div>\r\n  \r\n  <div class=\"multimediaWrapper\">\r\n    <app-multimedia-display></app-multimedia-display>    \r\n  </div> \r\n\r\n</div>"
 
 /***/ }),
 
@@ -737,7 +737,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- \r\n  We need to show the multimedia element in \r\n  different ways according to its type.\r\n-->\r\n\r\n<!-- In case it is a video. -->\r\n<div ng-if=\"multimediaType == 'video'\">\r\n  <video width=\"480\" height=\"360\" controls>\r\n    <source ng-src=\"multimediaURL\"/>\r\n    Your browser does not support the video HTML tag.\r\n  </video>\r\n</div>\r\n\r\n<!-- In case it is an audio. -->\r\n<div ng-if=\"multimediaType == 'audio'\">\r\n  <audio controls>\r\n    <source ng-src=\"multimediaURL\"/>\r\n    Your browser does not support the audio HTML tag.\r\n  </audio>\r\n</div>\r\n\r\n<!-- In case it is a image. -->\r\n<div ng-if=\"multimediaType == 'image'\">\r\n    <img ng-src=\"multimediaURL\"/>\r\n</div>\r\n\r\n"
+module.exports = "<!-- \r\n  We need to show the multimedia element in \r\n  different ways according to its type.\r\n-->\r\n\r\n<!-- In case it is a video. -->\r\n<div *ngIf=\"multimediaType === 'video'\">\r\n  <video width=\"480\" height=\"360\" controls>\r\n    <source [src]=\"multimediaURL\"/>\r\n    Your browser does not support the video HTML tag.\r\n  </video>\r\n</div>\r\n\r\n<!-- In case it is an audio. -->\r\n<div *ngIf=\"multimediaType === 'audio'\">\r\n  <audio controls>\r\n    <source [src]=\"multimediaURL\"/>\r\n    Your browser does not support the audio HTML tag.\r\n  </audio>\r\n</div>\r\n\r\n<!-- In case it is a image. -->\r\n<div *ngIf=\"multimediaType === 'image'\">\r\n    <img [src]=\"multimediaURL\"/>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -770,9 +770,16 @@ var MultimediaDisplayComponent = /** @class */ (function () {
         */
         if (multim === void 0) { multim = this.multimedia; }
         // For testing purposes
+        // Image
+        /*
         this.multimediaURL = 'https://i.redd.it/hf5v5rp6dir11.jpg';
         this.multimediaType = 'image';
         this.multimediaExten = 'jpg';
+        */
+        // Video
+        this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
+        this.multimediaType = 'video';
+        this.multimediaExten = 'webm';
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -811,7 +818,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dashboard\">\n  <p>Your webId is {{ session.webId }}</p>\n  <ul>\n    <li><a [routerLink]=\"['/card']\">Profile</a></li>\n    <li><a (click)=\"onSignOut()\">Signout</a></li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"dashboard\">\r\n  <p>Your webId is {{ session.webId }}</p>\r\n  <ul>\r\n    <li><a [routerLink]=\"['/card']\">Profile</a></li>\r\n    <li><a (click)=\"onSignOut()\">Signout</a></li>\r\n  </ul>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1023,7 +1030,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app-container\">Loading...</div>\n\n\n"
+module.exports = "<div id=\"app-container\">Loading...</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1077,7 +1084,7 @@ var LoginPopupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n.login-page {\n  text-align: center;\n  font-family: 'Roboto', sans-serif;\n  color: #666;\n}\n\n.login-page h1 {\n  font-size: 38px;\n  text-transform: uppercase;\n  font-weight: bold;\n  line-height: 50px;\n  letter-spacing: 1.9px;\n  padding-top: 12px;\n  margin-top: 0px;\n}\n\n.login-page h2 {\n  color: #666;\n\n  font-size: 16px;\n  font-weight: 500;\n  letter-spacing: 1px;\n  line-height: 21px;\n  margin-top: 48px;\n}\n\n.login-page .small-link {\n  font-size: 12px;\n  color: #666;\n  letter-spacing: 0.75px;\n  line-height: 16px;\n}\n\n.login-page .registration-link {\n  margin-top: 38px;\n}\n\n.login-page .registration-link p {\n  font-size: 16px;\n  color: #666;\n  letter-spacing: 1px;\n}\n\n.login-page .item-divider {\n  box-sizing:border-box;\n  height: 1px;\n  width: 354px;\n  border-bottom: 1px solid #E0E0E0;\n  position: absolute;\n  bottom:-8px; left:-9px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7RUFDRSxrQkFBa0I7RUFDbEIsaUNBQWlDO0VBQ2pDLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGVBQWU7RUFDZix5QkFBeUI7RUFDekIsaUJBQWlCO0VBQ2pCLGlCQUFpQjtFQUNqQixxQkFBcUI7RUFDckIsaUJBQWlCO0VBQ2pCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxXQUFXOztFQUVYLGVBQWU7RUFDZixnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsV0FBVztFQUNYLHNCQUFzQjtFQUN0QixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsV0FBVztFQUNYLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLHFCQUFxQjtFQUNyQixXQUFXO0VBQ1gsWUFBWTtFQUNaLGdDQUFnQztFQUNoQyxrQkFBa0I7RUFDbEIsV0FBVyxFQUFFLFNBQVM7QUFDeEIiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG4ubG9naW4tcGFnZSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xuICBjb2xvcjogIzY2Njtcbn1cblxuLmxvZ2luLXBhZ2UgaDEge1xuICBmb250LXNpemU6IDM4cHg7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBsaW5lLWhlaWdodDogNTBweDtcbiAgbGV0dGVyLXNwYWNpbmc6IDEuOXB4O1xuICBwYWRkaW5nLXRvcDogMTJweDtcbiAgbWFyZ2luLXRvcDogMHB4O1xufVxuXG4ubG9naW4tcGFnZSBoMiB7XG4gIGNvbG9yOiAjNjY2O1xuXG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgZm9udC13ZWlnaHQ6IDUwMDtcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgbGluZS1oZWlnaHQ6IDIxcHg7XG4gIG1hcmdpbi10b3A6IDQ4cHg7XG59XG5cbi5sb2dpbi1wYWdlIC5zbWFsbC1saW5rIHtcbiAgZm9udC1zaXplOiAxMnB4O1xuICBjb2xvcjogIzY2NjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuNzVweDtcbiAgbGluZS1oZWlnaHQ6IDE2cHg7XG59XG5cbi5sb2dpbi1wYWdlIC5yZWdpc3RyYXRpb24tbGluayB7XG4gIG1hcmdpbi10b3A6IDM4cHg7XG59XG5cbi5sb2dpbi1wYWdlIC5yZWdpc3RyYXRpb24tbGluayBwIHtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBjb2xvcjogIzY2NjtcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbn1cblxuLmxvZ2luLXBhZ2UgLml0ZW0tZGl2aWRlciB7XG4gIGJveC1zaXppbmc6Ym9yZGVyLWJveDtcbiAgaGVpZ2h0OiAxcHg7XG4gIHdpZHRoOiAzNTRweDtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNFMEUwRTA7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOi04cHg7IGxlZnQ6LTlweDtcbn1cbiJdfQ== */"
+module.exports = "\r\n.login-page {\r\n  text-align: center;\r\n  font-family: 'Roboto', sans-serif;\r\n  color: #666;\r\n}\r\n\r\n.login-page h1 {\r\n  font-size: 38px;\r\n  text-transform: uppercase;\r\n  font-weight: bold;\r\n  line-height: 50px;\r\n  letter-spacing: 1.9px;\r\n  padding-top: 12px;\r\n  margin-top: 0px;\r\n}\r\n\r\n.login-page h2 {\r\n  color: #666;\r\n\r\n  font-size: 16px;\r\n  font-weight: 500;\r\n  letter-spacing: 1px;\r\n  line-height: 21px;\r\n  margin-top: 48px;\r\n}\r\n\r\n.login-page .small-link {\r\n  font-size: 12px;\r\n  color: #666;\r\n  letter-spacing: 0.75px;\r\n  line-height: 16px;\r\n}\r\n\r\n.login-page .registration-link {\r\n  margin-top: 38px;\r\n}\r\n\r\n.login-page .registration-link p {\r\n  font-size: 16px;\r\n  color: #666;\r\n  letter-spacing: 1px;\r\n}\r\n\r\n.login-page .item-divider {\r\n  box-sizing:border-box;\r\n  height: 1px;\r\n  width: 354px;\r\n  border-bottom: 1px solid #E0E0E0;\r\n  position: absolute;\r\n  bottom:-8px; left:-9px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7RUFDRSxrQkFBa0I7RUFDbEIsaUNBQWlDO0VBQ2pDLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGVBQWU7RUFDZix5QkFBeUI7RUFDekIsaUJBQWlCO0VBQ2pCLGlCQUFpQjtFQUNqQixxQkFBcUI7RUFDckIsaUJBQWlCO0VBQ2pCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxXQUFXOztFQUVYLGVBQWU7RUFDZixnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsV0FBVztFQUNYLHNCQUFzQjtFQUN0QixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsV0FBVztFQUNYLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLHFCQUFxQjtFQUNyQixXQUFXO0VBQ1gsWUFBWTtFQUNaLGdDQUFnQztFQUNoQyxrQkFBa0I7RUFDbEIsV0FBVyxFQUFFLFNBQVM7QUFDeEIiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5sb2dpbi1wYWdlIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xyXG4gIGNvbG9yOiAjNjY2O1xyXG59XHJcblxyXG4ubG9naW4tcGFnZSBoMSB7XHJcbiAgZm9udC1zaXplOiAzOHB4O1xyXG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgbGluZS1oZWlnaHQ6IDUwcHg7XHJcbiAgbGV0dGVyLXNwYWNpbmc6IDEuOXB4O1xyXG4gIHBhZGRpbmctdG9wOiAxMnB4O1xyXG4gIG1hcmdpbi10b3A6IDBweDtcclxufVxyXG5cclxuLmxvZ2luLXBhZ2UgaDIge1xyXG4gIGNvbG9yOiAjNjY2O1xyXG5cclxuICBmb250LXNpemU6IDE2cHg7XHJcbiAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICBsZXR0ZXItc3BhY2luZzogMXB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyMXB4O1xyXG4gIG1hcmdpbi10b3A6IDQ4cHg7XHJcbn1cclxuXHJcbi5sb2dpbi1wYWdlIC5zbWFsbC1saW5rIHtcclxuICBmb250LXNpemU6IDEycHg7XHJcbiAgY29sb3I6ICM2NjY7XHJcbiAgbGV0dGVyLXNwYWNpbmc6IDAuNzVweDtcclxuICBsaW5lLWhlaWdodDogMTZweDtcclxufVxyXG5cclxuLmxvZ2luLXBhZ2UgLnJlZ2lzdHJhdGlvbi1saW5rIHtcclxuICBtYXJnaW4tdG9wOiAzOHB4O1xyXG59XHJcblxyXG4ubG9naW4tcGFnZSAucmVnaXN0cmF0aW9uLWxpbmsgcCB7XHJcbiAgZm9udC1zaXplOiAxNnB4O1xyXG4gIGNvbG9yOiAjNjY2O1xyXG4gIGxldHRlci1zcGFjaW5nOiAxcHg7XHJcbn1cclxuXHJcbi5sb2dpbi1wYWdlIC5pdGVtLWRpdmlkZXIge1xyXG4gIGJveC1zaXppbmc6Ym9yZGVyLWJveDtcclxuICBoZWlnaHQ6IDFweDtcclxuICB3aWR0aDogMzU0cHg7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNFMEUwRTA7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGJvdHRvbTotOHB4OyBsZWZ0Oi05cHg7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1088,7 +1095,7 @@ module.exports = "\n.login-page {\n  text-align: center;\n  font-family: 'Roboto
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-page\">\n\n  <!-- APP LOGO -->\n  <div style=\"margin-top:60px;\">\n    <i class=\"fas fa-user-circle\" style=\"font-size: 64px;\"></i>\n  </div>\n\n  <!-- APP NAME -->\n  <h1>\n    Profile Demo App\n  </h1>\n\n  <!-- LOGIN TITLE -->\n  <h2>\n    Login with Solid Identity\n  </h2>\n\n  <!-- PROVIDER SELECTION -->\n  <div style=\"margin-top: 10px;\">\n    <ng-select class=\"login-select\"\n               bindLabel=\"name\"\n               bindValue=\"loginUrl\"\n               placeholder=\"Select ID Provider\"\n               dropdownPosition=\"bottom\"\n               [items]=\"identityProviders\"\n               [(ngModel)]=\"selectedProviderUrl\"\n               style=\"width: 360px; height: 48px; margin-left: auto; margin-right: auto;\">\n\n      <!-- DROPDOWN TEMPLATE -->\n      <ng-template ng-option-tmp let-item=\"item\">\n        <div style=\"height:40px; padding-top:10px; position: relative;\">\n          <img [src]=\"item.image\" style=\"float: left; height: 32px; width: 32px; margin-top:-5px;\" />\n          <span style=\"float: left; margin-left: 10px;\">{{ item.name }}</span>\n          <div style=\"clear: both;\"></div>\n          <div class=\"item-divider\"></div>\n        </div>\n      </ng-template>\n\n    </ng-select>\n    <input type=\"text\"\n           class=\"wide-text\"\n           *ngIf=\"selectedProviderUrl===null\"\n           placeholder=\"Enter WebID\"\n           style=\"margin-top:10px; padding: 12px 10px; width: 340px; height: 16px; display: block; margin-left: auto; margin-right: auto;\"\n           [(ngModel)]=\"customProviderUrl\" />\n    <button class=\"wide-button\" (click)=\"onLogin()\" *ngIf=\"selectedProviderUrl !== undefined || customProviderUrl !== undefined\" [disabled]=\"selectedProviderUrl===null && !customProviderUrl\" style=\"margin-top:10px;\">Go</button>\n  </div>\n\n  <!-- REGISTRATION -->\n  <div class=\"registration-link\">\n    <p style=\"margin: 12px;\">Don't have a Solid Identity?</p>\n    <button class=\"wide-button\" (click)=\"goToRegistration()\">Register</button>\n  </div>\n\n  <!-- HELP -->\n  <div style=\"margin-top: 48px;\">\n    <a href=\"https://solid.mit.edu\" target=\"_blank\" class=\"small-link\">\n      <i class=\"fas fa-info-circle\"></i> What is a Solid Identity?\n    </a>\n  </div>\n\n</div>\n  \n\n"
+module.exports = "<div class=\"login-page\">\r\n\r\n  <!-- APP LOGO -->\r\n  <div style=\"margin-top:60px;\">\r\n    <i class=\"fas fa-user-circle\" style=\"font-size: 64px;\"></i>\r\n  </div>\r\n\r\n  <!-- APP NAME -->\r\n  <h1>\r\n    Profile Demo App\r\n  </h1>\r\n\r\n  <!-- LOGIN TITLE -->\r\n  <h2>\r\n    Login with Solid Identity\r\n  </h2>\r\n\r\n  <!-- PROVIDER SELECTION -->\r\n  <div style=\"margin-top: 10px;\">\r\n    <ng-select class=\"login-select\"\r\n               bindLabel=\"name\"\r\n               bindValue=\"loginUrl\"\r\n               placeholder=\"Select ID Provider\"\r\n               dropdownPosition=\"bottom\"\r\n               [items]=\"identityProviders\"\r\n               [(ngModel)]=\"selectedProviderUrl\"\r\n               style=\"width: 360px; height: 48px; margin-left: auto; margin-right: auto;\">\r\n\r\n      <!-- DROPDOWN TEMPLATE -->\r\n      <ng-template ng-option-tmp let-item=\"item\">\r\n        <div style=\"height:40px; padding-top:10px; position: relative;\">\r\n          <img [src]=\"item.image\" style=\"float: left; height: 32px; width: 32px; margin-top:-5px;\" />\r\n          <span style=\"float: left; margin-left: 10px;\">{{ item.name }}</span>\r\n          <div style=\"clear: both;\"></div>\r\n          <div class=\"item-divider\"></div>\r\n        </div>\r\n      </ng-template>\r\n\r\n    </ng-select>\r\n    <input type=\"text\"\r\n           class=\"wide-text\"\r\n           *ngIf=\"selectedProviderUrl===null\"\r\n           placeholder=\"Enter WebID\"\r\n           style=\"margin-top:10px; padding: 12px 10px; width: 340px; height: 16px; display: block; margin-left: auto; margin-right: auto;\"\r\n           [(ngModel)]=\"customProviderUrl\" />\r\n    <button class=\"wide-button\" (click)=\"onLogin()\" *ngIf=\"selectedProviderUrl !== undefined || customProviderUrl !== undefined\" [disabled]=\"selectedProviderUrl===null && !customProviderUrl\" style=\"margin-top:10px;\">Go</button>\r\n  </div>\r\n\r\n  <!-- REGISTRATION -->\r\n  <div class=\"registration-link\">\r\n    <p style=\"margin: 12px;\">Don't have a Solid Identity?</p>\r\n    <button class=\"wide-button\" (click)=\"goToRegistration()\">Register</button>\r\n  </div>\r\n\r\n  <!-- HELP -->\r\n  <div style=\"margin-top: 48px;\">\r\n    <a href=\"https://solid.mit.edu\" target=\"_blank\" class=\"small-link\">\r\n      <i class=\"fas fa-info-circle\"></i> What is a Solid Identity?\r\n    </a>\r\n  </div>\r\n\r\n</div>\r\n  \r\n\r\n"
 
 /***/ }),
 
@@ -1184,7 +1191,7 @@ module.exports = "\r\n.mainContent {\r\n    height: 100%;\r\n    width: 100%;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mainContent\">\n    <div class=\"userListWrapper\">\n        <app-chat-list></app-chat-list>\n    </div>\n\n    <div class=\"chatroomWrapper\">\n      <app-chatroom></app-chatroom>\n    </div>\n</div>\n"
+module.exports = "<div class=\"mainContent\">\r\n    <div class=\"userListWrapper\">\r\n        <app-chat-list></app-chat-list>\r\n    </div>\r\n\r\n    <div class=\"chatroomWrapper\">\r\n      <app-chatroom></app-chatroom>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1267,6 +1274,50 @@ var ChatMessage = /** @class */ (function () {
         this.date = new Date();
     }
     return ChatMessage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/dechat/chat.model.ts":
+/*!*********************************************!*\
+  !*** ./src/app/models/dechat/chat.model.ts ***!
+  \*********************************************/
+/*! exports provided: Chat */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Chat", function() { return Chat; });
+// Represents a whole chat.
+// Keep in mind it will never be uploaded to the pod,
+// it's just for local util usage.
+var Chat = /** @class */ (function () {
+    function Chat(chatInfo) {
+        this.chatInfo = chatInfo;
+        this.bundles = new Map();
+    }
+    Chat.prototype.addBundle = function (bundle) {
+        if (this.bundles.has(bundle.bundleId)) {
+            console.log("Failed to add bundle: already existent.");
+            return false;
+        }
+        this.bundles.set(bundle.bundleId, bundle);
+        console.log("Bundle added to the Chat.");
+        return true;
+    };
+    Chat.prototype.getBundles = function () {
+        var result = [];
+        this.bundles.forEach(function (value, key, map) { return result.push(value); });
+        return result;
+    };
+    Chat.prototype.getBundle = function (bundleId) {
+        if (this.bundles.has(bundleId))
+            return undefined;
+        return this.bundles.get(bundleId);
+    };
+    return Chat;
 }());
 
 
@@ -1456,7 +1507,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".registration {\n  text-align: center;\n  font-family: 'Roboto', sans-serif;\n}\n\n.registration .header-bar {\n  margin: 0px;\n  height: 44px;\n  width: calc(100% + 16px);\n  background-color: #3D6DEB;\n  color: #fff;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.registration .header-bar p {\n  text-align: center;\n  font-family: 'Roboto', sans-serif;\n  font-weight: bold;\n  font-size: 14px;\n  letter-spacing: 1px;\n  line-height: 15px;\n}\n\n.registration .header-text {\n  margin-top:92px;\n  width: 360px;\n  margin-left: auto;\n  margin-right: auto;\n  font-size: 14px;\n  color: #666;\n}\n\n.registration .header-text a {\n  color: #666;\n  font-size: 12px;\n}\n\n.registration .provider-card-container {\n  margin-top: 28px;\n}\n\n.registration .provider-card {\n  height: 140px;\n  width: 320px;\n  border: 1px solid #DAE0E6;\n  border-radius: 2px;\n  background-color: #fff;\n  margin: 10px;\n  display: inline-block;\n  box-shadow: #DAE0E6 1px 1px 6px;\n}\n\n.registration .provider-card .provider-logo {\n  height: 44px;\n  width: 44px;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 16px;\n}\n\n.registration .provider-card h2 {\n  color: #656E75;\n  font-size: 18px;\n  margin-top: -2px;\n  letter-spacing: 0.9px;\n  line-height: 24px;\n}\n\n.registration .provider-card p {\n  color: #656E75;\n  font-size: 12px;\n  line-height: 16px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixpQ0FBaUM7QUFDbkM7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHdCQUF3QjtFQUN4Qix5QkFBeUI7RUFDekIsV0FBVztFQUNYLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sT0FBTztBQUNUOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlDQUFpQztFQUNqQyxpQkFBaUI7RUFDakIsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsa0JBQWtCO0VBQ2xCLHNCQUFzQjtFQUN0QixZQUFZO0VBQ1oscUJBQXFCO0VBQ3JCLCtCQUErQjtBQUNqQzs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsaUJBQWlCO0FBQ25COztBQUNBO0VBQ0UsY0FBYztFQUNkLGVBQWU7RUFDZixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJlZ2lzdHJhdGlvbiB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xufVxuXG4ucmVnaXN0cmF0aW9uIC5oZWFkZXItYmFyIHtcbiAgbWFyZ2luOiAwcHg7XG4gIGhlaWdodDogNDRweDtcbiAgd2lkdGg6IGNhbGMoMTAwJSArIDE2cHgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjM0Q2REVCO1xuICBjb2xvcjogI2ZmZjtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG59XG5cbi5yZWdpc3RyYXRpb24gLmhlYWRlci1iYXIgcCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBsZXR0ZXItc3BhY2luZzogMXB4O1xuICBsaW5lLWhlaWdodDogMTVweDtcbn1cblxuLnJlZ2lzdHJhdGlvbiAuaGVhZGVyLXRleHQge1xuICBtYXJnaW4tdG9wOjkycHg7XG4gIHdpZHRoOiAzNjBweDtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBjb2xvcjogIzY2Njtcbn1cblxuLnJlZ2lzdHJhdGlvbiAuaGVhZGVyLXRleHQgYSB7XG4gIGNvbG9yOiAjNjY2O1xuICBmb250LXNpemU6IDEycHg7XG59XG5cbi5yZWdpc3RyYXRpb24gLnByb3ZpZGVyLWNhcmQtY29udGFpbmVyIHtcbiAgbWFyZ2luLXRvcDogMjhweDtcbn1cblxuLnJlZ2lzdHJhdGlvbiAucHJvdmlkZXItY2FyZCB7XG4gIGhlaWdodDogMTQwcHg7XG4gIHdpZHRoOiAzMjBweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI0RBRTBFNjtcbiAgYm9yZGVyLXJhZGl1czogMnB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICBtYXJnaW46IDEwcHg7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgYm94LXNoYWRvdzogI0RBRTBFNiAxcHggMXB4IDZweDtcbn1cblxuLnJlZ2lzdHJhdGlvbiAucHJvdmlkZXItY2FyZCAucHJvdmlkZXItbG9nbyB7XG4gIGhlaWdodDogNDRweDtcbiAgd2lkdGg6IDQ0cHg7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi10b3A6IDE2cHg7XG59XG5cbi5yZWdpc3RyYXRpb24gLnByb3ZpZGVyLWNhcmQgaDIge1xuICBjb2xvcjogIzY1NkU3NTtcbiAgZm9udC1zaXplOiAxOHB4O1xuICBtYXJnaW4tdG9wOiAtMnB4O1xuICBsZXR0ZXItc3BhY2luZzogMC45cHg7XG4gIGxpbmUtaGVpZ2h0OiAyNHB4O1xufVxuLnJlZ2lzdHJhdGlvbiAucHJvdmlkZXItY2FyZCBwIHtcbiAgY29sb3I6ICM2NTZFNzU7XG4gIGZvbnQtc2l6ZTogMTJweDtcbiAgbGluZS1oZWlnaHQ6IDE2cHg7XG59XG4iXX0= */"
+module.exports = ".registration {\r\n  text-align: center;\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.registration .header-bar {\r\n  margin: 0px;\r\n  height: 44px;\r\n  width: calc(100% + 16px);\r\n  background-color: #3D6DEB;\r\n  color: #fff;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.registration .header-bar p {\r\n  text-align: center;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-weight: bold;\r\n  font-size: 14px;\r\n  letter-spacing: 1px;\r\n  line-height: 15px;\r\n}\r\n\r\n.registration .header-text {\r\n  margin-top:92px;\r\n  width: 360px;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  font-size: 14px;\r\n  color: #666;\r\n}\r\n\r\n.registration .header-text a {\r\n  color: #666;\r\n  font-size: 12px;\r\n}\r\n\r\n.registration .provider-card-container {\r\n  margin-top: 28px;\r\n}\r\n\r\n.registration .provider-card {\r\n  height: 140px;\r\n  width: 320px;\r\n  border: 1px solid #DAE0E6;\r\n  border-radius: 2px;\r\n  background-color: #fff;\r\n  margin: 10px;\r\n  display: inline-block;\r\n  box-shadow: #DAE0E6 1px 1px 6px;\r\n}\r\n\r\n.registration .provider-card .provider-logo {\r\n  height: 44px;\r\n  width: 44px;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  margin-top: 16px;\r\n}\r\n\r\n.registration .provider-card h2 {\r\n  color: #656E75;\r\n  font-size: 18px;\r\n  margin-top: -2px;\r\n  letter-spacing: 0.9px;\r\n  line-height: 24px;\r\n}\r\n\r\n.registration .provider-card p {\r\n  color: #656E75;\r\n  font-size: 12px;\r\n  line-height: 16px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixpQ0FBaUM7QUFDbkM7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHdCQUF3QjtFQUN4Qix5QkFBeUI7RUFDekIsV0FBVztFQUNYLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sT0FBTztBQUNUOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlDQUFpQztFQUNqQyxpQkFBaUI7RUFDakIsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsa0JBQWtCO0VBQ2xCLHNCQUFzQjtFQUN0QixZQUFZO0VBQ1oscUJBQXFCO0VBQ3JCLCtCQUErQjtBQUNqQzs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsaUJBQWlCO0FBQ25COztBQUNBO0VBQ0UsY0FBYztFQUNkLGVBQWU7RUFDZixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJlZ2lzdHJhdGlvbiB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGZvbnQtZmFtaWx5OiAnUm9ib3RvJywgc2Fucy1zZXJpZjtcclxufVxyXG5cclxuLnJlZ2lzdHJhdGlvbiAuaGVhZGVyLWJhciB7XHJcbiAgbWFyZ2luOiAwcHg7XHJcbiAgaGVpZ2h0OiA0NHB4O1xyXG4gIHdpZHRoOiBjYWxjKDEwMCUgKyAxNnB4KTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjM0Q2REVCO1xyXG4gIGNvbG9yOiAjZmZmO1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB0b3A6IDA7XHJcbiAgbGVmdDogMDtcclxufVxyXG5cclxuLnJlZ2lzdHJhdGlvbiAuaGVhZGVyLWJhciBwIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBsZXR0ZXItc3BhY2luZzogMXB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAxNXB4O1xyXG59XHJcblxyXG4ucmVnaXN0cmF0aW9uIC5oZWFkZXItdGV4dCB7XHJcbiAgbWFyZ2luLXRvcDo5MnB4O1xyXG4gIHdpZHRoOiAzNjBweDtcclxuICBtYXJnaW4tbGVmdDogYXV0bztcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbiAgZm9udC1zaXplOiAxNHB4O1xyXG4gIGNvbG9yOiAjNjY2O1xyXG59XHJcblxyXG4ucmVnaXN0cmF0aW9uIC5oZWFkZXItdGV4dCBhIHtcclxuICBjb2xvcjogIzY2NjtcclxuICBmb250LXNpemU6IDEycHg7XHJcbn1cclxuXHJcbi5yZWdpc3RyYXRpb24gLnByb3ZpZGVyLWNhcmQtY29udGFpbmVyIHtcclxuICBtYXJnaW4tdG9wOiAyOHB4O1xyXG59XHJcblxyXG4ucmVnaXN0cmF0aW9uIC5wcm92aWRlci1jYXJkIHtcclxuICBoZWlnaHQ6IDE0MHB4O1xyXG4gIHdpZHRoOiAzMjBweDtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjREFFMEU2O1xyXG4gIGJvcmRlci1yYWRpdXM6IDJweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xyXG4gIG1hcmdpbjogMTBweDtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgYm94LXNoYWRvdzogI0RBRTBFNiAxcHggMXB4IDZweDtcclxufVxyXG5cclxuLnJlZ2lzdHJhdGlvbiAucHJvdmlkZXItY2FyZCAucHJvdmlkZXItbG9nbyB7XHJcbiAgaGVpZ2h0OiA0NHB4O1xyXG4gIHdpZHRoOiA0NHB4O1xyXG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG4gIG1hcmdpbi1yaWdodDogYXV0bztcclxuICBtYXJnaW4tdG9wOiAxNnB4O1xyXG59XHJcblxyXG4ucmVnaXN0cmF0aW9uIC5wcm92aWRlci1jYXJkIGgyIHtcclxuICBjb2xvcjogIzY1NkU3NTtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbiAgbWFyZ2luLXRvcDogLTJweDtcclxuICBsZXR0ZXItc3BhY2luZzogMC45cHg7XHJcbiAgbGluZS1oZWlnaHQ6IDI0cHg7XHJcbn1cclxuLnJlZ2lzdHJhdGlvbiAucHJvdmlkZXItY2FyZCBwIHtcclxuICBjb2xvcjogIzY1NkU3NTtcclxuICBmb250LXNpemU6IDEycHg7XHJcbiAgbGluZS1oZWlnaHQ6IDE2cHg7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1467,7 +1518,7 @@ module.exports = ".registration {\n  text-align: center;\n  font-family: 'Roboto
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"registration\">\n  <!-- Header Bar -->\n  <div class=\"header-bar\">\n    <p>Select Solid Identity Provider</p>\n  </div>\n\n  <!-- Header Text -->\n  <div class=\"header-text\">\n    <p>\n      With a Solid Identity your personal data is stored securely in a POD. You control who has access to it.\n    </p>\n    <a href=\"https://solid.mit.edu\" target=\"_blank\">\n      Learn more about Solid IDs and PODs\n    </a>\n  </div>\n\n  <!-- Provider cards -->\n  <div class=\"provider-card-container\">\n    <div class=\"provider-card\" *ngFor=\"let provider of availableProviders\">\n      <img [src]=\"provider.image\" class=\"provider-logo\">\n      <h2>{{ provider.name }}</h2>\n      <p>{{ provider.desc }}</p>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"registration\">\r\n  <!-- Header Bar -->\r\n  <div class=\"header-bar\">\r\n    <p>Select Solid Identity Provider</p>\r\n  </div>\r\n\r\n  <!-- Header Text -->\r\n  <div class=\"header-text\">\r\n    <p>\r\n      With a Solid Identity your personal data is stored securely in a POD. You control who has access to it.\r\n    </p>\r\n    <a href=\"https://solid.mit.edu\" target=\"_blank\">\r\n      Learn more about Solid IDs and PODs\r\n    </a>\r\n  </div>\r\n\r\n  <!-- Provider cards -->\r\n  <div class=\"provider-card-container\">\r\n    <div class=\"provider-card\" *ngFor=\"let provider of availableProviders\">\r\n      <img [src]=\"provider.image\" class=\"provider-logo\">\r\n      <h2>{{ provider.name }}</h2>\r\n      <p>{{ provider.desc }}</p>\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1583,36 +1634,21 @@ var ChatService = /** @class */ (function () {
                         return [4 /*yield*/, this.files.readFolderSubfolders(chatFolder)];
                     case 6:
                         chats = _b.sent();
-                        chats.forEach(function (chat) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var c;
-                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, this.fetchChat(chat)];
-                                    case 1:
-                                        c = _a.sent();
-                                        if (c != null)
-                                            this.allChats.push(c);
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); });
-                        // TODO remove this Testing stuff
-                        if (chats.length == 0) {
-                            console.log("No chats created. Generating test chats...");
-                            contacts.forEach(function (c) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var _a, _b;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                                    switch (_c.label) {
-                                        case 0:
-                                            _b = (_a = this.allChats).push;
-                                            return [4 /*yield*/, this.createChat(c)];
+                        return [4 /*yield*/, chats.forEach(function (chat) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var c;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, this.fetchChat(chat)];
                                         case 1:
-                                            _b.apply(_a, [_c.sent()]);
+                                            c = _a.sent();
+                                            if (c != null)
+                                                this.allChats.push(c);
                                             return [2 /*return*/];
                                     }
                                 });
-                            }); });
-                        }
+                            }); })];
+                    case 7:
+                        _b.sent();
                         return [2 /*return*/];
                 }
             });
@@ -1728,13 +1764,22 @@ var ChatService = /** @class */ (function () {
                         return [4 /*yield*/, this.files.readFile(dataFile)];
                     case 1:
                         file = _a.sent();
-                        if (file.length == 0) {
+                        if (file.length == 0 || file == undefined) {
                             console.log("Something bad happened.");
                             this.files.deleteFolder(chatUrl);
                             return [2 /*return*/, null];
                         }
                         chat = JSON.parse(file);
-                        // TODO load messages
+                        if (chat == undefined) {
+                            console.log("Something bad happened.");
+                            this.files.deleteFolder(chatUrl);
+                            return [2 /*return*/, null];
+                        }
+                        // Load messages
+                        return [4 /*yield*/, this.messages.fetchChat(chat)];
+                    case 2:
+                        // Load messages
+                        _a.sent();
                         return [2 /*return*/, chat];
                 }
             });
@@ -2238,6 +2283,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _files_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./files.service */ "./src/app/services/dechat/files.service.ts");
 /* harmony import */ var _inbox_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./inbox.service */ "./src/app/services/dechat/inbox.service.ts");
 /* harmony import */ var src_app_models_dechat_inbox_element_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/models/dechat/inbox-element.model */ "./src/app/models/dechat/inbox-element.model.ts");
+/* harmony import */ var src_app_models_dechat_chat_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/models/dechat/chat.model */ "./src/app/models/dechat/chat.model.ts");
+
 
 
 
@@ -2261,36 +2308,59 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.setCurrentUser = function (user) {
         this.user = user;
     };
-    MessageService.prototype.setCurrentChat = function (chat) {
+    MessageService.prototype.fetchChat = function (chatInfo) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var chat, chatUrl;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("Message Service Fetching chat: " + chatInfo.chatId);
+                        if (!this.chatMap.has(chatInfo.chatId)) {
+                            this.chatMap.set(chatInfo.chatId, new src_app_models_dechat_chat_model__WEBPACK_IMPORTED_MODULE_8__["Chat"](chatInfo));
+                        }
+                        chat = this.chatMap.get(chatInfo.chatId);
+                        chatUrl = this.files.getChatUrl(this.user, chatInfo);
+                        return [4 /*yield*/, this.loadAllMessageBundles(chatUrl, chat)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MessageService.prototype.setCurrentChat = function (chatInfo) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
-            var _a, bundles;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
+            var newBundles, bundles;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        if (this.currentChat === chat)
-                            return [2 /*return*/];
+                        console.log("Message service setting current chat");
                         // Clear messages of the previous chat
                         while (this.currentMessages.length > 0) {
                             this.currentMessages.pop();
                         }
-                        this.currentChat = chat;
-                        if (!this.chatMap.has(chat.chatId)) {
-                            this.chatMap.set(chat.chatId, []);
+                        if (!this.chatMap.has(chatInfo.chatId)) {
+                            this.chatMap.set(chatInfo.chatId, new src_app_models_dechat_chat_model__WEBPACK_IMPORTED_MODULE_8__["Chat"](chatInfo));
                         }
-                        _a = this;
-                        return [4 /*yield*/, this.files.getChatUrl(this.user, chat)];
+                        this.currentChat = this.chatMap.get(chatInfo.chatId);
+                        this.currentChatUrl = this.files.getChatUrl(this.user, chatInfo);
+                        return [4 /*yield*/, this.loadAllMessageBundles(this.currentChatUrl, this.currentChat)];
                     case 1:
-                        _a.currentChatUrl = _b.sent();
-                        // Fetch the bundles up in the pod (add them to the map)
-                        // And retrieve the existing bundles in the map
-                        return [4 /*yield*/, this.fetchMessageBundles()];
+                        newBundles = _a.sent();
+                        console.log("New bundles added: " + newBundles);
+                        bundles = this.currentChat.getBundles();
+                        if (bundles.length == 0)
+                            console.log("... man, the chat has no bundles");
+                        return [4 /*yield*/, bundles.forEach(function (b) {
+                                console.log("Bundle " + b.bundleId + " has " + b.messages.length + " messages");
+                                // Sort them by date
+                                b.messages = b.messages.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
+                                b.messages.forEach(function (m) { return _this.currentMessages.push(m); });
+                                _this.currentBundle = b;
+                            })];
                     case 2:
-                        // Fetch the bundles up in the pod (add them to the map)
-                        // And retrieve the existing bundles in the map
-                        _b.sent();
-                        bundles = this.chatMap.get(this.currentChat.chatId);
-                        bundles.forEach(function (b) { return _this.processFetchedMessages(b.messages); });
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
@@ -2324,7 +2394,7 @@ var MessageService = /** @class */ (function () {
                     case 0:
                         if (!(this.currentBundle == undefined)) return [3 /*break*/, 2];
                         _a = this;
-                        return [4 /*yield*/, this.createBundle(this.currentChat.chatId, this.getFullTimeStamp())];
+                        return [4 /*yield*/, this.createBundle(this.currentChat, this.getFullTimeStamp())];
                     case 1:
                         _a.currentBundle = _c.sent();
                         _c.label = 2;
@@ -2332,7 +2402,7 @@ var MessageService = /** @class */ (function () {
                         message = this.createMessage(msg);
                         if (!!this.currentBundle.addMessage(message)) return [3 /*break*/, 4];
                         _b = this;
-                        return [4 /*yield*/, this.createBundle(this.currentChat.chatId, this.getFullTimeStamp())];
+                        return [4 /*yield*/, this.createBundle(this.currentChat, this.getFullTimeStamp())];
                     case 3:
                         _b.currentBundle = _c.sent();
                         this.currentBundle.addMessage(message);
@@ -2341,9 +2411,9 @@ var MessageService = /** @class */ (function () {
                         // Push it so we can see it instantly
                         this.currentMessages.push(message);
                         // Send to the inbox of all users
-                        this.currentChat.users.forEach(function (user) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        this.currentChat.chatInfo.users.forEach(function (user) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                this.inbox.sendNewMessage(user, this.currentChat, message);
+                                this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
                                 return [2 /*return*/];
                             });
                         }); });
@@ -2357,53 +2427,62 @@ var MessageService = /** @class */ (function () {
         var message = new src_app_models_dechat_chat_message_model__WEBPACK_IMPORTED_MODULE_3__["ChatMessage"]();
         message.message = msg;
         message.userName = this.user.userName;
-        message.chatId = this.currentChat.chatId;
+        message.chatId = this.currentChat.chatInfo.chatId;
         message.bundleId = this.currentBundle.bundleId;
         return message;
     };
     MessageService.prototype.createMessageFromRequest = function (request) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var msg, existentMsg, bundles, bundle, _a;
+            var msg, chatInfo, existentMsg, chat, bundle, _a, path;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         msg = request.message;
-                        // Push it so we can see it
-                        if (this.currentChat.chatId == msg.chatId) {
+                        chatInfo = request.chat;
+                        if (this.currentChat == undefined) {
+                            // TODO Increase the unread icon on the chat
+                            // and create it
+                            console.log("Undefined current chat!!!!");
+                        }
+                        else if (this.currentChat.chatInfo.chatId == chatInfo.chatId) {
                             existentMsg = this.currentMessages.find(function (m, index, array) { return m.id == msg.id; });
-                            if (!existentMsg == undefined)
+                            if (existentMsg == undefined)
                                 this.currentMessages.push(msg);
                         }
                         else {
-                            // TODO increase the unread icon on the chat
+                            this.currentChat.unreadMessageCount++;
                         }
                         if (!this.chatMap.has(msg.chatId)) {
-                            console.log("[ERROR] We have received a message and we don't have the chat!!!!!!");
+                            console.log("[ERROR] We have received a message and we don't have the chat in the map!!!!!!");
                             // TODO add it to the chat map
                             return [2 /*return*/];
                         }
-                        bundles = this.chatMap.get(msg.chatId);
-                        bundle = bundles.find(function (b, index, array) { return b.bundleId == msg.bundleId; });
-                        if (!(bundle == undefined)) return [3 /*break*/, 2];
-                        console.log("Cundefined bundle. Creating it.");
-                        _a = this;
-                        return [4 /*yield*/, this.createBundle(msg.chatId, msg.bundleId)];
+                        chat = this.chatMap.get(msg.chatId);
+                        return [4 /*yield*/, chat.getBundle(msg.bundleId)];
                     case 1:
+                        bundle = _b.sent();
+                        if (!(bundle == undefined)) return [3 /*break*/, 3];
+                        console.log("Undefined bundle. Creating it.");
+                        _a = this;
+                        return [4 /*yield*/, this.createBundle(chat, msg.bundleId)];
+                    case 2:
                         _a.currentBundle = _b.sent();
                         bundle = this.currentBundle;
-                        _b.label = 2;
-                    case 2:
+                        _b.label = 3;
+                    case 3:
                         bundle.addMessage(msg);
+                        return [4 /*yield*/, this.files.getChatUrl(this.user, this.currentChat.chatInfo)];
+                    case 4:
+                        path = _b.sent();
+                        path = path + bundle.bundleId + '/';
+                        path = path + msg.id + '.txt';
+                        return [4 /*yield*/, this.files.createFile(path, JSON.stringify(msg))];
+                    case 5:
+                        _b.sent();
                         return [2 /*return*/];
                 }
             });
         });
-    };
-    MessageService.prototype.processFetchedMessages = function (messages) {
-        var _this = this;
-        // TODO sorth them
-        messages.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
-        messages.forEach(function (m) { return _this.currentMessages.push(m); });
     };
     MessageService.prototype.getMessageFromFile = function (url) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -2413,7 +2492,7 @@ var MessageService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.files.readFile(url).then(function (body) { return json = JSON.parse(body); })];
                     case 1:
                         _a.sent();
-                        // TODO get all the message data, I guess
+                        // Get all the message data, I guess
                         msg = new src_app_models_dechat_chat_message_model__WEBPACK_IMPORTED_MODULE_3__["ChatMessage"](json.message);
                         return [2 /*return*/, msg];
                 }
@@ -2425,104 +2504,124 @@ var MessageService = /** @class */ (function () {
     /*                     BUNDLE MANAGEMENT                     */
     /*                                                           */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    // TODO fetch messages in bundles from the pod
-    MessageService.prototype.fetchMessageBundles = function () {
+    // Looks at the message bundles in the pod, adds them
+    // to the map and returns how many of them are new
+    MessageService.prototype.loadAllMessageBundles = function (chatUrl, chat) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
+            var bundleFolders, count;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Fetching message bundles in the POD");
-                        // TODO for each folder in the chat folder, create  bundle
-                        return [4 /*yield*/, this.files.readFolderSubfolders(this.currentChatUrl).then(
-                            // TODO check if they already exist
-                            function (files) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var _this = this;
+                        console.log("Loading all message bundles in the POD chat folder " + chatUrl);
+                        return [4 /*yield*/, this.files.readFolderSubfolders(chatUrl)];
+                    case 1:
+                        bundleFolders = _a.sent();
+                        if (bundleFolders.length == 0) {
+                            console.log("The chat has no bundles");
+                            return [2 /*return*/, 0];
+                        }
+                        console.log("Number of bundles in the POD: " + bundleFolders.length);
+                        console.log("Number of bundles locally: " + chat.getBundles().length);
+                        count = 0;
+                        return [4 /*yield*/, bundleFolders.forEach(function (b) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var result;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, files.forEach(function (f) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    switch (_a.label) {
-                                                        case 0: return [4 /*yield*/, this.fetchMessageBundle(f)];
-                                                        case 1:
-                                                            _a.sent();
-                                                            return [2 /*return*/];
-                                                    }
-                                                });
-                                            }); })];
-                                        case 1: return [2 /*return*/, _a.sent()];
+                                        case 0: return [4 /*yield*/, this.loadMessageBundle(chat, chatUrl, b)];
+                                        case 1:
+                                            result = _a.sent();
+                                            console.log("Trying to add bundle");
+                                            return [4 /*yield*/, chat.addBundle(result)];
+                                        case 2:
+                                            if (_a.sent()) {
+                                                count++;
+                                                console.log("Bundle added :D");
+                                            }
+                                            console.log("Count = " + count);
+                                            return [2 /*return*/];
                                     }
                                 });
                             }); })];
-                    case 1:
-                        // TODO for each folder in the chat folder, create  bundle
+                    case 2:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [2 /*return*/, count];
                 }
             });
         });
     };
     // Fetches all the messages in a given bundle.
-    MessageService.prototype.fetchMessageBundle = function (bundleUrl) {
+    // Returns the bundle object.
+    MessageService.prototype.loadMessageBundle = function (chat, chatUrl, bundleUrl) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
-            var id, bundle;
+            var bundleId, bundle, messageFiles;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        id = bundleUrl.replace(this.currentChatUrl, '').replace('/', '');
-                        bundle = this.getBundle(id);
+                        console.log("Fetching message bundle.");
+                        bundleId = bundleUrl.replace(chatUrl, '').replace('/', '');
+                        console.log("URL: " + bundleUrl);
+                        console.log("ID: " + bundleId);
+                        console.log("Getting the bundle.");
+                        return [4 /*yield*/, this.getBundle(chat, bundleId)];
+                    case 1:
+                        bundle = _a.sent();
                         // Read all messages inside the bundle folder
-                        return [4 /*yield*/, this.files.readFolder(bundleUrl).then(function (files) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var _this = this;
+                        console.log("Reading all messages inside the bundle folder");
+                        return [4 /*yield*/, this.files.readFolder(bundleUrl)];
+                    case 2:
+                        messageFiles = _a.sent();
+                        return [4 /*yield*/, messageFiles.forEach(function (f) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var msg;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, files.forEach(function (f) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    switch (_a.label) {
-                                                        case 0: return [4 /*yield*/, this.getMessageFromFile(f)];
-                                                        case 1:
-                                                            _a.sent();
-                                                            return [2 /*return*/];
-                                                    }
-                                                });
-                                            }); })];
-                                        case 1: return [2 /*return*/, _a.sent()];
+                                        case 0: return [4 /*yield*/, this.getMessageFromFile(f)];
+                                        case 1:
+                                            msg = _a.sent();
+                                            return [4 /*yield*/, bundle.addMessage(msg)];
+                                        case 2:
+                                            _a.sent();
+                                            return [2 /*return*/];
                                     }
                                 });
                             }); })];
-                    case 1:
-                        // Read all messages inside the bundle folder
+                    case 3:
                         _a.sent();
-                        this.processFetchedMessages(bundle.messages);
-                        this.chatMap.get(this.currentChat.chatId).push(bundle);
-                        return [2 /*return*/];
+                        return [2 /*return*/, bundle];
                 }
             });
         });
     };
-    MessageService.prototype.getBundle = function (bundleId) {
-        this.chatMap.get(this.currentChat.chatId).forEach(function (bundle) {
-            if (bundle.bundleId === bundleId) {
-                return bundle;
-            }
+    MessageService.prototype.getBundle = function (chat, bundleId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var bundle;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        bundle = chat.getBundle(bundleId);
+                        if (bundle != undefined)
+                            return [2 /*return*/, bundle];
+                        return [4 /*yield*/, this.createBundle(chat, bundleId)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
         });
-        return null;
     };
-    MessageService.prototype.createBundle = function (chatId, id) {
+    MessageService.prototype.createBundle = function (chat, id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var bundle, path;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        bundle = new src_app_models_dechat_message_bundle_model__WEBPACK_IMPORTED_MODULE_4__["MessageBundle"](chatId, id);
-                        return [4 /*yield*/, this.files.getChatUrl(this.user, this.currentChat)];
+                        bundle = new src_app_models_dechat_message_bundle_model__WEBPACK_IMPORTED_MODULE_4__["MessageBundle"](chat.chatInfo.chatId, id);
+                        return [4 /*yield*/, this.files.getChatUrl(this.user, chat.chatInfo)];
                     case 1:
                         path = _a.sent();
                         return [4 /*yield*/, this.files.checkFolderExistence(path + bundle.bundleId + '/')];
                     case 2:
                         _a.sent();
-                        this.chatMap.get(chatId).push(bundle);
+                        //this.chatMap.get(chatId).addBundle(bundle);
                         return [2 /*return*/, bundle];
                 }
             });
@@ -2645,16 +2744,6 @@ var UserService = /** @class */ (function () {
                         while (this.contacts.length > 0) {
                             this.contacts.pop();
                         }
-                        // TODO
-                        /*await contacts.forEach(async element => {
-                
-                          console.log("Contact: " + element.value);
-                          await this.rdf.fetcher.load(element.value);
-                          var name = this.rdf.getValueFromVcard('fn', element.value);
-                          console.log("Contact name = " + name);
-                          var c = new User(name);
-                          this.contacts.push(c);
-                        });*/
                         contacts.forEach(function (element) {
                             var c = new src_app_models_dechat_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](element.value);
                             _this.contacts.push(c);
