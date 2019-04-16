@@ -42,4 +42,8 @@ export class ChatFormComponent implements OnInit {
         }
     }
 
+    multimedia() {
+        
+    }
+
 }

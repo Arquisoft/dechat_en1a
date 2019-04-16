@@ -47,6 +47,7 @@ import { CommonModule } from '@angular/common';
 import { NewChatDialogComponent } from './dialogComponents/new-chat-dialog/new-chat-dialog.component';
 import { MatDialogModule } from '@angular/material';
 import { UserDisplaySlotComponent } from './utilComponents/user-display-slot/user-display-slot.component';
+import { NewMultimediaDialogComponent } from './dialogComponents/new-multimedia-dialog/new-multimedia-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -93,7 +94,8 @@ const appRoutes: Routes = [
     ProfileIconComponent,
     MultimediaDisplayComponent,
     NewChatDialogComponent,
-    UserDisplaySlotComponent
+    UserDisplaySlotComponent,
+    NewMultimediaDialogComponent
   ],
   imports: [
     BrowserModule,
