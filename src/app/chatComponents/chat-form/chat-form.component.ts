@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
 import {MessageService} from 'src/app/services/dechat/message.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { NewMultimediaDialogComponent } from 'src/app/dialogComponents/new-multimedia-dialog/new-multimedia-dialog.component';
 
 @Component({
     selector: 'app-chat-form',
@@ -13,7 +15,7 @@ export class ChatFormComponent implements OnInit {
     message: string; // Corresponds to the ng bingding in the html <input/>
 
     // Constructor //
-    constructor(private messageService: MessageService) {
+    constructor(private messageService: MessageService, private dialog: MatDialog) {
         this.message = '';
     }
 
@@ -43,7 +45,12 @@ export class ChatFormComponent implements OnInit {
     }
 
     multimedia() {
-        
+        // Open a dialog to add multimedia to the message
+        var dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+    
+        var dialogRef = this.dialog.open(NewMultimediaDialogComponent, dialogConfig);
     }
 
 }

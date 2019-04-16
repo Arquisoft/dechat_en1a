@@ -25,6 +25,31 @@
 }
 
 
+/* * * * * 'MULTIMEDIA' BUTTON * * * * */
+
+.chatMultimediaButton {
+    flex: 1;
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-size: 1em;
+    background-color: #2A2845;    
+    color: #fff;
+    transition: 0.2s ease-out;
+    min-width: 50px;
+    text-align: center;
+}
+  
+.chatMultimediaButton:disabled {
+    background-color: #F0EEEB;
+    border-color: #F0EEEB;
+}
+  
+  
+.chatMultimediaButton:hover {
+    background-color: #444;
+}
+
+
 
 /* * * * * CHAT TEXT INPUT * * * * */
 
