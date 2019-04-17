@@ -98,6 +98,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     NgSelectModule,
     ToastrModule.forRoot(),

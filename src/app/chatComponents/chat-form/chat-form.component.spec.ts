@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatFormComponent } from './chat-form.component';
 import { MessageService } from 'src/app/services/dechat/message.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MockMessageService } from 'src/app/services/mock/mock-message.service';
 
@@ -14,7 +14,8 @@ describe('ChatFormComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        ReactiveFormsModule
       ],
       declarations: [ ChatFormComponent ],
       providers: [ {provide: MessageService, useClass: MockMessageService} ]
