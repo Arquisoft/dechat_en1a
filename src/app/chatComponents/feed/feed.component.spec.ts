@@ -4,6 +4,7 @@ import { FeedComponent } from './feed.component';
 import { MessageComponent } from '../message/message.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from 'src/app/services/dechat/message.service';
+import { MockMessageService } from 'src/app/services/mock/mock-message.service';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -16,7 +17,7 @@ describe('FeedComponent', () => {
         FeedComponent,
         MessageComponent
       ],
-      providers: [ MessageService ]
+      providers: [ {provide: MessageService, useClass: MockMessageService} ]
     })
     .compileComponents();
   }));

@@ -4,6 +4,7 @@ import { ChatItemComponent } from './chat-item.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChatService } from 'src/app/services/dechat/chat.service';
+import { MockChatService } from 'src/app/services/mock/mock-chat.service';
 
 describe('ChatItemComponent', () => {
   let component: ChatItemComponent;
@@ -18,7 +19,7 @@ describe('ChatItemComponent', () => {
       declarations: [ 
         ChatItemComponent
       ],
-      providers: [ ChatService ]
+      providers: [ {provide: ChatService, useClass: MockChatService} ]
     })
     .compileComponents();
   }));

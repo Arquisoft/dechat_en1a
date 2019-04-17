@@ -16,6 +16,9 @@ export class UserDisplaySlotComponent implements OnInit {
   constructor() { }
 
   ngOnInit(user = this.user) {
+    if (user == undefined) {
+      user = new User("dummy");
+    }
     this.userName = user.nickname;
   }
 

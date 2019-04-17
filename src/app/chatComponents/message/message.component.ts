@@ -15,16 +15,18 @@ export class MessageComponent implements OnInit {
     userName: string;
     messageContent: string;
     timeSent: string;
-    // isOwnMessage: boolean;
+    isOwnMessage: boolean;
     ready: boolean;
 
     constructor() {
         this.ready = true;
+        this.isOwnMessage = false; // TODO
     }
 
     ngOnInit(chatMessage = this.chatMessage, multim = this.multimedia) {
         if (chatMessage == undefined) {
-            return;
+            chatMessage = new ChatMessage("");
+            chatMessage.userName = "dummy";
         }
 
         this.messageContent = chatMessage.message;

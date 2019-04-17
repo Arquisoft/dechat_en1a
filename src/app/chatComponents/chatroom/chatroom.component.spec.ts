@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ChatService } from 'src/app/services/dechat/chat.service';
 import { MessageComponent } from '../message/message.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockChatService } from 'src/app/services/mock/mock-chat.service';
 
 describe('ChatroomComponent', () => {
   let component: ChatroomComponent;
@@ -22,7 +23,7 @@ describe('ChatroomComponent', () => {
         ChatFormComponent,
         MessageComponent
       ],
-      providers: [ ChatService ]
+      providers: [ {provide: ChatService, useClass: MockChatService} ]
     })
     .compileComponents();
   }));

@@ -4,6 +4,7 @@ import { ChatFormComponent } from './chat-form.component';
 import { MessageService } from 'src/app/services/dechat/message.service';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { MockMessageService } from 'src/app/services/mock/mock-message.service';
 
 describe('ChatFormComponent', () => {
   let component: ChatFormComponent;
@@ -16,7 +17,7 @@ describe('ChatFormComponent', () => {
         ToastrModule.forRoot()
       ],
       declarations: [ ChatFormComponent ],
-      providers: [ MessageService ]
+      providers: [ {provide: MessageService, useClass: MockMessageService} ]
     })
     .compileComponents();
   }));

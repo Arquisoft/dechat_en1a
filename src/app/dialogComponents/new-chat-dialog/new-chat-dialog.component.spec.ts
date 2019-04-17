@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewChatDialogComponent } from './new-chat-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('NewChatDialogComponent', () => {
   let component: NewChatDialogComponent;
@@ -8,6 +9,7 @@ describe('NewChatDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ ToastrModule.forRoot() ],
       declarations: [ NewChatDialogComponent ]
     })
     .compileComponents();

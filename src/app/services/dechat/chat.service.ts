@@ -147,8 +147,8 @@ export class ChatService {
         if (!this.isAdmin(chat))
             return false;
 
-        chat.users.push(this.user);
-        this.files.checkChatFolder(this.user, chat);
+        chat.users.push(user);
+        this.files.checkChatFolder(user, chat);
         return true;
     }
 

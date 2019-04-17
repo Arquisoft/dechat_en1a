@@ -6,6 +6,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { UserService } from 'src/app/services/dechat/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChatService } from 'src/app/services/dechat/chat.service';
+import { MockChatService } from 'src/app/services/mock/mock-chat.service';
+import { MatDialog, MatDialogConfig } from "@angular/material";
 
 describe('ChatListComponent', () => {
   let component: ChatListComponent;
@@ -21,7 +23,10 @@ describe('ChatListComponent', () => {
         ChatListComponent,
         ChatItemComponent
       ],
-      providers: [ ChatService ]
+      providers: [ 
+        {provide: ChatService, useClass: MockChatService},
+        MatDialog
+      ]
     })
     .compileComponents();
   }));
