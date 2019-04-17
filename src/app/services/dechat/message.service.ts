@@ -8,6 +8,8 @@ import {FilesService} from './files.service';
 import { InboxService } from './inbox.service';
 import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
 import { Chat } from 'src/app/models/dechat/chat.model';
+import { Multimedia } from 'src/app/models/dechat/multimedia.model';
+import { MultimediaDisplayComponent } from 'src/app/chatComponents/multimedia-display/multimedia-display.component';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +29,7 @@ export class MessageService {
 
     currentChat: Chat;
     currentMessages: ChatMessage[];
+    currentMultimedia: Multimedia[];
     currentBundle: MessageBundle;
     currentChatUrl: string;
 
@@ -140,6 +143,11 @@ export class MessageService {
 
     getMessages(): Observable<ChatMessage[]> {
         return of(this.currentMessages);
+    }
+
+    sendMultimedia(multimedia: Multimedia) {
+        // We add it to the current multimedia array
+        this.currentMultimedia.push(multimedia);
     }
 
     async sendMessage(msg: string) {
