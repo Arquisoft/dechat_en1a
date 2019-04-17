@@ -32,6 +32,16 @@ export class ChatFormComponent implements OnInit {
         }
 
         this.messageService.sendMessage(this.message);
+
+        /*
+         *  TODO: Send the multimedia (or null if there is no multimedia) 
+         *          to the message service.
+         * 
+         *        Something like: 
+         *          this.messageService.sendMultimedia(this.multimedia);
+         * 
+         */
+
         this.message = '';
     }
 
@@ -51,6 +61,8 @@ export class ChatFormComponent implements OnInit {
         dialogConfig.autoFocus = true;
     
         var dialogRef = this.dialog.open(NewMultimediaDialogComponent, dialogConfig);
+
+        // TODO: This dialog has to return the created multimedia
     }
 
 }

@@ -32,6 +32,7 @@ export class NewMultimediaDialogComponent implements OnInit {
 
   addMultimedia() {
     this.multimedia = new Multimedia(this.url, this.type, "");
+    // TODO: Now this multimedia needs to be returned to the chat-form
   }
 
 }
