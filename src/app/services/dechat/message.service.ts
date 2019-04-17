@@ -29,7 +29,7 @@ export class MessageService {
 
     currentChat: Chat;
     currentMessages: ChatMessage[];
-    currentMultimedia: MultimediaDisplayComponent[];
+    currentMultimedia: Multimedia[];
     currentBundle: MessageBundle;
     currentChatUrl: string;
 
@@ -146,11 +146,8 @@ export class MessageService {
     }
 
     sendMultimedia(multimedia: Multimedia) {
-        this.createMultimediaDisplay(multimedia);        
-    }
-
-    createMultimediaDisplay(multimedia: Multimedia) {
-        // const multimediaDisplay = new MultimediaDisplayComponent(multimedia);
+        // We add it to the current multimedia array
+        this.currentMultimedia.push(multimedia);
     }
 
     async sendMessage(msg: string) {
