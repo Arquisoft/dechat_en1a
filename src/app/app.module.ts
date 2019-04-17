@@ -107,7 +107,8 @@ const appRoutes: Routes = [
     MatDialogModule
   ],
   entryComponents: [
-    NewChatDialogComponent
+    NewChatDialogComponent,
+    NewMultimediaDialogComponent
   ],
   providers: [AuthService, ChatService],
   bootstrap: [AppComponent]
