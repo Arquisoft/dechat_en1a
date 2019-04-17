@@ -7,6 +7,7 @@ import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
 import { ToastrModule } from 'ngx-toastr';
 import { ChatService } from 'src/app/services/dechat/chat.service';
 import { MessageComponent } from '../message/message.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ChatroomComponent', () => {
   let component: ChatroomComponent;
@@ -14,7 +15,7 @@ describe('ChatroomComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ToastrModule.forRoot() ],
+      imports: [ RouterTestingModule, ToastrModule.forRoot() ],
       declarations: [ 
         ChatroomComponent,
         FeedComponent,

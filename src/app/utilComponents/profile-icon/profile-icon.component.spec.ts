@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileIconComponent } from './profile-icon.component';
-import { UserService } from '../services/dechat/user.service';
+import { UserService } from '../../services/dechat/user.service';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('ProfileIconComponent', () => {

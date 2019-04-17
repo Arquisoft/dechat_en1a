@@ -14,7 +14,7 @@ install:
   - npm install
   
 script:
-  - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+  - npm run test -- --watch=false --browsers=ChromeHeadlessCI
 
 after_success:
   - npm run coverage
