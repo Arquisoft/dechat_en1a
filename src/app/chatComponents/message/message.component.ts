@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ChatMessage} from '../../models/dechat/chat-message.model';
 import {MultimediaDisplayComponent} from '../multimedia-display/multimedia-display.component';
+import { UserService } from 'src/app/services/dechat/user.service';
 
 @Component({
     selector: 'app-message',
@@ -18,12 +19,12 @@ export class MessageComponent implements OnInit {
     isOwnMessage: boolean;
     ready: boolean;
 
-    constructor() {
+    constructor(private users : UserService) {
         this.ready = true;
-        this.isOwnMessage = false; // TODO
+        this.isOwnMessage = false;
     }
 
-    ngOnInit(chatMessage = this.chatMessage, multim = this.multimedia) {
+    async ngOnInit(chatMessage = this.chatMessage, multim = this.multimedia) {
         if (chatMessage == undefined) {
             chatMessage = new ChatMessage("");
             chatMessage.userName = "dummy";
@@ -32,6 +33,7 @@ export class MessageComponent implements OnInit {
         this.messageContent = chatMessage.message;
         this.userName = chatMessage.userName;
         this.timeSent = this.getTimeStamp(chatMessage.date);
+        this.isOwnMessage = chatMessage.isMessageFrom(await this.users.getUser())
     }
 
     getTimeStamp(date: Date) {
