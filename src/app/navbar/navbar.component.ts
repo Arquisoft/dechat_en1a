@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../services/dechat/user.service';
 import {AuthService} from '../services/solid/solid.auth.service';
+import { User } from '../models/dechat/user.model';
 
 @Component({
     selector: 'app-navbar',
@@ -10,7 +11,9 @@ import {AuthService} from '../services/solid/solid.auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+
     constructor(private router: Router) {
+        
     }
 
     ngOnInit() {
@@ -19,8 +22,11 @@ export class NavbarComponent implements OnInit {
         }*/
     }
 
+
     showProfileIcon(): boolean {
         return this.router.url === '/chat';
     }
+
+
 
 }
