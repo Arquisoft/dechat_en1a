@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: minmax(256px, 20%) auto;
     overflow: hidden;
 }
 
