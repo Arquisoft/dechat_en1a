@@ -1,20 +1,7 @@
 <div class="navBar">
+  
   <div id="logo"></div>
   <div id="heading"><a routerLink="/">DeChat</a></div>
-
-  <div class="links">
-      <span>
-        <a *ngIf="!showProfileIcon()" href="/login">Login</a>
-      </span>
-      <!--
-      <span>
-        <a *ngIf="!(user|async)?.uid" routerLink="/signup">Sign Up</a>
-      </span>
-      -->
-      <span>
-        <a *ngIf="showProfileIcon()" href="/logout">Logout</a>
-      </span>
-  </div>
 
   <div class="profileIconWrapper">
     <div *ngIf="showProfileIcon()">

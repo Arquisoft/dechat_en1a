@@ -10,7 +10,8 @@
 .userListWrapper {
     display: flex;
     flex: 1;
-    background-color: #2A2845;
+    
+    background-color: var(--background-purple);
     color: white;
     padding: 20px 0px 40px 30px;
     border-right: 1px solid #222;
