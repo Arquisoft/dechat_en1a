@@ -5,22 +5,28 @@
     margin-top: 10px;
     border-radius: 1px;
     align-items:flex-start;
-    background-color: #201835;
+    background-color: var(--background-light-dark);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    color: #A098A5;
+    color: var(--foreground-dark-light);
     border-radius: 8px;
     transition: ease-in 0.2s;
 }
 
-.activeChatItem {
-    background-color: #483b6d;
-    color: rgb(199, 192, 204);
+.chatItem:hover{
+    background-color: var(--background-light);
+    color: var(--foreground-purple);
+    transition: ease-in 0.1s;
 }
 
-.chatItem:hover{
-    background-color: #5a4b88;
-    color: #ddd;
-    transition: ease-in 0.1s;
+
+.activeChatItem {
+    background-color: var(--background-purple-light);
+    color: var(--foreground-light);
+}
+
+.activeChatItem:hover {
+    background-color: var(--background-purple-light);
+    color: var(--foreground-light);
 }
 
 .userName{

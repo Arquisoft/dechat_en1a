@@ -12,7 +12,9 @@ describe('FeedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ToastrModule.forRoot() ],
+      imports: [ 
+        ToastrModule.forRoot()
+      ],
       declarations: [ 
         FeedComponent,
         MessageComponent
