@@ -9,6 +9,7 @@ import { ChatService } from 'src/app/services/dechat/chat.service';
 import { MessageComponent } from '../message/message.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockChatService } from 'src/app/services/mock/mock-chat.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('ChatroomComponent', () => {
   let component: ChatroomComponent;
@@ -16,7 +17,12 @@ describe('ChatroomComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, ToastrModule.forRoot() ],
+      imports: [ 
+        RouterTestingModule, 
+        ToastrModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ 
         ChatroomComponent,
         FeedComponent,

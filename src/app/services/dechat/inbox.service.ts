@@ -58,7 +58,7 @@ export class InboxService {
       result => {
 
         newFiles = result.filter((str, index, array) => str.includes("DeChatEn1a"));
-        console.log("INBOX HAS " + newFiles.length + " FILES");
+        //console.log("INBOX HAS " + newFiles.length + " FILES");
         this.addInboxFiles(newFiles);
     });
 

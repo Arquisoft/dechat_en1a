@@ -1,0 +1,20 @@
+<div class="newMultimediaDialog">
+
+  <div class="titleWrapper">
+    <h1>Multimedia selector</h1>
+  </div>
+
+  <div class="urlWrapper">
+    <input [(ngModel)]="url" placeholder="URL of the multimedia element">
+  </div>
+
+  <div class="typeWrapper">
+    <input [(ngModel)]="type" placeholder="Type of the multimedia element">
+  </div>
+
+  <div class="actionsWrapper">
+    <button (click)="cancel()">Back</button>
+    <button (click)="addMultimedia()">Add multimedia</button>
+  </div>
+
+</div>
