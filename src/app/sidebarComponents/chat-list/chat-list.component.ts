@@ -14,8 +14,26 @@ import { NewChatDialogComponent } from 'src/app/dialogComponents/new-chat-dialog
 })
 export class ChatListComponent implements OnInit, OnChanges {
   
+  // Properties
+
+  /**
+   * An observable of all the chats information.
+   * 
+   * @type {Observable<ChatInfo[]>}
+   */
   chatInfos: Observable<ChatInfo[]>;
 
+
+  // Constructor
+
+  /**
+   * Creates a ChatListComponent.
+   * 
+   * @param chatService 
+   *          The chat service.
+   * @param dialog 
+   *          The dialog to create a new chat.
+   */
   constructor(
     private chatService: ChatService,
     private dialog: MatDialog
@@ -31,11 +49,16 @@ export class ChatListComponent implements OnInit, OnChanges {
     this.update();
   }
 
-  
+  /**
+   * Updates all the chats information.
+   */
   update() : void {
     this.chatInfos = this.chatService.getAllChats();
   }
 
+  /**
+   * Creates a new chat.
+   */
   newChat() {
     // TODO
     // open a dialog to create a new chat
