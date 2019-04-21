@@ -19,6 +19,8 @@ class Session {
 
   /**
    * Represents the WebID of the session.
+   * 
+   * @type {string}
    */
   webId: string;
 }
@@ -34,9 +36,13 @@ export class DashboardComponent implements OnInit {
 
   /**
    * Represents the current session.
+   * 
+   * @type {Session}
    */
   session: Session = new Session();
 
+
+  // Constructor
 
   /**
    * Creates a DashBoardComponent.

@@ -18,16 +18,22 @@ export class NewChatDialogComponent implements OnInit {
 
   /**
    * The name of the new chat.
+   * 
+   * @type {string}
    */
   chatName : string;
 
   /**
    * The users participating on the new chat.
+   * 
+   * @type {User[]}
    */
   users : User[];
 
   /**
    * The contacts of the current user of the application.
+   * 
+   * @type {User[]}
    */
   contacts : User[];
 

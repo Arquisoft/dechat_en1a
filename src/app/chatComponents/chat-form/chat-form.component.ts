@@ -15,6 +15,8 @@ export class ChatFormComponent implements OnInit {
 
     /**
      * Corresponds to the ng bingding in the html <input/>
+     * 
+     * @type {string}
      */
     message: string;
 

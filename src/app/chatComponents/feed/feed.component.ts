@@ -15,6 +15,8 @@ export class FeedComponent implements OnInit, OnChanges {
     /**
      * The feed of the chat, being represented 
      * by an Observable of ChatMessage objects.
+     * 
+     * @type {Observable<ChatMessage[]>}
      */
     feed: Observable<ChatMessage[]>;
     ready: boolean;

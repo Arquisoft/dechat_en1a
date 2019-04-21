@@ -11,16 +11,37 @@ import {AuthService} from '../services/solid/solid.auth.service';
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private auth: AuthService, private router: Router) {
-    }
+    // Properties
 
     /**
-     * A list of Solid Identity Providers
+     * A list of Solid Identity Providers.
+     * 
      * @type {SolidProvider[]}
      */
     identityProviders: SolidProvider[];
+
+    /**
+     * A string representing the selected provider URL.
+     * 
+     * @type string
+     */
     selectedProviderUrl: string;
+
+    /**
+     * A string representing the custom provider URL.
+     * 
+     * @type string
+     */
     customProviderUrl: string;
+
+
+    // Constructor
+
+    /**
+     * Creates a LoginComponent.
+     */
+    constructor(private auth: AuthService, private router: Router) {
+    }
 
     ngOnInit() {
         // If we're authenticated, go to profile
@@ -31,9 +52,9 @@ export class LoginComponent implements OnInit {
         this.identityProviders = this.auth.getIdentityProviders();
     }
 
-    /*
-    *  Alternate login-popup function for Solid. See service for more details.
-    */
+    /**
+     * Alternate login-popup function for Solid. See service for more details.
+     */
     onLoginPopup = async () => {
         this.auth.solidLoginPopup();
     }
@@ -50,6 +71,9 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    /**
+     * Goes to the registration page for solid community PODs.
+     */
     goToRegistration() {
         window.location.href = 'https://solid.community/register';
     }

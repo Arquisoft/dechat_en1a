@@ -13,20 +13,28 @@ export class NewMultimediaDialogComponent implements OnInit {
 
   /**
    * The URL of the multimedia.
+   * 
+   * @type {string}
    */
   url: string
 
   /**
    * The type of the multimedia. It can be an audio, video or image.
+   * 
+   * @type {string}
    */
   type: string
 
   /**
    * Model representing the multimedia element. 
+   * 
+   * @type {string}
    */
   multimedia: Multimedia
 
 
+  // Constructor
+  
   /**
    * Creates a NewMultimediaDialogComponent.
    * 

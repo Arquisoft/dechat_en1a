@@ -13,7 +13,9 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
     // Properties
 
     /**
-     *  Reference to the #scroller element in the DOM
+     * Reference to the #scroller element in the DOM
+     * 
+     * @type {ElementRef}
      */ 
     @ViewChild('scroller') feedContainer: ElementRef;
 
