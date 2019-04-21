@@ -8,11 +8,29 @@ import { User } from 'src/app/models/dechat/user.model';
 })
 export class UserDisplaySlotComponent implements OnInit {
 
+  // Properties
+
+  /**
+   * Model representing a user.
+   * 
+   * @type {User}
+   */
   @Input() user: User;
 
+  /**
+   * The name of the user.
+   * 
+   * @type {string}
+   */
   userName : string;
   // TODO picture
 
+
+  // Constructor
+
+  /**
+   * Creates an UserDisplaySlotComponent
+   */
   constructor() { }
 
   ngOnInit(user = this.user) {
