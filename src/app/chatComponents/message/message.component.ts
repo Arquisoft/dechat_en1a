@@ -14,37 +14,51 @@ export class MessageComponent implements OnInit {
 
     /**
      * Model of a chat message.
+     * 
+     * @type {ChatMessage}
      */
     @Input() chatMessage: ChatMessage;
 
     /**
      * Represents the multimedia contained by a chat message.
+     * 
+     * @type {MultimediaDisplayComponent}
      */
     @Input() multimedia: MultimediaDisplayComponent;
 
     /**
      * The email of the user.
+     * 
+     * @type {string}
      */
     userEmail: string;
 
     /**
      * The name of the user.
+     * 
+     * @type {string}
      */
     userName: string;
 
     /**
      * The message text.
+     * 
+     * @type {string}
      */
     messageContent: string;
 
     /**
      * The time at which the message was sent.
+     * 
+     * @type {string}
      */
     timeSent: string;
 
     /**
      * If the message corresponds to the current 
      * user of the application.
+     * 
+     * @type {boolean}
      */
     isOwnMessage: boolean;
     ready: boolean;
