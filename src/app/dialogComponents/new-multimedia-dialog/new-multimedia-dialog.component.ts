@@ -10,10 +10,29 @@ import { Multimedia } from 'src/app/models/dechat/multimedia.model';
 export class NewMultimediaDialogComponent implements OnInit {
 
   // Properties
+
+  /**
+   * The URL of the multimedia.
+   */
   url: string
+
+  /**
+   * The type of the multimedia. It can be an audio, video or image.
+   */
   type: string
+
+  /**
+   * Model representing the multimedia element. 
+   */
   multimedia: Multimedia
 
+
+  /**
+   * Creates a NewMultimediaDialogComponent.
+   * 
+   * @param dialogRef
+   *          The reference of the dialog.
+   */
   constructor(public dialogRef: MatDialogRef<NewMultimediaDialogComponent>) {
     
   }
@@ -22,6 +41,9 @@ export class NewMultimediaDialogComponent implements OnInit {
 
   }
 
+  /**
+   * Closes the dialog.
+   */
   cancel() {
     this.closeDialog();
   }
@@ -30,6 +52,9 @@ export class NewMultimediaDialogComponent implements OnInit {
     this.dialogRef.close('Dialog closed!');
   }
 
+  /**
+   * Adds the multimedia to the message.
+   */
   addMultimedia() {
     this.multimedia = new Multimedia(this.url, this.type, "");
     // TODO: Now this multimedia needs to be returned to the chat-form

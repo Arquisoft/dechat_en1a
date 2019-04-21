@@ -6,8 +6,20 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/solid/solid.auth.service';
 
 class Session {
+
+  // Constructor
+
+  /**
+   * Creates a Session object.
+   */
   constructor() {}
 
+
+  // Properties
+
+  /**
+   * Represents the WebID of the session.
+   */
   webId: string;
 }
 
@@ -17,8 +29,18 @@ class Session {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  // Properties
+
+  /**
+   * Represents the current session.
+   */
   session: Session = new Session();
 
+
+  /**
+   * Creates a DashBoardComponent.
+   */
   constructor(private auth: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
