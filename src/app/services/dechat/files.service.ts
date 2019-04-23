@@ -5,7 +5,7 @@ import {User} from 'src/app/models/dechat/user.model';
 import {RdfService} from '../solid/rdf.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FilesService {
 
@@ -32,169 +32,204 @@ export class FilesService {
         //this.readFile(inboxFolder + ".acl");
 
         this.checkFolderExistence(inboxFolder);
-        this.checkFolderExistence(userFolder).then(then =>
-          this.checkFolderExistence(userFolder + "dechat_en1a/").then( then =>
-            this.checkFolderExistence(userFolder + "dechat_en1a/chats/")
-          )
+        this.checkFolderExistence(userFolder).then((then) =>
+            this.checkFolderExistence(userFolder + 'dechat_en1a/').then((then) =>
+                this.checkFolderExistence(userFolder + 'dechat_en1a/chats/'),
+            ),
         );
     }
-  
 
-  // Checks if a folder exists.
-  // If not, it will create a folder with the requested url.
-  async checkFolderExistence(url : string, onError = (err) => {}) {
-    await this.rdf.getSession();
-    try {
-      solidFiles.readFolder(url).then(
-        (success: any) => { console.log('Existent folder!'); }, 
-        (error: any) => {
-            console.log('Non existent folder. Creating new one...');
-            this.createFolder(url).then(onError);
-        });
-    }
-    catch (error) {
-      console.log(`Error creating folder: ${error}`);
-    }    
-  }
-
-
-  /*
-    It will check the existance of the chat folder and, inside
-    that folder, the existance of the chat data file.
-  */
-  async checkChatFolder(user: User, chat : ChatInfo) {
-    await this.rdf.getSession();
-
-    var path = this.getChatUrl(user, chat);
-    
-    var error = (e) => { // TO be executed if the file doesn't exist yet
-      this.checkChatDataFile(path, chat);
-      this.givePermissions(path, user);
+    // Checks if a folder exists.
+    // If not, it will create a folder with the requested url.
+    async checkFolderExistence(url: string, onError = (err) => {
+    }) {
+        await this.rdf.getSession();
+        try {
+            solidFiles.readFolder(url).then(
+                (success: any) => {
+                    console.log('Existent folder!');
+                },
+                (error: any) => {
+                    console.log('Non existent folder. Creating new one...');
+                    this.createFolder(url).then(onError);
+                });
+        } catch (error) {
+            console.log(`Error creating folder: ${error}`);
+        }
     }
 
-    await this.checkFolderExistence(path, error);
-     
-  }
+    /*
+      It will check the existance of the chat folder and, inside
+      that folder, the existance of the chat data file.
+    */
+    async checkChatFolder(user: User, chat: ChatInfo) {
+        await this.rdf.getSession();
 
-  private checkChatDataFile(path : string, chat : ChatInfo) {
-      var filename = path + "data.txt";
-      var json = JSON.stringify(chat);
-      this.updateFile(filename, json);
-  }
+        const path = this.getChatUrl(user, chat);
 
+        const error = (e) => { // TO be executed if the file doesn't exist yet
+            this.checkChatDataFile(path, chat);
+            this.givePermissions(path, user);
+        };
 
+        await this.checkFolderExistence(path, error);
 
-  getChatsRootUrl(user: User) : string {
-    return this.getRoot(user) + "chats/";
-  }
+    }
 
+    private checkChatDataFile(path: string, chat: ChatInfo) {
+        const filename = path + 'data.txt';
+        let data = `@prefix : <#>.
+@prefix data: <>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix ldp: <http://www.w3.org/ns/ldp#>.
+@prefix schema: <http://schema.org/>.
+@prefix chat: <${this.rdf.getWebID().replace('/profile/card#me', '/private/dechat_en1a/chats/')}${chat.chatId}/>.
+@prefix chatImage: <${this.rdf.getWebID().replace('/profile/card#me', '/private/dechat_en1a/chats/')}${chat.chatId}/${chat.chatImage}>.
+`;
+        for (let i = 0; i < chat.users.length; i++) {
+            data += `@prefix u${i}: <${chat.users[i].url}>.
+`;
+        }
+        data += `data:
+        a ldp:Resource.
+chatImage:
+    a schema:URL.
+chat:
+        a schema:Conversation;
+        schema:name "${chat.chatName}";
+        schema:image chatImage;
+        `;
+        for (let i = 0; i < chat.users.length - 1; i++) {
+            if (chat.administrators.includes(chat.users[i])) {
+                data += `schema:contributor u${i};
+        schema:author u${i};
+        `;
+            } else {
+                data += `schema:contributor u${i};
+        `;
+            }
+        }
+        if (chat.administrators.includes(chat.users[chat.users.length - 1])) {
+            data += `schema:contributor u${chat.users.length - 1};
+        schema:author u${chat.users.length - 1}.
+        `;
+        } else {
+            data += `schema:contributor u${chat.users.length - 1}.
+        `;
+        }
+        this.updateFile(filename, data);
+    }
 
-  getChatUrl(user: User, chat : ChatInfo) : string {
-    var userFolder = this.getRoot(user) + "chats/";
-    var url = userFolder + chat.chatId + "/";
-    console.log("Chat url = " + url);
-    return url;
-  }
+    getChatsRootUrl(user: User): string {
+        return this.getRoot(user) + 'chats/';
+    }
 
-  getInboxUrl(user: User) : string {
-    return user.url.replace('/profile/card#me', '/inbox/');
-  }
+    getChatUrl(user: User, chat: ChatInfo): string {
+        const userFolder = this.getRoot(user) + 'chats/';
+        const url = userFolder + chat.chatId + '/';
+        console.log('Chat url = ' + url);
+        return url;
+    }
 
+    getInboxUrl(user: User): string {
+        return user.url.replace('/profile/card#me', '/inbox/');
+    }
 
-  async createFolder(url: String) {
-    await solidFiles.createFolder(url).then(
-      (success: any) => { console.log(`Created folder ${url}.`); },
-      (error: any) => { console.log('Could not create folder: ' + error) }
-    );
-  }
+    async createFolder(url: String) {
+        await solidFiles.createFolder(url).then(
+            (success: any) => {
+                console.log(`Created folder ${url}.`);
+            },
+            (error: any) => {
+                console.log('Could not create folder: ' + error);
+            },
+        );
+    }
 
-  async createFile(url: string, str: string = null) {
-    await solidFiles.createFile(url).then(
-      (success: any) => { 
-        console.log(`Created file ${url}.`);
-        if (str != null)
-          this.updateFile(url, str);
-      },
-      (error: any) => { console.log('Could not create file: ' + error) }
-    );
-  }
+    async createFile(url: string, str: string = null) {
+        await solidFiles.createFile(url).then(
+            (success: any) => {
+                console.log(`Created file ${url}.`);
+                if (str != null) {
+                    this.updateFile(url, str);
+                }
+            },
+            (error: any) => {
+                console.log('Could not create file: ' + error);
+            },
+        );
+    }
 
-  async updateFile(url: string, str: string) {
-    await solidFiles.updateFile(url, str).then(
-      (success: any) => { console.log("File edited!"); },
-      (error: any) => { 
-        //console.log("Could not edit file: " + error)
-        this.createFile(url, str);
-      }
-    );
-  }
+    async updateFile(url: string, str: string) {
+        await solidFiles.updateFile(url, str).then(
+            (success: any) => {
+                console.log('File edited!');
+            },
+            (error: any) => {
+                //console.log("Could not edit file: " + error)
+                this.createFile(url, str);
+            },
+        );
+    }
 
+    async readFile(url: string): Promise<string> {
+        let result = '';
+        await solidFiles.readFile(url).then((body) => {
+            console.log(`File content is : ${body}.`);
+            result = body;
+        }, (err) => console.log(err));
+        return result;
+    }
 
+    deleteFile(url: string) {
+        solidFiles.deleteFile(url).then(
+            (success) => {
+                console.log(`Deleted ${url}.`);
+            },
+            (err) => console.log(err),
+        );
+    }
 
-  async readFile(url: string) : Promise<string> {
-    var result = "";
-    await solidFiles.readFile(url).then(  body => {
-      console.log(`File content is : ${body}.`);
-      result = body;
-    }, err => console.log(err) );
-    return result;
-  }
+    async readFolder(url: string): Promise<string[]> {
 
-  deleteFile(url: string) {
-    solidFiles.deleteFile(url).then(
-        success => { console.log(`Deleted ${url}.`); },
-        err => console.log(err)
-      );
-  }
+        let result = [];
+        await solidFiles.readFolder(url).then(
+            (folder) => {
+                result = folder.files.map((f) => f.url);
+            },
+            (err) => console.log(err),
+        );
+        return result;
+    }
 
+    deleteFolder(url: string) {
+        solidFiles.deleteFolder(url).then(
+            (success) => {
+                console.log(`Deleted ${url}.`);
+            },
+            (err) => console.log(err),
+        );
+    }
 
-  async readFolder(url: string): Promise<string[]> {
-    
-    let result = [];    
-    await solidFiles.readFolder(url).then(
-      folder => { result = folder.files.map((f) => f.url); },
-      err => console.log(err)
-    );
-    return result;
-  }
+    async readFolderSubfolders(url: string): Promise<string[]> {
 
-  deleteFolder(url: string) {
-    solidFiles.deleteFolder(url).then(
-        success => { console.log(`Deleted ${url}.`); },
-        err => console.log(err)
-      );
-  }
+        let result = [];
+        await solidFiles.readFolder(url).then(
+            (folder) => {
+                result = folder.folders.map((f) => f.url);
+            },
+            (err) => console.log(err),
+        );
+        return result;
+    }
 
-
-  async readFolderSubfolders(url: string) : Promise<string[]> {
-    
-    var result = [];
-    await solidFiles.readFolder(url).then(
-      folder => { result = folder.folders.map(f => f.url); },
-      err => console.log(err)
-    );
-    return result;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-     
-  async givePermissions(path: string, owner: User) {
-    const webId = owner.url;//.replace('#me', '#');
-    const acl =
-          `# ACL resource for the profile folder
+    async givePermissions(path: string, owner: User) {
+        const webId = owner.url; //.replace('#me', '#');
+        const acl =
+            `# ACL resource for the profile folder
           @prefix acl: <http://www.w3.org/ns/auth/acl#>.
           @prefix foaf: <http://xmlns.com/foaf/0.1/>.
-          
+
           # The owner has all permissions
           <#owner>
               a acl:Authorization;
@@ -202,7 +237,7 @@ export class FilesService {
               acl:accessTo <./>;
               acl:defaultForNew <./>;
               acl:mode acl:Read, acl:Write, acl:Control.
-          
+
           # The public has read permissions
           <#public>
               a acl:Authorization;
@@ -210,84 +245,72 @@ export class FilesService {
               acl:accessTo <./>;
               acl:defaultForNew <./>;
               acl:mode acl:Read.`;
-  
-    path += '.acl';
-    this.readFile(path);
-    solidFiles.updateFile(path, acl).then((success: any) => {
-      console.log('Folder permisions added');
-    }, (err: string) => console.log('Could not set folder permisions' + err));
-  }
 
-
-
-
-
-  // Process the .acl file to give premissions to a new user
-  // Work in prograss
-  private addUserToAclFile(str : string, newUser: User) {
-
-    var webId = newUser.url;
-    var lines : string[] = str.split("\n");
-
-    // First check the @prefixes //
-    var lastPrefixLine = 0;
-    var prefixes = lines.filter((str, index, array) => {
-      if (str.startsWith("@prefix")) {
-        lastPrefixLine = index;
-        return true;
-      }
-      return false;
-    });
-
-
-    // Check w3.org auth acl
-    var isW3Added = false;
-    var w3 = "http://www.w3.org/ns/auth/acl#";
-    for (var i = 0; i < prefixes.length; i ++) {
-      if (prefixes[i].includes(w3)) {
-        isW3Added = true;
-        break;
-      }
-    }    
-    if (!isW3Added) {
-      var prefix = `@prefix n0: <${w3}>.\n`;
-      lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
-      lastPrefixLine ++;
+        path += '.acl';
+        this.readFile(path);
+        solidFiles.updateFile(path, acl).then((success: any) => {
+            console.log('Folder permisions added');
+        }, (err: string) => console.log('Could not set folder permisions' + err));
     }
 
-    // Check user prefix added
-    var isUserAdded = false;
-    for (var i = 0; i < prefixes.length; i ++) {
-      if (prefixes[i].includes(webId)) {
-        isUserAdded = true;
-        break;
-      }
-    }    
-    if (!isUserAdded) {
-      var prefix = `@prefix c0: <${webId}>.\n`;
-      lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
+    // Process the .acl file to give premissions to a new user
+    // Work in prograss
+    private addUserToAclFile(str: string, newUser: User) {
+
+        let webId = newUser.url;
+        let lines: string[] = str.split('\n');
+
+        // First check the @prefixes //
+        let lastPrefixLine = 0;
+        let prefixes = lines.filter((str, index, array) => {
+            if (str.startsWith('@prefix')) {
+                lastPrefixLine = index;
+                return true;
+            }
+            return false;
+        });
+
+        // Check w3.org auth acl
+        let isW3Added = false;
+        let w3 = 'http://www.w3.org/ns/auth/acl#';
+        for (let i = 0; i < prefixes.length; i++) {
+            if (prefixes[i].includes(w3)) {
+                isW3Added = true;
+                break;
+            }
+        }
+        if (!isW3Added) {
+            let prefix = `@prefix n0: <${w3}>.\n`;
+            lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
+            lastPrefixLine++;
+        }
+
+        // Check user prefix added
+        let isUserAdded = false;
+        for (let i = 0; i < prefixes.length; i++) {
+            if (prefixes[i].includes(webId)) {
+                isUserAdded = true;
+                break;
+            }
+        }
+        if (!isUserAdded) {
+            let prefix = `@prefix c0: <${webId}>.\n`;
+            lines.splice(lastPrefixLine, 0 /*no removing!*/, prefix);
+        }
+
+        // Now add the :Read permission //
+        let readIndex = lines.findIndex((str, index, array) => str.startsWith(':Read'));
+        if (readIndex == -1) {
+            readIndex = lines.length;
+            lines.push(':Read\n');
+            lines.push('a n0:Authorization;\n');
+            lines.push('n0:accessTo <./>:;\n');
+            lines.push('n0:defaultForNew <./>:;\n');
+            lines.push('n0:mode n0:Read.`;\n');
+
+            lines.push('n0:agent c0:me;\n');
+        }
+
     }
-
-
-    // Now add the :Read permission //
-    var readIndex = lines.findIndex((str, index, array) => str.startsWith(":Read"));
-    if (readIndex == -1) {
-      readIndex = lines.length;
-      lines.push(":Read\n");
-      lines.push("a n0:Authorization;\n");
-      lines.push("n0:accessTo <./>:;\n");
-      lines.push("n0:defaultForNew <./>:;\n");
-      lines.push("n0:mode n0:Read.`;\n");
-
-      lines.push("n0:agent c0:me;\n");
-    }
-
-
-
-  }
-
-
-
-
 
 }
