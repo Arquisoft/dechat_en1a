@@ -12,6 +12,8 @@ import {NamedNode} from 'src/assets/types/rdflib';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
+const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
+const SCHEMA = $rdf.Namespace('http://schema.org/');
 
 /**
  * A service layer for RDF data manipulation using rdflib.js
@@ -54,7 +56,7 @@ export class RdfService {
      */
     getSession = async () => {
         this.session = await solid.auth.currentSession(localStorage);
-    }
+    };
 
     /**
      * Gets a node that matches the specified pattern using the VCARD onthology
@@ -69,7 +71,7 @@ export class RdfService {
      */
     getValueFromVcard = (node: string, webId?: string): string | any => {
         return this.getValueFromNamespace(node, VCARD, webId);
-    }
+    };
 
     /**
      * Gets a node that matches the specified pattern using the FOAF onthology
@@ -79,7 +81,27 @@ export class RdfService {
      */
     getValueFromFoaf = (node: string, webId?: string) => {
         return this.getValueFromNamespace(node, FOAF, webId);
-    }
+    };
+
+    /**
+     * Gets a node that matches the specified pattern using the LDP onthology
+     * @param {string} node LDP predicate to apply to the $rdf.any()
+     * @param {string?} webId The webId URL (e.g. https://yourpod.solid.community/profile/card#me)
+     * @return {string} The value of the fetched node or an emtpty string
+     */
+    getValueFromLdp = (node: string, webId?: string) => {
+        return this.getValueFromNamespace(node, SCHEMA, webId);
+    };
+
+    /**
+     * Gets a node that matches the specified pattern using the Schema onthology
+     * @param {string} node Schema predicate to apply to the $rdf.any()
+     * @param {string?} webId The webId URL (e.g. https://yourpod.solid.community/profile/card#me)
+     * @return {string} The value of the fetched node or an emtpty string
+     */
+    getValueFromSchema = (node: string, webId?: string) => {
+        return this.getValueFromNamespace(node, SCHEMA, webId);
+    };
 
     transformDataForm = (form: NgForm, me: any, doc: any) => {
         const insertions = [];
@@ -122,7 +144,7 @@ export class RdfService {
             insertions,
             deletions,
         };
-    }
+    };
 
     private addNewLinkedField(field, insertions, predicate, fieldValue, why, me: any) {
         // Generate a new ID. This id can be anything but needs to be unique.
@@ -167,7 +189,6 @@ export class RdfService {
                 uri = me;
                 break;
         }
-
         return uri;
     }
 
@@ -250,7 +271,7 @@ export class RdfService {
                 }
             });
         }
-    }
+    };
 
     getAddress = () => {
         const linkedUri = this.getValueFromVcard('hasAddress');
@@ -265,7 +286,7 @@ export class RdfService {
         }
 
         return {};
-    }
+    };
 
     // Function to get email. This returns only the first email, which is temporary
     getEmail = () => {
@@ -276,7 +297,7 @@ export class RdfService {
         }
 
         return '';
-    }
+    };
 
     // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
     getPhone = () => {
@@ -285,7 +306,7 @@ export class RdfService {
         if (linkedUri) {
             return this.getValueFromVcard('value', linkedUri).split('tel:+')[1];
         }
-    }
+    };
 
     getProfile = async () => {
 
@@ -313,7 +334,7 @@ export class RdfService {
         } catch (error) {
             console.log(`Error fetching data: ${error}`);
         }
-    }
+    };
 
     /**
      * Gets any resource that matches the node, using the provided Namespace
@@ -335,17 +356,127 @@ export class RdfService {
     //  |   |   |   |   |   |   |
     //  v   v   v   v   v   v   v
 
-    async getContacts(): Promise<NamedNode[]> {
-        // if (!this.session) {
-        //  await this.getSession();
-        // }
-        const webId = this.session.webId;
+    /**
+     * This method is used for retrieving the value of a field as an string.
+     * @param webId WebId of the resource from where the field is going to be retrieved.
+     * @param field Field to retrieve from the resource.
+     * @param namespace Namespace to which the field belongs.
+     */
+    async getField(webId: string, field: string, namespace: any): Promise<string> {
         try {
-            await this.fetcher.load(this.store.sym(webId).doc());
-            return this.store.each(this.store.sym(webId), FOAF('knows'));
-        } catch (error) {
-            console.log(`Error fetching contacts data: ${error}`);
+            const id = await this.store.sym(webId);
+            await this.fetcher.load(id.doc());
+            return this.store.any(id, namespace(field));
+        } catch (err) {
+            console.log(`Error while fetching data ${err}`);
         }
+    }
+
+    /**
+     * This method is used for retrieving data as an array.
+     * @param webId WebId from  which the data is going to be retrieved.
+     * @param field Field that is going to be retrieved from the resource.
+     * @param namespace Name space to which the field belongs.
+     */
+    async getFieldArray(webId: string, field: string, namespace: any): Promise<NamedNode[]> {
+        try {
+            const id = await this.store.sym(webId);
+            await this.fetcher.load(id.doc());
+            return this.store.each(id, namespace(field));
+        } catch (err) {
+            console.log(`Error while fetching data ${err}`);
+        }
+    }
+
+    async getFriendData(webId: string) {
+        try {
+
+            console.log('Profile loaded: ' + this.getValueFromVcard('fn', webId));
+            return {
+                fn: this.getValueFromVcard('fn', webId),
+                company: this.getValueFromVcard('organization-name', webId),
+                phone: this.getFriendPhone(webId),
+                role: this.getValueFromVcard('role', webId),
+                image: this.getValueFromVcard('hasPhoto', webId),
+                address: this.getFriendAddress(webId),
+                email: this.getFriendEmail(webId),
+            };
+        } catch (error) {
+            console.log(`Error fetching data: ${error}`);
+        }
+    }
+
+    // Function to get email. This returns only the first email, which is temporary
+    getFriendEmail = (webId: string) => {
+        const linkedUri = this.getValueFromVcard('hasEmail', webId);
+
+        if (linkedUri) {
+            return this.getValueFromVcard('value', linkedUri).split('mailto:')[1];
+        }
+
+        return '';
+    };
+
+    // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
+    getFriendPhone = (webId: string) => {
+        const linkedUri = this.getValueFromVcard('hasTelephone', webId);
+
+        if (linkedUri) {
+            return this.getValueFromVcard('value', linkedUri).split('tel:+')[1];
+        }
+    };
+
+    getFriendAddress = (webId: string) => {
+        const linkedUri = this.getValueFromVcard('hasAddress', webId);
+
+        if (linkedUri) {
+            return {
+                locality: this.getValueFromVcard('locality', linkedUri),
+                country_name: this.getValueFromVcard('country-name', linkedUri),
+                region: this.getValueFromVcard('region', linkedUri),
+                street: this.getValueFromVcard('street-address', linkedUri),
+            };
+        }
+
+        return {};
+    };
+
+    /**
+     * This method is used for adding a new friend from your solid profile
+     * @param webId WebId of the friend to add.
+     */
+    addFriend(webId: string) {
+        const me = $rdf.sym(this.session.webId);
+        const friend = $rdf.sym(webId);
+        const toBeInserted = $rdf.st(me, FOAF('knows'), friend, me.doc());
+        this.updateManager.update([], toBeInserted, (response, success, message) => {
+            if (success) {
+                this.toastr.success('Friend added', 'Success!');
+            } else {
+                this.toastr.error('Message: ' + message, 'An error has occurred');
+            }
+        });
+    }
+
+    /**
+     * This method is used to remove a friend from your solid profile.
+     * @param webId webId of the friend to remove
+     */
+    removeFriend(webId: string) {
+        const me = $rdf.sym(this.session.webId);
+        const friend = $rdf.sym(webId);
+        const toBeInserted = $rdf.st(me, FOAF('knows'), friend, me.doc());
+        this.updateManager.update(toBeInserted, [], (response: any, success: any, message: string) => {
+            if (success) {
+                this.toastr.success('Friend removed', 'Success!');
+            } else {
+                this.toastr.error('Message: ' + message, 'An error has occurred');
+            }
+        });
+    }
+
+    async getContacts(): Promise<NamedNode[]> {
+        return this.getFieldArray(this.getWebID(), 'knows', FOAF);
     }
 
     getWebID() {
@@ -354,6 +485,10 @@ export class RdfService {
 
     getUserName() {
         return this.getValueFromVcard('fn');
+    }
+
+    getProfilePicture() {
+        return this.getValueFromVcard('hasPhoto');
     }
 
 }
