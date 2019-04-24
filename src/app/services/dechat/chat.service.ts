@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 
 import {Observable, of} from 'rxjs';
 import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
-import {ChatMessage} from 'src/app/models/dechat/chat-message.model';
 import {User} from 'src/app/models/dechat/user.model';
 import {RdfService} from '../solid/rdf.service';
 import {FilesService} from './files.service';
@@ -41,6 +40,7 @@ export class ChatService {
                 if (element.type === InboxElementType.CHAT_REQUEST) {
                     this.createChatFromRequest(element);
                 }
+
             });
     }
 
@@ -130,7 +130,7 @@ export class ChatService {
             }
         });
 
-        await this.files.checkChatFolder(this.user, chat);
+        //await this.files.checkChatFolder(this.user, chat);
 
         return chat;
     }

@@ -79,7 +79,7 @@ export class InboxService {
             const file = files[i];
             if (file.length > 0) {
                 const inboxElement: InboxElement = new InboxElement();
-                if (this.rdf.requestIsChat(file)) {
+                if (await this.rdf.requestIsChat(file)) {
                     const chatInfo = await this.rdf.getChatData(file);
                     const chat = new ChatInfo(chatInfo.id);
                     chat.chatName = chatInfo.name;
@@ -99,8 +99,25 @@ export class InboxService {
                     });
                     inboxElement.chat = chat;
                     inboxElement.type = InboxElementType.CHAT_REQUEST;
+                } else {
+                    let msg;
+                    const messageInfo = await this.rdf.getMessageData(file);
+                    msg = new ChatMessage(messageInfo.message);
+                    msg.id = messageInfo.id;
+                    msg.date = messageInfo.date;
+                    msg.userUrl = messageInfo.sender;
+                    msg.chatId = messageInfo.chatId;
+                    msg.bundleId = messageInfo.bundleId;
+                    inboxElement.message = msg;
+                    inboxElement.type = InboxElementType.NEW_MESSAGE;
                 }
-                this.newElements.push(inboxElement);
+                if (this.newElements === undefined) {
+                    this.newElements.push(inboxElement);
+                } else {
+                    if (this.newElements.length < files.length) {
+                        this.newElements.push(inboxElement);
+                    }
+                }
                 console.log('Inbox element pushed: ' + inboxElement);
             }
             this.files.deleteFile(files[i]);
@@ -127,7 +144,7 @@ export class InboxService {
         this.sendRequest(request, filename);
     }
 
-    public sendNewMessage(toUser: User, chat: ChatInfo, message: ChatMessage) {
+    public async sendNewMessage(toUser: User, chat: ChatInfo, message: ChatMessage) {
 
         let request: InboxElement;
         request = new InboxElement();
@@ -138,12 +155,12 @@ export class InboxService {
         const inboxUrl = this.files.getInboxUrl(toUser);
         const filename = inboxUrl + 'DeChatEn1a_newmsg_' + message.id + '.ttl';
 
-        this.sendRequest(request, filename);
+        await this.sendRequest(request, filename);
     }
 
     private sendRequest(inboxElement: InboxElement, filename: string) {
         console.log('Sending request...');
-        const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfo();
+        const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfoInbox();
         this.files.createFile(filename, text);
     }
 

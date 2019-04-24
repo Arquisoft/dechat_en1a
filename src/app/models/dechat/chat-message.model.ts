@@ -32,6 +32,22 @@ export class ChatMessage {
         const msg = `@prefix : <#>.
 @prefix schem: <http://schema.org/>.
 @prefix s: <${this.userUrl}>.
+@prefix message: <${this.userUrl.replace('profile/card#me', 'private/dechat_en1a/chats/')}${this.chatId}/${this.bundleId}$${this.id}.ttl>.
+message:
+      a schem:Message;
+      schem:sender s:;
+      schem:identifier "${this.chatId}/${this.bundleId}/${this.id}";
+      schem:text "${this.message}";
+      schem:dateSent "${this.date.toISOString()}".
+    `;
+        return msg;
+    }
+
+    getTtlInfoInbox(): string {
+        const msg = `@prefix : <#>.
+@prefix schem: <http://schema.org/>.
+@prefix s: <${this.userUrl}>.
+@prefix message: <${this.userUrl.replace('profile/card#me', 'inbox/')}DeChatEn1a_newmsg_${this.id}.ttl>.
 message:
       a schem:Message;
       schem:sender s:;

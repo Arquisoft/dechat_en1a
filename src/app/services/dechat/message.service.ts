@@ -154,6 +154,7 @@ export class MessageService {
         // Push it so we can see it instantly
         this.currentMessages.push(message);
 
+        await this.inbox.sendNewMessage(this.user, this.currentChat.chatInfo, message);
         // Send to the inbox of all users
         this.currentChat.chatInfo.users.forEach(async (user) => {
             try {
@@ -170,6 +171,7 @@ export class MessageService {
         const message = new ChatMessage();
         message.message = msg;
         message.userName = this.user.userName;
+        message.userUrl = this.user.url;
         message.chatId = this.currentChat.chatInfo.chatId;
         message.bundleId = this.currentBundle.bundleId;
         return message;
@@ -178,15 +180,15 @@ export class MessageService {
     private async createMessageFromRequest(request: InboxElement) {
 
         const msg: ChatMessage = request.message;
-        const chatInfo: ChatInfo = request.chat;
+        const chatInfo: ChatInfo = this.chatMap.get(msg.chatId).chatInfo;
 
         if (this.currentChat === undefined) {
             // TODO Increase the unread icon on the chat
             // and create it
             console.log('Undefined current chat!!!!');
-        } else if (this.currentChat.chatInfo.chatId == chatInfo.chatId) {
-            const existentMsg = this.currentMessages.find((m, index, array) => m.id == msg.id);
-            if (existentMsg == undefined) {
+        } else if (this.currentChat.chatInfo.chatId === chatInfo.chatId) {
+            const existentMsg = this.currentMessages.find((m, index, array) => m.id === msg.id);
+            if (existentMsg === undefined) {
                 this.currentMessages.push(msg);
             }
         } else {
@@ -195,7 +197,6 @@ export class MessageService {
 
         if (!this.chatMap.has(msg.chatId)) {
             console.log('[ERROR] We have received a message and we don\'t have the chat in the map!!!!!!');
-            // TODO add it to the chat map
             return;
         }
 
@@ -212,9 +213,9 @@ export class MessageService {
 
         // Create the message file in the pod
         let path = await this.files.getChatUrl(this.user, this.currentChat.chatInfo);
-        console.log('HEEEEEERE' + path);
         path = path + bundle.bundleId + '/';
         path = path + msg.id + '.ttl';
+        console.log('HEEEEEERE' + path);
         await this.files.createFile(path, msg.getTtlInfo());
     }
 

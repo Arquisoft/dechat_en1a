@@ -12,7 +12,7 @@ import {NamedNode} from 'src/assets/types/rdflib';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
-const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
+const RDF = $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 const SCHEMA = $rdf.Namespace('http://schema.org/');
 
 /**
@@ -413,7 +413,6 @@ export class RdfService {
 
     async getChatData(chatUrl: string) {
         try {
-
             console.log('Chat loaded: ' + await this.getField(chatUrl, 'name', SCHEMA));
             return {
                 id: await this.getField(chatUrl, 'identifier', SCHEMA),
@@ -423,14 +422,14 @@ export class RdfService {
                 picture: await this.getField(chatUrl, 'image', SCHEMA),
             };
         } catch (error) {
-            console.log(`Error fetching data: ${error}`);
+            console.log(`Error fetching data : ${error}`);
         }
     }
 
     async getMessageData(messageUrl: string) {
         try {
-            console.log('Chat loaded: ' + await this.getField(messageUrl, 'name', SCHEMA));
             const identifier = await this.getField(messageUrl, 'identifier', SCHEMA);
+            console.log(`Message loaded: ${identifier}`);
             return {
                 id: identifier.split('/')[2],
                 chatId: identifier.split('/')[0],
@@ -446,8 +445,8 @@ export class RdfService {
 
     async requestIsChat(webId: string): Promise<boolean> {
         try {
-            const file = await this.store.sym(webId).doc();
-            return file.type === SCHEMA('conversation');
+            const file = await this.getFieldArray(webId, 'type', RDF);
+            return file.includes(SCHEMA('Conversation'));
         } catch (err) {
             console.log(`Error while fetching data ${err}`);
         }
