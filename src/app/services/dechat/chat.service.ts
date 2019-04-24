@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
 import {ChatMessage} from 'src/app/models/dechat/chat-message.model';
 import {User} from 'src/app/models/dechat/user.model';
+import {RdfService} from '../solid/rdf.service';
 import {FilesService} from './files.service';
 import {InboxService} from './inbox.service';
 import {MessageService} from './message.service';
@@ -30,6 +31,7 @@ export class ChatService {
         private files: FilesService,
         private messages: MessageService,
         private inbox: InboxService,
+        private rdf: RdfService,
     ) {
         this.allChats = [];
         this.setUp();
@@ -94,14 +96,14 @@ export class ChatService {
     * the other one.
     */
     async createChat(otherUser: User): Promise<ChatInfo> {
-        let users = [];
+        const users = [];
         users.push(otherUser);
         return this.createGroupChat(otherUser.nickname, users);
     }
 
     private async createChatFromRequest(request: InboxElement): Promise<ChatInfo> {
 
-        let chat: ChatInfo = request.chat; //JSON.parse(file);
+        const chat: ChatInfo = request.chat; //JSON.parse(file);
         this.allChats.push(chat);
         await this.files.checkChatFolder(this.user, chat);
         return chat;
@@ -153,24 +155,40 @@ export class ChatService {
     async fetchChat(chatUrl: string): Promise<ChatInfo> {
         console.log('Fetching chat: ' + chatUrl);
         let chat: ChatInfo;
-        let id = chatUrl;
+        const id = chatUrl;
 
         // Get the chat data file, with name and users
 
-        let dataFile = chatUrl + 'data.txt';
-        let file = await this.files.readFile(dataFile);
+        const dataFile = chatUrl + 'data.ttl';
+        const file = await this.files.readFile(dataFile);
 
-        if (file.length == 0 || file == undefined) {
+        if (file.length === 0 || file === undefined) {
             console.log('Something bad happened.');
             this.files.deleteFolder(chatUrl);
             return null;
         }
-        chat = JSON.parse(file);
-        if (chat == undefined) {
+        const chatInfo = await this.rdf.getChatData(dataFile);
+        if (chatInfo === undefined) {
             console.log('Something bad happened.');
             this.files.deleteFolder(chatUrl);
             return null;
         }
+        chat = new ChatInfo(id);
+        chat.chatName = chatInfo.name;
+        chat.chatImage = chatInfo.picture;
+        const users = await this.userService.getContacts();
+        users.forEach((user) => {
+            chatInfo.users.forEach((user2) => {
+                if (user.url === user2.value) {
+                    chat.users.push(user);
+                }
+            });
+            chatInfo.administrators.forEach((user2) => {
+                if (user.url === user2.value) {
+                    chat.administrators.push(user);
+                }
+            });
+        });
 
         // Load messages
         await this.messages.fetchChat(chat);

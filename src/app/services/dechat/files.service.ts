@@ -77,7 +77,7 @@ export class FilesService {
     }
 
     private checkChatDataFile(path: string, chat: ChatInfo) {
-        const filename = path + 'data.txt';
+        const filename = path + 'data.ttl';
         let data = `@prefix : <#>.
 @prefix data: <>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
@@ -97,24 +97,24 @@ chatImage:
 chat:
         a schema:Conversation;
         schema:name "${chat.chatName}";
-        schema:image chatImage;
+        schema:image chatImage:;
         `;
         for (let i = 0; i < chat.users.length - 1; i++) {
             if (chat.administrators.includes(chat.users[i])) {
-                data += `schema:contributor u${i};
-        schema:author u${i};
+                data += `schema:contributor u${i}:;
+        schema:author u${i}:;
         `;
             } else {
-                data += `schema:contributor u${i};
+                data += `schema:contributor u${i}:;
         `;
             }
         }
         if (chat.administrators.includes(chat.users[chat.users.length - 1])) {
-            data += `schema:contributor u${chat.users.length - 1};
-        schema:author u${chat.users.length - 1}.
+            data += `schema:contributor u${chat.users.length - 1}:;
+        schema:author u${chat.users.length - 1}:.
         `;
         } else {
-            data += `schema:contributor u${chat.users.length - 1}.
+            data += `schema:contributor u${chat.users.length - 1}:.
         `;
         }
         this.updateFile(filename, data);

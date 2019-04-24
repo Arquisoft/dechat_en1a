@@ -366,7 +366,12 @@ export class RdfService {
         try {
             const id = await this.store.sym(webId);
             await this.fetcher.load(id.doc());
-            return this.store.any(id, namespace(field));
+            const element = this.store.any(id, namespace(field));
+            if (element !== undefined) {
+                return element.value;
+            } else {
+                return element;
+            }
         } catch (err) {
             console.log(`Error while fetching data ${err}`);
         }
@@ -391,15 +396,30 @@ export class RdfService {
     async getFriendData(webId: string) {
         try {
 
-            console.log('Profile loaded: ' + this.getValueFromVcard('fn', webId));
+            console.log('Profile loaded: ' + await this.getField(webId, 'fn', VCARD));
             return {
-                fn: this.getValueFromVcard('fn', webId),
-                company: this.getValueFromVcard('organization-name', webId),
-                phone: this.getFriendPhone(webId),
-                role: this.getValueFromVcard('role', webId),
-                image: this.getValueFromVcard('hasPhoto', webId),
-                address: this.getFriendAddress(webId),
-                email: this.getFriendEmail(webId),
+                fn: await this.getField(webId, 'fn', VCARD),
+                company: await this.getField(webId, 'organization-name', VCARD),
+                phone: await this.getFriendPhone(webId),
+                role: await this.getField(webId, 'role', VCARD),
+                image: await this.getField(webId, 'hasPhoto', VCARD),
+                address: await this.getFriendAddress(webId),
+                email: await this.getFriendEmail(webId),
+            };
+        } catch (error) {
+            console.log(`Error fetching data: ${error}`);
+        }
+    }
+
+    async getChatData(chatUrl: string) {
+        try {
+
+            console.log('Chat loaded: ' + await this.getField(chatUrl, 'name', SCHEMA));
+            return {
+                name: await this.getField(chatUrl, 'name', SCHEMA),
+                administrators: await this.getFieldArray(chatUrl, 'author', SCHEMA),
+                users: await this.getFieldArray(chatUrl, 'contributor', SCHEMA),
+                picture: await this.getField(chatUrl, 'image', SCHEMA),
             };
         } catch (error) {
             console.log(`Error fetching data: ${error}`);
@@ -407,34 +427,39 @@ export class RdfService {
     }
 
     // Function to get email. This returns only the first email, which is temporary
-    getFriendEmail = (webId: string) => {
-        const linkedUri = this.getValueFromVcard('hasEmail', webId);
+    getFriendEmail = async (webId: string) => {
+        const linkedUri = await this.getField(webId, 'hasEmail', VCARD);
 
         if (linkedUri) {
-            return this.getValueFromVcard('value', linkedUri).split('mailto:')[1];
+            const mail = await this.getField(linkedUri, 'value', VCARD);
+            return mail.split('mailto:')[1];
         }
 
         return '';
     };
 
     // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
-    getFriendPhone = (webId: string) => {
-        const linkedUri = this.getValueFromVcard('hasTelephone', webId);
+    getFriendPhone = async (webId: string) => {
+        const linkedUri = await this.getField(webId, 'hasTelephone', VCARD);
 
         if (linkedUri) {
-            return this.getValueFromVcard('value', linkedUri).split('tel:+')[1];
+            const mail = await this.getField(linkedUri, 'value', VCARD);
+            const phone = mail.split('tel:')[1];
+            return phone;
         }
+
+        return '';
     };
 
-    getFriendAddress = (webId: string) => {
-        const linkedUri = this.getValueFromVcard('hasAddress', webId);
+    getFriendAddress = async (webId: string) => {
+        const linkedUri = await this.getField(webId, 'hasAddress', VCARD);
 
         if (linkedUri) {
             return {
-                locality: this.getValueFromVcard('locality', linkedUri),
-                country_name: this.getValueFromVcard('country-name', linkedUri),
-                region: this.getValueFromVcard('region', linkedUri),
-                street: this.getValueFromVcard('street-address', linkedUri),
+                locality: await this.getField(linkedUri, 'locality', VCARD),
+                country_name: await this.getField(linkedUri, 'country-name', VCARD),
+                region: await this.getField(linkedUri, 'region', VCARD),
+                street: await this.getField(linkedUri, 'street-address', VCARD),
             };
         }
 
@@ -484,11 +509,11 @@ export class RdfService {
     }
 
     getUserName() {
-        return this.getValueFromVcard('fn');
+        return this.getField(this.getWebID(), 'fn', VCARD);
     }
 
     getProfilePicture() {
-        return this.getValueFromVcard('hasPhoto');
+        return this.getField(this.getWebID(), 'hasPhoto', VCARD);
     }
 
 }

@@ -96,7 +96,9 @@ export class UserService {
                 c.userName = friendInfo.fn;
                 c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
             }
-            this.contacts.push(c);
+            if (this.contacts.length < contacts.length) {
+                this.contacts.push(c);
+            }
         });
     }
 
