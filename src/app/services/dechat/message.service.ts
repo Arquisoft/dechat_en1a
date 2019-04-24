@@ -8,6 +8,7 @@ import {InboxElement, InboxElementType} from 'src/app/models/dechat/inbox-elemen
 import {MessageBundle} from 'src/app/models/dechat/message-bundle.model';
 import {Multimedia} from 'src/app/models/dechat/multimedia.model';
 import {User} from 'src/app/models/dechat/user.model';
+import {RdfService} from '../solid/rdf.service';
 import {FilesService} from './files.service';
 import {InboxService} from './inbox.service';
 
@@ -38,6 +39,7 @@ export class MessageService {
     constructor(
         private files: FilesService,
         private inbox: InboxService,
+        private rdf: RdfService,
     ) {
 
         this.currentMessages = [];
@@ -136,7 +138,7 @@ export class MessageService {
     async sendMessage(msg: string) {
 
         // No bundle!!
-        if (this.currentBundle == undefined) {
+        if (this.currentBundle === undefined) {
             this.currentBundle = await this.createBundle(this.currentChat, this.getFullTimeStamp());
         }
 
@@ -154,7 +156,11 @@ export class MessageService {
 
         // Send to the inbox of all users
         this.currentChat.chatInfo.users.forEach(async (user) => {
-            this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
+            try {
+                this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
+            } catch (err) {
+                console.log(err);
+            }
         });
 
         console.log('[Message sent] : ' + msg);
@@ -174,7 +180,7 @@ export class MessageService {
         const msg: ChatMessage = request.message;
         const chatInfo: ChatInfo = request.chat;
 
-        if (this.currentChat == undefined) {
+        if (this.currentChat === undefined) {
             // TODO Increase the unread icon on the chat
             // and create it
             console.log('Undefined current chat!!!!');
@@ -196,7 +202,7 @@ export class MessageService {
         const chat = this.chatMap.get(msg.chatId);
         let bundle = await chat.getBundle(msg.bundleId);
 
-        if (bundle == undefined) {
+        if (bundle === undefined) {
             console.log('Undefined bundle. Creating it.');
             this.currentBundle = await this.createBundle(chat, msg.bundleId);
             bundle = this.currentBundle;
@@ -206,18 +212,21 @@ export class MessageService {
 
         // Create the message file in the pod
         let path = await this.files.getChatUrl(this.user, this.currentChat.chatInfo);
+        console.log('HEEEEEERE' + path);
         path = path + bundle.bundleId + '/';
-        path = path + msg.id + '.txt';
-        await this.files.createFile(path, JSON.stringify(msg));
+        path = path + msg.id + '.ttl';
+        await this.files.createFile(path, msg.getTtlInfo());
     }
 
     private async getMessageFromFile(url: string): Promise<ChatMessage> {
         let msg;
-        let json;
-        await this.files.readFile(url).then((body) => json = JSON.parse(body));
-
-        // Get all the message data, I guess
-        msg = new ChatMessage(json.message);
+        const messageInfo = await this.rdf.getMessageData(url);
+        msg = new ChatMessage(messageInfo.message);
+        msg.id = messageInfo.id;
+        msg.date = messageInfo.date;
+        msg.userUrl = messageInfo.sender;
+        msg.chatId = messageInfo.chatId;
+        msg.bundleId = messageInfo.bundleId;
         return msg;
     }
 

@@ -78,45 +78,7 @@ export class FilesService {
 
     private checkChatDataFile(path: string, chat: ChatInfo) {
         const filename = path + 'data.ttl';
-        let data = `@prefix : <#>.
-@prefix data: <>.
-@prefix foaf: <http://xmlns.com/foaf/0.1/>.
-@prefix ldp: <http://www.w3.org/ns/ldp#>.
-@prefix schema: <http://schema.org/>.
-@prefix chat: <${this.rdf.getWebID().replace('/profile/card#me', '/private/dechat_en1a/chats/')}${chat.chatId}/>.
-@prefix chatImage: <${this.rdf.getWebID().replace('/profile/card#me', '/private/dechat_en1a/chats/')}${chat.chatId}/${chat.chatImage}>.
-`;
-        for (let i = 0; i < chat.users.length; i++) {
-            data += `@prefix u${i}: <${chat.users[i].url}>.
-`;
-        }
-        data += `data:
-        a ldp:Resource.
-chatImage:
-    a schema:URL.
-chat:
-        a schema:Conversation;
-        schema:name "${chat.chatName}";
-        schema:image chatImage:;
-        `;
-        for (let i = 0; i < chat.users.length - 1; i++) {
-            if (chat.administrators.includes(chat.users[i])) {
-                data += `schema:contributor u${i}:;
-        schema:author u${i}:;
-        `;
-            } else {
-                data += `schema:contributor u${i}:;
-        `;
-            }
-        }
-        if (chat.administrators.includes(chat.users[chat.users.length - 1])) {
-            data += `schema:contributor u${chat.users.length - 1}:;
-        schema:author u${chat.users.length - 1}:.
-        `;
-        } else {
-            data += `schema:contributor u${chat.users.length - 1}:.
-        `;
-        }
+        const data = chat.getTtlInfo(this.rdf);
         this.updateFile(filename, data);
     }
 

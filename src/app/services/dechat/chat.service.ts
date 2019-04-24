@@ -173,7 +173,7 @@ export class ChatService {
             this.files.deleteFolder(chatUrl);
             return null;
         }
-        chat = new ChatInfo(id);
+        chat = new ChatInfo(chatInfo.id);
         chat.chatName = chatInfo.name;
         chat.chatImage = chatInfo.picture;
         const users = await this.userService.getContacts();

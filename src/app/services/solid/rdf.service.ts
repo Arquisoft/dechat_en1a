@@ -416,6 +416,7 @@ export class RdfService {
 
             console.log('Chat loaded: ' + await this.getField(chatUrl, 'name', SCHEMA));
             return {
+                id: await this.getField(chatUrl, 'identifier', SCHEMA),
                 name: await this.getField(chatUrl, 'name', SCHEMA),
                 administrators: await this.getFieldArray(chatUrl, 'author', SCHEMA),
                 users: await this.getFieldArray(chatUrl, 'contributor', SCHEMA),
@@ -423,6 +424,32 @@ export class RdfService {
             };
         } catch (error) {
             console.log(`Error fetching data: ${error}`);
+        }
+    }
+
+    async getMessageData(messageUrl: string) {
+        try {
+            console.log('Chat loaded: ' + await this.getField(messageUrl, 'name', SCHEMA));
+            const identifier = await this.getField(messageUrl, 'identifier', SCHEMA);
+            return {
+                id: identifier.split('/')[2],
+                chatId: identifier.split('/')[0],
+                bundleId: identifier.split('/')[1],
+                message: await this.getField(messageUrl, 'text', SCHEMA),
+                sender: await this.getFieldArray(messageUrl, 'sender', SCHEMA),
+                date: await this.getFieldArray(messageUrl, 'dateSent', SCHEMA),
+            };
+        } catch (error) {
+            console.log(`Error fetching data: ${error}`);
+        }
+    }
+
+    async requestIsChat(webId: string): Promise<boolean> {
+        try {
+            const file = await this.store.sym(webId).doc();
+            return file.type === SCHEMA('conversation');
+        } catch (err) {
+            console.log(`Error while fetching data ${err}`);
         }
     }
 

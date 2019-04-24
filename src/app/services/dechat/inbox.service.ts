@@ -3,7 +3,7 @@ import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
 import {ChatMessage} from 'src/app/models/dechat/chat-message.model';
 import {InboxElement, InboxElementType} from 'src/app/models/dechat/inbox-element.model';
 import {User} from 'src/app/models/dechat/user.model';
-import {ChatService} from './chat.service';
+import {RdfService} from '../solid/rdf.service';
 import {FilesService} from './files.service';
 import {UserService} from './user.service';
 
@@ -20,6 +20,8 @@ export class InboxService {
     constructor(
         private files: FilesService,
         private users: UserService,
+        private rdf: RdfService,
+        private userService: UserService,
     ) {
         this.newElements = [];
         this.onElementFoundCallbacks = [];
@@ -42,7 +44,7 @@ export class InboxService {
     // It checks if there exist new files in the inbox.
     private async checkInbox() {
 
-        if (this.user == undefined) {
+        if (this.user === undefined) {
             this.user = await this.users.getUser();
             return;
         }
@@ -53,7 +55,7 @@ export class InboxService {
         const folder = await this.files.readFolder(url).then(
             (result) => {
                 newFiles = result.filter((str, index, array) => str.includes('DeChatEn1a'));
-                //console.log("INBOX HAS " + newFiles.length + " FILES");
+                console.log('INBOX HAS ' + newFiles.length + ' FILES');
                 this.addInboxFiles(newFiles);
             });
 
@@ -74,10 +76,30 @@ export class InboxService {
     private async addInboxFiles(files: string[]) {
 
         for (let i = 0; i < files.length; i++) {
-
-            let file = await this.files.readFile(files[i]);
+            const file = files[i];
             if (file.length > 0) {
-                let inboxElement: InboxElement = JSON.parse(file);
+                const inboxElement: InboxElement = new InboxElement();
+                if (this.rdf.requestIsChat(file)) {
+                    const chatInfo = await this.rdf.getChatData(file);
+                    const chat = new ChatInfo(chatInfo.id);
+                    chat.chatName = chatInfo.name;
+                    chat.chatImage = chatInfo.picture;
+                    const users = await this.userService.getContacts();
+                    users.forEach((user) => {
+                        chatInfo.users.forEach((user2) => {
+                            if (user.url === user2.value) {
+                                chat.users.push(user);
+                            }
+                        });
+                        chatInfo.administrators.forEach((user2) => {
+                            if (user.url === user2.value) {
+                                chat.administrators.push(user);
+                            }
+                        });
+                    });
+                    inboxElement.chat = chat;
+                    inboxElement.type = InboxElementType.CHAT_REQUEST;
+                }
                 this.newElements.push(inboxElement);
                 console.log('Inbox element pushed: ' + inboxElement);
             }
@@ -100,7 +122,7 @@ export class InboxService {
         request.type = InboxElementType.CHAT_REQUEST;
 
         const inboxUrl = this.files.getInboxUrl(toUser);
-        const filename = inboxUrl + 'DeChatEn1a_chatreq_' + chat.chatId + '.txt';
+        const filename = inboxUrl + 'DeChatEn1a_chatreq_' + chat.chatId + '.ttl';
 
         this.sendRequest(request, filename);
     }
@@ -114,14 +136,14 @@ export class InboxService {
         request.type = InboxElementType.NEW_MESSAGE;
 
         const inboxUrl = this.files.getInboxUrl(toUser);
-        const filename = inboxUrl + 'DeChatEn1a_newmsg_' + message.id + '.txt';
+        const filename = inboxUrl + 'DeChatEn1a_newmsg_' + message.id + '.ttl';
 
         this.sendRequest(request, filename);
     }
 
     private sendRequest(inboxElement: InboxElement, filename: string) {
         console.log('Sending request...');
-        const text = JSON.stringify(inboxElement);
+        const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfo();
         this.files.createFile(filename, text);
     }
 
