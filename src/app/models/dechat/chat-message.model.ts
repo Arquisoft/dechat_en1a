@@ -29,10 +29,11 @@ export class ChatMessage {
     }
 
     getTtlInfo(): string {
+        console.log('MESSAGE USERURL: ' + this.userUrl);
         const msg = `@prefix : <#>.
 @prefix schem: <http://schema.org/>.
 @prefix s: <${this.userUrl}>.
-@prefix message: <${this.userUrl.replace('profile/card#me', 'private/dechat_en1a/chats/')}${this.chatId}/${this.bundleId}$${this.id}.ttl>.
+@prefix message: <${this.userUrl.replace('profile/card#me', 'private/dechat_en1a/chats/')}${this.chatId}/${this.bundleId}/${this.id}.ttl>.
 message:
       a schem:Message;
       schem:sender s:;

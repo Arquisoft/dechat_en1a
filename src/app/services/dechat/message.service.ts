@@ -47,7 +47,7 @@ export class MessageService {
 
         this.inbox.addOnElementFoundCallback(
             (element: InboxElement) => {
-                if (element.type == InboxElementType.NEW_MESSAGE) {
+                if (element.type === InboxElementType.NEW_MESSAGE) {
                     this.createMessageFromRequest(element);
                 }
             });
@@ -215,7 +215,7 @@ export class MessageService {
         let path = await this.files.getChatUrl(this.user, this.currentChat.chatInfo);
         path = path + bundle.bundleId + '/';
         path = path + msg.id + '.ttl';
-        console.log('HEEEEEERE' + path);
+        console.log('HEEEEEERE: ' + path);
         await this.files.createFile(path, msg.getTtlInfo());
     }
 
@@ -224,7 +224,7 @@ export class MessageService {
         const messageInfo = await this.rdf.getMessageData(url);
         msg = new ChatMessage(messageInfo.message);
         msg.id = messageInfo.id;
-        msg.date = messageInfo.date;
+        msg.date = new Date(messageInfo.date);
         msg.userUrl = messageInfo.sender;
         msg.chatId = messageInfo.chatId;
         msg.bundleId = messageInfo.bundleId;
@@ -244,7 +244,7 @@ export class MessageService {
         console.log('Loading all message bundles in the POD chat folder ' + chatUrl);
         const bundleFolders: string[] = await this.files.readFolderSubfolders(chatUrl);
 
-        if (bundleFolders.length == 0) {
+        if (bundleFolders.length === 0) {
             console.log('The chat has no bundles');
             return 0;
         }
@@ -295,7 +295,7 @@ export class MessageService {
 
     private async getBundle(chat: Chat, bundleId: string): Promise<MessageBundle> {
         const bundle = chat.getBundle(bundleId);
-        if (bundle != undefined) {
+        if (bundle !== undefined) {
             return bundle;
         }
         return await this.createBundle(chat, bundleId);

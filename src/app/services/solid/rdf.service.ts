@@ -321,13 +321,13 @@ export class RdfService {
         try {
             await this.fetcher.load(this.session.webId);
 
-            console.log('Profile loaded: ' + this.getValueFromVcard('fn'));
+            console.log('Profile loaded: ' + this.getProfileField('fn'));
             return {
-                fn: this.getValueFromVcard('fn'),
-                company: this.getValueFromVcard('organization-name'),
+                fn: await this.getProfileField('fn'),
+                company: await this.getProfileField('organization-name'),
                 phone: this.getPhone(),
-                role: this.getValueFromVcard('role'),
-                image: this.getValueFromVcard('hasPhoto'),
+                role: await this.getProfileField('role'),
+                image: await this.getProfileField('hasPhoto'),
                 address: this.getAddress(),
                 email: this.getEmail(),
             };
@@ -356,6 +356,11 @@ export class RdfService {
     //  |   |   |   |   |   |   |
     //  v   v   v   v   v   v   v
 
+    async getProfileField(field: string): Promise<string> {
+        return await this.getField(this.session.webId, field, VCARD);
+    }
+
+
     /**
      * This method is used for retrieving the value of a field as an string.
      * @param webId WebId of the resource from where the field is going to be retrieved.
@@ -365,7 +370,7 @@ export class RdfService {
     async getField(webId: string, field: string, namespace: any): Promise<string> {
         try {
             const id = await this.store.sym(webId);
-            await this.fetcher.load(id.doc());
+            await this.fetcher.load(id.doc(), {force: true, clearPreviousData: true});
             const element = this.store.any(id, namespace(field));
             if (element !== undefined) {
                 return element.value;
@@ -386,10 +391,10 @@ export class RdfService {
     async getFieldArray(webId: string, field: string, namespace: any): Promise<NamedNode[]> {
         try {
             const id = await this.store.sym(webId);
-            await this.fetcher.load(id.doc());
+            await this.fetcher.load(id.doc(), {force: true, clearPreviousData: true});
             return this.store.each(id, namespace(field));
         } catch (err) {
-            console.log(`Error while fetching data ${err}`);
+            console.log(`Error while fetching data:  ${err}`);
         }
     }
 
@@ -435,8 +440,8 @@ export class RdfService {
                 chatId: identifier.split('/')[0],
                 bundleId: identifier.split('/')[1],
                 message: await this.getField(messageUrl, 'text', SCHEMA),
-                sender: await this.getFieldArray(messageUrl, 'sender', SCHEMA),
-                date: await this.getFieldArray(messageUrl, 'dateSent', SCHEMA),
+                sender: await this.getField(messageUrl, 'sender', SCHEMA),
+                date: await this.getField(messageUrl, 'dateSent', SCHEMA),
             };
         } catch (error) {
             console.log(`Error fetching data: ${error}`);

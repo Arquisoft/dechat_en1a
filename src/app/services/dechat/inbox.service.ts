@@ -81,46 +81,59 @@ export class InboxService {
                 const inboxElement: InboxElement = new InboxElement();
                 if (await this.rdf.requestIsChat(file)) {
                     const chatInfo = await this.rdf.getChatData(file);
-                    const chat = new ChatInfo(chatInfo.id);
-                    chat.chatName = chatInfo.name;
-                    chat.chatImage = chatInfo.picture;
-                    const users = await this.userService.getContacts();
-                    users.forEach((user) => {
-                        chatInfo.users.forEach((user2) => {
-                            if (user.url === user2.value) {
-                                chat.users.push(user);
-                            }
+                    if (chatInfo) {
+                        const chat = new ChatInfo(chatInfo.id);
+                        chat.chatName = chatInfo.name;
+                        chat.chatImage = chatInfo.picture;
+                        const users = await this.userService.getContacts();
+                        users.forEach((user) => {
+                            chatInfo.users.forEach((user2) => {
+                                if (user.url === user2.value) {
+                                    chat.users.push(user);
+                                }
+                            });
+                            chatInfo.administrators.forEach((user2) => {
+                                if (user.url === user2.value) {
+                                    chat.administrators.push(user);
+                                }
+                            });
                         });
-                        chatInfo.administrators.forEach((user2) => {
-                            if (user.url === user2.value) {
-                                chat.administrators.push(user);
-                            }
-                        });
-                    });
-                    inboxElement.chat = chat;
-                    inboxElement.type = InboxElementType.CHAT_REQUEST;
+                        inboxElement.chat = chat;
+                        inboxElement.type = InboxElementType.CHAT_REQUEST;
+                    } else {
+                        return;
+                    }
                 } else {
                     let msg;
                     const messageInfo = await this.rdf.getMessageData(file);
-                    msg = new ChatMessage(messageInfo.message);
-                    msg.id = messageInfo.id;
-                    msg.date = messageInfo.date;
-                    msg.userUrl = messageInfo.sender;
-                    msg.chatId = messageInfo.chatId;
-                    msg.bundleId = messageInfo.bundleId;
-                    inboxElement.message = msg;
-                    inboxElement.type = InboxElementType.NEW_MESSAGE;
-                }
-                if (this.newElements === undefined) {
-                    this.newElements.push(inboxElement);
-                } else {
-                    if (this.newElements.length < files.length) {
-                        this.newElements.push(inboxElement);
+                    console.log('MESSAGE INFO: ' + messageInfo);
+                    if (messageInfo) {
+                        msg = new ChatMessage(messageInfo.message);
+                        msg.id = messageInfo.id;
+                        msg.date = new Date(messageInfo.date);
+                        msg.userUrl = messageInfo.sender;
+                        console.log('USERURL: ' + msg.userUrl);
+                        msg.chatId = messageInfo.chatId;
+                        msg.bundleId = messageInfo.bundleId;
+                        inboxElement.message = msg;
+                        inboxElement.type = InboxElementType.NEW_MESSAGE;
+                    } else {
+                        return;
                     }
                 }
+                this.addInboxElement(inboxElement, files.length);
+                this.files.deleteFile(files[i]);
                 console.log('Inbox element pushed: ' + inboxElement);
             }
-            this.files.deleteFile(files[i]);
+
+        }
+    }
+
+    addInboxElement(inboxElement: InboxElement, filesLength: number) {
+        if (this.newElements.length < filesLength) {
+            this.newElements.push(inboxElement);
+        } else {
+            console.log('Trying to add more files than there actually are');
         }
     }
 
