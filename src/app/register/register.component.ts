@@ -7,8 +7,25 @@ import {AuthService} from '../services/solid/solid.auth.service';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+    // Properties
+
+    /**
+     * Represents the available POD providers.
+     * 
+     * @type {any[]}
+     */
     availableProviders: any[];
 
+
+    // Constructor
+    
+    /**
+     * Creates a RegisterComponent.
+     * 
+     * @param auth 
+     *          The authentication service.
+     */
     constructor(private auth: AuthService) {
     }
 

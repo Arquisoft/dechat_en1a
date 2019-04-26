@@ -7,5 +7,11 @@ import {popupLogin} from 'solid-auth-client/dist-lib/solid-auth-client.bundle.js
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+    /**
+     * The title of the application.
+     * 
+     * @type {string}
+     */
     title = 'DeChat';
 }

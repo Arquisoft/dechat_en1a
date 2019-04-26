@@ -11,7 +11,9 @@ import { User } from '../models/dechat/user.model';
 })
 export class NavbarComponent implements OnInit {
 
-
+    /**
+     * Creates a NavbarComponent.
+     */
     constructor(private router: Router) {
         
     }
@@ -23,10 +25,11 @@ export class NavbarComponent implements OnInit {
     }
 
 
+    /**
+     * Checks wether the profile icon must be shown or not.
+     */
     showProfileIcon(): boolean {
         return this.router.url === '/chat';
     }
-
-
 
 }

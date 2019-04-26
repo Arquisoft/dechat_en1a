@@ -10,10 +10,26 @@ import {ChatMessage} from '../../models/dechat/chat-message.model';
 })
 export class FeedComponent implements OnInit, OnChanges {
 
-    feed: Observable<ChatMessage[]>;
+    // Properties
 
+    /**
+     * The feed of the chat, being represented 
+     * by an Observable of ChatMessage objects.
+     * 
+     * @type {Observable<ChatMessage[]>}
+     */
+    feed: Observable<ChatMessage[]>;
     ready: boolean;
 
+
+    // Constructor
+
+    /**
+     * Creates a FeedComponent.
+     * 
+     * @param messageService 
+     *          The message service, used to retrieve the messages of the chat.
+     */
     constructor(private messageService: MessageService) {
         this.ready = true;
     }

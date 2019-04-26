@@ -14,11 +14,44 @@ import { ChatService } from 'src/app/services/dechat/chat.service';
 })
 export class NewChatDialogComponent implements OnInit {
 
+  // Properties
+
+  /**
+   * The name of the new chat.
+   * 
+   * @type {string}
+   */
   chatName : string;
+
+  /**
+   * The users participating on the new chat.
+   * 
+   * @type {User[]}
+   */
   users : User[];
 
+  /**
+   * The contacts of the current user of the application.
+   * 
+   * @type {User[]}
+   */
   contacts : User[];
 
+
+  // Constructor
+
+  /**
+   * Creates a NewChatDialogComponent.
+   * Sets the users and contacts arrays to empty arrays.
+   * Gets the contacts of the current user.
+   * 
+   * @param dialogRef 
+   *          The reference of the dialog.
+   * @param userService 
+   *          The user service.
+   * @param chatService 
+   *          The chat service.
+   */
   constructor(
     public dialogRef: MatDialogRef<NewChatDialogComponent>,
     private userService : UserService,
@@ -33,13 +66,20 @@ export class NewChatDialogComponent implements OnInit {
     
   }
 
-
   private async setUp() {
     var c = await this.userService.getContacts();
     c.forEach(contact => this.contacts.push(contact));
   }
 
-
+  /**
+   * Listener called when the user clicks in one of his contacts.
+   * If the contact was already added to the new chat, the function will 
+   * delete that contact from the new chat. Otherwise, it will add the contact 
+   * as a participant of the new chat.
+   * 
+   * @param contact 
+   *          The contact clicked by the user.
+   */
   onContactClick(contact : User) {
     console.log("You clicked on " + contact.nickname);
 
@@ -54,21 +94,28 @@ export class NewChatDialogComponent implements OnInit {
     this.users.push(contact);
   }
 
+  /**
+   * Checks wether the contact is listed as a participant of the new chat
+   * or not.
+   *
+   * @param contact
+   *          The specified contact. 
+   */
   isContactIn(contact : User) {
     return this.users.includes(contact);
   }
 
-
-
-
-
+  /**
+   * Closes the dialog.
+   */
   cancel() {
     this.closeDialog();
   }
 
-
+  /**
+   * Creates the new chat.
+   */
   async create() {
-
     if (this.chatName == undefined)
       return; // TODO warn error
 
