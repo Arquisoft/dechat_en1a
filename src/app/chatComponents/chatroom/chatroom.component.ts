@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {OnChanges, Component, ElementRef, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MessageBundle} from 'src/app/models/dechat/message-bundle.model';
 import {ChatService} from '../../services/dechat/chat.service';
@@ -8,7 +8,7 @@ import {ChatService} from '../../services/dechat/chat.service';
     templateUrl: './chatroom.component.html',
     styleUrls: ['./chatroom.component.css']
 })
-export class ChatroomComponent implements OnInit, AfterViewChecked {
+export class ChatroomComponent implements OnInit, OnChanges {
 
     // Reference to the #scroller element in the DOM
     @ViewChild('scroller') feedContainer: ElementRef;
@@ -21,7 +21,7 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
     ngOnInit() {
     }
 
-    ngAfterViewChecked() {
+    ngOnChanges(changes: SimpleChanges): void {
         this.scrollToBottom();
     }
 
