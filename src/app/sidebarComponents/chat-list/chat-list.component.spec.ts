@@ -1,10 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ToastrModule} from 'ngx-toastr';
 import {ChatService} from 'src/app/services/dechat/chat.service';
-import {UserService} from 'src/app/services/dechat/user.service';
 import {MockChatService} from 'src/app/services/mock/mock-chat.service';
 import {ChatItemComponent} from '../chat-item/chat-item.component';
 import {ChatListComponent} from './chat-list.component';

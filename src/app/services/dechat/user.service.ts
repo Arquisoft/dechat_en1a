@@ -132,22 +132,19 @@ export class UserService {
 
         const contacts = await this.rdf.getContacts();
         console.log('Contact count = ' + contacts.length);
-
-        while (this.contacts.length > 0) {
-            this.contacts.pop();
-        }
-
-        contacts.forEach(async (element) => {
+        
+        await contacts.forEach(async (element) => {
             const c = new User(element.value);
+            console.log('Contact: ' + c.nickname);
+
             const friendInfo = await this.rdf.getFriendData(element.value);
             if (friendInfo) {
                 c.userName = friendInfo.fn;
-                c.userName = friendInfo.fn;
                 c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
             }
-            if (this.contacts.length < contacts.length) {
+            
+            if (!this.contacts.map(c => c.url).includes(c.url))
                 this.contacts.push(c);
-            }
         });
     }
 

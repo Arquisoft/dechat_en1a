@@ -74,7 +74,7 @@ export class InboxService {
         const folder = await this.files.readFolder(url).then(
             (result) => {
                 newFiles = result.filter((str, index, array) => str.includes('DeChatEn1a'));
-                console.log('INBOX HAS ' + newFiles.length + ' FILES');
+                //console.log('INBOX HAS ' + newFiles.length + ' FILES');
                 this.addInboxFiles(newFiles);
             });
 
