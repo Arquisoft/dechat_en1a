@@ -17,25 +17,73 @@ import {InboxService} from './inbox.service';
 })
 export class MessageService {
 
-    // Huge TODO here
-    //
-    // Now we are working with json-encoded plain text.
-    // This will have to change and use RDF.
-    //
-
+    /**
+     * The current user.
+     * 
+     * @type {User}
+     */
     user: User;
+
+    /**
+     * The chat message.
+     * 
+     * @type {ChatMessage}
+     */
     chatMessage: ChatMessage;
 
+    /**
+     * The active chat.
+     * 
+     * @type {Chat}
+     */
     currentChat: Chat;
+
+    /**
+     * The current messages.
+     * 
+     * @type {ChatMessage[]}
+     */
     currentMessages: ChatMessage[];
+
+    /**
+     * The current multimedia.
+     * 
+     * @type {Multimedia[]}
+     */
     currentMultimedia: Multimedia[];
+
+    /**
+     * The current message bundle.
+     * 
+     * @type {MessageBundle}
+     */
     currentBundle: MessageBundle;
+
+    /**
+     * The current chat's URL.
+     * 
+     * @type {string}
+     */
     currentChatUrl: string;
 
-    // We will store the chats locally in a hash map
-    // string -> ChatInfo.chatId
+    /**
+     * We are storing te chats locally in a hash map.
+     * 
+     * string -> ChatInfo.chatID
+     * 
+     * @type {Map<string, Chat>}
+     */
     chatMap: Map<string, Chat>;
 
+
+    /**
+     * Creates a message service.
+     * 
+     * @param files 
+     *          The files service.
+     * @param inbox 
+     *          The inbox service.
+     */
     constructor(
         private files: FilesService,
         private inbox: InboxService,
@@ -53,13 +101,26 @@ export class MessageService {
             });
     }
 
+
+    /**
+     * Sets the current user.
+     * 
+     * @param user 
+     *          The current user.
+     */
     setCurrentUser(user: User) {
         this.user = user;
     }
 
-    async fetchChat(chatInfo: ChatInfo) {
+    /**
+     * Fetchs the chat given the chat info.
+     * 
+     * @param chatInfo 
+     *          An object representing the chat information.
+     */
+    async fetchChat(chatInfo : ChatInfo) {
 
-        console.log('Message Service Fetching chat: ' + chatInfo.chatId);
+        console.log("Message Service Fetching chat: " + chatInfo.chatId);
 
         if (!this.chatMap.has(chatInfo.chatId)) {
             this.chatMap.set(chatInfo.chatId, new Chat(chatInfo));
@@ -69,6 +130,12 @@ export class MessageService {
         await this.loadAllMessageBundles(chatUrl, chat);
     }
 
+    /**
+     * Sets the current chat.
+     * 
+     * @param chatInfo 
+     *          An object representing the current chat information.
+     */
     async setCurrentChat(chatInfo: ChatInfo) {
 
         console.log('Message service setting current chat');
@@ -104,6 +171,9 @@ export class MessageService {
         });
     }
 
+    /**
+     * Returns a full time stamp, with the current date and time.
+     */
     getFullTimeStamp() {
         const now = new Date();
 
@@ -119,22 +189,38 @@ export class MessageService {
         return date + ' ' + time;
     }
 
+
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /*                                                           */
     /*                     MESSAGE MANAGEMENT                    */
     /*                                                           */
-
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+    /**
+     * Gets the current messages.
+     */
     getMessages(): Observable<ChatMessage[]> {
         return of(this.currentMessages);
     }
 
+    /**
+     * Sends a multimedia element.
+     * 
+     * @param multimedia 
+     *          The multimedia element.
+     */
     sendMultimedia(multimedia: Multimedia) {
         // We add it to the current multimedia array
         this.currentMultimedia.push(multimedia);
     }
 
+    /**
+     * Sends a message given its string.
+     * 
+     * @param msg 
+     *          The string with the message contents.
+     */
     async sendMessage(msg: string) {
 
         // No bundle!!
@@ -167,6 +253,12 @@ export class MessageService {
         console.log('[Message sent] : ' + msg);
     }
 
+    /**
+     * Creates a ChatMessage object given its contents in a string.
+     * 
+     * @param msg 
+     *          The string with the contents of the message.
+     */
     private createMessage(msg: string): ChatMessage {
         const message = new ChatMessage();
         message.message = msg;
@@ -177,6 +269,12 @@ export class MessageService {
         return message;
     }
 
+    /**
+     * Creates a message from an inbox request.
+     * 
+     * @param request 
+     *          The request in form of a InboxElement.
+     */
     private async createMessageFromRequest(request: InboxElement) {
 
         const msg: ChatMessage = request.message;
@@ -219,6 +317,12 @@ export class MessageService {
         await this.files.createFile(path, msg.getTtlInfo());
     }
 
+    /**
+     * Gets a message from a file given its URL.
+     * 
+     * @param url 
+     *          The URL of the file.
+     */
     private async getMessageFromFile(url: string): Promise<ChatMessage> {
         let msg;
         const messageInfo = await this.rdf.getMessageData(url);
@@ -231,15 +335,23 @@ export class MessageService {
         return msg;
     }
 
+
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /*                                                           */
     /*                     BUNDLE MANAGEMENT                     */
     /*                                                           */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-    // Looks at the message bundles in the pod, adds them
-    // to the map and returns how many of them are new
-    async loadAllMessageBundles(chatUrl: string, chat: Chat): Promise<number> {
+    
+    /**
+     * Looks at the message bundles in the POD, then it adds them 
+     * to the map and returns how many of them are new.
+     * 
+     * @param chatUrl 
+     * @param chat 
+     */
+    async loadAllMessageBundles(chatUrl : string, chat: Chat) : Promise<number>{
 
         console.log('Loading all message bundles in the POD chat folder ' + chatUrl);
         const bundleFolders: string[] = await this.files.readFolderSubfolders(chatUrl);
@@ -269,9 +381,18 @@ export class MessageService {
         return count;
     }
 
-    // Fetches all the messages in a given bundle.
-    // Returns the bundle object.
-    private async loadMessageBundle(chat: Chat, chatUrl: string, bundleUrl: string): Promise<MessageBundle> {
+    /**
+     * Fetches all the messages in a given bundle, and returns 
+     * the bundle object.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param chatUrl 
+     *          The URL of the given chat.
+     * @param bundleUrl 
+     *          The URL of the bundle.
+     */
+    private async loadMessageBundle(chat : Chat, chatUrl: string, bundleUrl: string) : Promise<MessageBundle>{
 
         console.log('Fetching message bundle.');
         const bundleId = bundleUrl.replace(chatUrl, '').replace('/', '');
@@ -293,15 +414,31 @@ export class MessageService {
         return bundle;
     }
 
-    private async getBundle(chat: Chat, bundleId: string): Promise<MessageBundle> {
-        const bundle = chat.getBundle(bundleId);
-        if (bundle !== undefined) {
+    /**
+     * Gets a bundle given a chat and the ID of the bundle.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param bundleId 
+     *          The ID of the bundle.
+     */
+    private async getBundle(chat : Chat, bundleId: string): Promise<MessageBundle> {
+        var bundle = chat.getBundle(bundleId);
+        if (bundle != undefined) {
             return bundle;
         }
         return await this.createBundle(chat, bundleId);
     }
 
-    private async createBundle(chat: Chat, id: string): Promise<MessageBundle> {
+    /**
+     * Creates a bundle for a given chat and a given ID.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param id 
+     *          The ID of the bundle to be created.
+     */
+    private async createBundle(chat : Chat, id: string): Promise<MessageBundle> {
 
         const bundle = new MessageBundle(chat.chatInfo.chatId, id);
         const path = await this.files.getChatUrl(this.user, chat.chatInfo);

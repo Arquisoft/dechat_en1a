@@ -18,13 +18,44 @@ import {v4 as uuid} from 'uuid';
 export class ChatService {
 
     // Attributes //
+
+    /**
+     * User of the application.
+     * 
+     * @type {User}
+     */
     user: User;
     userName: Observable<string>;
 
+    /**
+     * All the chats available for the user.
+     * 
+     * @type {ChatInfo[]}
+     */
     allChats: ChatInfo[];
+
+    /**
+     * The chat in which the user is currently 
+     * participating.
+     * 
+     * @type {ChatInfo}
+     */
     currentChat: ChatInfo;
 
     // Constructor //
+
+    /**
+     * Creates a chat service.
+     * 
+     * @param userService 
+     *          The users service.
+     * @param files 
+     *          The files service.
+     * @param messages 
+     *          The messages service.
+     * @param inbox 
+     *          The inbox service.
+     */
     constructor(
         private userService: UserService,
         private files: FilesService,
@@ -44,6 +75,12 @@ export class ChatService {
             });
     }
 
+
+    /**
+     * Sets up the chat service. It sets the current user, 
+     * gets their contacts, checks their files for the chats, and 
+     * fetches all the chats from their POD.
+     */
     async setUp() {
         await 1;
         this.user = await this.userService.getUser();
@@ -65,8 +102,10 @@ export class ChatService {
 
     }
 
-    // Given a ChatInfo object, we will open the chat
-    async openChat(chatInfo: ChatInfo): Promise<void> {
+    /**
+     * Given a ChatInfo object, we will open the chat
+     */
+    async openChat(chatInfo: ChatInfo) : Promise<void> {
 
         this.messages.setCurrentChat(chatInfo);
         this.currentChat = chatInfo;
@@ -75,6 +114,9 @@ export class ChatService {
         this.files.checkChatFolder(this.user, chatInfo);
     }
 
+    /**
+     * Gets all the chats available to the user.
+     */
     getAllChats(): Observable<ChatInfo[]> {
         return of(this.allChats);
     }
@@ -83,17 +125,27 @@ export class ChatService {
     /*                                                           */
     /*                 CHAT CREATION AND EDITION                 */
     /*                                                           */
-
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+    /**
+     * Checks whether the current user is an administrator 
+     * of the given chat.
+     * 
+     * @param chat 
+     *          The given chat.
+     */
     isAdmin(chat: ChatInfo): boolean {
         return chat.administrators.includes(this.user);
     }
 
-    /*
+
+   /**
     * Normal chats behave the same as group chats, so
     * we create a group chat with just both this user and
     * the other one.
+    * 
+    * @param otherUser 
+    *           The other user of the chat.
     */
     async createChat(otherUser: User): Promise<ChatInfo> {
         const users = [];
@@ -101,6 +153,13 @@ export class ChatService {
         return this.createGroupChat(otherUser.nickname, users);
     }
 
+
+    /**
+     * Creates a chat from a request.
+     * 
+     * @param request 
+     *          The InboxElement request.
+     */
     private async createChatFromRequest(request: InboxElement): Promise<ChatInfo> {
 
         const chat: ChatInfo = request.chat; //JSON.parse(file);
@@ -108,7 +167,16 @@ export class ChatService {
         await this.files.checkChatFolder(this.user, chat);
         return chat;
     }
-
+    
+    /**
+     * Creates a groupal chat, composed by the current user and other users.
+     * 
+     * @param chatName 
+     *          The name of the groupal chat.
+     * @param otherUsers 
+     *          An array of users with the components of the group, 
+     *          except the current user.
+     */
     async createGroupChat(chatName: string, otherUsers: User[]): Promise<ChatInfo> {
         console.log('Chat service creating new chat: ' + chatName);
         let chat: ChatInfo;
@@ -135,7 +203,15 @@ export class ChatService {
         return chat;
     }
 
-    addUserToChat(chat: ChatInfo, user: User): boolean {
+    /**
+     * Adds a given user to a given chat.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param user 
+     *          The given user.
+     */
+    addUserToChat(chat: ChatInfo, user: User) : boolean {
         if (!this.isAdmin(chat)) {
             return false;
         }
@@ -152,10 +228,16 @@ export class ChatService {
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-    async fetchChat(chatUrl: string): Promise<ChatInfo> {
-        console.log('Fetching chat: ' + chatUrl);
-        let chat: ChatInfo;
-        const id = chatUrl;
+    /**
+     * Fetchs a chat from a given URL.
+     * 
+     * @param chatUrl 
+     *          The URL of the chat.
+     */
+    async fetchChat(chatUrl : string) : Promise<ChatInfo> {
+        console.log("Fetching chat: " + chatUrl);    
+        var chat : ChatInfo;
+        var id = chatUrl;
 
         // Get the chat data file, with name and users
 
