@@ -2,8 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FormsModule} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material';
-import {ToastrModule} from 'ngx-toastr';
 import {RouterTestingModule} from '@angular/router/testing';
+import {ToastrModule} from 'ngx-toastr';
 
 import {UserDisplaySlotComponent} from '../../utilComponents/user-display-slot/user-display-slot.component';
 import {NewChatDialogComponent} from './new-chat-dialog.component';
