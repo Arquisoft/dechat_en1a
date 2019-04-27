@@ -15,9 +15,21 @@ export class FilesService {
     //  https://github.com/jeff-zucker/solid-file-client
     //
 
+    /**
+     * Creates a file service.
+     * 
+     * @param rdf 
+     *          The rdf service.
+     */
     constructor(private rdf: RdfService) {
     }
 
+    /**
+     * Gets the private folder of the given user.
+     * 
+     * @param user 
+     *          The given user.
+     */
     getRoot(user: User) {
         return user.url.replace('/profile/card#me', '/private/dechat_en1a/');
     }
@@ -42,6 +54,15 @@ export class FilesService {
 
   // Checks if a folder exists.
   // If not, it will create a folder with the requested url.
+  /**
+   * Checks if a folder exists. If it does not exist, it will create 
+   * a folder with the requested URL.
+   * 
+   * @param url 
+   *          The requested url
+   * @param onError 
+   *          Function to be executed in case an error occurs.
+   */
   async checkFolderExistence(url : string, onError = (err) => {}) {
     await this.rdf.getSession();
     try {
@@ -58,9 +79,9 @@ export class FilesService {
   }
 
 
-  /*
-    It will check the existance of the chat folder and, inside
-    that folder, the existance of the chat data file.
+ /** 
+  * Checks the existence of the chat folder, and inside that folder, 
+  * checks whethere the chat data file exists or not.
   */
   async checkChatFolder(user: User, chat : ChatInfo) {
     await this.rdf.getSession();
@@ -83,12 +104,24 @@ export class FilesService {
   }
 
 
-
+  /**
+   * Gets the chats' root URL for a given user.
+   * 
+   * @param user 
+   *          The given user.
+   */
   getChatsRootUrl(user: User) : string {
     return this.getRoot(user) + "chats/";
   }
 
-
+  /**
+   * Gets the given chat url of the given user.
+   * 
+   * @param user 
+   *          The given user.
+   * @param chat 
+   *          The given chat.
+   */
   getChatUrl(user: User, chat : ChatInfo) : string {
     var userFolder = this.getRoot(user) + "chats/";
     var url = userFolder + chat.chatId + "/";
@@ -96,11 +129,22 @@ export class FilesService {
     return url;
   }
 
+  /**
+   * Gets the Inbox URL of the given user.
+   *
+   * @param user 
+   *          The given user.
+   */
   getInboxUrl(user: User) : string {
     return user.url.replace('/profile/card#me', '/inbox/');
   }
 
-
+  /**
+   * Creates a folder for the given URL.
+   * 
+   * @param url
+   *          The URL in which the folder will be created. 
+   */
   async createFolder(url: String) {
     await solidFiles.createFolder(url).then(
       (success: any) => { console.log(`Created folder ${url}.`); },
@@ -108,6 +152,14 @@ export class FilesService {
     );
   }
 
+  /**
+   * Creates a file for the given URL and a string.
+   * 
+   * @param url 
+   *          The URL in which the file will be created.
+   * @param str 
+   *          The given string.
+   */
   async createFile(url: string, str: string = null) {
     await solidFiles.createFile(url).then(
       (success: any) => { 
@@ -119,6 +171,14 @@ export class FilesService {
     );
   }
 
+  /**
+   * Updates a file given its URL and a string.
+   * 
+   * @param url 
+   *          The URL of the file.
+   * @param str 
+   *          The string to be updated.
+   */
   async updateFile(url: string, str: string) {
     await solidFiles.updateFile(url, str).then(
       (success: any) => { console.log("File edited!"); },
@@ -130,7 +190,12 @@ export class FilesService {
   }
 
 
-
+  /**
+   * Reads a file given its URL.
+   * 
+   * @param url
+   *          The URL of the file. 
+   */
   async readFile(url: string) : Promise<string> {
     var result = "";
     await solidFiles.readFile(url).then(  body => {
@@ -140,6 +205,12 @@ export class FilesService {
     return result;
   }
 
+  /**
+   * Deletes a file given its URL.
+   * 
+   * @param url 
+   *          The URL of the file.
+   */
   deleteFile(url: string) {
     solidFiles.deleteFile(url).then(
         success => { console.log(`Deleted ${url}.`); },
@@ -147,7 +218,12 @@ export class FilesService {
       );
   }
 
-
+  /**
+   * Reads the contents of a folder.
+   * 
+   * @param url 
+   *          The URL of the folder.
+   */
   async readFolder(url: string): Promise<string[]> {
     
     let result = [];    
@@ -158,6 +234,12 @@ export class FilesService {
     return result;
   }
 
+  /**
+   * Deletes a folder.
+   * 
+   * @param url 
+   *          The URL of the folder.
+   */
   deleteFolder(url: string) {
     solidFiles.deleteFolder(url).then(
         success => { console.log(`Deleted ${url}.`); },
@@ -165,7 +247,12 @@ export class FilesService {
       );
   }
 
-
+  /**
+   * Reads the subfolders of a folder.
+   * 
+   * @param url 
+   *          The URL of the folder.
+   */
   async readFolderSubfolders(url: string) : Promise<string[]> {
     
     var result = [];
@@ -176,18 +263,14 @@ export class FilesService {
     return result;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-     
+  /**
+   * Gives permissions to the private folder of the owner.
+   * 
+   * @param path 
+   *          The path to the private folder.
+   * @param owner 
+   *          The owner of the private folder.
+   */   
   async givePermissions(path: string, owner: User) {
     const webId = owner.url;//.replace('#me', '#');
     const acl =
@@ -218,12 +301,14 @@ export class FilesService {
     }, (err: string) => console.log('Could not set folder permisions' + err));
   }
 
-
-
-
-
-  // Process the .acl file to give premissions to a new user
-  // Work in prograss
+  /**
+   * Process the .acl file to give permissions to a new user.
+   * 
+   * @param str 
+   *          The given string.
+   * @param newUser 
+   *          The new user.
+   */
   private addUserToAclFile(str : string, newUser: User) {
 
     var webId = newUser.url;
