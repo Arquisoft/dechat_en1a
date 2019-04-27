@@ -25,9 +25,7 @@ describe('ChatListComponent', () => {
                 ChatItemComponent,
             ],
             providers: [
-                {provide: ChatService, useClass: MockChatService},
-                {provide: MatDialogRef, useValue: {}},
-                {provide: MAT_DIALOG_DATA, useValue: {}},
+                {provide: ChatService, useClass: MockChatService}
             ],
         })
             .compileComponents();
