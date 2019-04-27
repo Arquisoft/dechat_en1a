@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ToastrModule} from 'ngx-toastr';
 import {ChatService} from 'src/app/services/dechat/chat.service';
@@ -18,6 +18,7 @@ describe('ChatListComponent', () => {
             imports: [
                 ToastrModule.forRoot(),
                 RouterTestingModule,
+                MatDialogModule,
             ],
             declarations: [
                 ChatListComponent,
@@ -25,8 +26,8 @@ describe('ChatListComponent', () => {
             ],
             providers: [
                 {provide: ChatService, useClass: MockChatService},
-                {provide: MAT_DIALOG_DATA, useValue: {}},
                 {provide: MatDialogRef, useValue: {}},
+                {provide: MAT_DIALOG_DATA, useValue: {}},
             ],
         })
             .compileComponents();
