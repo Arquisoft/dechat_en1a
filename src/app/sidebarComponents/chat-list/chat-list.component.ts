@@ -1,74 +1,72 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ChatService } from '../../services/dechat/chat.service';
-import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
-import { Observable } from 'rxjs';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
+import {ChatService} from '../../services/dechat/chat.service';
 
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { NewChatDialogComponent } from 'src/app/dialogComponents/new-chat-dialog/new-chat-dialog.component';
-
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {NewChatDialogComponent} from 'src/app/dialogComponents/new-chat-dialog/new-chat-dialog.component';
 
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.css']
+    selector: 'app-chat-list',
+    templateUrl: './chat-list.component.html',
+    styleUrls: ['./chat-list.component.css'],
 })
 export class ChatListComponent implements OnInit, OnChanges {
-  
-  // Properties
 
-  /**
-   * An observable of all the chats information.
-   * 
-   * @type {Observable<ChatInfo[]>}
-   */
-  chatInfos: Observable<ChatInfo[]>;
+    // Properties
 
+    /**
+     * An observable of all the chats information.
+     *
+     * @type {Observable<ChatInfo[]>}
+     */
+    chatInfos: Observable<ChatInfo[]>;
 
-  // Constructor
+    // Constructor
 
-  /**
-   * Creates a ChatListComponent.
-   * 
-   * @param chatService 
-   *          The chat service.
-   * @param dialog 
-   *          The dialog to create a new chat.
-   */
-  constructor(
-    private chatService: ChatService,
-    private dialog: MatDialog
-  ) {
+    /**
+     * Creates a ChatListComponent.
+     *
+     * @param chatService
+     *          The chat service.
+     * @param dialog
+     *          The dialog to create a new chat.
+     */
+    constructor(
+        public dialogRef: MatDialogRef<NewChatDialogComponent>,
+        private chatService: ChatService,
+        private dialog: MatDialog,
+    ) {
 
-  }
+    }
 
-  ngOnInit() {
-    this.update();
-  }
+    ngOnInit() {
+        this.update();
+    }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
+    ngOnChanges(changes: SimpleChanges): void {
+        this.update();
+    }
 
-  /**
-   * Updates all the chats information.
-   */
-  update() : void {
-    this.chatInfos = this.chatService.getAllChats();
-  }
+    /**
+     * Updates all the chats information.
+     */
+    update(): void {
+        this.chatInfos = this.chatService.getAllChats();
+    }
 
-  /**
-   * Creates a new chat.
-   */
-  newChat() {
-    // TODO
-    // open a dialog to create a new chat
-    var dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    /**
+     * Creates a new chat.
+     */
+    newChat() {
+        // TODO
+        // open a dialog to create a new chat
+        var dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
 
-    var dialogRef = this.dialog.open(NewChatDialogComponent, dialogConfig);
-    
-  }
+        var dialogRef = this.dialog.open(NewChatDialogComponent, dialogConfig);
 
+    }
 
 }
