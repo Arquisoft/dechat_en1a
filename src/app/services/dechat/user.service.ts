@@ -142,11 +142,12 @@ export class UserService {
                 c.userName = friendInfo.fn;
                 c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
             }
-            
+
             if (!this.contacts.map(c => c.url).includes(c.url))
                 this.contacts.push(c);
         });
     }
+
 
     /**
      * Gets the user of the application.
