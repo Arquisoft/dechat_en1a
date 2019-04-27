@@ -133,15 +133,15 @@ export class UserService {
         const contacts = await this.rdf.getContacts();
         console.log('Contact count = ' + contacts.length);
 
-        while (this.contacts.length > 0) {
-            this.contacts.pop();
-        }
-
         contacts.forEach((element) => {
             const c = new User(element.value);
-            this.contacts.push(c);
+            console.log('Contact: ' + c.nickname);
+
+            if (!this.contacts.map(c => c.url).includes(c.url))
+                this.contacts.push(c);
         });
     }
+
 
     /**
      * Gets the user of the application.
