@@ -14,20 +14,19 @@ export class InboxService {
 
     /**
      * The user of the application.
-     * 
+     *
      * @type {User}
      */
-    private user : User;
+    private user: User;
 
     /**
      * The new elements of the inbox.
-     * 
+     *
      * @type {InboxElement}
      */
-    private newElements : InboxElement[];
+    private newElements: InboxElement[];
 
     private onElementFoundCallbacks;
-
 
 
     constructor(
@@ -40,7 +39,6 @@ export class InboxService {
         this.setUp();
     }
 
-  
 
     /**
      * Sets up the inbox. Called when the service is created.
@@ -48,7 +46,7 @@ export class InboxService {
     private async setUp() {
         await 4;
 
-        console.log("Inbox setting up...");
+        console.log('Inbox setting up...');
         this.user = await this.users.getUser();
         setInterval(this.checkInbox.bind(this), 500/*2000*/);
     }
@@ -58,14 +56,14 @@ export class InboxService {
     }
 
     /**
-     * This function is called periodically, it checks if 
+     * This function is called periodically, it checks if
      * there are any new files in the inbox.
      */
     private async checkInbox() {
 
         if (this.user == undefined) {
-        this.user = await this.users.getUser();
-        return;
+            this.user = await this.users.getUser();
+            return;
         }
 
         // Read files in inbox
@@ -87,8 +85,10 @@ export class InboxService {
      * Proccesses any new element in the inbox.
      */
     private processNewElements() {
-        this.newElements.forEach( element => {
-        this.onElementFoundCallbacks.forEach(callback => { callback(element); });
+        this.newElements.forEach(element => {
+            this.onElementFoundCallbacks.forEach(callback => {
+                callback(element);
+            });
         });
         this.newElements = [];
     }
@@ -96,8 +96,8 @@ export class InboxService {
 
     /**
      * Takes an array of urls and processes the requests.
-     * 
-     * @param files 
+     *
+     * @param files
      *          The files' URLs.
      */
     private async addInboxFiles(files: string[]) {
@@ -106,7 +106,7 @@ export class InboxService {
             const file = files[i];
             if (file.length > 0) {
                 const inboxElement: InboxElement = new InboxElement();
-                if (await this.rdf.requestIsChat(file)) {
+                if (file.includes('chatreq')) {
                     const chatInfo = await this.rdf.getChatData(file);
                     if (chatInfo) {
                         const chat = new ChatInfo(chatInfo.id);
@@ -156,7 +156,6 @@ export class InboxService {
     }
 
 
-
     addInboxElement(inboxElement: InboxElement, filesLength: number) {
         if (this.newElements.length < filesLength) {
             this.newElements.push(inboxElement);
@@ -166,21 +165,19 @@ export class InboxService {
     }
 
 
-  
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*                                                           */
+    /*                         REQUESTS                          */
+    /*                                                           */
 
-
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  /*                                                           */
-  /*                         REQUESTS                          */
-  /*                                                           */
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     /**
      * Sends a chat request to a given user.
-     * 
-     * @param toUser 
+     *
+     * @param toUser
      *          The given user.
-     * @param chat 
+     * @param chat
      *          The chat that is requested.
      */
     public sendChatRequest(toUser: User, chat: ChatInfo) {
@@ -197,21 +194,19 @@ export class InboxService {
     }
 
 
-
-
     /**
      * Sends a new message to the chat to a given user.
-     * 
-     * @param toUser 
+     *
+     * @param toUser
      *          The given user,
-     * @param chat 
+     * @param chat
      *          The chat to which the messages is sent.
-     * @param message 
+     * @param message
      *          The message.
      */
-    public sendNewMessage(toUser: User, chat : ChatInfo, message : ChatMessage) {
+    public sendNewMessage(toUser: User, chat: ChatInfo, message: ChatMessage) {
 
-        let request : InboxElement;
+        let request: InboxElement;
         request = new InboxElement();
         request.chat = chat;
         request.message = message;
@@ -226,10 +221,10 @@ export class InboxService {
 
     /**
      * Sends a request given the inbox element and a filename.
-     * 
-     * @param inboxElement 
+     *
+     * @param inboxElement
      *          The inbox element.
-     * @param filename 
+     * @param filename
      *          The filename of the file to be created.
      */
     private sendRequest(inboxElement: InboxElement, filename: string) {
