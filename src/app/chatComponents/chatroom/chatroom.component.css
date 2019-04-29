@@ -15,10 +15,15 @@
 }
 
 .feedWrapper {
-    display: flex;
-    flex-direction: column-reverse;
     overflow-y: scroll;
     padding: 20px 0px 0px 24px;
+    position: relative;
+}
+
+app-feed{
+    position: absolute;
+    botom: 0;
+    left: 0;
 }
 
 .chatFormWrapper {

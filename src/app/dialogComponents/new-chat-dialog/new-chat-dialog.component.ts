@@ -65,7 +65,11 @@ export class NewChatDialogComponent implements OnInit {
 
     private async setUp() {
         var c = await this.userService.getContacts();
-        c.forEach(contact => this.contacts.push(contact));
+        console.log("Contacts to create chat: " + c.length);
+        c.forEach(contact => {
+            this.contacts.push(contact);
+            console.log("Contact: " + contact.nickname);
+        });
     }
 
     /**

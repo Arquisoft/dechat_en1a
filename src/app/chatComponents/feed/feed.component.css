@@ -1,10 +1,8 @@
 
-
 .feed {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    bottom: 0px;
+    overflow-y: scroll;
 }
 
 .message {
