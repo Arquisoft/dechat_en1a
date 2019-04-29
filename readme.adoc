@@ -17,7 +17,21 @@ image:https://api.codacy.com/project/badge/Grade/6bf64efc1f78475686c2690c1f4462e
 The documentation is done in http://asciidoc.org/[AsciiDoc]
 using the https://arc42.org/[arc42] templates.
 The source documents are located at
- https://github.com/Arquisoft/dechat_en1a/tree/master/docs[src/docs].
+ https://github.com/Arquisoft/dechat_en1a/tree/master/src/docs[src/docs].
+
+To build the documentation, check you have gulp and asciidoctor.js installed
+
+----
+npm install -g asciidoctor.js asciidoctor-cli
+npm install gulp
+----
+
+And run the command
+
+----
+gulp
+----
+
 
  
 == Installing and Running
