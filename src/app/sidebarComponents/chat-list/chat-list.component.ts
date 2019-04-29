@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {ChatInfo} from 'src/app/models/dechat/chat-info.model';
 import {ChatService} from '../../services/dechat/chat.service';
 
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {NewChatDialogComponent} from 'src/app/dialogComponents/new-chat-dialog/new-chat-dialog.component';
 
 @Component({
@@ -33,7 +33,6 @@ export class ChatListComponent implements OnInit, OnChanges {
      *          The dialog to create a new chat.
      */
     constructor(
-        public dialogRef: MatDialogRef<NewChatDialogComponent>,
         private chatService: ChatService,
         private dialog: MatDialog,
     ) {
