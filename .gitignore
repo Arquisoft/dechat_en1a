@@ -1,6 +1,7 @@
 
 /target/
 
+/coverage/
 
 # .gitignore copied from Angular GitHub page
 
