@@ -440,7 +440,7 @@ export class RdfService {
                 bundleId: identifier.split('/')[1],
                 message: await this.getField(messageUrl, 'text', SCHEMA),
                 sender: await this.getField(messageUrl, 'sender', SCHEMA),
-                date: await this.getField(messageUrl, 'dateSent', SCHEMA),
+                date:   await this.getField(messageUrl, 'dateSent', SCHEMA),
             };
         } catch (error) {
             console.log(`Error fetching data: ${error}`);

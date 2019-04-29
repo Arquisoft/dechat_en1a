@@ -215,7 +215,7 @@ export class InboxService {
         const inboxUrl = this.files.getInboxUrl(toUser);
         const filename = inboxUrl + 'DeChatEn1a_newmsg_' + message.id + '.ttl';
 
-        this.sendRequest(request, filename);
+        this.sendRequest(request, filename, toUser.url);
     }
 
 
@@ -227,9 +227,9 @@ export class InboxService {
      * @param filename
      *          The filename of the file to be created.
      */
-    private sendRequest(inboxElement: InboxElement, filename: string) {
+    private sendRequest(inboxElement: InboxElement, filename: string, toUser ?: string) {
         console.log('Sending request...');
-        const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfoInbox();
+        const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfoInbox(toUser);
         this.files.createFile(filename, text);
     }
 

@@ -44,11 +44,11 @@ message:
         return msg;
     }
 
-    getTtlInfoInbox(): string {
+    getTtlInfoInbox(toUser): string {
         const msg = `@prefix : <#>.
 @prefix schem: <http://schema.org/>.
-@prefix s: <${this.userUrl}>.
-@prefix message: <${this.userUrl.replace('profile/card#me', 'inbox/')}DeChatEn1a_newmsg_${this.id}.ttl>.
+@prefix s: <${toUser}>.
+@prefix message: <${toUser.replace('profile/card#me', 'inbox/')}DeChatEn1a_newmsg_${this.id}.ttl>.
 message:
       a schem:Message;
       schem:sender s:;
