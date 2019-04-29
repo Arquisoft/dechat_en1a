@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\app\services\dechat\chat.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">src/app/services/dechat/</a> chat.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.35% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>55/133</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25.81% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>8/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.98% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>55/131</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {Injectable} from '@angular/core';
+&nbsp;
+import { ChatMessage } from 'src/app/models/dechat/chat-message.model';
+import { User } from 'src/app/models/dechat/user.model';
+import { Observable, of } from 'rxjs';
+import { ChatInfo } from 'src/app/models/dechat/chat-info.model';
+import { UserService } from './user.service';
+import { FilesService } from './files.service';
+import { MessageService } from './message.service';
+import { InboxService } from './inbox.service';
+&nbsp;
+import { v4 as uuid } from 'uuid';
+import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-element.model';
+&nbsp;
+@Injectable({
+    providedIn: 'root'
+})
+export class ChatService {
+&nbsp;
+    // Attributes //
+&nbsp;
+    /**
+     * User of the application.
+     * 
+     * @type {User}
+     */
+    user: User;
+    userName: Observable&lt;string&gt;;
+&nbsp;
+    /**
+     * All the chats available for the user.
+     * 
+     * @type {ChatInfo[]}
+     */
+    allChats: ChatInfo[];<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    /**<span class="cstat-no" title="statement not covered" ></span>
+     * The chat in which the user is currently 
+     * participating.
+     * 
+     * @type {ChatInfo}
+     */
+    currentChat: ChatInfo;
+&nbsp;
+&nbsp;
+    // Constructor //
+&nbsp;
+    /**
+     * Creates a chat service.
+     * 
+     * @param userService 
+     *          The users service.
+     * @param files 
+     *          The files service.
+     * @param messages 
+     *          The messages service.
+     * @param inbox 
+     *          The inbox service.
+     */
+    constructor(
+        private userService : UserService,
+        private files : FilesService,
+        private messages : MessageService,
+        private inbox : InboxService
+    ) {  
+&nbsp;
+        this.allChats = [];
+        this.setUp();
+&nbsp;
+        this.inbox.addOnElementFoundCallback(
+            (element : InboxElement) =&gt; {
+                if (element.type == InboxElementType.CHAT_REQUEST)<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+                    this.createChatFromRequest(element);
+            });<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**<span class="cstat-no" title="statement not covered" ></span>
+     * Sets up the chat service. It sets the<span class="cstat-no" title="statement not covered" > current user, </span>
+     * gets their contacts, checks their files f<span class="cstat-no" title="statement not covered" >or the chats, and </span>
+     * fetches all the chats from their POD.<span class="cstat-no" title="statement not covered" ></span>
+     */
+    async setUp() {
+&nbsp;
+        await 1;
+        this.user = await this.userService.getUser();
+        this.messages.setCurrentUser(this.user);
+        var contacts = await this.userService.getContacts();
+        
+        await this.files.checkUserFiles(this.user);
+&nbsp;
+        console.log("Checking existent chats...");
+        
+        var chatFolder = await this.files.getChatsRootUrl(this.user);
+        var chats = await this.files.readFolderSubfolders<span class="fstat-no" title="function not covered" >(chatFolder);</span>
+<span class="cstat-no" title="statement not covered" >        await chats.forEach(async chat =&gt; {<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >            var c = await this.fetchChat(chat);<span class="fstat-no" title="function not covered" ></span></span>
+            if (<span class="cstat-no" title="statement not covered" >c != null)</span>
+<span class="cstat-no" title="statement not covered" >                this.allChats.push(c);</span>
+        });
+<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**
+     * Given a ChatInfo object, we will open the chat
+     */
+    async openChat(chatInfo: ChatInfo) : Promise&lt;void&gt; {
+&nbsp;
+        this.messages.setCurrentChat(chatInfo);
+        this.currentChat = chatInfo;
+&nbsp;
+        // Update file system
+        this.files.checkChatFolder(this.user, chatInfo);
+    }
+&nbsp;
+    /**
+     * Gets all the chats available to the user.
+     */
+    getAllChats(): Observable&lt;ChatInfo[]&gt; {
+        return of(this.allChats);
+    }
+&nbsp;
+&nbsp;
+    /* * * * * * * * * * * * * * * * * * * * * * * *<span class="fstat-no" title="function not covered" > * * * * * * */</span>
+    /*  <span class="cstat-no" title="statement not covered" >                                                </span>         */
+    /*                 CHAT CREATION AND EDITION                 */
+    /*                                                           */
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+&nbsp;
+    /**
+     * Checks whether the current user is an administrator 
+     * of the given chat.
+     * 
+     * @param chat 
+     *          The given chat.<span class="fstat-no" title="function not covered" ></span>
+     */<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    isAdmin(chat: ChatInfo): boolean {
+        retu<span class="cstat-no" title="statement not covered" >rn chat.administrators.includes(this.user);<span class="fstat-no" title="function not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+   /**
+    * Normal chats behave the same as group chats, so
+    * we create a group chat with just both this user and
+    * the other one.
+    * 
+    * @param otherUser 
+    *           The other user of the chat.
+    */
+    async createChat(otherUser: User): Promise&lt;ChatInfo&gt; {
+        var users = [];<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        users.push(otherUser);<span class="fstat-no" title="function not covered" ></span></span>
+        return this.createGroupChat(otherUser.nickname, users);
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**<span class="cstat-no" title="statement not covered" ></span>
+     * Creates a chat fr<span class="cstat-no" title="statement not covered" >om a request.</span>
+     * <span class="cstat-no" title="statement not covered" ></span>
+     * @param request 
+     *          The Inbo<span class="cstat-no" title="statement not covered" >xElement re</span>quest.
+     */<span class="cstat-no" title="statement not covered" ></span>
+    private async createChatFromRequest(request: InboxElement): Promise&lt;ChatInfo&gt; {
+        
+        var chat : ChatInfo = request.chat;//JSON.parse(file);
+        this.allChats.push(chat);
+        await this.files.checkChatFolder(this.user, chat);
+        return chat;
+    }
+    
+    /**
+     * Creates a groupal chat, composed by the current user and other users.
+     * 
+     * @param chatName 
+     *          The name of the groupal chat.
+     * @param otherUsers <span class="fstat-no" title="function not covered" ></span>
+     *  <span class="cstat-no" title="statement not covered" >        An array of users with the components of the group, <span class="fstat-no" title="function not covered" ></span></span>
+     *          except t<span class="cstat-no" title="statement not covered" >he cu</span>rrent user.
+     */
+    async cr<span class="cstat-no" title="statement not covered" >eateGroupChat(chatName: string, otherUsers: Use<span class="fstat-no" title="function not covered" >r[]): Promise&lt;ChatInfo&gt; {</span></span>
+        console.<span class="cstat-no" title="statement not covered" >log("Chat service creating new chat: " + chatName);</span>
+        let chat: ChatInfo;
+<span class="cstat-no" title="statement not covered" ></span>
+        var id : string <span class="cstat-no" title="statement not covered" >= uuid();</span>
+        id = id.replace(<span class="cstat-no" title="statement not covered" >/-/g, '');</span>
+        console.log("New<span class="cstat-no" title="statement not covered" > chat id: " + id);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        chat = new ChatI<span class="cstat-no" title="statement not covered" >nfo(id);</span>
+        chat.chatName = <span class="cstat-no" title="statement not covered" >chatName;</span>
+        chat.users = oth<span class="cstat-no" title="statement not covered" >erUsers;</span>
+        chat.administrat<span class="cstat-no" title="statement not covered" >ors = [];</span>
+        chat.administrat<span class="cstat-no" title="statement not covered" >ors.push(this.user);</span>
+        chat.users.push(<span class="cstat-no" title="statement not covered" >this.user);<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        chat.users.forEach(async<span class="cstat-no" title="statement not covered" > user =&gt; {</span>
+            if (user !== this.user)<span class="cstat-no" title="statement not covered" ></span>
+                this.inbox.sendC<span class="cstat-no" title="statement not covered" >hatRequest(user, chat);</span>
+        });
+&nbsp;
+        await this.files<span class="cstat-no" title="statement not covered" >.checkChatFolder(this.user, chat);</span>
+&nbsp;
+        return chat;<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**
+     * Adds a given user to a given chat.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param user 
+     *          The given user.
+     */
+    addUserToChat(chat: ChatInfo, user: User) : boolean {
+        if (!this.isAdmin(chat))
+            return false;
+<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        chat.users.push(user);</span>
+        this<span class="cstat-no" title="statement not covered" >.files.checkCh</span>atFolder(user, chat);
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    
+&nbsp;
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*                                                           */
+    /*                        CHAT FETCHING                      */
+    /*                                                           */
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+&nbsp;
+    /**
+     * Fetchs a chat from a given URL.
+     * 
+     * @param chatUrl <span class="fstat-no" title="function not covered" ></span>
+     *  <span class="cstat-no" title="statement not covered" >        The URL of the chat.<span class="fstat-no" title="function not covered" ></span></span>
+     */
+    async fe<span class="cstat-no" title="statement not covered" >tchChat(chatUrl : string) : Promise&lt;ChatInfo&gt; {<span class="fstat-no" title="function not covered" ></span></span>
+        console.<span class="cstat-no" title="statement not covered" >log("Fetching chat: " + chatUrl);    </span>
+        var chat : ChatInfo;
+        var id = chatUrl<span class="cstat-no" title="statement not covered" >;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        // Get the chat <span class="cstat-no" title="statement not covered" >data file, with name and users</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        var dataFile = chatUrl + "data.txt";
+        var file = await<span class="cstat-no" title="statement not covered" > this.files.readFi</span>le(dataFile);
+        <span class="cstat-no" title="statement not covered" ></span>
+        if (file.length == 0<span class="cstat-no" title="statement not covered" > ||file == undefined) {</span>
+            console.log("Som<span class="cstat-no" title="statement not covered" >ething bad happened.");</span>
+            this.files.delet<span class="cstat-no" title="statement not covered" >eFolder(chatUrl);</span>
+            return null;
+        }<span class="cstat-no" title="statement not covered" ></span>
+        var chat : ChatI<span class="cstat-no" title="statement not covered" >nfo = JSON.parse(file);</span>
+        if (chat == undefine<span class="cstat-no" title="statement not covered" >d) {</span>
+            console.log("Som<span class="cstat-no" title="statement not covered" >ething bad happened.");</span>
+            this.files.delet<span class="cstat-no" title="statement not covered" >eFolder(chatUrl);</span>
+            return null;
+        }
+<span class="cstat-no" title="statement not covered" ></span>
+        // Load messages
+        await this.messages.fetchChat(chat);
+<span class="cstat-no" title="statement not covered" ></span>
+        return chat;<span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Apr 29 2019 21:26:56 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

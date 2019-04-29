@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\app\dialogComponents\new-chat-dialog\new-chat-dialog.component.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">src/app/dialogComponents/new-chat-dialog/</a> new-chat-dialog.component.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">54.39% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>31/57</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">18.18% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">55.36% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>31/56</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {ChatService} from 'src/app/services/dechat/chat.service';
+import {User} from '../../models/dechat/user.model';
+import {UserService} from '../../services/dechat/user.service';
+&nbsp;
+@Component({
+    selector: 'app-new-chat-dialog',
+    templateUrl: './new-chat-dialog.component.html',
+    styleUrls: ['./new-chat-dialog.component.css'],
+})
+export class NewChatDialogComponent implements OnInit {
+&nbsp;
+    // Properties
+&nbsp;
+    /**
+     * The name of the new chat.
+     *
+     * @type {string}
+     */
+    chatName: string;
+&nbsp;
+    /**
+     * The users participating on the new chat.
+     *
+     * @type {User[]}
+     */
+    users: User[];
+&nbsp;
+    /**
+     * The contacts of the current user of the application.
+     *
+     * @type {User[]}
+     */
+    contacts: User[];
+&nbsp;
+    // Constructor
+&nbsp;
+    /**
+     * Creates a NewChatDialogComponent.
+     * Sets the users and contacts arrays to empty arrays.
+     * Gets the contacts of the current user.<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+     *
+     * @param dialogRef
+     *          The reference of the dialog.
+     * @param data
+     * @param userService
+     *          The user service.
+     * @param chatService
+     *          The chat service.
+     */
+    constructor(
+        public dialogRef: MatDialogRef&lt;NewChatDialogComponent&gt;,
+        private userService: UserService,
+        private chatService: ChatService,
+    ) {
+        this.users = [];<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        this.contacts = [];</span>
+        this.setUp();
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    ngOnInit() {<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
+    private async setUp() {
+<span class="cstat-no" title="statement not covered" >        var c = await this.userSer</span>vice.getContacts();
+        c.forEach(contact =&gt; this.contacts.push(contact));
+    }
+&nbsp;
+    /**
+     * Listener called when the user clicks in one of his contacts.
+     * If the contact was already added to the new chat, the function will
+     * delete that contact from the new chat. Otherwise, it will add the contact
+     * as a participant of the new chat.
+     *<span class="fstat-no" title="function not covered" ></span>
+     * @<span class="cstat-no" title="statement not covered" >param contact</span>
+     *          The contact clicked by the user.
+     */
+    onContactClick(contact: User) {
+        console.log('You clicked on ' + contact.nickname);
+<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        // If he's in, delet</span>e him
+        for (var i = 0; i &lt; this.users.length; i++) {
+            if (this.users[i] == contact) {
+                this.users.splice(i, 1);
+                return;
+            }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        }<span class="fstat-no" title="function not covered" ></span></span>
+        // Otherwise, add
+        this<span class="cstat-no" title="statement not covered" >.users.push(contact);<span class="fstat-no" title="function not covered" ></span></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**<span class="cstat-no" title="statement not covered" ></span>
+     * Checks wether the con<span class="cstat-no" title="statement not covered" >tact is listed as a par</span>ticipant of the new chat
+     * or not.
+     *<span class="cstat-no" title="statement not covered" ></span>
+     * @param contact<span class="cstat-no" title="statement not covered" ></span>
+     *          The specified contact.
+     */<span class="cstat-no" title="statement not covered" ></span>
+    isContactIn(contact:<span class="cstat-no" title="statement not covered" > User) {</span>
+        return this.user<span class="cstat-no" title="statement not covered" >s.includes(contact);</span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    /**<span class="cstat-no" title="statement not covered" ></span>
+     * Closes the dialog<span class="cstat-no" title="statement not covered" >.</span>
+     */
+    cancel() {<span class="cstat-no" title="statement not covered" ></span>
+        this.closeDialog<span class="cstat-no" title="statement not covered" >();</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /**
+     * Creates the new chat.
+     */
+    async create() {<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (this.chatName == undefined) {</span>
+            return;
+        } // TODO warn error
+&nbsp;
+        if (this.users.length == 0) {
+            return;
+        } // TODO warn error
+&nbsp;
+        console.log('Creating new chat');
+        console.log('Chat name: ' + this.chatName);
+&nbsp;
+        var chat = await this.chatService.createGroupChat(this.chatName, this.users);
+        this.chatService.allChats.push(chat);
+        await this.chatService.openChat(chat);
+&nbsp;
+        this.closeDialog();
+    }
+&nbsp;
+    private closeDialog() {
+        this.dialogRef.close('Dialog closed!');
+    }
+&nbsp;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Apr 29 2019 21:26:56 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>
