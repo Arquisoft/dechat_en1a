@@ -55,7 +55,7 @@ Once deployed, the DeChat application will be available at: http://localhost:420
 == Deployment
 
 You can visit the deployed version of the app in https://arquisoft.github.io/dechat_en1a/[github pages].
-
+The deployed documentation can also be found https://arquisoft.github.io/dechat_en1a/docs/[here].
 
 
 
