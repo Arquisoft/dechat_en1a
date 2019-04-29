@@ -2,7 +2,7 @@
 :imagesdir: images
 
 == Building Block View
-The building blocks that are currently being explored are in white background, and the ones yet to explore are in grey background. Some of the grey background blocks are not developed by the team and thus are not going to be explored in this doxumentation.
+The building blocks that are currently being explored are in white background, and the ones yet to explore are in grey background. Some of the grey background blocks either are not developed by the team or do not provide significantly wider information when expanded, so they are not going to be explored in this doxumentation.
 
 === Whitebox Overall System
 image::buildingBlocks_overall.png[]
@@ -18,5 +18,15 @@ image::buildingBlocks_level1.png[]
 - components: front end of the application
 
 === Level 2
+image::buildingBlocks_level2.png[]
 
-TBD
+==== Services
+- solid services: logic inside the application not related directly with the external comunication.
+- dechat services: logic of the application invonving the comunication with the solid pods.
+
+==== Components
+- app component: main component of the application.
+- chatComponents: contains the components related to the chat interaction(showing the messages, submiting the messages, mutimedia, etc.).
+- dialogComponents: contains the components that are shown as dialogs in the interface.
+- main-content: wraps everything but the nav bar in the graphical interface.
+- utilComponents: not the main functionality of the app.
