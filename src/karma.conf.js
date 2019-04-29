@@ -23,9 +23,19 @@ module.exports = function (config) {
       verbose: true
     },
     reporters: ["progress", "kjhtml", "coverage", "coveralls"],
+    preprocessors: {
+      "**/lib/*js": "coverage",
+    },
     coverageReporter: {
-      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
-      dir: 'coverage/'
+      type: "lcov.info",
+      dir: "coverage/",
+    },
+    plugins: [
+      "karma-coverage",
+    ],
+    coverageReporter: {
+      type: "lcov.info", // lcov.info or lcovonly are required for generating lcov.info files
+      dir: "coverage/",
     },
     port: 9876,
     colors: true,
