@@ -1,11 +1,4 @@
 
-/target/
-/gatling/results/
-
-/coverage/
-
-# .gitignore copied from Angular GitHub page
-
 .DS_STORE
 
 /dist/
@@ -15,6 +8,11 @@ e2e_test.*
 node_modules
 tools/gulp-tasks/cldr/cldr-data/
 .nyc_output/
+
+target
+gatling/results
+
+coverage
 
 # Include when developing application packages.
 pubspec.lock
@@ -41,3 +39,6 @@ yarn-error.log
 
 # User specific bazel settings
 .bazelrc.user
+
+
+.project
