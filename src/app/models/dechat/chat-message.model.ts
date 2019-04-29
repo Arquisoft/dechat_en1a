@@ -47,7 +47,7 @@ message:
     getTtlInfoInbox(toUser): string {
         const msg = `@prefix : <#>.
 @prefix schem: <http://schema.org/>.
-@prefix s: <${toUser}>.
+@prefix s: <${this.userUrl}>.
 @prefix message: <${toUser.replace('profile/card#me', 'inbox/')}DeChatEn1a_newmsg_${this.id}.ttl>.
 message:
       a schem:Message;
