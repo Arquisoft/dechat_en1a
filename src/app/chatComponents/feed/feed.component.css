@@ -3,6 +3,8 @@
 .feed {
     display: flex;
     flex-direction: column;
+    position: fixed;
+    bottom: 0px;
 }
 
 .message {

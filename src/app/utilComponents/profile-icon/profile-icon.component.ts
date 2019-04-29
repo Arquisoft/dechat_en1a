@@ -8,9 +8,31 @@ import {UserService} from '../../services/dechat/user.service';
 })
 export class ProfileIconComponent implements OnInit {
 
+    // Properties
+
+    /**
+     * The name of the user.
+     * 
+     * @type {string}
+     */
     userName: string;
+
+    /**
+     * The profile image of the user.
+     * 
+     * @type {string}
+     */
     profileImage: string;
 
+
+    // Constructor
+
+    /**
+     * Creates a ProfileIconComponent.
+     * 
+     * @param user 
+     *          The user service.
+     */
     constructor(private user: UserService) {
         this.profileImage = '/assets/images/profile.png';
     }
@@ -19,6 +41,9 @@ export class ProfileIconComponent implements OnInit {
         this.loadProfile();
     }
 
+    /**
+     * Loads the profile of the current user.
+     */
     async loadProfile() {
         this.userName = await this.user.getUserName();
         this.profileImage = await this.user.getProfileImage();
