@@ -30,3 +30,18 @@ image::buildingBlocks_level2.png[]
 - dialogComponents: contains the components that are shown as dialogs in the interface.
 - main-content: wraps everything but the nav bar in the graphical interface.
 - utilComponents: not the main functionality of the app.
+
+=== Level 3
+image::buildingBlocks_level3.png[]
+
+==== Solid services
+- auth.guard.service:
+- rdf.service: manages everything related with rdf communication.
+- solid.auth.service: logging in and out from solid.
+
+==== Dechat services
+- chat.service: chat management.
+- files.service: file management in the pod.
+- inbox.service: inbox management.
+- message.service: message management.
+- user.service: user management.
