@@ -2,14 +2,14 @@
 :imagesdir: images
 
 == Building Block View
-We have marked in the diagrams the building blocks that are not going to be explored in this section as <<outOfScope>> and in yellow background and grey borders. The building blocks that are currently being explored are in white background, and the ones yet to explore are in grey background.
+The building blocks that are currently being explored are in white background, and the ones yet to explore are in grey background. Some of the grey background blocks are not developed by the team and thus are not going to be explored in this doxumentation.
 
 === Whitebox Overall System
 image::buildingBlocks_overall.png[]
 
 - user: represents a human using the application as a client.
 - chat app: this is the main functionality of the app. It contains all the logic as well as all the styling files and markup.
-- solid service: everything related to the solid platform that is not directly developed by our team. This includes mainly the pods and its storing system.
+- solid pod: everything related to the solid platform that is not directly developed by our team. This includes mainly the pods and its storing system.
 
 === Level 1
 image::buildingBlocks_level1.png[]
