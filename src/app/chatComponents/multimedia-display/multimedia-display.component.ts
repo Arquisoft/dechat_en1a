@@ -4,7 +4,7 @@ import {Multimedia} from 'src/app/models/dechat/multimedia.model';
 @Component({
     selector: 'app-multimedia-display',
     templateUrl: './multimedia-display.component.html',
-    styleUrls: ['./multimedia-display.component.css']
+    styleUrls: ['./multimedia-display.component.css'],
 })
 export class MultimediaDisplayComponent implements OnInit {
 
@@ -12,33 +12,32 @@ export class MultimediaDisplayComponent implements OnInit {
 
     /**
      * Model representing a multimedia element.
-     * 
+     *
      * @type {Multimedia}
      */
     @Input() multimedia: Multimedia;
 
     /**
      * The URL of the multimedia.
-     * 
+     *
      * @type {string}
      */
     multimediaURL: string;
 
     /**
      * The type of the multimedia. It can be an audio, video or image.
-     * 
+     *
      * @type {string}
      */
     multimediaType: string;
 
     /**
      * The extension of the multimedia element.
-     * 
+     *
      * @type {string}
      */
     multimediaExten: string;
     ready: boolean;
-
 
     // Constructor
 
@@ -50,16 +49,15 @@ export class MultimediaDisplayComponent implements OnInit {
     }
 
     /**
-     * @param multim 
+     * @param multim
      *          The model representing the multimedia element.
      */
     ngOnInit(multim = this.multimedia) {
-        /*
+
         // Actual implementation
         this.multimediaURL = multim.url;
         this.multimediaType = multim.type;
         this.multimediaExten = multim.extension;
-        */
 
         // For testing purposes
 
@@ -71,9 +69,9 @@ export class MultimediaDisplayComponent implements OnInit {
         */
 
         // Video
-        this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
-        this.multimediaType = 'video';
-        this.multimediaExten = 'webm';
+        // this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
+        // this.multimediaType = 'video';
+        // this.multimediaExten = 'webm';
     }
 
 }

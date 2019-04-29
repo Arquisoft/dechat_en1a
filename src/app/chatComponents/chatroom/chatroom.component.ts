@@ -14,9 +14,9 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
 
     /**
      * Reference to the #scroller element in the DOM
-     * 
+     *
      * @type {ElementRef}
-     */ 
+     */
     @ViewChild('scroller') feedContainer: ElementRef;
 
 
@@ -24,8 +24,8 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
 
     /**
      * Creates a ChatRoomComponent.
-     * 
-     * @param chatService 
+     *
+     * @param chatService
      *          The chat service.
      */
     constructor(public chatService: ChatService) {
@@ -34,6 +34,7 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
 
     ngOnInit() {
     }
+
 
     ngAfterViewChecked() {
         this.scrollToBottom();
