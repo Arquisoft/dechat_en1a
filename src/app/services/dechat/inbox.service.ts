@@ -28,6 +28,8 @@ export class InboxService {
 
     private onElementFoundCallbacks;
 
+    private fileLoading: string;
+
     constructor(
         private files: FilesService,
         private users: UserService,
@@ -201,7 +203,7 @@ export class InboxService {
      * @param message
      *          The message.
      */
-    public sendNewMessage(toUser: User, chat: ChatInfo, message: ChatMessage) {
+    public async sendNewMessage(toUser: User, chat: ChatInfo, message: ChatMessage) {
 
         let request: InboxElement;
         request = new InboxElement();
@@ -212,7 +214,7 @@ export class InboxService {
         const inboxUrl = this.files.getInboxUrl(toUser);
         const filename = inboxUrl + 'DeChatEn1a_newmsg_' + message.id + '.ttl';
 
-        this.sendRequest(request, filename, toUser.url);
+        await this.sendRequest(request, filename, toUser.url);
     }
 
     /**
@@ -229,7 +231,7 @@ export class InboxService {
 
         const file = await this.files.readFile(filename);
         if (file === '') {
-            await this.files.createFile(filename, text);
+            await this.files.updateFile(filename, text);
         }
 
     }

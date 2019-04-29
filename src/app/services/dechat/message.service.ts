@@ -243,7 +243,7 @@ export class MessageService {
         // Send to the inbox of all users
         this.currentChat.chatInfo.users.forEach(async (user) => {
             try {
-                this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
+                await this.inbox.sendNewMessage(user, this.currentChat.chatInfo, message);
             } catch (err) {
                 console.log(err);
             }

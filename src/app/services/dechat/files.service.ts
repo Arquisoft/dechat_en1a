@@ -163,7 +163,7 @@ export class FilesService {
      *          The given string.
      */
     async createFile(url: string, str: string = null) {
-        await solidFiles.createFile(url).then(
+        await solidFiles.createFile(url, str).then(
             (success: any) => {
                 console.log(`Created file ${url}.`);
                 if (str != null) {
