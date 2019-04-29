@@ -18,14 +18,45 @@ import { InboxElement, InboxElementType } from 'src/app/models/dechat/inbox-elem
 export class ChatService {
 
     // Attributes //
+
+    /**
+     * User of the application.
+     * 
+     * @type {User}
+     */
     user: User;
     userName: Observable<string>;
 
+    /**
+     * All the chats available for the user.
+     * 
+     * @type {ChatInfo[]}
+     */
     allChats: ChatInfo[];
+
+    /**
+     * The chat in which the user is currently 
+     * participating.
+     * 
+     * @type {ChatInfo}
+     */
     currentChat: ChatInfo;
 
 
     // Constructor //
+
+    /**
+     * Creates a chat service.
+     * 
+     * @param userService 
+     *          The users service.
+     * @param files 
+     *          The files service.
+     * @param messages 
+     *          The messages service.
+     * @param inbox 
+     *          The inbox service.
+     */
     constructor(
         private userService : UserService,
         private files : FilesService,
@@ -44,7 +75,11 @@ export class ChatService {
     }
 
 
-
+    /**
+     * Sets up the chat service. It sets the current user, 
+     * gets their contacts, checks their files for the chats, and 
+     * fetches all the chats from their POD.
+     */
     async setUp() {
 
         await 1;
@@ -66,10 +101,9 @@ export class ChatService {
 
     }
 
-
-
-
-    // Given a ChatInfo object, we will open the chat
+    /**
+     * Given a ChatInfo object, we will open the chat
+     */
     async openChat(chatInfo: ChatInfo) : Promise<void> {
 
         this.messages.setCurrentChat(chatInfo);
@@ -79,6 +113,9 @@ export class ChatService {
         this.files.checkChatFolder(this.user, chatInfo);
     }
 
+    /**
+     * Gets all the chats available to the user.
+     */
     getAllChats(): Observable<ChatInfo[]> {
         return of(this.allChats);
     }
@@ -88,18 +125,27 @@ export class ChatService {
     /*                                                           */
     /*                 CHAT CREATION AND EDITION                 */
     /*                                                           */
-
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+    /**
+     * Checks whether the current user is an administrator 
+     * of the given chat.
+     * 
+     * @param chat 
+     *          The given chat.
+     */
     isAdmin(chat: ChatInfo): boolean {
         return chat.administrators.includes(this.user);
     }
 
 
-    /*
+   /**
     * Normal chats behave the same as group chats, so
     * we create a group chat with just both this user and
     * the other one.
+    * 
+    * @param otherUser 
+    *           The other user of the chat.
     */
     async createChat(otherUser: User): Promise<ChatInfo> {
         var users = [];
@@ -108,6 +154,12 @@ export class ChatService {
     }
 
 
+    /**
+     * Creates a chat from a request.
+     * 
+     * @param request 
+     *          The InboxElement request.
+     */
     private async createChatFromRequest(request: InboxElement): Promise<ChatInfo> {
         
         var chat : ChatInfo = request.chat;//JSON.parse(file);
@@ -116,7 +168,15 @@ export class ChatService {
         return chat;
     }
     
-
+    /**
+     * Creates a groupal chat, composed by the current user and other users.
+     * 
+     * @param chatName 
+     *          The name of the groupal chat.
+     * @param otherUsers 
+     *          An array of users with the components of the group, 
+     *          except the current user.
+     */
     async createGroupChat(chatName: string, otherUsers: User[]): Promise<ChatInfo> {
         console.log("Chat service creating new chat: " + chatName);
         let chat: ChatInfo;
@@ -142,13 +202,20 @@ export class ChatService {
         return chat;
     }
 
-
+    /**
+     * Adds a given user to a given chat.
+     * 
+     * @param chat 
+     *          The given chat.
+     * @param user 
+     *          The given user.
+     */
     addUserToChat(chat: ChatInfo, user: User) : boolean {
         if (!this.isAdmin(chat))
             return false;
 
-        chat.users.push(this.user);
-        this.files.checkChatFolder(this.user, chat);
+        chat.users.push(user);
+        this.files.checkChatFolder(user, chat);
         return true;
     }
 
@@ -161,6 +228,12 @@ export class ChatService {
     /*                                                           */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+    /**
+     * Fetchs a chat from a given URL.
+     * 
+     * @param chatUrl 
+     *          The URL of the chat.
+     */
     async fetchChat(chatUrl : string) : Promise<ChatInfo> {
         console.log("Fetching chat: " + chatUrl);    
         var chat : ChatInfo;

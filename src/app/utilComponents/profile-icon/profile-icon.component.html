@@ -1,8 +1,13 @@
 <div class="profileIcon">
 
-  <div class="textWrapper">
-    Hello, {{ userName }}
-  </div>
+  <span class="textWrapper">
+    <span>
+      Hello, <span class="username">{{ userName }}</span>
+    </span>
+    <span>
+      <a class="logout" href="/logout">Logout</a>
+    </span>
+  </span>
 
   <div class="imgWrapper">
     <img [src]="profileImage" />

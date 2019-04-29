@@ -10,10 +10,24 @@ import {ChatService} from '../../services/dechat/chat.service';
 })
 export class ChatroomComponent implements OnInit, AfterViewChecked {
 
-    // Reference to the #scroller element in the DOM
+    // Properties
+
+    /**
+     * Reference to the #scroller element in the DOM
+     * 
+     * @type {ElementRef}
+     */ 
     @ViewChild('scroller') feedContainer: ElementRef;
 
 
+    // Constructor
+
+    /**
+     * Creates a ChatRoomComponent.
+     * 
+     * @param chatService 
+     *          The chat service.
+     */
     constructor(public chatService: ChatService) {
 
     }
@@ -24,7 +38,6 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
     ngAfterViewChecked() {
         this.scrollToBottom();
     }
-
 
     scrollToBottom(): void {
         this.feedContainer.nativeElement.scrollTop =

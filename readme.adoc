@@ -1,11 +1,13 @@
 = dechat_en1a
 
 image:https://travis-ci.org/Arquisoft/dechat_en1a.svg?branch=master["Build Status", link="https://travis-ci.org/Arquisoft/dechat_en1a"]
-image:https://codecov.io/gh/Arquisoft/dechat_en1a/branch/master/graph/badge.svg["Codecov",link="https://codecov.io/gh/Arquisoft/dechat_en1a"]
 image:https://coveralls.io/repos/github/Arquisoft/dechat_en1a/badge.svg["Coverage",link="https://coveralls.io/github/Arquisoft/dechat_en1a"]
 image:https://api.codacy.com/project/badge/Grade/6bf64efc1f78475686c2690c1f4462e2[link="https://app.codacy.com/app/pacojq/dechat_en1a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en1a&utm_campaign=Badge_Grade_Dashboard"]
 
-This project was generated with https://github.com/angular/angular-cli[Angular CLI] version 6.0.8.
+== Contributors
+* Paco Juan Quirós
+* Jaime Fernández Martínez
+* Hugo Fonseca Díaz
 
 == Build documentation
 
@@ -15,40 +17,29 @@ The source documents are located at
  https://github.com/Arquisoft/dechat_en1a/tree/master/docs[src/docs].
 
  
-== Development server
+== Installing and Running
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The project is built using Angular. Therefore, dependency installation can be done with
 
-== Code scaffolding
+----
+npm install
+----
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+And the app can be executed with the command
 
-== Build
+----
+ng serve
+----
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Once deployed, the DeChat application will be available at: http://localhost:4200
 
-== Running unit tests
 
-Run `ng test` to execute the unit tests via https://karma-runner.github.io[Karma].
 
-== Running end-to-end tests
+== Deployment
 
-Run `ng e2e` to execute the end-to-end tests via http://www.protractortest.org/[Protractor].
+You can visit the deployed version of the app in https://arquisoft.github.io/dechat_en1a/[github pages].
 
-== Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the https://github.com/angular/angular-cli/blob/master/README.md[Angular CLI README].
-
-== Extra steps
-
-Go to tsconfig.app.json into paths add the following data : 
-
-    "paths": {
-        "zlib": ["node_modules/browserify-zlib/lib/index.js"],
-        "http": ["node_modules/@angular/http"],
-        "https": ["node_modules/@angular/http"],
-        "stream": ["node_modules/jszip/dist/jszip.min.js"]
-    }
 
 
 

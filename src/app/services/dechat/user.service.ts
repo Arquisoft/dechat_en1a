@@ -10,13 +10,50 @@ import {AuthService} from '../solid/solid.auth.service';
 })
 export class UserService {
 
+    /**
+     * Solid profile of the user.
+     * 
+     * @type {SolidProfile}
+     */
     private profile: SolidProfile;
+
+    /**
+     * If the profile is being loaded or not.
+     * 
+     * @type {boolean}
+     */
     private loadingProfile: boolean;
+
+    /**
+     * If the profile has finished loading or not.
+     * 
+     * @type {boolean}
+     */
     private profileLoaded: boolean;
 
+    /**
+     * User of the application.
+     * 
+     * @type {User}
+     */
     private user: User;
+
+    /**
+     * Contacts of the user.
+     * 
+     * @type {User[]}
+     */
     private contacts: User[];
 
+
+    /**
+     * Creates an user service.
+     * 
+     * @param rdf 
+     *          The RDF service.
+     * @param auth 
+     *          The authentication service.
+     */
     constructor(private rdf: RdfService, private auth: AuthService) {
 
         console.log('User service constructor');
@@ -31,7 +68,10 @@ export class UserService {
         localStorage.removeItem('oldProfileData');
     }
 
-    // Loads the profile from the rdf service and handles the response
+
+    /**
+     * Loads the profile from the rdf service and handles the response
+     */
     async loadProfile() {
 
         if (this.profileLoaded) {
@@ -63,6 +103,9 @@ export class UserService {
         }
     }
 
+    /**
+     * Sets up the user by means of the RDF service and the profile.
+     */
     private setupFromProfile() {
 
         this.user = new User(this.rdf.getWebID());
@@ -73,42 +116,60 @@ export class UserService {
         this.loadContacts();
     }
 
+    /**
+     * Loads the default user.
+     */
     private setupDefault() {
         console.log('UserService failed fetching user data. Loading default user.');
         this.user = new User('');
     }
 
+    /**
+     * Loads the contacts of the user.
+     */
     private async loadContacts() {
         console.log('Fetching contacts...');
 
         const contacts = await this.rdf.getContacts();
         console.log('Contact count = ' + contacts.length);
 
-        while (this.contacts.length > 0) {
-            this.contacts.pop();
-        }
-
         contacts.forEach((element) => {
             const c = new User(element.value);
-            this.contacts.push(c);
+            console.log('Contact: ' + c.nickname);
+
+            if (!this.contacts.map(c => c.url).includes(c.url))
+                this.contacts.push(c);
         });
     }
 
+
+    /**
+     * Gets the user of the application.
+     */
     async getUser(): Promise<User> {
         await this.loadProfile();
         return this.user;
     }
 
+    /**
+     * Gets the name of the user.
+     */
     async getUserName(): Promise<string> {
         await this.loadProfile();
         return this.user.userName;
     }
 
+    /**
+     * Gets the profile image of the user.
+     */
     async getProfileImage(): Promise<string> {
         await this.loadProfile();
         return this.user.profileImage;
     }
 
+    /**
+     * Gets the contacts of the user.
+     */
     async getContacts(): Promise<User[]> {
         await this.loadProfile();
         return this.contacts;

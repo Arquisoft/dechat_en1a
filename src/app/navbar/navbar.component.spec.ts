@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
-import { ProfileIconComponent } from '../profile-icon/profile-icon.component';
+import { ProfileIconComponent } from '../utilComponents/profile-icon/profile-icon.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 

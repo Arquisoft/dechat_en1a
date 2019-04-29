@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { ProfileIconComponent } from './profile-icon/profile-icon.component';
+import { ProfileIconComponent } from './utilComponents/profile-icon/profile-icon.component';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('AppComponent', () => {

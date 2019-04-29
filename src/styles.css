@@ -2,6 +2,26 @@
 /* import so dialogs can work as intended :D */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+
+/* VARIABLES */
+html {
+    --background-dark: rgb(31, 31, 31);
+    --background-dark-light: rgb(54, 54, 54);
+    --background-light: rgb(230, 230, 255);
+    --background-light-dark: rgb(191, 191, 214);
+    --background-purple: rgb(75, 31, 111);
+    --background-purple-light: rgb(102, 51, 153);
+    --background-purple-dark: rgb(46, 23, 59);
+
+    --foreground-light: white;
+    --foreground-light-dark: rgb(184, 184, 184);
+    --foreground-purple: rgb(153, 51, 255);
+    --foreground-purple-light: rgb(183, 110, 255);
+    --foreground-dark: black;
+    --foreground-dark-light: rgb(41, 41, 41);
+}
+
+
 html {
     height: 100%;
     box-sizing: border-box;

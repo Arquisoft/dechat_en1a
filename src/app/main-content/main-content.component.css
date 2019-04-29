@@ -3,14 +3,15 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: minmax(256px, 20%) auto;
     overflow: hidden;
 }
 
 .userListWrapper {
     display: flex;
     flex: 1;
-    background-color: #2A2845;
+    
+    background-color: var(--background-purple);
     color: white;
     padding: 20px 0px 40px 30px;
     border-right: 1px solid #222;
