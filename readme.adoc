@@ -10,6 +10,7 @@ image:https://api.codacy.com/project/badge/Grade/6bf64efc1f78475686c2690c1f4462e
 * Hugo Fonseca Díaz
 * Álvaro Tejido Jardón
 * Álvaro Vega Cadavieco
+* Iván Prieto Labrador
 
 == Build documentation
 
