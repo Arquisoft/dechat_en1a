@@ -24,6 +24,7 @@ module.exports = function (config) {
         coverageReporter: {
             type: "lcov", // lcov.info or lcovonly are required for generating lcov.info files
             dir: "coverage/",
+            subdir: ".",
         },
         port: 9876,
         colors: true,
