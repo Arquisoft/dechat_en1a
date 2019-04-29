@@ -207,7 +207,10 @@ export class FilesService {
         await solidFiles.readFile(url).then((body) => {
             console.log(`File content is : ${body}.`);
             result = body;
-        }, (err) => console.log(err));
+        }, (err) => {
+            console.log(err);
+            return null;
+        });
         return result;
     }
 

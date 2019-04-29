@@ -230,7 +230,13 @@ export class InboxService {
     private sendRequest(inboxElement: InboxElement, filename: string, toUser ?: string) {
         console.log('Sending request...');
         const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfoInbox(toUser);
-        this.files.createFile(filename, text);
+
+        const file = this.files.readFile(filename);
+        if (file == null) {
+            this.files.createFile(filename, text);
+        }
+        
+
     }
 
 }
