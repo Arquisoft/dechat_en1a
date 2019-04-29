@@ -12,35 +12,35 @@ export class UserService {
 
     /**
      * Solid profile of the user.
-     * 
+     *
      * @type {SolidProfile}
      */
     private profile: SolidProfile;
 
     /**
      * If the profile is being loaded or not.
-     * 
+     *
      * @type {boolean}
      */
     private loadingProfile: boolean;
 
     /**
      * If the profile has finished loading or not.
-     * 
+     *
      * @type {boolean}
      */
     private profileLoaded: boolean;
 
     /**
      * User of the application.
-     * 
+     *
      * @type {User}
      */
     private user: User;
 
     /**
      * Contacts of the user.
-     * 
+     *
      * @type {User[]}
      */
     private contacts: User[];
@@ -48,10 +48,10 @@ export class UserService {
 
     /**
      * Creates an user service.
-     * 
-     * @param rdf 
+     *
+     * @param rdf
      *          The RDF service.
-     * @param auth 
+     * @param auth
      *          The authentication service.
      */
     constructor(private rdf: RdfService, private auth: AuthService) {
@@ -114,6 +114,7 @@ export class UserService {
         this.user.status = 'online';
         this.user.profileImage = this.profile.image ? this.profile.image : '/assets/images/profile.png';
         this.loadContacts();
+        console.log('contacts loaded');
     }
 
     /**
@@ -132,7 +133,7 @@ export class UserService {
 
         const contacts = await this.rdf.getContacts();
         console.log('Contact count = ' + contacts.length);
-        
+
         await contacts.forEach(async (element) => {
             const c = new User(element.value);
             console.log('Contact: ' + c.nickname);
@@ -143,8 +144,11 @@ export class UserService {
                 c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
             }
 
-            if (!this.contacts.map(c => c.url).includes(c.url))
+            const map = this.contacts.map((c) => c.url);
+            const url = c.url;
+            if (!map.includes(url)) {
                 this.contacts.push(c);
+            }
         });
     }
 
@@ -177,6 +181,9 @@ export class UserService {
      * Gets the contacts of the user.
      */
     async getContacts(): Promise<User[]> {
+        if (this.profileLoaded = true) {
+            return this.contacts;
+        }
         await this.loadProfile();
         return this.contacts;
     }
