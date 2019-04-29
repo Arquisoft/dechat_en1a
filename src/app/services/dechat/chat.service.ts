@@ -124,6 +124,7 @@ export class ChatService {
     /*                                                           */
     /*                 CHAT CREATION AND EDITION                 */
     /*                                                           */
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     /**
@@ -137,14 +138,14 @@ export class ChatService {
         return chat.administrators.includes(this.user);
     }
 
-   /**
-    * Normal chats behave the same as group chats, so
-    * we create a group chat with just both this user and
-    * the other one.
-    *
-    * @param otherUser
-    *           The other user of the chat.
-    */
+    /**
+     * Normal chats behave the same as group chats, so
+     * we create a group chat with just both this user and
+     * the other one.
+     *
+     * @param otherUser
+     *           The other user of the chat.
+     */
     async createChat(otherUser: User): Promise<ChatInfo> {
         const users = [];
         users.push(otherUser);
@@ -214,7 +215,7 @@ export class ChatService {
         }
 
         chat.users.push(user);
-        this.files.checkChatFolder(user, chat);
+        this.inbox.sendChatRequest(user, chat);
         return true;
     }
 

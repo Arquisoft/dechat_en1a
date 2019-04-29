@@ -56,7 +56,7 @@ export class RdfService {
      */
     getSession = async () => {
         this.session = await solid.auth.currentSession(localStorage);
-    };
+    }
 
     /**
      * Gets a node that matches the specified pattern using the VCARD onthology
@@ -71,7 +71,7 @@ export class RdfService {
      */
     getValueFromVcard = (node: string, webId?: string): string | any => {
         return this.getValueFromNamespace(node, VCARD, webId);
-    };
+    }
 
     /**
      * Gets a node that matches the specified pattern using the FOAF onthology
@@ -81,7 +81,7 @@ export class RdfService {
      */
     getValueFromFoaf = (node: string, webId?: string) => {
         return this.getValueFromNamespace(node, FOAF, webId);
-    };
+    }
 
     /**
      * Gets a node that matches the specified pattern using the LDP onthology
@@ -91,7 +91,7 @@ export class RdfService {
      */
     getValueFromLdp = (node: string, webId?: string) => {
         return this.getValueFromNamespace(node, SCHEMA, webId);
-    };
+    }
 
     /**
      * Gets a node that matches the specified pattern using the Schema onthology
@@ -101,7 +101,7 @@ export class RdfService {
      */
     getValueFromSchema = (node: string, webId?: string) => {
         return this.getValueFromNamespace(node, SCHEMA, webId);
-    };
+    }
 
     transformDataForm = (form: NgForm, me: any, doc: any) => {
         const insertions = [];
@@ -144,7 +144,7 @@ export class RdfService {
             insertions,
             deletions,
         };
-    };
+    }
 
     private addNewLinkedField(field, insertions, predicate, fieldValue, why, me: any) {
         // Generate a new ID. This id can be anything but needs to be unique.
@@ -271,7 +271,7 @@ export class RdfService {
                 }
             });
         }
-    };
+    }
 
     getAddress = () => {
         const linkedUri = this.getValueFromVcard('hasAddress');
@@ -286,7 +286,7 @@ export class RdfService {
         }
 
         return {};
-    };
+    }
 
     // Function to get email. This returns only the first email, which is temporary
     getEmail = () => {
@@ -297,7 +297,7 @@ export class RdfService {
         }
 
         return '';
-    };
+    }
 
     // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
     getPhone = () => {
@@ -306,7 +306,7 @@ export class RdfService {
         if (linkedUri) {
             return this.getValueFromVcard('value', linkedUri).split('tel:+')[1];
         }
-    };
+    }
 
     getProfile = async () => {
 
@@ -334,7 +334,7 @@ export class RdfService {
         } catch (error) {
             console.log(`Error fetching data: ${error}`);
         }
-    };
+    }
 
     /**
      * Gets any resource that matches the node, using the provided Namespace
@@ -359,7 +359,6 @@ export class RdfService {
     async getProfileField(field: string): Promise<string> {
         return await this.getField(this.session.webId, field, VCARD);
     }
-
 
     /**
      * This method is used for retrieving the value of a field as an string.
@@ -467,7 +466,7 @@ export class RdfService {
         }
 
         return '';
-    };
+    }
 
     // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
     getFriendPhone = async (webId: string) => {
@@ -480,7 +479,7 @@ export class RdfService {
         }
 
         return '';
-    };
+    }
 
     getFriendAddress = async (webId: string) => {
         const linkedUri = await this.getField(webId, 'hasAddress', VCARD);
@@ -495,7 +494,7 @@ export class RdfService {
         }
 
         return {};
-    };
+    }
 
     /**
      * This method is used for adding a new friend from your solid profile
