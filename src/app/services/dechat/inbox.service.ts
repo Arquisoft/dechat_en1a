@@ -28,7 +28,6 @@ export class InboxService {
 
     private onElementFoundCallbacks;
 
-
     constructor(
         private files: FilesService,
         private users: UserService,
@@ -38,7 +37,6 @@ export class InboxService {
         this.onElementFoundCallbacks = [];
         this.setUp();
     }
-
 
     /**
      * Sets up the inbox. Called when the service is created.
@@ -80,19 +78,17 @@ export class InboxService {
         this.processNewElements();
     }
 
-
     /**
      * Proccesses any new element in the inbox.
      */
     private processNewElements() {
-        this.newElements.forEach(element => {
-            this.onElementFoundCallbacks.forEach(callback => {
+        this.newElements.forEach((element) => {
+            this.onElementFoundCallbacks.forEach((callback) => {
                 callback(element);
             });
         });
         this.newElements = [];
     }
-
 
     /**
      * Takes an array of urls and processes the requests.
@@ -106,6 +102,10 @@ export class InboxService {
             const file = files[i];
             if (file.length > 0) {
                 const inboxElement: InboxElement = new InboxElement();
+                if (await this.files.readFile(file) === '') {
+                    this.files.deleteFile(file);
+                    return;
+                }
                 if (file.includes('chatreq')) {
                     const chatInfo = await this.rdf.getChatData(file);
                     if (chatInfo) {
@@ -155,7 +155,6 @@ export class InboxService {
         }
     }
 
-
     addInboxElement(inboxElement: InboxElement, filesLength: number) {
         if (this.newElements.length < filesLength) {
             this.newElements.push(inboxElement);
@@ -163,7 +162,6 @@ export class InboxService {
             console.log('Trying to add more files than there actually are');
         }
     }
-
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /*                                                           */
@@ -193,7 +191,6 @@ export class InboxService {
         this.sendRequest(request, filename);
     }
 
-
     /**
      * Sends a new message to the chat to a given user.
      *
@@ -218,7 +215,6 @@ export class InboxService {
         this.sendRequest(request, filename, toUser.url);
     }
 
-
     /**
      * Sends a request given the inbox element and a filename.
      *
@@ -227,15 +223,14 @@ export class InboxService {
      * @param filename
      *          The filename of the file to be created.
      */
-    private sendRequest(inboxElement: InboxElement, filename: string, toUser ?: string) {
+    private async sendRequest(inboxElement: InboxElement, filename: string, toUser ?: string) {
         console.log('Sending request...');
         const text = inboxElement.type === InboxElementType.CHAT_REQUEST ? inboxElement.chat.getTtlInfo(this.rdf) : inboxElement.message.getTtlInfoInbox(toUser);
 
-        const file = this.files.readFile(filename);
-        if (file == null) {
-            this.files.createFile(filename, text);
+        const file = await this.files.readFile(filename);
+        if (file === '') {
+            await this.files.createFile(filename, text);
         }
-        
 
     }
 
