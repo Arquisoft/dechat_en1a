@@ -20,6 +20,7 @@ setlocal
 set USER_ARGS=%*
 
 rem set GATLING_HOME automatically if possible
+//set GATLING_HOME=*\dechat_en1a\gatling-charts-highcharts-bundle-3.1.1-bundle
 set "OLD_DIR=%cd%"
 cd ..
 set "DEFAULT_GATLING_HOME=%cd%"
