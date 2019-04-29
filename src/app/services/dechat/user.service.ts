@@ -144,9 +144,7 @@ export class UserService {
                 c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
             }
 
-            const map = this.contacts.map((c) => c.url);
-            const url = c.url;
-            if (!map.includes(url)) {
+            if (!this.contacts.map(c => c.url).includes(c.url)) {
                 this.contacts.push(c);
             }
         });

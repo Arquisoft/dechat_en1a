@@ -257,17 +257,32 @@ export class ChatService {
         chat.chatName = chatInfo.name;
         chat.chatImage = chatInfo.picture;
         const users = await this.userService.getContacts();
-        users.forEach((user) => {
-            chatInfo.users.forEach((user2) => {
-                if (user.url === user2.value) {
-                    chat.users.push(user);
-                }
-            });
-            chatInfo.administrators.forEach((user2) => {
-                if (user.url === user2.value) {
-                    chat.administrators.push(user);
-                }
-            });
+        chatInfo.users.forEach(async (user) => {
+            const c = new User(user.value);
+            console.log('Contact: ' + c.nickname);
+
+            const friendInfo = await this.rdf.getFriendData(user.value);
+            if (friendInfo) {
+                c.userName = friendInfo.fn;
+                c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
+            }
+            if (!chat.users.map(c => c.url).includes(c.url)) {
+                chat.users.push(c);
+            }
+        });
+
+        chatInfo.administrators.forEach(async (user) => {
+            const c = new User(user.value);
+            console.log('Contact: ' + c.nickname);
+
+            const friendInfo = await this.rdf.getFriendData(user.value);
+            if (friendInfo) {
+                c.userName = friendInfo.fn;
+                c.profileImage = friendInfo.image ? friendInfo.image : '/assets/images/profile.png';
+            }
+            if (!chat.administrators.map(c => c.url).includes(c.url)) {
+                chat.administrators.push(c);
+            }
         });
 
         // Load messages
