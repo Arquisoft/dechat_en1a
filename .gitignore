@@ -1,5 +1,6 @@
 
 /target/
+/gatling/results/
 
 
 # .gitignore copied from Angular GitHub page
