@@ -54,12 +54,12 @@ export class MultimediaDisplayComponent implements OnInit {
      *          The model representing the multimedia element.
      */
     ngOnInit(multim = this.multimedia) {
-        
+        /*
         // Actual implementation
         this.multimediaURL = multim.url;
         this.multimediaType = multim.type;
         this.multimediaExten = multim.extension;
-        
+        */
 
         // For testing purposes
 
@@ -69,12 +69,10 @@ export class MultimediaDisplayComponent implements OnInit {
         this.multimediaType = 'image';
         this.multimediaExten = 'jpg';
         */
-        /*
         // Video
         this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
         this.multimediaType = 'video';
         this.multimediaExten = 'webm';
-        */
     }
 
 }
