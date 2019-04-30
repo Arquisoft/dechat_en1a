@@ -9,7 +9,7 @@ addons:
 cache:
   directories:
     - ./node_modules
-    - ./coverage
+    - ./coverage/lcov.info
 
 install:
   - npm install
