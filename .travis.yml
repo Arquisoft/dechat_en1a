@@ -17,6 +17,5 @@ script:
   - npm run test -- --watch=false --browsers=ChromeHeadlessCI
 
 after_success:
-  - ls ./coverage
+  - ls
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - ls ./coverage
