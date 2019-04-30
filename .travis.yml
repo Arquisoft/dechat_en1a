@@ -9,6 +9,7 @@ addons:
 cache:
   directories:
     - ./node_modules
+    - ./coverage/lcov.info
 
 install:
   - npm install
@@ -17,4 +18,6 @@ script:
   - npm run test -- --watch=false --browsers=ChromeHeadlessCI
 
 after_success:
+  - ls
+  - ls ./coverage
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

@@ -69,7 +69,6 @@ export class MultimediaDisplayComponent implements OnInit {
         this.multimediaType = 'image';
         this.multimediaExten = 'jpg';
         */
-
         // Video
         this.multimediaURL = 'https://audio-video.gnu.org/video/short--undated--rms--what-is-gnu-plus-linux--480p.webm';
         this.multimediaType = 'video';
