@@ -12,7 +12,7 @@ tools/gulp-tasks/cldr/cldr-data/
 target
 gatling/results
 
-coverage
+coverage/*
 
 # Include when developing application packages.
 pubspec.lock
