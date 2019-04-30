@@ -13,6 +13,7 @@ target
 gatling/results
 
 coverage
+coverage/*
 
 # Include when developing application packages.
 pubspec.lock
